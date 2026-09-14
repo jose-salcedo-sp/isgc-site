@@ -1,13 +1,10 @@
 # Nexus App
 
-Next.js starter based on
-[Axios-Intelligence/nexus](https://github.com/Axios-Intelligence/nexus) tooling —
-React Compiler, Ultracite (oxlint + anti-slop), Vitest, Knip, jscpd, and React Doctor.
+Next.js starter based on [Axios-Intelligence/nexus](https://github.com/Axios-Intelligence/nexus) tooling — React Compiler, Ultracite (oxlint + anti-slop), Vitest, Knip, jscpd, and React Doctor.
 
 ## Stack
 
-Next.js 15 App Router · React 19 · React Compiler · Tailwind v4 · Vitest · Ultracite ·
-React Doctor
+Next.js 15 App Router · React 19 · React Compiler · Tailwind v4 · Vitest · Ultracite · React Doctor
 
 ## Quickstart
 
@@ -20,12 +17,12 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Quality gates
 
-| Command            | Purpose                                         |
-| ------------------ | ----------------------------------------------- |
-| `npm run verify`   | typecheck + lint + test + build                 |
-| `npm run doctor`   | React Doctor health scan (80+ required on PRs)  |
-| `npm run deadcode` | Knip unused code report                         |
-| `npm run dupes`    | jscpd duplicate detection                       |
+| Command            | Purpose                                        |
+| ------------------ | ---------------------------------------------- |
+| `npm run verify`   | typecheck + lint + test + build                |
+| `npm run doctor`   | React Doctor health scan (80+ required on PRs) |
+| `npm run deadcode` | Knip unused code report                        |
+| `npm run dupes`    | jscpd duplicate detection                      |
 
 ## CI
 

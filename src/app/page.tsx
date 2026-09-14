@@ -6,5 +6,5 @@ const Home = () => (
       health checks.
     </p>
   </main>
-)
-export default Home
+);
+export default Home;
