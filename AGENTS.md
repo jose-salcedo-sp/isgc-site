@@ -1,6 +1,6 @@
-# Nexus App — agent briefing
+# ISGC Site — agent briefing
 
-Next.js App Router starter derived from [Axios-Intelligence/nexus](https://github.com/Axios-Intelligence/nexus). Strict linting, anti-slop rules, Vitest, and React Doctor — without Supabase or backend integrations.
+Next.js App Router site. Strict linting, anti-slop rules, Vitest, and React Doctor.
 
 ## Stack
 

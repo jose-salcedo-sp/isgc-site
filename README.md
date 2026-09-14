@@ -1,6 +1,6 @@
-# Nexus App
+# ISGC Site
 
-Next.js starter based on [Axios-Intelligence/nexus](https://github.com/Axios-Intelligence/nexus) tooling — React Compiler, Ultracite (oxlint + anti-slop), Vitest, Knip, jscpd, and React Doctor.
+Next.js site built with React Compiler, Ultracite (oxlint + anti-slop), Vitest, Knip, jscpd, and React Doctor.
 
 ## Stack
 
