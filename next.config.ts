@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   headers: () =>
@@ -6,15 +6,15 @@ const nextConfig: NextConfig = {
       {
         headers: [
           {
-            key: "Content-Security-Policy",
+            key: 'Content-Security-Policy',
             value: "frame-ancestors 'none'",
           },
-          { key: "X-Frame-Options", value: "DENY" },
+          { key: 'X-Frame-Options', value: 'DENY' },
         ],
-        source: "/:path*",
+        source: '/:path*',
       },
     ]),
   reactCompiler: true,
-};
+}
 
-export default nextConfig;
+export default nextConfig

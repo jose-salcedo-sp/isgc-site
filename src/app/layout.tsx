@@ -1,16 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next'
 
-import "./globals.css";
+import './globals.css'
 
 export const metadata: Metadata = {
-  description: "Next.js starter with React Compiler, Ultracite, and React Doctor.",
-  title: "Nexus App",
-};
+  description:
+    'Next.js starter with React Compiler, Ultracite, and React Doctor.',
+  title: 'Nexus App',
+}
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="en">
     <body className="antialiased">{children}</body>
   </html>
-);
-
-export default RootLayout;
+)
+export default RootLayout

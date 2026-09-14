@@ -54,8 +54,8 @@ Keyboard reachable, focus managed, async state announced. Run on UI diffs only.
 
 ## Severity
 
-| Tier | Action |
-| --- | --- |
-| **blocker** | Do not merge |
-| **important** | Fix before merge or file with an owner |
-| **nit** | Author's discretion |
+| Tier          | Action                                  |
+| ------------- | --------------------------------------- |
+| **blocker**   | Do not merge                            |
+| **important** | Fix before merge or file with an owner  |
+| **nit**       | Author's discretion                     |
