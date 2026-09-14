@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  reactCompiler: true,
   headers: () =>
     Promise.resolve([
       {
@@ -15,6 +14,7 @@ const nextConfig: NextConfig = {
         source: "/:path*",
       },
     ]),
+  reactCompiler: true,
 };
 
 export default nextConfig;
