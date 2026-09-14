@@ -1,6 +1,6 @@
 # ISGC Site
 
-Next.js site built with React Compiler, Ultracite (oxlint + anti-slop), Vitest, Knip, jscpd, and React Doctor.
+Personal site built with Next.js, React Compiler, Ultracite (oxlint + anti-slop), Vitest, Knip, jscpd, and React Doctor.
 
 ## Stack
 

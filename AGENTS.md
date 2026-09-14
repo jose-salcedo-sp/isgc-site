@@ -1,6 +1,6 @@
 # ISGC Site — agent briefing
 
-Next.js App Router site. Strict linting, anti-slop rules, Vitest, and React Doctor.
+Personal Next.js App Router site. Strict linting, anti-slop rules, Vitest, and React Doctor.
 
 ## Stack
 
