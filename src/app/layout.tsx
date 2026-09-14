@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  description: "ISGC site built with React Compiler, Ultracite, and React Doctor.",
+  description:
+    "ISGC site built with React Compiler, Ultracite, and React Doctor.",
   title: "ISGC Site",
 };
 
