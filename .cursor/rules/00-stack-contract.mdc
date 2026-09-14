@@ -1,0 +1,34 @@
+---
+description: Non-negotiable architecture contract for this Next.js TypeScript app.
+globs:
+alwaysApply: true
+---
+
+# Stack contract
+
+Stack: React 19 + TypeScript, Next.js App Router, Tailwind v4, Vitest, Ultracite (oxlint + oxfmt + anti-slop).
+
+## Layer boundaries
+
+- **Server Components by default.** Use `"use client"` only when the browser is required.
+- **Server actions and route handlers own secrets.** Never expose service keys via `NEXT_PUBLIC_` variables.
+- **Validate at the boundary.** Parse remote data with schema validation, not `as` casts.
+
+## Correctness rules
+
+- **No blocking spinners for static content.** Prefer server rendering and streaming.
+- **Change the minimum necessary.** No adjacent refactors or speculative abstraction.
+- **Do not add try/catch that swallows errors** to make a build pass.
+
+## Workflow contract
+
+- Run `npm run verify` before claiming done.
+- Never edit a test to make a check pass; never silence checks with `any` or skip flags.
+- PRs are reviewed against `REVIEW.md`. Approval is a human act.
+
+## Craft — anti-slop
+
+- Search before you write — no duplicate helpers.
+- One caller, no abstraction.
+- No comments that restate the code.
+- Match the file you are in.

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "src/app/**/{page,layout,route,loading,error,not-found,default,template,middleware}.{ts,tsx}",
+    "src/middleware.ts",
+    "src/app/api/**/route.ts"
+  ],
+  "project": ["src/**/*.{ts,tsx}"],
+  "ignore": ["**/*.test.ts"],
+  "rules": {
+    "files": "error",
+    "exports": "error",
+    "types": "error",
+    "dependencies": "error",
+    "devDependencies": "warn",
+    "unlisted": "error"
+  }
+}

@@ -1,0 +1,49 @@
+# React Doctor — security, performance, correctness, accessibility, and architecture checks.
+# Docs: https://www.react.doctor/ci
+
+name: React Doctor
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  statuses: write
+
+concurrency:
+  group: react-doctor-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  react-doctor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - id: react-doctor
+        uses: millionco/react-doctor@v2
+        with:
+          scope: full
+          blocking: error
+
+      - name: Enforce minimum health score (80+)
+        if: github.event_name == 'pull_request'
+        env:
+          SCORE: ${{ steps.react-doctor.outputs.score }}
+        run: |
+          if [ -z "$SCORE" ]; then
+            echo "React Doctor score was unavailable."
+            exit 1
+          fi
+          if [ "$SCORE" -lt 80 ]; then
+            echo "React Doctor score ${SCORE}/100 is below the minimum of 80."
+            exit 1
+          fi
+          echo "React Doctor score ${SCORE}/100 meets the minimum of 80."
