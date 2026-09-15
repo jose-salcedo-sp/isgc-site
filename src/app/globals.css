@@ -25,7 +25,7 @@
   --border: color-mix(in oklab, var(--foreground) 12%, transparent);
   --graph-program: #5d1028;
   --graph-semester: #8a1538;
-  --graph-course: #b08d4f;
+  --graph-course: #7d602a;
   --graph-subject: #625d59;
   --graph-ring: color-mix(in oklab, var(--foreground) 10%, transparent);
 }

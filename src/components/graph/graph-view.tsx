@@ -7,9 +7,50 @@ import { GraphInspector } from "./graph-inspector";
 import { GraphLegend } from "./graph-legend";
 import type { GraphEdge, GraphKind, GraphNode, GraphText } from "./graph-model";
 import { layoutRadial } from "./graph-radial";
+import type { RadialLayout, RadialNode } from "./graph-radial";
 import { KIND_ORDER } from "./graph-theme";
 
 const GraphCanvas = dynamic(() => import("./graph-canvas"), { ssr: false });
+
+const childrenOf = (layout: RadialLayout, node: RadialNode): RadialNode[] =>
+  node.neighbors
+    .flatMap((nb) => {
+      const child = layout.byId.get(nb.id);
+      return child && child.proximity > node.proximity ? [child] : [];
+    })
+    .toSorted((left, right) => left.angle - right.angle);
+
+/** Screen-reader and keyboard path through the map, which canvas cannot give. */
+const Outline = ({
+  layout,
+  nodes,
+  onSelect,
+}: {
+  layout: RadialLayout;
+  nodes: RadialNode[];
+  onSelect: (id: string) => void;
+}) => (
+  <ul>
+    {nodes.map((node) => {
+      const kids = childrenOf(layout, node);
+      return (
+        <li key={node.id}>
+          <button
+            onClick={() => {
+              onSelect(node.id);
+            }}
+            type="button"
+          >
+            {node.label}
+          </button>
+          {kids.length > 0 ? (
+            <Outline layout={layout} nodes={kids} onSelect={onSelect} />
+          ) : null}
+        </li>
+      );
+    })}
+  </ul>
+);
 
 export const GraphView = ({
   initialEdges,
@@ -63,8 +104,19 @@ export const GraphView = ({
       .slice(0, 60);
   }, [layout, selectedNode]);
 
+  const roots = useMemo(
+    () =>
+      layout.nodes
+        .filter((node) => node.proximity === 1)
+        .toSorted((left, right) => left.angle - right.angle),
+    [layout]
+  );
+
   return (
     <div className="flex h-dvh min-h-0 flex-col overflow-hidden">
+      <nav aria-label={text.title} className="sr-only">
+        <Outline layout={layout} nodes={roots} onSelect={setSelected} />
+      </nav>
       <div className="relative min-h-0 flex-1">
         <GraphCanvas
           activeKinds={activeKinds}

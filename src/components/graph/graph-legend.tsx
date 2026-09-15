@@ -18,7 +18,7 @@ const kindButtons = (
     }
     buttons.push(
       <button
-        className={`hover:bg-muted flex items-center gap-2 rounded-md px-1 py-1 text-left ${activeKinds.has(kind) ? "" : "opacity-35"}`}
+        className={`hover:bg-muted flex min-h-11 items-center gap-2 rounded-md px-2 text-left ${activeKinds.has(kind) ? "" : "opacity-35"}`}
         key={kind}
         type="button"
         onClick={() => {
@@ -50,7 +50,7 @@ export const GraphLegend = ({
   text: GraphText;
 }) => (
   <div className="pointer-events-auto absolute top-4 left-4 z-10 w-56">
-    <p className="text-foreground text-sm font-semibold">{text.title}</p>
+    <h1 className="text-foreground text-sm font-semibold">{text.title}</h1>
     <p className="text-muted-foreground mb-3 text-xs">
       {layout.nodes.length.toLocaleString()} nodes ·{" "}
       {layout.edges.length.toLocaleString()} links

@@ -295,7 +295,7 @@ const GraphCanvas = ({
   return (
     <div className="h-full w-full" ref={wrapRef}>
       <canvas
-        aria-label={text.title}
+        aria-hidden="true"
         className="block h-full w-full cursor-grab touch-none active:cursor-grabbing"
         ref={canvasRef}
         onLostPointerCapture={onLostPointerCapture}
