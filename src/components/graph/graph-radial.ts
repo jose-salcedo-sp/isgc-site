@@ -75,12 +75,19 @@ const leafCount = (node: TreeNode): number => {
   return sum;
 };
 
-const assignAngles = (node: TreeNode, start: number, span: number): void => {
+const assignAngles = (
+  node: TreeNode,
+  start: number,
+  span: number,
+  equal = false
+): void => {
   node.data.angle = start + span / 2;
   const total = leafCount(node);
   let cursor = start;
   for (const child of node.children) {
-    const childSpan = span * (leafCount(child) / total);
+    const childSpan = equal
+      ? span / node.children.length
+      : span * (leafCount(child) / total);
     assignAngles(child, cursor, childSpan);
     cursor += childSpan;
   }
@@ -222,15 +229,15 @@ const attachOrphans = (
 
 const growTree = (
   rootId: string,
-  nodes: readonly GraphNode[],
   byId: Map<string, RadialNode>,
-  trees: Map<string, TreeNode>
+  trees: Map<string, TreeNode>,
+  visited: Set<string>
 ): TreeNode | null => {
   const rootTree = trees.get(rootId);
-  if (!rootTree) {
+  if (!rootTree || visited.has(rootId)) {
     return null;
   }
-  const visited = new Set([rootId]);
+  visited.add(rootId);
   const queue = [rootId];
   let head = 0;
   while (head < queue.length) {
@@ -260,9 +267,28 @@ const growTree = (
       }
     }
   }
-  attachOrphans(nodes, byId, trees, rootTree, visited);
   return rootTree;
 };
+
+/** Anchors the innermost ring without drawing a node at the center. */
+const hubTree = (): TreeNode => ({
+  childIds: new Set(),
+  children: [],
+  data: {
+    angle: 0,
+    degree: 0,
+    id: "",
+    kind: "program",
+    label: "",
+    neighbors: [],
+    order: 0,
+    proximity: 0,
+    r: 0,
+    radius: 0,
+    x: 0,
+    y: 0,
+  },
+});
 
 const walkSort = (node: TreeNode): void => {
   node.children.sort(sortKids);
@@ -310,16 +336,24 @@ export const layoutRadial = (
   }
   const { byId, kindCounts, trees } = seedNodes(nodes);
   const kept = wireEdges(byId, edges);
-  const rootRaw = nodes.find((node) => node.kind === "program") ?? nodes[0];
-  if (!rootRaw) {
+  const inner = Math.min(...[...byId.values()].map((node) => node.proximity));
+  const visited = new Set<string>();
+  const hub = hubTree();
+  for (const node of nodes) {
+    if (byId.get(node.id)?.proximity !== inner) {
+      continue;
+    }
+    const tree = growTree(node.id, byId, trees, visited);
+    if (tree) {
+      pushChild(hub, tree);
+    }
+  }
+  if (hub.children.length === 0) {
     return { byId, edges: [], kindCounts, nodes: [] };
   }
-  const rootTree = growTree(rootRaw.id, nodes, byId, trees);
-  if (!rootTree) {
-    return { byId, edges: [], kindCounts, nodes: [] };
-  }
-  walkSort(rootTree);
-  assignAngles(rootTree, 0, Math.PI * 2);
+  attachOrphans(nodes, byId, trees, hub, visited);
+  walkSort(hub);
+  assignAngles(hub, 0, Math.PI * 2, true);
   placeXY(byId);
   return {
     byId,

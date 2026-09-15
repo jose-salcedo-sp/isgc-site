@@ -50,6 +50,41 @@ describe("radial layout", () => {
     expect(subject.radius).toBe(RING_RADIUS[3]);
   });
 
+  it("splits the innermost ring into equal slices regardless of class count", () => {
+    const nodes: GraphNode[] = [
+      {
+        id: "a",
+        kind: "semester",
+        label: "Semester 1",
+        order: 1,
+        proximity: 1,
+      },
+      {
+        id: "b",
+        kind: "semester",
+        label: "Semester 2",
+        order: 2,
+        proximity: 1,
+      },
+      { id: "c1", kind: "course", label: "Calc", order: 1, proximity: 2 },
+      { id: "c2", kind: "course", label: "Algebra", order: 2, proximity: 2 },
+      { id: "c3", kind: "course", label: "Physics", order: 1, proximity: 2 },
+    ];
+    const layout = layoutRadial(nodes, [
+      edge("a", "c1", "e1"),
+      edge("a", "c2", "e2"),
+      edge("b", "c3", "e3"),
+    ]);
+    const a = layout.byId.get("a");
+    const b = layout.byId.get("b");
+    if (!a || !b) {
+      throw new Error("missing nodes");
+    }
+    expect(a.angle).toBeCloseTo(Math.PI / 2);
+    expect(b.angle).toBeCloseTo((3 * Math.PI) / 2);
+    expect(a.radius).toBe(RING_RADIUS[1]);
+  });
+
   it("gives sibling semesters distinct angles", () => {
     const nodes: GraphNode[] = [
       { id: "program", kind: "program", label: "CSE", proximity: 0 },

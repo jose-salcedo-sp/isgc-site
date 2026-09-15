@@ -722,14 +722,6 @@
     },
     "nodes": [
       {
-        "description": "Formación de ingenieros que diseñan software, productos digitales y experiencias gráficas para industria real: visión computacional, programación, realidad mixta, cómputo en paralelo y en la nube, representación gráfica de datos y big data.",
-        "id": "program",
-        "kind": "program",
-        "label": "Computer Science and Engineering",
-        "order": 0,
-        "proximity": 0
-      },
-      {
         "id": "semester-1",
         "kind": "semester",
         "label": "Semester 1",
@@ -1312,66 +1304,6 @@
       }
     ],
     "edges": [
-      {
-        "a": "program",
-        "b": "semester-1",
-        "id": "e:program:semester-1",
-        "label": "includes"
-      },
-      {
-        "a": "program",
-        "b": "semester-2",
-        "id": "e:program:semester-2",
-        "label": "includes"
-      },
-      {
-        "a": "program",
-        "b": "semester-3",
-        "id": "e:program:semester-3",
-        "label": "includes"
-      },
-      {
-        "a": "program",
-        "b": "semester-4",
-        "id": "e:program:semester-4",
-        "label": "includes"
-      },
-      {
-        "a": "program",
-        "b": "semester-5",
-        "id": "e:program:semester-5",
-        "label": "includes"
-      },
-      {
-        "a": "program",
-        "b": "semester-6",
-        "id": "e:program:semester-6",
-        "label": "includes"
-      },
-      {
-        "a": "program",
-        "b": "semester-7",
-        "id": "e:program:semester-7",
-        "label": "includes"
-      },
-      {
-        "a": "program",
-        "b": "semester-8",
-        "id": "e:program:semester-8",
-        "label": "includes"
-      },
-      {
-        "a": "program",
-        "b": "semester-9",
-        "id": "e:program:semester-9",
-        "label": "includes"
-      },
-      {
-        "a": "program",
-        "b": "semester-10",
-        "id": "e:program:semester-10",
-        "label": "includes"
-      },
       {
         "a": "semester-1",
         "b": "calculo-diferencial",

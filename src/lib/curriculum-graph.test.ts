@@ -14,10 +14,9 @@ describe("curriculum graph", () => {
     expect(curriculumGraph.text.kinds.course).toBe("Classes");
   });
 
-  it("places the program, semesters, and classes on their rings", () => {
+  it("starts at the semester ring with no node at the center", () => {
     const byId = new Map(curriculumGraph.nodes.map((node) => [node.id, node]));
-    expect(byId.get("program")?.proximity).toBe(0);
-    expect(byId.get("program")?.label).toBe("Computer Science and Engineering");
+    expect(byId.has("program")).toBeFalsy();
     expect(byId.get("semester-1")?.proximity).toBe(1);
     expect(byId.get("calculo-diferencial")?.proximity).toBe(2);
   });
