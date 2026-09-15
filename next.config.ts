@@ -1,20 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  headers: () =>
-    Promise.resolve([
-      {
-        headers: [
-          {
-            key: "Content-Security-Policy",
-            value: "frame-ancestors 'none'",
-          },
-          { key: "X-Frame-Options", value: "DENY" },
-        ],
-        source: "/:path*",
-      },
-    ]),
-  reactCompiler: process.env.NODE_ENV === "production",
+  distDir: process.env.NEXT_BUILD_DIR || ".next",
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+    ],
+  },
 };
 
 export default nextConfig;

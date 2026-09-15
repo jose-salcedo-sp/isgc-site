@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISGC · Ingeniería en Sistemas y Gráficas Computacionales</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --bg: #1A1617;
+  --bg-soft: #201B1C;
+  --surface: #262021;
+  --surface-2: #2E2728;
+  --line: rgba(255,255,255,0.09);
+  --line-strong: rgba(255,255,255,0.16);
+  --text: #F5F1EE;
+  --text-muted: #AFA3A3;
+  --text-faint: #7A6F6F;
+  --blue: #8A1538;
+  --blue-soft: rgba(138,21,56,0.20);
+  --violet: #B08D4F;
+  --violet-soft: rgba(176,141,79,0.20);
+  --gradient: linear-gradient(135deg, var(--blue), var(--violet));
+  --gradient-soft: linear-gradient(135deg, rgba(138,21,56,0.18), rgba(176,141,79,0.18));
+  --radius: 18px;
+  --radius-sm: 12px;
+  --maxw: 1180px;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter', sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{
+  font-family:'Space Grotesk', sans-serif;
+  margin:0;
+  letter-spacing:-0.02em;
+  color:var(--text);
+}
+p{margin:0;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.mono{font-family:'IBM Plex Mono', monospace;}
+::selection{background:var(--violet);color:#fff;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+section{position:relative;}
+
+/* ---------- Hexagon watermark background ---------- */
+.hex-field{
+  position:absolute;inset:0;overflow:hidden;pointer-events:none;
+  opacity:0.5;
+}
+.hex-field svg{position:absolute;}
+
+/* ---------- Nav ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:16px 0;
+  transition:background .3s ease, backdrop-filter .3s ease, border-color .3s ease;
+  border-bottom:1px solid transparent;
+}
+header.scrolled{
+  background:rgba(14,15,19,0.86);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand img{height:30px;width:auto;}
+.brand span{font-family:'Space Grotesk';font-weight:700;font-size:16px;letter-spacing:0.02em;}
+.brand small{
+  display:block;font-family:'IBM Plex Mono';font-size:9.5px;color:var(--text-muted);
+  letter-spacing:0.04em;margin-top:1px;font-weight:400;
+}
+nav.primary{
+  display:flex;align-items:center;gap:2px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:100px;
+  padding:5px;
+}
+nav.primary a{
+  font-size:13px;font-weight:500;color:var(--text-muted);
+  padding:8px 14px;border-radius:100px;
+  transition:color .2s ease, background .2s ease;
+  white-space:nowrap;
+}
+nav.primary a:hover{color:var(--text);}
+nav.primary a.active{color:var(--text);background:var(--surface-2);}
+.nav-cta{
+  display:flex;align-items:center;gap:10px;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;
+  padding:10px 18px;border-radius:100px;
+  border:1px solid var(--line-strong);
+  transition:all .2s ease;
+  cursor:pointer;
+}
+.btn-primary{
+  background:var(--blue);
+  border:none;color:#fff;
+}
+.btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px);}
+.btn-ghost{background:transparent;color:var(--text);}
+.btn-ghost:hover{background:var(--surface-2);border-color:var(--line-strong);}
+.btn-sm{padding:7px 14px;font-size:12px;}
+
+.menu-toggle{
+  display:none;
+  width:40px;height:40px;border-radius:100px;
+  border:1px solid var(--line-strong);background:var(--surface);
+  align-items:center;justify-content:center;cursor:pointer;
+}
+.menu-toggle span, .menu-toggle::before, .menu-toggle::after{content:'';display:block;width:16px;height:1.5px;background:var(--text);position:relative;}
+.menu-toggle{flex-direction:column;gap:4px;}
+
+/* ---------- Hero ---------- */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:140px 0 80px;
+  position:relative;
+  overflow:hidden;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center;
+  position:relative;z-index:2;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'IBM Plex Mono';font-size:11.5px;color:var(--text-muted);
+  border:1px solid var(--line-strong);border-radius:100px;
+  padding:6px 12px;margin-bottom:22px;
+  letter-spacing:0.03em;
+}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gradient);}
+.hero h1{
+  font-size:clamp(2.4rem, 5vw, 3.9rem);
+  line-height:1.04;
+  font-weight:700;
+  margin-bottom:22px;
+}
+.hero h1 .accent{
+  background:linear-gradient(135deg, #B87287, var(--violet));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p.lead{
+  font-size:17px;color:var(--text-muted);max-width:520px;margin-bottom:32px;
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px;}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap;}
+.hero-stats div{border-left:1px solid var(--line-strong);padding-left:14px;}
+.hero-stats strong{display:block;font-family:'Space Grotesk';font-size:22px;}
+.hero-stats span{font-size:12px;color:var(--text-muted);}
+
+.hero-hex{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  aspect-ratio:1/1;
+}
+.hero-hex svg{width:88%;height:88%;}
+.hero-hex .glow{
+  position:absolute;top:50%;left:50%;width:60%;height:60%;border-radius:50%;
+  background:var(--gradient);filter:blur(90px);opacity:0.35;
+  transform:translate(-50%,-50%) scale(1);
+  animation:pulse 6s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:0.28;transform:translate(-50%,-50%) scale(1);}
+  50%{opacity:0.45;transform:translate(-50%,-50%) scale(1.08);}
+}
+.hex-outline{
+  animation:spin 40s linear infinite;
+  transform-origin:center;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.hero-hex .logo-center{
+  position:absolute;top:50%;left:50%;width:34%;
+  transform:translate(-50%,-50%);
+}
+
+.scroll-cue{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:'IBM Plex Mono';font-size:10px;color:var(--text-faint);
+  letter-spacing:0.08em;
+}
+.scroll-cue .line{width:1px;height:30px;background:linear-gradient(var(--text-muted), transparent);animation:scrolldown 1.8s ease-in-out infinite;}
+@keyframes scrolldown{0%{opacity:0;transform:translateY(-6px);}50%{opacity:1;}100%{opacity:0;transform:translateY(10px);}}
+
+/* ---------- Section shell ---------- */
+.section{padding:110px 0;border-top:1px solid var(--line);}
+.section.tight{padding:90px 0;}
+.section-head{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+  margin-bottom:52px;flex-wrap:wrap;
+}
+.tag{
+  font-family:'IBM Plex Mono';font-size:11.5px;color:var(--violet);
+  letter-spacing:0.06em;display:flex;align-items:center;gap:8px;margin-bottom:14px;
+}
+.tag::before{content:'';width:20px;height:1px;background:var(--violet);}
+.section-head h2{font-size:clamp(1.7rem,3vw,2.5rem);max-width:640px;}
+.section-head p{color:var(--text-muted);max-width:420px;font-size:14.5px;}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ---------- Intro / Carrera ---------- */
+.intro-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:start;}
+.intro-grid p.big{font-size:19px;color:var(--text);line-height:1.65;margin-bottom:24px;}
+.chip-row{display:flex;gap:10px;flex-wrap:wrap;}
+.chip{
+  font-family:'IBM Plex Mono';font-size:11.5px;color:var(--text-muted);
+  border:1px solid var(--line-strong);padding:7px 13px;border-radius:100px;
+}
+.fact-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px;
+}
+.fact-card + .fact-card{margin-top:14px;}
+.fact-card h4{font-size:14px;margin-bottom:6px;}
+.fact-card p{font-size:13.5px;color:var(--text-muted);}
+
+/* ---------- News / Eventos ---------- */
+.events-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.event-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;display:flex;flex-direction:column;gap:14px;
+}
+.event-card .badge{
+  align-self:flex-start;font-family:'IBM Plex Mono';font-size:10.5px;
+  padding:5px 10px;border-radius:100px;background:var(--blue-soft);color:#F0C3CE;
+}
+.event-card.past .badge{background:var(--violet-soft);color:#F0DFC0;}
+.event-card h4{font-size:16.5px;}
+.event-card p{font-size:13.5px;color:var(--text-muted);}
+.event-card .meta{font-family:'IBM Plex Mono';font-size:11.5px;color:var(--text-faint);}
+
+/* ---------- Tabs (Especialidades) ---------- */
+.tabs{display:flex;gap:10px;margin-bottom:32px;flex-wrap:wrap;}
+.tab-btn{
+  font-family:'Space Grotesk';font-weight:600;font-size:14px;
+  padding:12px 20px;border-radius:100px;border:1px solid var(--line-strong);
+  background:transparent;color:var(--text-muted);cursor:pointer;transition:all .2s ease;
+}
+.tab-btn.active{background:var(--blue);color:#fff;border-color:transparent;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;animation:fadein .4s ease;}
+@keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+.spec-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:44px;}
+.spec-desc h3{font-size:24px;margin-bottom:14px;}
+.spec-desc p{color:var(--text-muted);font-size:15px;margin-bottom:20px;}
+.hex-badge{
+  width:56px;height:56px;position:relative;margin-bottom:20px;
+}
+.sem-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.sem-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:20px;}
+.sem-card .sem-label{font-family:'IBM Plex Mono';font-size:11px;color:var(--violet);margin-bottom:12px;display:block;letter-spacing:0.05em;}
+.sem-card ul{margin:0;padding:0;list-style:none;}
+.sem-card li{
+  font-size:13.5px;color:var(--text);padding:9px 0;border-top:1px solid var(--line);
+  display:flex;gap:10px;
+}
+.sem-card li:first-child{border-top:none;}
+.sem-card li::before{content:'';min-width:5px;height:5px;border-radius:50%;background:var(--gradient);margin-top:7px;}
+
+/* ---------- Plan de estudios CTA ---------- */
+.plan-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:44px;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;
+  position:relative;overflow:hidden;
+}
+.plan-card::before{
+  content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;
+  background:var(--gradient);opacity:0.14;filter:blur(60px);border-radius:50%;
+}
+.plan-card h3{font-size:26px;margin-bottom:14px;}
+.plan-card p{color:var(--text-muted);font-size:15px;margin-bottom:22px;}
+.plan-links{display:flex;flex-direction:column;gap:12px;}
+.plan-link-btn{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:12px;
+  padding:16px 18px;font-size:14px;font-weight:500;transition:border-color .2s ease, transform .2s ease;
+}
+.plan-link-btn:hover{border-color:var(--violet);transform:translateX(3px);}
+.plan-link-btn span.arrow{color:var(--violet);font-size:16px;}
+
+/* ---------- Media Lab timeline ---------- */
+.timeline{position:relative;padding-left:36px;}
+.timeline::before{content:'';position:absolute;left:6px;top:6px;bottom:6px;width:1.5px;background:linear-gradient(var(--blue),var(--violet));}
+.tl-item{position:relative;padding-bottom:40px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-item::before{
+  content:'';position:absolute;left:-36px;top:4px;width:13px;height:13px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--violet);
+}
+.tl-year{font-family:'IBM Plex Mono';font-size:12px;color:var(--violet);margin-bottom:6px;display:block;}
+.tl-item h4{font-size:17px;margin-bottom:8px;}
+.tl-item p{font-size:14px;color:var(--text-muted);max-width:640px;}
+.medialab-team{
+  margin-top:56px;display:flex;flex-wrap:wrap;gap:10px;
+}
+
+/* ---------- Accordion (Becas & FAQ) ---------- */
+.accordion{border-top:1px solid var(--line);}
+.acc-item{border-bottom:1px solid var(--line);}
+.acc-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 4px;cursor:pointer;gap:20px;
+}
+.acc-head h4{font-size:15.5px;font-weight:600;}
+.acc-head .plus{
+  width:26px;height:26px;border-radius:50%;border:1px solid var(--line-strong);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  position:relative;transition:transform .3s ease, border-color .3s ease;
+}
+.acc-head .plus::before,.acc-head .plus::after{
+  content:'';position:absolute;background:var(--text-muted);transition:transform .3s ease, background .3s ease;
+}
+.acc-head .plus::before{width:10px;height:1.4px;}
+.acc-head .plus::after{width:1.4px;height:10px;}
+.acc-item.open .plus{border-color:var(--violet);transform:rotate(45deg);}
+.acc-item.open .plus::before,.acc-item.open .plus::after{background:var(--violet);}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.acc-body-inner{padding:0 4px 24px;font-size:14.5px;color:var(--text-muted);max-width:760px;}
+.acc-body-inner strong{color:var(--text);}
+.acc-meta{
+  display:inline-block;margin-top:10px;font-family:'IBM Plex Mono';font-size:11px;
+  color:#F0C3CE;background:var(--blue-soft);padding:4px 10px;border-radius:100px;
+}
+
+/* ---------- Profesores ---------- */
+.prof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.prof-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:22px;text-align:center;transition:transform .25s ease, border-color .25s ease;
+}
+.prof-card:hover{transform:translateY(-4px);border-color:var(--violet);}
+.prof-hex{
+  width:64px;height:64px;margin:0 auto 16px;position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+.prof-hex span{
+  font-family:'Space Grotesk';font-weight:700;font-size:16px;color:#fff;position:relative;z-index:1;
+}
+.prof-card h4{font-size:14.5px;margin-bottom:4px;}
+.prof-card .role{font-size:12px;color:var(--violet);margin-bottom:10px;display:block;}
+.prof-card a.mail{font-family:'IBM Plex Mono';font-size:11px;color:var(--text-muted);word-break:break-all;}
+.prof-card a.mail:hover{color:var(--text);}
+
+/* ---------- Campus ---------- */
+.campus-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.campus-item{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:22px;display:flex;gap:16px;
+}
+.campus-item .num{font-family:'IBM Plex Mono';font-size:12px;color:var(--violet);min-width:26px;}
+.campus-item h4{font-size:15px;margin-bottom:4px;}
+.campus-item .loc{font-family:'IBM Plex Mono';font-size:11px;color:var(--text-faint);margin-bottom:8px;display:block;}
+.campus-item p{font-size:13.5px;color:var(--text-muted);}
+
+/* ---------- Herramientas ---------- */
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.tool-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:24px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s ease, transform .2s ease;
+}
+.tool-card:hover{border-color:var(--blue);transform:translateY(-3px);}
+.tool-card h4{font-size:15.5px;}
+.tool-card p{font-size:13px;color:var(--text-muted);flex-grow:1;}
+.tool-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+.tool-links a{
+  font-size:12px;font-weight:600;color:var(--blue);border:1px solid var(--blue-soft);
+  padding:6px 12px;border-radius:100px;transition:background .2s ease;
+}
+.tool-links a:hover{background:var(--blue-soft);}
+
+/* ---------- Bolsa de trabajo ---------- */
+.job-layout{display:grid;grid-template-columns:0.9fr 1.1fr;gap:50px;}
+.step-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px;}
+.step-list li{display:flex;gap:14px;align-items:flex-start;}
+.step-list .n{
+  font-family:'IBM Plex Mono';font-size:12px;min-width:28px;height:28px;border-radius:50%;
+  background:var(--surface-2);border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;
+}
+.step-list p{font-size:14.5px;padding-top:3px;}
+.portal-list{display:flex;flex-direction:column;gap:10px;margin-top:22px;}
+.portal-list a{
+  font-size:13.5px;color:var(--text-muted);display:flex;align-items:center;gap:8px;
+}
+.portal-list a:hover{color:var(--text);}
+.employer-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
+.employer-chips span{
+  font-family:'IBM Plex Mono';font-size:11.5px;border:1px solid var(--line);
+  padding:7px 13px;border-radius:100px;color:var(--text-muted);
+}
+.note-box{
+  margin-top:22px;padding:16px 18px;border-radius:12px;background:var(--violet-soft);
+  border:1px solid rgba(176,141,79,0.35);font-size:13px;color:#F0DFC0;
+}
+
+/* ---------- FAQ / Contacto ---------- */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.contact-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:32px;}
+.contact-row{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-top:1px solid var(--line);}
+.contact-row:first-child{border-top:none;}
+.contact-row .lbl{font-size:13px;color:var(--text-muted);}
+.contact-row .val{font-size:14px;font-weight:500;}
+.social-row{display:flex;gap:12px;margin-top:24px;}
+.social-btn{
+  width:42px;height:42px;border-radius:50%;border:1px solid var(--line-strong);
+  display:flex;align-items:center;justify-content:center;transition:all .2s ease;
+}
+.social-btn:hover{border-color:var(--violet);background:var(--violet-soft);}
+
+footer{
+  border-top:1px solid var(--line);padding:36px 0;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+}
+footer p{font-size:12.5px;color:var(--text-faint);}
+footer .foot-links{display:flex;gap:18px;}
+footer .foot-links a{font-size:12.5px;color:var(--text-faint);}
+footer .foot-links a:hover{color:var(--text-muted);}
+
+.back-top{
+  position:fixed;bottom:26px;right:26px;z-index:90;
+  width:46px;height:46px;border-radius:50%;
+  background:var(--surface);border:1px solid var(--line-strong);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  opacity:0;pointer-events:none;transform:translateY(10px);
+  transition:all .3s ease;
+}
+.back-top.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+.back-top:hover{border-color:var(--violet);}
+
+/* proposal ribbon */
+.proposal-ribbon{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:var(--blue);color:#fff;text-align:center;
+  font-family:'IBM Plex Mono';font-size:11.5px;font-weight:500;
+  padding:7px 12px;letter-spacing:0.02em;
+  border-bottom:1px solid rgba(176,141,79,0.4);
+}
+header{margin-top:32px;}
+.hero{padding-top:172px;}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 980px){
+  .hero-grid{grid-template-columns:1fr;}
+  .hero-hex{max-width:280px;margin:0 auto;}
+  .intro-grid, .spec-layout, .plan-card, .job-layout, .contact-grid{grid-template-columns:1fr;}
+  .events-grid, .prof-grid, .tools-grid{grid-template-columns:repeat(2,1fr);}
+  .campus-layout{grid-template-columns:1fr;}
+  .sem-grid{grid-template-columns:1fr;}
+  nav.primary{display:none;}
+  .menu-toggle{display:flex;}
+}
+@media (max-width: 620px){
+  .events-grid, .prof-grid, .tools-grid{grid-template-columns:1fr;}
+  .hero-stats{gap:18px;}
+  .section{padding:74px 0;}
+  .plan-card, .contact-card{padding:26px;}
+}
+
+/* mobile menu drawer */
+.mobile-menu{
+  position:fixed;inset:0;z-index:150;background:rgba(10,10,14,0.75);backdrop-filter:blur(6px);
+  display:none;
+}
+.mobile-menu.open{display:block;}
+.mobile-menu-panel{
+  position:absolute;top:0;right:0;height:100%;width:78%;max-width:320px;
+  background:var(--bg-soft);border-left:1px solid var(--line);
+  padding:100px 28px 28px;display:flex;flex-direction:column;gap:6px;
+  transform:translateX(100%);transition:transform .35s ease;
+}
+.mobile-menu.open .mobile-menu-panel{transform:translateX(0);}
+.mobile-menu a{
+  font-family:'Space Grotesk';font-size:17px;font-weight:600;padding:12px 0;
+  border-bottom:1px solid var(--line);color:var(--text-muted);
+}
+.mobile-menu a:hover{color:var(--text);}
+.mobile-close{
+  position:absolute;top:28px;right:28px;width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;
+}
+</style>
+</head>
+<body>
+
+<div class="proposal-ribbon">PROPUESTA DE DISEÑO — ISGC · Universidad Panamericana Guadalajara · contenido original preservado del sitio actual</div>
+
+<!-- ============ HEX FIELD DEFS ============ -->
+<svg width="0" height="0">
+  <defs>
+    <linearGradient id="gradStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8A1538"/>
+      <stop offset="100%" stop-color="#B08D4F"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header id="siteHeader">
+  <div class="wrap nav-inner">
+    <a href="#inicio" class="brand">
+      <img src="data:image/png;base64,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" alt="ISGC">
+      <div>
+        <span>ISGC</span>
+        <small>UP GUADALAJARA</small>
+      </div>
+    </a>
+    <nav class="primary" id="primaryNav">
+      <a href="#carrera">La carrera</a>
+      <a href="#especialidades">Especialidades</a>
+      <a href="#becas">Becas</a>
+      <a href="#profesores">Profesores</a>
+      <a href="#campus">Campus</a>
+      <a href="#laboral">Bolsa de trabajo</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="https://up4u.up.edu.mx/p/home" target="_blank" class="btn btn-ghost btn-sm">UP4U</a>
+      <a href="#contacto" class="btn btn-primary btn-sm">Contacto</a>
+      <div class="menu-toggle" id="menuToggle"><span></span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MOBILE MENU ============ -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-panel">
+    <div class="mobile-close" id="mobileClose">✕</div>
+    <a href="#carrera">La carrera</a>
+    <a href="#especialidades">Especialidades</a>
+    <a href="#plan">Plan de estudios</a>
+    <a href="#medialab">Media Lab</a>
+    <a href="#becas">Becas</a>
+    <a href="#profesores">Profesores</a>
+    <a href="#campus">Campus</a>
+    <a href="#herramientas">Herramientas</a>
+    <a href="#laboral">Bolsa de trabajo</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="inicio">
+  <div class="hex-field" id="hexField"></div>
+  <div class="wrap hero-grid">
+    <div class="reveal in">
+      <div class="eyebrow"><span class="dot"></span> Universidad Panamericana · Campus Guadalajara</div>
+      <h1>Ingeniería en Sistemas<br> y <span class="accent">Gráficas Computacionales</span></h1>
+      <p class="lead">La carrera donde la lógica de la programación y la creatividad visual conviven: resolvemos problemas reales con tecnología y contamos historias a través de gráficas por computadora.</p>
+      <div class="hero-actions">
+        <a href="#carrera" class="btn btn-primary">Conoce la carrera</a>
+        <a href="#especialidades" class="btn btn-ghost">Ver especialidades</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>2</strong><span>Especialidades: Datos &amp; VFX</span></div>
+        <div><strong>8+</strong><span>Profesores e investigadores</span></div>
+        <div><strong>2013</strong><span>Media Lab activo desde</span></div>
+      </div>
+    </div>
+    <div class="hero-hex reveal in">
+      <div class="glow"></div>
+      <svg class="hex-outline" viewBox="0 0 200 200">
+        <polygon points="100,6 183,53 183,147 100,194 17,147 17,53" fill="none" stroke="url(#gradStroke)" stroke-width="1.5" opacity="0.55"/>
+        <polygon points="100,26 165,63 165,137 100,174 35,137 35,63" fill="none" stroke="url(#gradStroke)" stroke-width="1" opacity="0.3"/>
+      </svg>
+      <img class="logo-center" src="data:image/png;base64,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" alt="Logo ISGC">
+    </div>
+  </div>
+  <div class="scroll-cue"><span>SCROLL</span><div class="line"></div></div>
+</section>
+
+<!-- ============ LA CARRERA ============ -->
+<section class="section" id="carrera">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="tag">La carrera</div>
+        <h2>Bienvenid@ al site de ISGC</h2>
+      </div>
+      <p>Aquí encuentras todo lo esencial para un alumno de ISGC: calendarios, eventos, noticias, becas, profesores, materias y especialidades.</p>
+    </div>
+    <div class="intro-grid">
+      <div class="reveal">
+        <p class="big">Es la carrera en donde los alumnos adquieren conocimientos de programación y computación, con el fin de resolver problemas a través de la tecnología. Además, son capaces de mezclar la creatividad con los desarrollos y cambios tecnológicos que están pasando en el mundo.</p>
+        <div class="chip-row">
+          <span class="chip">Programación</span>
+          <span class="chip">Computación</span>
+          <span class="chip">Gráficas por computadora</span>
+          <span class="chip">Ciencia de datos</span>
+          <span class="chip">Efectos visuales</span>
+          <span class="chip">Resolución de problemas</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="fact-card">
+          <h4>¿Qué significa ISGC?</h4>
+          <p>Ingeniería en Sistemas y Gráficas Computacionales.</p>
+        </div>
+        <div class="fact-card">
+          <h4>Redes de la carrera</h4>
+          <p>Síguenos en Instagram y Facebook como <strong>@isgc_upgdl</strong> para noticias, concursos y avisos del semestre.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NOTICIAS / EVENTOS ============ -->
+<section class="section tight" id="eventos" style="border-top:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="tag">Noticias · asuntos relevantes</div>
+        <h2>Eventos de la comunidad ISGC</h2>
+      </div>
+      <p>Ejemplos de convocatorias y eventos reales del ciclo — la sección se actualiza cada semestre.</p>
+    </div>
+    <div class="events-grid">
+      <div class="event-card reveal">
+        <span class="badge">PRÓXIMO</span>
+        <h4>Concurso de programación interno</h4>
+        <p class="meta">Sábado 10 de febrero · 9:00–10:00 am · CompuAulas, Edificio Central</p>
+        <p>Inscripción con malcaraz@up.edu.mx</p>
+      </div>
+      <div class="event-card reveal">
+        <span class="badge">PRÓXIMO</span>
+        <h4>Panel de egresados</h4>
+        <p class="meta">Martes 13 de febrero · 6:00 pm</p>
+        <p>Egresados de ISGC comparten su experiencia laboral. Registro por formulario.</p>
+      </div>
+      <div class="event-card past reveal">
+        <span class="badge">EVENTO PASADO</span>
+        <h4>SIGGRAPH 2022</h4>
+        <p class="meta">11th Annual Faculty Submitted Student Work Exhibit</p>
+        <p>Proyectos de alumnos ISGC exhibidos internacionalmente en SIGGRAPH.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ESPECIALIDADES ============ -->
+<section class="section" id="especialidades">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="tag">Especialidades</div>
+        <h2>Elige tu camino dentro de ISGC</h2>
+      </div>
+      <p>Al final de la carrera puedes profundizar en una de dos especialidades, cada una con dos semestres de materias enfocadas.</p>
+    </div>
+
+    <div class="tabs reveal">
+      <button class="tab-btn active" data-tab="datos">Ciencia de Datos</button>
+      <button class="tab-btn" data-tab="vfx">Efectos Visuales</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-datos">
+      <div class="spec-layout">
+        <div class="spec-desc reveal">
+          <svg class="hex-badge" viewBox="0 0 60 60"><polygon points="30,2 55,16 55,44 30,58 5,44 5,16" fill="none" stroke="url(#gradStroke)" stroke-width="2"/></svg>
+          <h3>Especialidad en Ciencia de Datos</h3>
+          <p>Domina las técnicas para extraer información a través de las herramientas tecnológicas de vanguardia que te permitirán generar sistemas de aprendizaje predictivo y de visualización de datos, para convertirte en una pieza clave dentro de la toma de decisiones en el proyecto o empresa donde te desenvuelves.</p>
+        </div>
+        <div class="sem-grid reveal">
+          <div class="sem-card">
+            <span class="sem-label">SEMESTRE 1</span>
+            <ul>
+              <li>Estadística para Ciencia de Datos</li>
+              <li>Minería de Datos</li>
+              <li>Herramientas enfocadas a la Ciencia de Datos</li>
+              <li>Introducción al Aprendizaje Automático</li>
+              <li>Habilidades directivas y Ética</li>
+            </ul>
+          </div>
+          <div class="sem-card">
+            <span class="sem-label">SEMESTRE 2</span>
+            <ul>
+              <li>Visualización de Datos y narración de historias</li>
+              <li>Introducción al aprendizaje profundo</li>
+              <li>Aprendizaje automático para grandes volúmenes de datos</li>
+              <li>Gestión de proyectos</li>
+              <li>Proyecto terminal de Ciencia de Datos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-vfx">
+      <div class="spec-layout">
+        <div class="spec-desc reveal">
+          <svg class="hex-badge" viewBox="0 0 60 60"><polygon points="30,2 55,16 55,44 30,58 5,44 5,16" fill="none" stroke="url(#gradStroke)" stroke-width="2"/></svg>
+          <h3>Especialidad en Efectos Visuales</h3>
+          <p>Realiza proyectos a gran escala en industrias de animación, videojuegos y entretenimiento, generando valor a través del perfeccionamiento de tus habilidades artísticas y técnicas que te preparan como profesional de alto valor.</p>
+        </div>
+        <div class="sem-grid reveal">
+          <div class="sem-card">
+            <span class="sem-label">SEMESTRE 1</span>
+            <ul>
+              <li>Diseño conceptual</li>
+              <li>Representación digital avanzada</li>
+              <li>Procesamiento e integración de medios (Pipeline)</li>
+              <li>Programación para efectos visuales</li>
+              <li>Ética en los negocios</li>
+            </ul>
+          </div>
+          <div class="sem-card">
+            <span class="sem-label">SEMESTRE 2</span>
+            <ul>
+              <li>Dirección técnica</li>
+              <li>Composición avanzada</li>
+              <li>Efectos de partículas y destrucción</li>
+              <li>Administración de proyectos (Proyecto Terminal)</li>
+              <li>Diseño avanzado de escenarios</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top:28px;font-size:13.5px;color:var(--text-muted);" class="reveal">
+      Para más información sobre inscripción y todas las especialidades disponibles, visita el
+      <a href="https://sites.google.com/up.edu.mx/posgradosingenierias2020/página-principal" target="_blank" style="color:var(--violet);font-weight:600;">site de posgrados de Ingenierías →</a>
+    </p>
+  </div>
+</section>
+
+<!-- ============ PLAN DE ESTUDIOS ============ -->
+<section class="section tight" id="plan">
+  <div class="wrap">
+    <div class="plan-card reveal">
+      <div>
+        <div class="tag">Plan de estudios</div>
+        <h3>Traza tu Ruta Ideal semestre a semestre</h3>
+        <p>Consulta la ruta ideal de materias de ISGC y planea tu avance si vas a hacer intercambio, doble carrera o quieres adelantar semestres.</p>
+        <div class="chip-row">
+          <span class="chip">Ruta Ideal</span>
+          <span class="chip">Doble carrera desde 5° semestre</span>
+          <span class="chip">Planeación por semestre</span>
+        </div>
+      </div>
+      <div class="plan-links">
+        <a class="plan-link-btn" href="http://192.100.179.64/TuRutaIdeal/" target="_blank">Abrir app "Tu Ruta Ideal" <span class="arrow">→</span></a>
+        <a class="plan-link-btn" href="#faq">Ver dudas frecuentes sobre doble carrera <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEDIA LAB ============ -->
+<section class="section" id="medialab">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="tag">Media Lab</div>
+        <h2>Investigación aplicada desde 2013</h2>
+      </div>
+      <p>El Media Lab es un laboratorio en donde se desarrollan proyectos de investigación y aplicaciones para la industria, dirigido por el Mtro. Gabriel Castillo Cortés.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <span class="tl-year">2013</span>
+        <h4>Pirámide de Chichén Itzá</h4>
+        <p>Primer proyecto del Media Lab sobre realidad aumentada, el cual consistió en mostrar la pirámide de Chichén Itzá en una aplicación de iPad.</p>
+      </div>
+      <div class="tl-item reveal">
+        <span class="tl-year">2014</span>
+        <h4>LARVA Game Studios</h4>
+        <p>Primer proyecto en el que el Media Lab fue contratado por una empresa externa, para resolver un juego de rompecabezas para LARVA Game Studios.</p>
+      </div>
+      <div class="tl-item reveal">
+        <span class="tl-year">2014</span>
+        <h4>Montaña Rusa Virtual</h4>
+        <p>Investigación sobre la velocidad y percepción de inercia en tecnología virtual: una montaña rusa de 7 km de largo y 4.5 minutos, construida con Oculus SDK 1.</p>
+      </div>
+      <div class="tl-item reveal">
+        <span class="tl-year">2015</span>
+        <h4>Fósiles en Realidad Aumentada</h4>
+        <p>Fósiles del Museo de Paleontología de Guadalajara fueron escaneados y texturizados para una aplicación de realidad aumentada, exhibida en la conferencia ISTE en Filadelfia.</p>
+      </div>
+    </div>
+    <div class="medialab-team reveal">
+      <span class="chip">Dirección: Gabriel Castillo Cortés</span>
+      <span class="chip">Enrique Rosales</span>
+      <span class="chip">Arturo Jafet Rodríguez</span>
+      <span class="chip">María Luisa Cruz</span>
+      <span class="chip">Miguel Alcaraz</span>
+      <span class="chip">Carolina Del Valle</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BECAS ============ -->
+<section class="section" id="becas">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="tag">Becas y financiamiento</div>
+        <h2>Opciones de apoyo económico</h2>
+      </div>
+      <p>Para conservar cualquier beca se requiere un promedio mínimo de 8.0 en todos tus semestres y no reprobar materias. Se entregan al inicio de semestre y se solicitan a finales del anterior.</p>
+    </div>
+
+    <div class="accordion reveal" id="becasAccordion">
+      <div class="acc-item open">
+        <div class="acc-head"><h4>Beca SEP</h4><div class="plus"></div></div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            Se solicita ingresando tus datos y documentos en la convocatoria de <a href="http://apoyoeconomico.gdl.up.mx/" target="_blank" style="color:var(--violet);">apoyoeconomico.gdl.up.mx</a>, disponible del 1° al 15 de mayo y del 1° al 15 de noviembre de cada semestre. Requiere promedio mínimo de 8.0 y necesidad económica comprobable; se otorga por carrera a los mejores promedios con mayor necesidad. Aplica en inscripción y colegiatura.
+            <span class="acc-meta">Promedio mínimo 8.0</span>
+          </div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4>Beca Cultural</h4><div class="plus"></div></div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            Pensada para alumnos a quienes les gusta el canto o la actuación. Deberán acudir al Departamento de Arte y Cultura para más información. Sólo aplica en colegiatura.
+          </div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4>Beca Deportiva</h4><div class="plus"></div></div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            Para alumnos que practican algún deporte como fútbol, básquetbol o tenis. Deberás presentarte en el Departamento de Deportes para realizar una prueba física. Sólo aplica en colegiatura.
+          </div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4>Crédito educativo / Apoyo en diferimiento de pagos</h4><div class="plus"></div></div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            Crédito educativo otorgado por la Universidad Panamericana a los alumnos que desean terminar sus estudios en la universidad, el cual se paga al finalizar la carrera. Aplica en reinscripción y colegiatura.
+          </div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4>Becas Trabajo</h4><div class="plus"></div></div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            Se solicita directamente en el departamento en el que te gustaría trabajar; de ser seleccionado, te ofrecen un porcentaje de beca.
+          </div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4>Fondo de apoyo para grandes familias</h4><div class="plus"></div></div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            Apoyo para alumnos con hermanos dentro de UP, Colmenares y Los Altos: a partir de 3 hermanos, 10% de beca c/u; de 4 hermanos en adelante, 25% c/u (tope de 50% en UP; no aplica junto con otras becas en Colmenares y Los Altos). Aplica en inscripción y colegiatura. La convocatoria se publica en Colmenares y Los Altos en febrero y marzo de cada año.
+          </div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4>Beca Convenio</h4><div class="plus"></div></div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            Para alumnos con promedio mínimo de 9.0 provenientes de preparatorias con convenio: Liceo del Valle, Los Altos, Colegio Altamira Moctezuma, Colegio Altamira La Cima, Torreblanca, Palmares, Colegio Chapultepec, Instituto Chapultepec, Colegio Mochis, Cervantes Costa Rica, Colegio Morelos de Tepatitlán, Campogrande Colima y Liceo Thezia. Para mantenerla se requiere promedio mínimo de 8.0 sin materias reprobadas. Sólo aplica en colegiatura.
+          </div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4>Beca Excelencia</h4><div class="plus"></div></div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            Otorgada a alumnos con desempeño excelente en preparatorias con convenio, asignada por la misma preparatoria con promedio mínimo de 9.0. Para mantenerla se requiere promedio mínimo de 8.5 sin materias reprobadas. Sólo aplica en colegiatura.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-card reveal" style="margin-top:36px;">
+      <div class="contact-row">
+        <div><span class="lbl">Jefa de Becas y Financiamientos</span><br><span class="val">L.A.F. Rosario Gutiérrez Robles</span></div>
+        <a href="mailto:rgutierr@up.edu.mx" class="btn btn-ghost btn-sm">rgutierr@up.edu.mx</a>
+      </div>
+      <div class="contact-row">
+        <div><span class="lbl">Coordinadora de Becas y Financiamientos</span><br><span class="val">Lic. Adriana Lara Sánchez</span></div>
+        <a href="mailto:alaras@up.edu.mx" class="btn btn-ghost btn-sm">alaras@up.edu.mx</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROFESORES ============ -->
+<section class="section" id="profesores">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="tag">Profesores</div>
+        <h2>Equipo académico de ISGC</h2>
+      </div>
+      <p>Dirección, academias y profesores investigadores de la carrera.</p>
+    </div>
+    <div class="prof-grid">
+      <div class="prof-card reveal">
+        <div class="prof-hex"><svg width="64" height="64" viewBox="0 0 64 64" style="position:absolute;"><polygon points="32,2 60,17 60,47 32,62 4,47 4,17" fill="url(#gradStroke)" opacity="0.85"/></svg><span>AJ</span></div>
+        <h4>Arturo Jafet Rodríguez</h4>
+        <span class="role">Director de ISGC</span>
+        <a class="mail" href="mailto:arodrig@up.edu.mx">arodrig@up.edu.mx</a>
+      </div>
+      <div class="prof-card reveal">
+        <div class="prof-hex"><svg width="64" height="64" viewBox="0 0 64 64" style="position:absolute;"><polygon points="32,2 60,17 60,47 32,62 4,47 4,17" fill="url(#gradStroke)" opacity="0.85"/></svg><span>CV</span></div>
+        <h4>Dra. Carolina del Valle</h4>
+        <span class="role">Jefa Academia de Cómputo</span>
+        <a class="mail" href="mailto:cvalle@up.edu.mx">cvalle@up.edu.mx</a>
+      </div>
+      <div class="prof-card reveal">
+        <div class="prof-hex"><svg width="64" height="64" viewBox="0 0 64 64" style="position:absolute;"><polygon points="32,2 60,17 60,47 32,62 4,47 4,17" fill="url(#gradStroke)" opacity="0.85"/></svg><span>AA</span></div>
+        <h4>Dra. Avelina Alejo Reyes</h4>
+        <span class="role">Jefa Academia de Matemáticas</span>
+        <a class="mail" href="mailto:aalejo@up.edu.mx">aalejo@up.edu.mx</a>
+      </div>
+      <div class="prof-card reveal">
+        <div class="prof-hex"><svg width="64" height="64" viewBox="0 0 64 64" style="position:absolute;"><polygon points="32,2 60,17 60,47 32,62 4,47 4,17" fill="url(#gradStroke)" opacity="0.85"/></svg><span>GC</span></div>
+        <h4>Mtro. Gabriel Castillo Cortés</h4>
+        <span class="role">Director Media Lab</span>
+        <a class="mail" href="mailto:gacastil@up.edu.mx">gacastil@up.edu.mx</a>
+      </div>
+      <div class="prof-card reveal">
+        <div class="prof-hex"><svg width="64" height="64" viewBox="0 0 64 64" style="position:absolute;"><polygon points="32,2 60,17 60,47 32,62 4,47 4,17" fill="url(#gradStroke)" opacity="0.85"/></svg><span>MA</span></div>
+        <h4>Dr. Miguel Alcaraz</h4>
+        <span class="role">Profesor Investigador</span>
+        <a class="mail" href="mailto:malcaraz@up.edu.mx">malcaraz@up.edu.mx</a>
+      </div>
+      <div class="prof-card reveal">
+        <div class="prof-hex"><svg width="64" height="64" viewBox="0 0 64 64" style="position:absolute;"><polygon points="32,2 60,17 60,47 32,62 4,47 4,17" fill="url(#gradStroke)" opacity="0.85"/></svg><span>MC</span></div>
+        <h4>Dra. María Luisa Cruz</h4>
+        <span class="role">Profesora Investigadora</span>
+        <a class="mail" href="mailto:mlcruz@up.edu.mx">mlcruz@up.edu.mx</a>
+      </div>
+      <div class="prof-card reveal">
+        <div class="prof-hex"><svg width="64" height="64" viewBox="0 0 64 64" style="position:absolute;"><polygon points="32,2 60,17 60,47 32,62 4,47 4,17" fill="url(#gradStroke)" opacity="0.85"/></svg><span>JL</span></div>
+        <h4>Dr. Juan Carlos López Pimentel</h4>
+        <span class="role">Profesor Investigador</span>
+        <a class="mail" href="mailto:clopezp@up.edu.mx">clopezp@up.edu.mx</a>
+      </div>
+      <div class="prof-card reveal">
+        <div class="prof-hex"><svg width="64" height="64" viewBox="0 0 64 64" style="position:absolute;"><polygon points="32,2 60,17 60,47 32,62 4,47 4,17" fill="url(#gradStroke)" opacity="0.85"/></svg><span>JP</span></div>
+        <h4>Dr. José Alberto Del Puerto Flores</h4>
+        <span class="role">Profesor Investigador</span>
+        <a class="mail" href="mailto:jpuerto@up.edu.mx">jpuerto@up.edu.mx</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAMPUS ============ -->
+<section class="section" id="campus">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="tag">Campus</div>
+        <h2>Puntos clave para ISGC</h2>
+      </div>
+      <p><a href="https://www.up.edu.mx/sites/default/files/mapa_gdl_compressed.pdf" target="_blank" style="color:var(--violet);font-weight:600;">Ver mapa del campus UP Guadalajara →</a></p>
+    </div>
+    <div class="campus-layout">
+      <div class="campus-item reveal">
+        <span class="num">01</span>
+        <div>
+          <h4>Laboratorios CIAC</h4>
+          <span class="loc">Edificio A · Ingenierías · 2° piso</span>
+          <p>Centros de cómputo especialmente para IAD, IID e ISGC. Muchas materias de programación se imparten aquí, con equipo de alta tecnología.</p>
+        </div>
+      </div>
+      <div class="campus-item reveal">
+        <span class="num">02</span>
+        <div>
+          <h4>CRAI</h4>
+          <span class="loc">Edificio Central · 2° piso</span>
+          <p>Espacio con computadoras y compuaulas donde normalmente se dan las primeras clases de programación.</p>
+        </div>
+      </div>
+      <div class="campus-item reveal">
+        <span class="num">03</span>
+        <div>
+          <h4>Oficina del Director</h4>
+          <span class="loc">Edificio C · 3er piso (izquierda)</span>
+          <p>Aquí los alumnos pueden resolver dudas sobre la carrera, materias, etc. con el Director Arturo Jafet Rodríguez.</p>
+        </div>
+      </div>
+      <div class="campus-item reveal">
+        <span class="num">04</span>
+        <div>
+          <h4>Cafetería</h4>
+          <span class="loc">A un lado del Edificio Central</span>
+          <p>Lugar para comer entre clases o después de ellas.</p>
+        </div>
+      </div>
+      <div class="campus-item reveal">
+        <span class="num">05</span>
+        <div>
+          <h4>Coordinación</h4>
+          <span class="loc">Edificio C · 3er piso (derecha)</span>
+          <p>Ahí encontrarás a los coordinadores de Ingenierías para dudas sobre materias, profesores, etc.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HERRAMIENTAS ============ -->
+<section class="section" id="herramientas">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="tag">Herramientas</div>
+        <h2>Todo lo que usarás en el día a día</h2>
+      </div>
+      <p>Accesos directos a los portales y apps que acompañan tu vida académica.</p>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-card reveal">
+        <h4>UP4U</h4>
+        <p>Calificaciones, horarios, asistencias, estado de cuenta y mucho más.</p>
+        <div class="tool-links"><a href="https://up4u.up.edu.mx/p/home" target="_blank">Ingresar →</a></div>
+      </div>
+      <div class="tool-card reveal">
+        <h4>Tu Ruta Ideal</h4>
+        <p>App para planear tus materias por semestre. Muy útil si harás intercambio o doble carrera.</p>
+        <div class="tool-links"><a href="http://192.100.179.64/TuRutaIdeal/" target="_blank">Ingresar →</a></div>
+      </div>
+      <div class="tool-card reveal">
+        <h4>GPA Calculator</h4>
+        <p>Convierte tu promedio mexicano de la UP al estándar GPA de EUA (Scholaro).</p>
+        <div class="tool-links"><a href="https://www.scholaro.com/gpa-calculator/Mexico" target="_blank">Ingresar →</a></div>
+      </div>
+      <div class="tool-card reveal">
+        <h4>Portal de pagos</h4>
+        <p>Realiza tus pagos en línea de forma directa.</p>
+        <div class="tool-links"><a href="https://portaldepagos.up.edu.mx/" target="_blank">Ingresar →</a></div>
+      </div>
+      <div class="tool-card reveal">
+        <h4>Tesorería</h4>
+        <p>Formas de pago, referencia bancaria y solicitud de documentos.</p>
+        <div class="tool-links">
+          <a href="https://movil.gdl.up.mx/tesoreria/seccion/formas_de_pago/guadalajara" target="_blank">Formas de pago →</a>
+          <a href="https://movil.gdl.up.mx/tesoreria/seccion/referencia/guadalajara" target="_blank">Referencia →</a>
+          <a href="https://movil.gdl.up.mx/tesoreria/seccion/documentos/guadalajara" target="_blank">Documentos →</a>
+        </div>
+      </div>
+      <div class="tool-card reveal">
+        <h4>Office 365</h4>
+        <p>Inicia sesión con tu cuenta UP e instala Office 365 en hasta 5 dispositivos.</p>
+        <div class="tool-links"><a href="https://portal.office.com/" target="_blank">Instalar →</a></div>
+      </div>
+      <div class="tool-card reveal">
+        <h4>Curriculum Vitae</h4>
+        <p>Crea tu perfil de LinkedIn y expórtalo como CV en minutos.</p>
+        <div class="tool-links"><a href="https://mx.linkedin.com/" target="_blank">LinkedIn →</a></div>
+      </div>
+      <div class="tool-card reveal">
+        <h4>LeetCode</h4>
+        <p>Lista de problemas Blind 75 para prepararte en entrevistas técnicas.</p>
+        <div class="tool-links"><a href="https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions" target="_blank">Ver lista →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOLSA DE TRABAJO ============ -->
+<section class="section" id="laboral">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="tag">Bolsa de trabajo</div>
+        <h2>¿Buscas empleo o prácticas?</h2>
+      </div>
+      <p>Sigue estos pasos y consulta los portales recomendados por la coordinación.</p>
+    </div>
+    <div class="job-layout">
+      <div class="reveal">
+        <ul class="step-list">
+          <li><span class="n">1</span><p>Crea tu cuenta en LinkedIn.</p></li>
+          <li><span class="n">2</span><p>Crea tu CV.</p></li>
+          <li><span class="n">3</span><p>Añade tu usuario de GitHub.</p></li>
+        </ul>
+        <div class="portal-list">
+          <a href="https://work.hirellama.com/" target="_blank">→ work.hirellama.com</a>
+          <a href="https://jobs.intel.com/ListJobs/All/Country-MX" target="_blank">→ jobs.intel.com (Intel México)</a>
+          <a href="https://www.empleojaltec.mx/" target="_blank">→ empleojaltec.mx</a>
+        </div>
+        <p style="margin-top:18px;font-size:13px;color:var(--text-muted);">¿Dudas o recomendaciones? Escribe a Jafet Rodríguez: <a href="mailto:arodrig@up.edu.mx" style="color:var(--violet);">arodrig@up.edu.mx</a></p>
+      </div>
+      <div class="reveal">
+        <h4 style="font-size:15px;margin-bottom:14px;">Empresas que han contratado a alumnos de ISGC</h4>
+        <div class="employer-chips">
+          <span>Wizeline</span><span>Apptegy</span><span>Amdocs</span><span>Flex</span>
+          <span>Herbalife</span><span>Nextiva</span><span>Nexus Sistemas</span>
+          <span>Crabi</span><span>Create For Life</span><span>Threat Informant</span>
+        </div>
+        <div class="note-box">
+          Las vacantes específicas (puesto, sueldo, requisitos) rotan cada semestre. Esta propuesta conserva los procesos y portales vigentes; las convocatorias activas se mostrarían aquí como tarjetas dinámicas administradas por Coordinación.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="tag">FAQ</div>
+        <h2>Preguntas frecuentes de ISGC</h2>
+      </div>
+    </div>
+    <div class="accordion reveal" id="faqAccordion">
+      <div class="acc-item open">
+        <div class="acc-head"><h4>¿Qué significa ISGC?</h4><div class="plus"></div></div>
+        <div class="acc-body"><div class="acc-body-inner">Ingeniería en Sistemas y Gráficas Computacionales.</div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4>¿Qué necesito saber si quiero hacer doble carrera?</h4><div class="plus"></div></div>
+        <div class="acc-body"><div class="acc-body-inner">Puedes hacer doble carrera empezando el quinto semestre. Mientras ninguna de las dos carreras llegue a especialidad, seguirás pagando una sola inscripción; de lo contrario, pagarás tanto la normal como la de especialidad.</div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4>¿Qué computadora se recomienda?</h4><div class="plus"></div></div>
+        <div class="acc-body"><div class="acc-body-inner">Las especificaciones recomendadas se publican en el site oficial y varían según la generación. Consulta a Coordinación para la ficha técnica vigente.</div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4>¿Cuál es el reglamento general de la UP?</h4><div class="plus"></div></div>
+        <div class="acc-body"><div class="acc-body-inner">Consulta el documento oficial: <a href="https://www.up.edu.mx/sites/default/files/reglamento_general_up_2020.pdf" target="_blank" style="color:var(--violet);">Reglamento General UP (PDF) →</a></div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4>¿Cuál es el reglamento interno de Ingenierías?</h4><div class="plus"></div></div>
+        <div class="acc-body"><div class="acc-body-inner">Consulta el documento oficial: <a href="https://www.up.edu.mx/sites/default/files/ri_ingenieria_2017.pdf" target="_blank" style="color:var(--violet);">Reglamento Interno de Ingenierías (PDF) →</a></div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4>Información de servicios escolares</h4><div class="plus"></div></div>
+        <div class="acc-body"><div class="acc-body-inner">Consulta la normativa completa: <a href="https://sites.google.com/up.edu.mx/servicios-escolares-upgdl/normativa" target="_blank" style="color:var(--violet);">Servicios escolares UP GDL →</a></div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4>¿Dónde veo información sobre especialidades?</h4><div class="plus"></div></div>
+        <div class="acc-body"><div class="acc-body-inner">En el site de posgrados de Ingenierías: <a href="https://sites.google.com/up.edu.mx/posgradosingenierias2020/página-principal" target="_blank" style="color:var(--violet);">Especialidades de Ingeniería →</a></div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4>¿Cómo pido documentos como mi kardex?</h4><div class="plus"></div></div>
+        <div class="acc-body"><div class="acc-body-inner">A través de Tesorería / Servicios Escolares: <a href="https://movil.gdl.up.mx/tesoreria/seccion/documentos/guadalajara" target="_blank" style="color:var(--violet);">Solicitar documentos →</a></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section class="section" id="contacto">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="tag">Contacto</div>
+        <h2 style="margin-bottom:18px;">Hablemos</h2>
+        <p style="color:var(--text-muted);font-size:15px;max-width:420px;margin-bottom:24px;">¿Dudas sobre la carrera, especialidades, becas o el proceso de admisión? Escríbenos o síguenos en redes.</p>
+        <div class="social-row">
+          <a class="social-btn" href="https://www.instagram.com/isgc_upgdl/" target="_blank" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>
+          </a>
+          <a class="social-btn" href="https://www.facebook.com/isgc.upgdl/" target="_blank" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V5.5h-3C11.5 5.5 10 7 10 9.3V12H7v3.5h3V22h3.5v-6.5H16l0.6-3.5h-3.1V9.6c0-.6.3-.6.5-.6Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-row">
+          <div><span class="lbl">Director de ISGC</span><br><span class="val">Arturo Jafet Rodríguez</span></div>
+          <a href="mailto:arodrig@up.edu.mx" class="btn btn-ghost btn-sm">Escribir</a>
+        </div>
+        <div class="contact-row">
+          <div><span class="lbl">Instagram</span><br><span class="val">@isgc_upgdl</span></div>
+          <a href="https://www.instagram.com/isgc_upgdl/" target="_blank" class="btn btn-ghost btn-sm">Ver</a>
+        </div>
+        <div class="contact-row">
+          <div><span class="lbl">Facebook</span><br><span class="val">isgc.upgdl</span></div>
+          <a href="https://www.facebook.com/isgc.upgdl/" target="_blank" class="btn btn-ghost btn-sm">Ver</a>
+        </div>
+        <div class="contact-row">
+          <div><span class="lbl">Portal académico</span><br><span class="val">UP4U</span></div>
+          <a href="https://up4u.up.edu.mx/p/home" target="_blank" class="btn btn-ghost btn-sm">Entrar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;">
+    <p>© Ingeniería en Sistemas y Gráficas Computacionales · Universidad Panamericana, Campus Guadalajara — Propuesta de rediseño</p>
+    <div class="foot-links">
+      <a href="https://www.up.edu.mx/sites/default/files/reglamento_general_up_2020.pdf" target="_blank">Reglamento general</a>
+      <a href="https://www.up.edu.mx/sites/default/files/ri_ingenieria_2017.pdf" target="_blank">Reglamento Ingenierías</a>
+      <a href="#inicio">Volver arriba</a>
+    </div>
+  </div>
+</footer>
+
+<div class="back-top" id="backTop" aria-label="Volver arriba">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</div>
+
+<script>
+// ---------- header scroll state ----------
+const header = document.getElementById('siteHeader');
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 30);
+  backTop.classList.toggle('show', window.scrollY > 700);
+});
+backTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+// ---------- mobile menu ----------
+const menuToggle = document.getElementById('menuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+menuToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+mobileMenu.addEventListener('click', (e) => { if(e.target === mobileMenu) mobileMenu.classList.remove('open'); });
+
+// ---------- scroll-spy nav ----------
+const navLinks = document.querySelectorAll('nav.primary a');
+const sections = Array.from(navLinks).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+const spy = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const id = '#' + entry.target.id;
+      navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === id));
+    }
+  });
+}, {rootMargin: '-40% 0px -50% 0px'});
+sections.forEach(s => spy.observe(s));
+
+// ---------- reveal on scroll ----------
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      revealObs.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.12});
+revealEls.forEach(el => revealObs.observe(el));
+
+// ---------- tabs: especialidades ----------
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ---------- accordions ----------
+function setupAccordion(containerId){
+  const container = document.getElementById(containerId);
+  container.querySelectorAll('.acc-item').forEach(item => {
+    const head = item.querySelector('.acc-head');
+    const body = item.querySelector('.acc-body');
+    if(item.classList.contains('open')){
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+    head.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      container.querySelectorAll('.acc-item.open').forEach(other => {
+        if(other !== item){
+          other.classList.remove('open');
+          other.querySelector('.acc-body').style.maxHeight = null;
+        }
+      });
+      item.classList.toggle('open', !isOpen);
+      body.style.maxHeight = !isOpen ? body.scrollHeight + 'px' : null;
+    });
+  });
+}
+setupAccordion('becasAccordion');
+setupAccordion('faqAccordion');
+window.addEventListener('resize', () => {
+  document.querySelectorAll('.acc-item.open .acc-body').forEach(b => b.style.maxHeight = b.scrollHeight + 'px');
+});
+
+// ---------- hex field background ----------
+(function(){
+  const field = document.getElementById('hexField');
+  const w = 1400, h = 900, size = 70;
+  let svg = `<svg viewBox="0 0 ${w} ${h}" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">`;
+  const hexPoints = (cx,cy,r) => {
+    let pts = [];
+    for(let i=0;i<6;i++){
+      const angle = Math.PI/180 * (60*i - 30);
+      pts.push(`${(cx + r*Math.cos(angle)).toFixed(1)},${(cy + r*Math.sin(angle)).toFixed(1)}`);
+    }
+    return pts.join(' ');
+  };
+  const r = size/2;
+  const dx = size * 0.87;
+  const dy = size * 0.75;
+  for(let row=0; row*dy < h + size; row++){
+    for(let col=0; col*dx < w + size; col++){
+      const cx = col*dx;
+      const cy = row*dy + (col%2 ? dy/2 : 0);
+      const opacity = (0.02 + Math.random()*0.05).toFixed(3);
+      svg += `<polygon points="${hexPoints(cx,cy,r)}" fill="none" stroke="#ffffff" stroke-width="1" opacity="${opacity}"/>`;
+    }
+  }
+  svg += `</svg>`;
+  field.innerHTML = svg;
+})();
+</script>
+</body>
+</html>

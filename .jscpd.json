@@ -1,9 +1,0 @@
-{
-  "threshold": 4,
-  "minTokens": 40,
-  "minLines": 5,
-  "reporters": ["console"],
-  "ignore": ["**/*.test.*", "**/e2e/**"],
-  "absolute": true,
-  "gitignore": true
-}
