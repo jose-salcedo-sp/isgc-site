@@ -1,14 +1,15 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useDeferredValue, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { GraphInspector } from "./graph-inspector";
-import { GraphLegend } from "./graph-legend";
 import type { GraphEdge, GraphKind, GraphNode, GraphText } from "./graph-model";
 import { layoutRadial } from "./graph-radial";
 import type { RadialLayout, RadialNode } from "./graph-radial";
 import { KIND_ORDER } from "./graph-theme";
+
+const ALL_KINDS = new Set<GraphKind>(KIND_ORDER);
 
 const GraphCanvas = dynamic(() => import("./graph-canvas"), { ssr: false });
 
@@ -62,30 +63,11 @@ export const GraphView = ({
   text: GraphText;
 }) => {
   const [selected, setSelected] = useState<string | null>(null);
-  const [query, setQuery] = useState("");
-  const deferredQuery = useDeferredValue(query);
-  const [activeKinds, setActiveKinds] = useState(
-    () => new Set<GraphKind>(KIND_ORDER)
-  );
 
   const layout = useMemo(
     () => layoutRadial(initialNodes, initialEdges),
     [initialEdges, initialNodes]
   );
-
-  const searchIds = useMemo(() => {
-    const needle = deferredQuery.trim().toLowerCase();
-    if (!needle) {
-      return null;
-    }
-    const matches = new Set<string>();
-    for (const node of layout.nodes) {
-      if (node.label.toLowerCase().includes(needle)) {
-        matches.add(node.id);
-      }
-    }
-    return matches;
-  }, [deferredQuery, layout]);
 
   const selectedNode = selected ? (layout.byId.get(selected) ?? null) : null;
   const connections = useMemo(() => {
@@ -119,30 +101,12 @@ export const GraphView = ({
       </nav>
       <div className="relative min-h-0 flex-1">
         <GraphCanvas
-          activeKinds={activeKinds}
+          activeKinds={ALL_KINDS}
           layout={layout}
-          searchIds={searchIds}
+          searchIds={null}
           selectedId={selected}
           text={text}
           onSelect={setSelected}
-        />
-        <GraphLegend
-          activeKinds={activeKinds}
-          layout={layout}
-          query={query}
-          text={text}
-          onQuery={setQuery}
-          onToggleKind={(kind) => {
-            setActiveKinds((prev) => {
-              const next = new Set(prev);
-              if (next.has(kind)) {
-                next.delete(kind);
-              } else {
-                next.add(kind);
-              }
-              return next;
-            });
-          }}
         />
         {selectedNode ? (
           <GraphInspector

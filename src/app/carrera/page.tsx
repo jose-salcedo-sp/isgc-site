@@ -82,12 +82,42 @@ const CarreraPage = () => (
         </a>
       </div>
     </PageSection>
-    <section className="graph-surface h-[min(90vh,900px)] w-full">
-      <GraphView
-        initialEdges={curriculumGraph.edges}
-        initialNodes={curriculumGraph.nodes}
-        text={curriculumGraph.text}
-      />
+    <section className="graph-surface w-full py-16 sm:py-20" id="mapa">
+      <div className="mx-auto max-w-300 px-5 lg:px-6">
+        <p className="text-dorado text-xs font-bold tracking-[0.18em] uppercase">
+          Plan 2015
+        </p>
+        <h2 className="text-foreground mt-4 max-w-3xl font-serif text-4xl leading-[1.05] sm:text-6xl">
+          Tu carrera <em className="text-dorado not-italic">de un vistazo</em>.
+        </h2>
+        <p className="text-muted-foreground mt-5 max-w-2xl text-lg leading-relaxed">
+          Diez semestres, 57 materias y los temas que las conectan. Pasa el
+          cursor por cualquier parte del mapa para ver de dónde viene y hacia
+          dónde lleva.
+        </p>
+        <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
+          {[
+            { label: "Semestres", tone: "bg-graph-semester" },
+            { label: "Materias", tone: "bg-graph-course" },
+            { label: "Temas", tone: "bg-graph-subject" },
+          ].map((item) => (
+            <li
+              className="text-muted-foreground flex items-center gap-2 text-sm font-semibold"
+              key={item.label}
+            >
+              <span className={`size-2.5 rounded-full ${item.tone}`} />
+              {item.label}
+            </li>
+          ))}
+        </ul>
+        <div className="mx-auto mt-10 aspect-square w-full max-w-[860px]">
+          <GraphView
+            initialEdges={curriculumGraph.edges}
+            initialNodes={curriculumGraph.nodes}
+            text={curriculumGraph.text}
+          />
+        </div>
+      </div>
     </section>
     <PageSection tone="marfil">
       <SectionHeading
