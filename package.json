@@ -1,45 +1,28 @@
 {
-  "name": "isgc-site",
+  "name": "isgc-web",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "vitest run",
-    "typecheck": "tsc --noEmit",
-    "lint": "ultracite check",
-    "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check",
-    "deadcode": "knip",
-    "dupes": "jscpd src --config .jscpd.json",
-    "verify": "npm run typecheck && npm run check && npm run test && npm run build",
-    "doctor": "npx react-doctor@latest",
-    "check": "ultracite check",
-    "fix": "ultracite fix",
-    "prepare": "git config core.hooksPath .githooks"
+    "lint": "eslint ."
   },
   "dependencies": {
-    "next": "^16",
-    "react": "^19",
-    "react-dom": "^19"
+    "gsap": "^3.15.0",
+    "next": "15.3.3",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^26",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "babel-plugin-react-compiler": "^1",
-    "jscpd": "^5",
-    "knip": "^6",
-    "oxfmt": "^0.68",
-    "oxlint": "^1",
-    "oxlint-plugin-react-doctor": "^0.9",
-    "tailwindcss": "^4",
-    "typescript": "^5",
-    "ultracite": "^7",
-    "vite-tsconfig-paths": "^6",
-    "vitest": "^5"
+    "@types/node": "22.13.10",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
+    "autoprefixer": "10.4.20",
+    "eslint": "8.57.0",
+    "eslint-config-next": "15.3.3",
+    "postcss": "8.5.3",
+    "tailwindcss": "3.4.17",
+    "typescript": "5.8.2"
   }
 }
