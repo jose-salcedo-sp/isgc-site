@@ -63,16 +63,28 @@ const polar = (angle: number, radius: number): [number, number] => [
   radius * Math.sin(angle - Math.PI / 2),
 ];
 
-/** Same-level links arc outside the rings; the wider the gap, the wider the bow. */
+const ARC_STEPS = 48;
+
+/**
+ * Same-level links bow outside the rings. Sampling radius as `tip + h·sin(πs)`
+ * keeps every point at or beyond the outer edge, which a Bézier through a
+ * single control point does not for widely separated slices.
+ */
 const outerLinkPath = (source: RadialNode, target: RadialNode): string => {
   const delta =
     ((target.angle - source.angle + Math.PI) % (Math.PI * 2)) - Math.PI;
-  const mid = source.angle + delta / 2;
-  const bulge = source.tip + 60 + (Math.abs(delta) / Math.PI) * 420;
+  const height = 70 + (Math.abs(delta) / Math.PI) * 460;
   const [x0, y0] = polar(source.angle, source.tip);
-  const [cx, cy] = polar(mid, bulge);
-  const [x1, y1] = polar(target.angle, target.tip);
-  return `M${x0},${y0}Q${cx},${cy},${x1},${y1}`;
+  let path = `M${x0},${y0}`;
+  for (let step = 1; step <= ARC_STEPS; step += 1) {
+    const s = step / ARC_STEPS;
+    const [x, y] = polar(
+      source.angle + delta * s,
+      source.tip + height * Math.sin(Math.PI * s)
+    );
+    path += `L${x},${y}`;
+  }
+  return path;
 };
 
 export const radialLinkPath = (

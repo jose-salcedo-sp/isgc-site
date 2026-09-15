@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import type { GraphEdge, GraphNode } from "./graph-model";
-import { layoutRadial, pickSlice } from "./graph-radial";
+import { layoutRadial, pickSlice, radialLinkPath } from "./graph-radial";
 import { RING_RADIUS } from "./graph-theme";
 
 const edge = (
@@ -113,6 +113,30 @@ describe("radial layout", () => {
     }
     expect(a.angle).not.toBe(b.angle);
     expect(layout.edges).toHaveLength(2);
+  });
+});
+
+describe("links between slices on the same ring", () => {
+  it("stays outside the outer ring along the whole arc", () => {
+    const nodes: GraphNode[] = [
+      { id: "a", kind: "subject", label: "A", order: 1, proximity: 3 },
+      { id: "b", kind: "subject", label: "B", order: 2, proximity: 3 },
+      { id: "c", kind: "subject", label: "C", order: 3, proximity: 3 },
+    ];
+    const layout = layoutRadial(nodes, []);
+    const a = layout.byId.get("a");
+    const c = layout.byId.get("c");
+    if (!a || !c) {
+      throw new Error("missing nodes");
+    }
+    const points = radialLinkPath(a, c)
+      .slice(1)
+      .split("L")
+      .map((pair) => pair.split(",").map(Number));
+    expect(points.length).toBeGreaterThan(8);
+    for (const [x, y] of points) {
+      expect(Math.hypot(x ?? 0, y ?? 0)).toBeGreaterThanOrEqual(a.tip - 0.001);
+    }
   });
 });
 
