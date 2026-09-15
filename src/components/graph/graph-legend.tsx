@@ -1,12 +1,13 @@
 "use client";
 
-import type { GraphKind } from "./graph-model";
+import type { GraphKind, GraphText } from "./graph-model";
 import type { RadialLayout } from "./graph-radial";
-import { KIND_LABEL, KIND_ORDER } from "./graph-theme";
+import { KIND_ORDER, KIND_SWATCH } from "./graph-theme";
 
 const kindButtons = (
   layout: RadialLayout,
   activeKinds: ReadonlySet<GraphKind>,
+  kinds: GraphText["kinds"],
   onToggleKind: (kind: GraphKind) => void
 ) => {
   const buttons = [];
@@ -17,22 +18,16 @@ const kindButtons = (
     }
     buttons.push(
       <button
-        className="flex items-center gap-2 rounded-md px-1 py-1 text-left hover:bg-[color-mix(in_oklab,var(--foreground)_6%,transparent)]"
+        className={`hover:bg-muted flex items-center gap-2 rounded-md px-1 py-1 text-left ${activeKinds.has(kind) ? "" : "opacity-35"}`}
         key={kind}
-        style={{ opacity: activeKinds.has(kind) ? 1 : 0.35 }}
         type="button"
         onClick={() => {
           onToggleKind(kind);
         }}
       >
-        <span
-          className="size-2 shrink-0 rounded-full"
-          style={{ background: `var(--graph-${kind}, var(--foreground))` }}
-        />
-        <span className="text-xs text-[var(--foreground)]">
-          {KIND_LABEL[kind]}
-        </span>
-        <span className="ml-auto text-xs text-[var(--muted)]">{count}</span>
+        <span className={`size-2 shrink-0 rounded-full ${KIND_SWATCH[kind]}`} />
+        <span className="text-foreground text-xs">{kinds[kind]}</span>
+        <span className="text-muted-foreground ml-auto text-xs">{count}</span>
       </button>
     );
   }
@@ -45,35 +40,35 @@ export const GraphLegend = ({
   onQuery,
   onToggleKind,
   query,
+  text,
 }: {
   activeKinds: ReadonlySet<GraphKind>;
   layout: RadialLayout;
   onQuery: (value: string) => void;
   onToggleKind: (kind: GraphKind) => void;
   query: string;
+  text: GraphText;
 }) => (
   <div className="pointer-events-auto absolute top-4 left-4 z-10 w-56">
-    <p className="text-sm font-semibold text-[var(--foreground)]">
-      Major at a glance
-    </p>
-    <p className="mb-3 text-xs text-[var(--muted)]">
+    <p className="text-foreground text-sm font-semibold">{text.title}</p>
+    <p className="text-muted-foreground mb-3 text-xs">
       {layout.nodes.length.toLocaleString()} nodes ·{" "}
       {layout.edges.length.toLocaleString()} links
     </p>
     <label className="sr-only" htmlFor="graph-search">
-      Search nodes
+      {text.searchLabel}
     </label>
     <input
-      className="mb-3 w-full rounded-md border border-[color-mix(in_oklab,var(--foreground)_12%,transparent)] bg-[var(--background)] px-2.5 py-1.5 text-sm text-[var(--foreground)] outline-none placeholder:text-[var(--muted)]"
+      className="border-border bg-background text-foreground placeholder:text-muted-foreground mb-3 w-full rounded-md border px-2.5 py-1.5 text-sm outline-none"
       id="graph-search"
-      placeholder="Search"
+      placeholder={text.search}
       value={query}
       onChange={(event) => {
         onQuery(event.target.value);
       }}
     />
     <div className="flex flex-col gap-0.5">
-      {kindButtons(layout, activeKinds, onToggleKind)}
+      {kindButtons(layout, activeKinds, text.kinds, onToggleKind)}
     </div>
   </div>
 );

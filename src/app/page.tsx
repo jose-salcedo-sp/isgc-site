@@ -1,12 +1,13 @@
 import { GraphView } from "@/components/graph/graph-view";
-import curriculum from "@/data/curriculum.json";
-import { toCurriculumGraph } from "@/lib/curriculum-graph";
-
-const { edges, nodes } = toCurriculumGraph(curriculum);
+import { curriculumGraph } from "@/lib/curriculum-graph";
 
 const Home = () => (
   <main>
-    <GraphView initialEdges={edges} initialNodes={nodes} />
+    <GraphView
+      initialEdges={curriculumGraph.edges}
+      initialNodes={curriculumGraph.nodes}
+      text={curriculumGraph.text}
+    />
   </main>
 );
 export default Home;

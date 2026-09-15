@@ -5,30 +5,20 @@ import { useDeferredValue, useMemo, useState } from "react";
 
 import { GraphInspector } from "./graph-inspector";
 import { GraphLegend } from "./graph-legend";
-import type { GraphEdge, GraphKind, GraphNode } from "./graph-model";
+import type { GraphEdge, GraphKind, GraphNode, GraphText } from "./graph-model";
 import { layoutRadial } from "./graph-radial";
 import { KIND_ORDER } from "./graph-theme";
 
-import "./graph-canvas.css";
-
-const GraphCanvas = dynamic(
-  () => import("./graph-canvas").then((mod) => ({ default: mod.GraphCanvas })),
-  {
-    loading: () => (
-      <div className="flex h-full items-center justify-center text-sm text-[var(--muted)]">
-        Loading graph
-      </div>
-    ),
-    ssr: false,
-  }
-);
+const GraphCanvas = dynamic(() => import("./graph-canvas"), { ssr: false });
 
 export const GraphView = ({
   initialEdges,
   initialNodes,
+  text,
 }: {
   initialEdges: GraphEdge[];
   initialNodes: GraphNode[];
+  text: GraphText;
 }) => {
   const [selected, setSelected] = useState<string | null>(null);
   const [query, setQuery] = useState("");
@@ -74,19 +64,21 @@ export const GraphView = ({
   }, [layout, selectedNode]);
 
   return (
-    <div className="nexus-graph-shell flex h-dvh min-h-0 flex-col overflow-hidden">
+    <div className="flex h-dvh min-h-0 flex-col overflow-hidden">
       <div className="relative min-h-0 flex-1">
         <GraphCanvas
           activeKinds={activeKinds}
           layout={layout}
           searchIds={searchIds}
           selectedId={selected}
+          text={text}
           onSelect={setSelected}
         />
         <GraphLegend
           activeKinds={activeKinds}
           layout={layout}
           query={query}
+          text={text}
           onQuery={setQuery}
           onToggleKind={(kind) => {
             setActiveKinds((prev) => {
@@ -103,6 +95,7 @@ export const GraphView = ({
         {selectedNode ? (
           <GraphInspector
             selected={{ ...selectedNode, connections }}
+            text={text}
             onClose={() => {
               setSelected(null);
             }}

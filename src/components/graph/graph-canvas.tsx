@@ -5,7 +5,7 @@ import type { PointerEvent as ReactPointerEvent } from "react";
 
 import { buildHitGrid, findNear } from "./graph-hit";
 import type { HitGrid } from "./graph-hit";
-import type { GraphKind } from "./graph-model";
+import type { GraphKind, GraphText } from "./graph-model";
 import {
   focusOn,
   paintGraph,
@@ -15,22 +15,21 @@ import {
 } from "./graph-paint";
 import type { Palette, Transform } from "./graph-paint";
 import type { RadialLayout, RadialNode } from "./graph-radial";
-import { KIND_LABEL } from "./graph-theme";
 
-import "./graph-canvas.css";
-
-export const GraphCanvas = ({
+const GraphCanvas = ({
   activeKinds,
   layout,
   onSelect,
   searchIds,
   selectedId,
+  text,
 }: {
   activeKinds: ReadonlySet<GraphKind>;
   layout: RadialLayout;
   onSelect: (id: string | null) => void;
   searchIds: ReadonlySet<string> | null;
   selectedId: string | null;
+  text: GraphText;
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -212,7 +211,7 @@ export const GraphCanvas = ({
       label.textContent = hit.label;
     }
     if (kind) {
-      kind.textContent = `${KIND_LABEL[hit.kind]} · ${hit.degree} connection${hit.degree === 1 ? "" : "s"}`;
+      kind.textContent = `${text.kinds[hit.kind]} · ${hit.degree} ${hit.degree === 1 ? text.connectionOne : text.connectionMany}`;
     }
   };
 
@@ -292,9 +291,10 @@ export const GraphCanvas = ({
   };
 
   return (
-    <div className="nexus-graph-canvas h-full w-full" ref={wrapRef}>
+    <div className="h-full w-full" ref={wrapRef}>
       <canvas
-        aria-label="Curriculum graph"
+        aria-label={text.title}
+        className="block h-full w-full cursor-grab touch-none active:cursor-grabbing"
         ref={canvasRef}
         onLostPointerCapture={onLostPointerCapture}
         onPointerCancel={onPointerCancel}
@@ -304,13 +304,15 @@ export const GraphCanvas = ({
         onPointerUp={onPointerUp}
       />
       <div
-        className="pointer-events-none fixed z-20 max-w-64 rounded-md border border-[color-mix(in_oklab,var(--foreground)_12%,transparent)] bg-[var(--background)] px-2.5 py-1.5 shadow-sm"
+        className="border-border bg-background pointer-events-none fixed z-20 max-w-64 rounded-md border px-2.5 py-1.5 shadow-sm"
         hidden
         ref={tipRef}
       >
-        <div className="text-xs text-[var(--foreground)]" data-tip-label />
-        <div className="text-xs text-[var(--muted)]" data-tip-kind />
+        <div className="text-foreground text-xs" data-tip-label />
+        <div className="text-muted-foreground text-xs" data-tip-kind />
       </div>
     </div>
   );
 };
+
+export default GraphCanvas;

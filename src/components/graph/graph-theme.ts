@@ -9,14 +9,19 @@ export const KIND_ORDER = [
   "subject",
 ] as const satisfies readonly GraphKind[];
 
-export const KIND_LABEL = {
-  course: "Classes",
-  program: "Program",
-  semester: "Semesters",
-  subject: "Subjects",
+export const KIND_SWATCH = {
+  course: "bg-graph-course",
+  program: "bg-graph-program",
+  semester: "bg-graph-semester",
+  subject: "bg-graph-subject",
 } as const satisfies Record<GraphKind, string>;
 
 export const nodeRadius = (kind: GraphKind, degree: number): number => {
-  const base = kind === "program" ? 12 : kind === "semester" ? 5.5 : 2.4;
+  let base = 2.4;
+  if (kind === "program") {
+    base = 12;
+  } else if (kind === "semester") {
+    base = 5.5;
+  }
   return base + Math.sqrt(Math.max(degree, 1)) * 1.15;
 };

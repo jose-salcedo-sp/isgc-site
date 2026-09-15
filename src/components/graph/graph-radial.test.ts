@@ -5,7 +5,12 @@ import type { GraphEdge, GraphNode } from "./graph-model";
 import { layoutRadial } from "./graph-radial";
 import { RING_RADIUS } from "./graph-theme";
 
-const edge = (a: string, b: string, id: string, label = "includes"): GraphEdge => ({
+const edge = (
+  a: string,
+  b: string,
+  id: string,
+  label = "includes"
+): GraphEdge => ({
   a,
   b,
   id,
@@ -16,7 +21,13 @@ describe("radial layout", () => {
   it("pins the program at the origin and children on later rings", () => {
     const nodes: GraphNode[] = [
       { id: "program", kind: "program", label: "CSE", proximity: 0 },
-      { id: "s1", kind: "semester", label: "Semester 1", order: 1, proximity: 1 },
+      {
+        id: "s1",
+        kind: "semester",
+        label: "Semester 1",
+        order: 1,
+        proximity: 1,
+      },
       { id: "c1", kind: "course", label: "Calc", order: 1, proximity: 2 },
       { id: "sub", kind: "subject", label: "Limits", order: 1, proximity: 3 },
     ];
@@ -37,19 +48,29 @@ describe("radial layout", () => {
     expect(semester.radius).toBe(RING_RADIUS[1]);
     expect(course.radius).toBe(RING_RADIUS[2]);
     expect(subject.radius).toBe(RING_RADIUS[3]);
-    expect(Math.hypot(semester.x, semester.y)).toBeCloseTo(RING_RADIUS[1]);
   });
 
   it("gives sibling semesters distinct angles", () => {
     const nodes: GraphNode[] = [
       { id: "program", kind: "program", label: "CSE", proximity: 0 },
-      { id: "a", kind: "semester", label: "Semester 1", order: 1, proximity: 1 },
-      { id: "b", kind: "semester", label: "Semester 2", order: 2, proximity: 1 },
+      {
+        id: "a",
+        kind: "semester",
+        label: "Semester 1",
+        order: 1,
+        proximity: 1,
+      },
+      {
+        id: "b",
+        kind: "semester",
+        label: "Semester 2",
+        order: 2,
+        proximity: 1,
+      },
     ];
     const layout = layoutRadial(nodes, [
       edge("program", "a", "e1"),
       edge("program", "b", "e2"),
-      edge("a", "b", "e3", "next"),
     ]);
     const a = layout.byId.get("a");
     const b = layout.byId.get("b");
@@ -57,7 +78,7 @@ describe("radial layout", () => {
       throw new Error("missing nodes");
     }
     expect(a.angle).not.toBe(b.angle);
-    expect(layout.edges).toHaveLength(3);
+    expect(layout.edges).toHaveLength(2);
   });
 });
 

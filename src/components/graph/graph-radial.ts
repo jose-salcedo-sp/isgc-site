@@ -9,7 +9,7 @@ export interface RadialNeighbor {
 
 export interface RadialNode {
   angle: number;
-  credits?: number | null;
+  credits?: number;
   degree: number;
   description?: string;
   id: string;

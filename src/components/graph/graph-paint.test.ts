@@ -19,7 +19,7 @@ describe("graph focus transform", () => {
     const next = focusOn(0, 0, FOCUS_K, { h: 700, w: 400 });
     expect(next.k).toBe(FOCUS_K);
     expect(next.x).toBe(0);
-    expect(next.y).toBe((700 - 288) / 2 - 700 / 2);
+    expect(next.y).toBe((700 - 280) / 2 - 700 / 2);
   });
 
   it("clamps extreme zoom", () => {
