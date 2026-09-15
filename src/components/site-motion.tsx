@@ -1,7 +1,6 @@
 "use client";
 
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { animate, inView, scroll, stagger } from "motion";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 
@@ -13,6 +12,13 @@ const chapters = {
   "/oportunidades": ["Construye", "Muéstralo", "Trasciende"],
   "/proyectos": ["Código", "Experiencia", "Impacto"],
 } satisfies Record<string, [string, string, string]>;
+
+const EASE_OUT = [0.16, 1, 0.3, 1] as const;
+const CURTAIN_MS = 350;
+const NAV_RESET_MS = 2500;
+
+const reduced = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 export const ChapterVisual = () => {
   const pathname = usePathname();
@@ -45,6 +51,98 @@ export const ChapterVisual = () => {
   );
 };
 
+const playChapterIntro = (): void => {
+  animate(
+    "#contenido > section:first-child :is(h1, p)",
+    { opacity: [0, 1], y: [30, 0] },
+    {
+      delay: stagger(0.12, { startDelay: 0.2 }),
+      duration: 0.85,
+      ease: EASE_OUT,
+    }
+  );
+  animate(
+    ".chapter-words > span",
+    { opacity: [0, 1], y: [35, 0] },
+    {
+      delay: stagger(0.15, { startDelay: 0.35 }),
+      duration: 0.9,
+      ease: EASE_OUT,
+    }
+  );
+};
+
+const linkToScroll = (): (() => void)[] => {
+  const stops: (() => void)[] = [];
+  const wire = document.querySelector<HTMLElement>(".chapter-wire");
+  const visual = document.querySelector<HTMLElement>(".chapter-visual");
+  if (wire && visual) {
+    stops.push(
+      scroll(animate(wire, { rotate: [0, 90], scale: [1, 0.75] }), {
+        offset: ["start 0.3", "end start"],
+        target: visual,
+      })
+    );
+  }
+  const track = document.querySelector<HTMLElement>(".chapter-track i");
+  const content = document.querySelector<HTMLElement>("#contenido");
+  if (track && content) {
+    stops.push(
+      scroll(animate(track, { scaleX: [0.05, 1] }), { target: content })
+    );
+  }
+  for (const image of document.querySelectorAll<HTMLElement>(
+    "#contenido figure img"
+  )) {
+    stops.push(
+      scroll(
+        animate(image, {
+          clipPath: [
+            "inset(12% 0 12% 0 round 20px)",
+            "inset(0% 0 0% 0 round 20px)",
+          ],
+        }),
+        { offset: ["start 0.9", "center 0.55"], target: image }
+      )
+    );
+  }
+  return stops;
+};
+
+const revealSections = (): (() => void)[] => {
+  const stops: (() => void)[] = [];
+  const sections = document.querySelectorAll<HTMLElement>(
+    "#contenido > section:not(:first-child)"
+  );
+  for (const section of sections) {
+    const heading = section.querySelector("h2");
+    if (heading) {
+      stops.push(
+        inView(heading, () => {
+          animate(
+            heading,
+            { opacity: [0, 1], y: [30, 0] },
+            { duration: 0.8, ease: EASE_OUT }
+          );
+        })
+      );
+    }
+    const cards = section.querySelectorAll<HTMLElement>("article, .grid > a");
+    for (const [index, card] of [...cards].entries()) {
+      stops.push(
+        inView(card, () => {
+          animate(
+            card,
+            { opacity: [0, 1], rotate: [index % 2 ? 1 : -1, 0], y: [40, 0] },
+            { duration: 0.75, ease: EASE_OUT }
+          );
+        })
+      );
+    }
+  }
+  return stops;
+};
+
 export const SiteMotion = () => {
   const pathname = usePathname();
   const router = useRouter();
@@ -52,150 +150,52 @@ export const SiteMotion = () => {
   const navigating = useRef(false);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
     navigating.current = false;
-    const media = gsap.matchMedia();
     const active = new Set<HTMLElement>();
     const timers = new Set<ReturnType<typeof setTimeout>>();
-    const ctx = gsap.context(() => {
-      // Populated on demand by ctx.add below; gsap.context() with no function
-      // returns the ambient context instead of a new one.
-    });
-    const motion = () =>
-      !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    media.add("(prefers-reduced-motion: no-preference)", () => {
-      gsap.fromTo(
-        curtain.current,
-        { scaleY: 1, transformOrigin: "top" },
-        { duration: 0.65, ease: "power4.inOut", scaleY: 0 }
-      );
-      if (pathname !== "/") {
-        gsap.from(
-          "#contenido > section:first-child h1, #contenido > section:first-child p",
-          {
-            clearProps: "all",
-            delay: 0.2,
-            duration: 0.85,
-            opacity: 0,
-            stagger: 0.12,
-            y: 30,
-          }
-        );
-        gsap.from(".chapter-words > span", {
-          delay: 0.35,
-          duration: 0.9,
-          opacity: 0,
-          stagger: 0.15,
-          y: 35,
-        });
-        gsap.to(".chapter-wire", {
-          ease: "none",
-          rotation: 90,
-          scale: 0.75,
-          scrollTrigger: {
-            end: "bottom top",
-            scrub: 1,
-            start: "top 30%",
-            trigger: ".chapter-visual",
-          },
-        });
-        gsap.to(".chapter-track i", {
-          ease: "none",
-          scaleX: 1,
-          scrollTrigger: {
-            end: "bottom bottom",
-            scrub: true,
-            start: "top top",
-            trigger: "#contenido",
-          },
-        });
-        const sections = document.querySelectorAll<HTMLElement>(
-          "#contenido > section:not(:first-child)"
-        );
-        for (const section of sections) {
-          const heading = section.querySelector("h2");
-          if (heading) {
-            gsap.from(heading, {
-              clearProps: "transform,opacity",
-              duration: 0.8,
-              opacity: 0,
-              scrollTrigger: {
-                once: true,
-                start: "top 92%",
-                trigger: heading,
-              },
-              y: 30,
-            });
-          }
-          const cards = section.querySelectorAll("article, .grid > a");
-          for (const [index, card] of [...cards].entries()) {
-            gsap.from(card, {
-              clearProps: "transform,opacity",
-              duration: 0.75,
-              opacity: 0,
-              rotation: index % 2 ? 1 : -1,
-              scrollTrigger: {
-                once: true,
-                start: "top 96%",
-                trigger: card,
-              },
-              y: 40,
-            });
-          }
-          for (const image of section.querySelectorAll("figure img")) {
-            gsap.fromTo(
-              image,
-              { clipPath: "inset(12% 0 12% 0 round 20px)" },
-              {
-                clipPath: "inset(0% 0 0% 0 round 20px)",
-                scrollTrigger: {
-                  end: "center 55%",
-                  scrub: 0.5,
-                  start: "top 90%",
-                  trigger: image,
-                },
-              }
-            );
-          }
-        }
+    const stops: (() => void)[] = [];
+    if (!reduced()) {
+      const sheet = curtain.current;
+      if (sheet) {
+        sheet.style.transformOrigin = "top";
+        animate(sheet, { scaleY: [1, 0] }, { duration: 0.65, ease: EASE_OUT });
       }
-    });
+      if (pathname !== "/") {
+        playChapterIntro();
+        stops.push(...linkToScroll(), ...revealSections());
+      }
+    }
+
     const target = (event: Event) =>
       event.target instanceof Element
         ? event.target.closest<HTMLElement>("a, button")
         : null;
-    const animate = (element: HTMLElement, on: boolean, pressed = false) => {
-      if (!motion() || element.matches(":disabled")) {
+    const lift = (element: HTMLElement, on: boolean, pressed = false) => {
+      if (reduced() || element.matches(":disabled")) {
         return;
       }
       active.add(element);
-      ctx.add(() => {
-        gsap.to(element, {
-          duration: 0.25,
-          ease: "power2.out",
-          overwrite: "auto",
-          scale: pressed ? 0.97 : 1,
-          y: on ? -2 : 0,
-        });
-        const icons = element.querySelectorAll(
-          '[aria-hidden="true"], .resource-arrow'
+      animate(
+        element,
+        { scale: pressed ? 0.97 : 1, y: on ? -2 : 0 },
+        { duration: 0.25, ease: EASE_OUT }
+      );
+      const icons = element.querySelectorAll<HTMLElement>(
+        '[aria-hidden="true"], .resource-arrow'
+      );
+      if (icons.length) {
+        animate(
+          [...icons],
+          { rotate: on ? -8 : 0, x: on ? 4 : 0, y: on ? -2 : 0 },
+          { duration: 0.3 }
         );
-        if (icons.length) {
-          gsap.to(icons, {
-            duration: 0.3,
-            overwrite: "auto",
-            rotation: on ? -8 : 0,
-            x: on ? 4 : 0,
-            y: on ? -2 : 0,
-          });
-        }
-      });
+      }
       element.classList.toggle("motion-active", on);
     };
     const enter = (event: Event) => {
       const el = target(event);
       if (el) {
-        animate(el, true);
+        lift(el, true);
       }
     };
     const leave = (event: Event) => {
@@ -208,19 +208,38 @@ export const SiteMotion = () => {
           el.contains(event.relatedTarget)
         )
       ) {
-        animate(el, false);
+        lift(el, false);
       }
     };
     const down = (event: Event) => {
       const el = target(event);
       if (el) {
-        animate(el, true, true);
+        lift(el, true, true);
       }
     };
     const up = () => {
       for (const el of active) {
-        animate(el, false);
+        lift(el, false);
       }
+    };
+    const drawCurtain = async (href: string) => {
+      const sheet = curtain.current;
+      if (sheet) {
+        sheet.style.transformOrigin = "bottom";
+        await animate(
+          sheet,
+          { scaleY: [0, 1] },
+          { duration: CURTAIN_MS / 1000, ease: EASE_OUT }
+        );
+      }
+      router.push(href);
+      const timer = setTimeout(() => {
+        navigating.current = false;
+        if (sheet) {
+          animate(sheet, { scaleY: 0 }, { duration: 0.3 });
+        }
+      }, NAV_RESET_MS);
+      timers.add(timer);
     };
     const click = (event: MouseEvent) => {
       const link = target(event);
@@ -241,7 +260,7 @@ export const SiteMotion = () => {
       if (
         url.origin !== location.origin ||
         url.pathname === location.pathname ||
-        !motion()
+        reduced()
       ) {
         return;
       }
@@ -251,25 +270,7 @@ export const SiteMotion = () => {
         return;
       }
       navigating.current = true;
-      ctx.add(() =>
-        gsap.fromTo(
-          curtain.current,
-          { scaleY: 0, transformOrigin: "bottom" },
-          {
-            duration: 0.35,
-            ease: "power3.inOut",
-            onComplete: () => {
-              router.push(url.pathname + url.search + url.hash);
-              const timer = setTimeout(() => {
-                navigating.current = false;
-                gsap.to(curtain.current, { duration: 0.3, scaleY: 0 });
-              }, 2500);
-              timers.add(timer);
-            },
-            scaleY: 1,
-          }
-        )
-      );
+      void drawCurtain(url.pathname + url.search + url.hash);
     };
     document.addEventListener("pointerover", enter);
     document.addEventListener("pointerout", leave);
@@ -280,8 +281,9 @@ export const SiteMotion = () => {
     document.addEventListener("pointercancel", up);
     document.addEventListener("click", click, true);
     return () => {
-      media.revert();
-      ctx.revert();
+      for (const stop of stops) {
+        stop();
+      }
       for (const timer of timers) {
         clearTimeout(timer);
       }

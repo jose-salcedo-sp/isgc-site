@@ -1,140 +1,96 @@
 "use client";
 
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { animate, inView, scroll, stagger } from "motion";
 import { useEffect } from "react";
+
+const EASE_OUT = [0.16, 1, 0.3, 1] as const;
+
+const revealOnScroll = (selector: string, amount = 0.15): (() => void)[] =>
+  [...document.querySelectorAll<HTMLElement>(selector)].map((element) =>
+    inView(
+      element,
+      () => {
+        animate(
+          element,
+          { opacity: [0, 1], y: [28, 0] },
+          { duration: 0.75, ease: EASE_OUT }
+        );
+      },
+      { amount }
+    )
+  );
+
+const playIntro = (): void => {
+  animate(
+    "#inicio .hero-title",
+    { opacity: [0, 1], y: [35, 0] },
+    { duration: 0.9, ease: EASE_OUT }
+  );
+  animate(
+    "#inicio .hero-title ~ p, #inicio .hero-title ~ div",
+    { opacity: [0, 1], y: [20, 0] },
+    { delay: stagger(0.12, { startDelay: 0.3 }), duration: 0.9, ease: EASE_OUT }
+  );
+  animate(
+    "#inicio .lab-panel",
+    { opacity: [0, 1], rotate: [3, 0], y: [35, 0] },
+    { delay: 0.2, duration: 0.9, ease: EASE_OUT }
+  );
+  for (const path of document.querySelectorAll<SVGPathElement>(
+    "#inicio .lab-object path"
+  )) {
+    const length = path.getTotalLength();
+    path.style.strokeDasharray = `${length}`;
+    animate(
+      path,
+      { strokeDashoffset: [length, 0] },
+      { delay: 0.5, duration: 1.4, ease: EASE_OUT }
+    );
+  }
+};
+
+const linkToScroll = (): (() => void)[] => {
+  const stops: (() => void)[] = [];
+  const lab = document.querySelector<SVGElement>("#inicio .lab-object");
+  const hero = document.querySelector<HTMLElement>("#inicio");
+  if (lab && hero) {
+    stops.push(
+      scroll(animate(lab, { rotate: [0, 8], y: [0, -16] }), {
+        offset: ["start start", "end start"],
+        target: hero,
+      })
+    );
+  }
+  const fill = document.querySelector<HTMLElement>(".story-progress-fill");
+  const steps = document.querySelector<HTMLElement>(".story-steps");
+  if (fill && steps) {
+    stops.push(
+      scroll(animate(fill, { scaleY: [0, 1] }), {
+        offset: ["start center", "end center"],
+        target: steps,
+      })
+    );
+  }
+  return stops;
+};
 
 export const HomeMotion = () => {
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    const media = gsap.matchMedia();
-    media.add("(prefers-reduced-motion: no-preference)", () => {
-      const intro = gsap.timeline({
-        defaults: { duration: 0.9, ease: "power3.out" },
-      });
-      intro
-        .from("#inicio .hero-title", { opacity: 0, y: 35 })
-        .from(
-          "#inicio .hero-title ~ p, #inicio .hero-title ~ div",
-          { opacity: 0, stagger: 0.12, y: 20 },
-          "-=0.6"
-        )
-        .from(
-          "#inicio .lab-panel",
-          { opacity: 0, rotation: 3, y: 35 },
-          "-=0.7"
-        );
-      const paths = gsap.utils.toArray<SVGPathElement>(
-        "#inicio .lab-object path"
-      );
-      for (const path of paths) {
-        const length = path.getTotalLength();
-        intro.fromTo(
-          path,
-          { strokeDasharray: length, strokeDashoffset: length },
-          { duration: 1.4, strokeDashoffset: 0 },
-          0.5
-        );
-      }
-      gsap.to("#inicio .lab-object", {
-        ease: "none",
-        rotation: 8,
-        scrollTrigger: {
-          end: "bottom top",
-          scrub: 1,
-          start: "top top",
-          trigger: "#inicio",
-        },
-        transformOrigin: "50% 50%",
-        y: -16,
-      });
-      const sections = gsap.utils.toArray<HTMLElement>(
-        "#contenido > section:not(#inicio):not(#historia)"
-      );
-      for (const section of sections) {
-        const targets = section.querySelectorAll("h2, article, .grid > a");
-        for (const target of targets) {
-          gsap.from(target, {
-            clearProps: "transform,opacity",
-            duration: 0.75,
-            ease: "power2.out",
-            opacity: 0,
-            scrollTrigger: { once: true, start: "top 94%", trigger: target },
-            y: 28,
-          });
-        }
-      }
-      for (const step of gsap.utils.toArray<HTMLElement>(".story-step")) {
-        gsap.from(step.querySelectorAll(".story-number, h3, p"), {
-          duration: 0.7,
-          opacity: 0,
-          scrollTrigger: { once: true, start: "top 85%", trigger: step },
-          stagger: 0.12,
-          y: 24,
-        });
-      }
-      gsap.to(".story-progress-fill", {
-        ease: "none",
-        scaleY: 1,
-        scrollTrigger: {
-          end: "bottom center",
-          scrub: true,
-          start: "top center",
-          trigger: ".story-steps",
-        },
-      });
-      return () => intro.kill();
-    });
-    media.add(
-      "(min-width: 900px) and (prefers-reduced-motion: no-preference)",
-      () => {
-        const timeline = gsap.timeline({
-          scrollTrigger: {
-            end: "bottom 65%",
-            scrub: 0.8,
-            start: "top 65%",
-            trigger: ".story-steps",
-          },
-        });
-        timeline
-          .fromTo(
-            ".story-orbit",
-            { rotation: -45, scale: 0.65 },
-            { duration: 2, rotation: 90, scale: 1 },
-            0
-          )
-          .fromTo(
-            ".story-core",
-            { borderRadius: "50%", rotation: 0 },
-            { borderRadius: "18%", duration: 2, rotation: 180 },
-            0
-          )
-          .fromTo(
-            ".story-node",
-            { opacity: 0, scale: 0 },
-            { duration: 0.5, opacity: 1, scale: 1, stagger: 0.12 },
-            0.5
-          )
-          .fromTo(
-            ".story-connection",
-            { scaleX: 0 },
-            { duration: 0.5, scaleX: 1, stagger: 0.1 },
-            0.8
-          );
-      }
-    );
-    const refresh = () => ScrollTrigger.refresh();
-    window.addEventListener("load", refresh);
-    const refreshAfterFonts = async () => {
-      await document.fonts.ready;
-      if (document.querySelector("#historia")) {
-        refresh();
-      }
-    };
-    void refreshAfterFonts();
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+    playIntro();
+    const stops = [
+      ...linkToScroll(),
+      ...revealOnScroll(
+        "#contenido > section:not(#inicio) :is(h2, article, .grid > a)"
+      ),
+      ...revealOnScroll(".story-step :is(.story-number, h3, p)", 0.4),
+    ];
     return () => {
-      window.removeEventListener("load", refresh);
-      media.revert();
+      for (const stop of stops) {
+        stop();
+      }
     };
   }, []);
   return null;
