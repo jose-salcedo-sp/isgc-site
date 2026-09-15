@@ -2707,9 +2707,16 @@
 
       // ---------- scroll-spy nav ----------
       const navLinks = document.querySelectorAll("nav.primary a");
-      const sections = Array.from(navLinks)
-        .map((a) => document.querySelector(a.getAttribute("href")))
-        .filter(Boolean);
+      const sectionFor = (link) => {
+        const href = link.getAttribute("href");
+        if (!href || !href.startsWith("#") || href === "#") return null;
+        try {
+          return document.querySelector("#" + CSS.escape(href.slice(1)));
+        } catch {
+          return null;
+        }
+      };
+      const sections = Array.from(navLinks).map(sectionFor).filter(Boolean);
       const spy = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
