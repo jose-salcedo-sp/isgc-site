@@ -724,70 +724,70 @@
       {
         "id": "semester-1",
         "kind": "semester",
-        "label": "Semester 1",
+        "label": "1st Semester",
         "order": 1,
         "proximity": 1
       },
       {
         "id": "semester-2",
         "kind": "semester",
-        "label": "Semester 2",
+        "label": "2nd Semester",
         "order": 2,
         "proximity": 1
       },
       {
         "id": "semester-3",
         "kind": "semester",
-        "label": "Semester 3",
+        "label": "3rd Semester",
         "order": 3,
         "proximity": 1
       },
       {
         "id": "semester-4",
         "kind": "semester",
-        "label": "Semester 4",
+        "label": "4th Semester",
         "order": 4,
         "proximity": 1
       },
       {
         "id": "semester-5",
         "kind": "semester",
-        "label": "Semester 5",
+        "label": "5th Semester",
         "order": 5,
         "proximity": 1
       },
       {
         "id": "semester-6",
         "kind": "semester",
-        "label": "Semester 6",
+        "label": "6th Semester",
         "order": 6,
         "proximity": 1
       },
       {
         "id": "semester-7",
         "kind": "semester",
-        "label": "Semester 7",
+        "label": "7th Semester",
         "order": 7,
         "proximity": 1
       },
       {
         "id": "semester-8",
         "kind": "semester",
-        "label": "Semester 8",
+        "label": "8th Semester",
         "order": 8,
         "proximity": 1
       },
       {
         "id": "semester-9",
         "kind": "semester",
-        "label": "Semester 9",
+        "label": "9th Semester",
         "order": 9,
         "proximity": 1
       },
       {
         "id": "semester-10",
         "kind": "semester",
-        "label": "Semester 10",
+        "label": "10th Semester",
         "order": 10,
         "proximity": 1
       },
@@ -2386,6 +2386,246 @@
         "b": "t:especialidad-10",
         "id": "e:especialidad-10:t:especialidad-10",
         "label": "covers"
+      },
+      {
+        "a": "t:calculo-diferencial",
+        "b": "t:calculo-integral",
+        "id": "e:rel:calculo-diferencial:calculo-integral",
+        "label": "relates"
+      },
+      {
+        "a": "t:calculo-integral",
+        "b": "t:calculo-vectorial",
+        "id": "e:rel:calculo-integral:calculo-vectorial",
+        "label": "relates"
+      },
+      {
+        "a": "t:calculo-vectorial",
+        "b": "t:ecuaciones-diferenciales",
+        "id": "e:rel:calculo-vectorial:ecuaciones-diferenciales",
+        "label": "relates"
+      },
+      {
+        "a": "t:ecuaciones-diferenciales",
+        "b": "t:metodos-numericos",
+        "id": "e:rel:ecuaciones-diferenciales:metodos-numericos",
+        "label": "relates"
+      },
+      {
+        "a": "t:algebra",
+        "b": "t:algebra-lineal",
+        "id": "e:rel:algebra:algebra-lineal",
+        "label": "relates"
+      },
+      {
+        "a": "t:algebra-lineal",
+        "b": "t:algebra-geometrica-conformal",
+        "id": "e:rel:algebra-lineal:algebra-geometrica-conformal",
+        "label": "relates"
+      },
+      {
+        "a": "t:algebra-lineal",
+        "b": "t:graficacion-avanzada-por-computadora",
+        "id": "e:rel:algebra-lineal:graficacion-avanzada-por-computadora",
+        "label": "relates"
+      },
+      {
+        "a": "t:matematicas-de-la-computacion",
+        "b": "t:analisis-y-diseno-de-algoritmos",
+        "id": "e:rel:matematicas-de-la-computacion:analisis-y-diseno-de-algoritmos",
+        "label": "relates"
+      },
+      {
+        "a": "t:probabilidad-y-estadistica",
+        "b": "t:metodos-numericos",
+        "id": "e:rel:probabilidad-y-estadistica:metodos-numericos",
+        "label": "relates"
+      },
+      {
+        "a": "t:probabilidad-y-estadistica",
+        "b": "t:inteligencia-artificial-en-videojuegos",
+        "id": "e:rel:probabilidad-y-estadistica:inteligencia-artificial-en-videojuegos",
+        "label": "relates"
+      },
+      {
+        "a": "t:analisis-y-diseno-de-algoritmos",
+        "b": "t:programacion-orientada-a-objetos",
+        "id": "e:rel:analisis-y-diseno-de-algoritmos:programacion-orientada-a-objetos",
+        "label": "relates"
+      },
+      {
+        "a": "t:programacion-orientada-a-objetos",
+        "b": "t:programacion-y-estructura-de-datos",
+        "id": "e:rel:programacion-orientada-a-objetos:programacion-y-estructura-de-datos",
+        "label": "relates"
+      },
+      {
+        "a": "t:programacion-y-estructura-de-datos",
+        "b": "t:compiladores",
+        "id": "e:rel:programacion-y-estructura-de-datos:compiladores",
+        "label": "relates"
+      },
+      {
+        "a": "t:programacion-y-estructura-de-datos",
+        "b": "t:geometria-computacional",
+        "id": "e:rel:programacion-y-estructura-de-datos:geometria-computacional",
+        "label": "relates"
+      },
+      {
+        "a": "t:programacion-avanzada",
+        "b": "t:desarrollo-de-plugins",
+        "id": "e:rel:programacion-avanzada:desarrollo-de-plugins",
+        "label": "relates"
+      },
+      {
+        "a": "t:sistemas-operativos",
+        "b": "t:fundamentos-de-programacion-en-paralelo",
+        "id": "e:rel:sistemas-operativos:fundamentos-de-programacion-en-paralelo",
+        "label": "relates"
+      },
+      {
+        "a": "t:fundamentos-de-programacion-en-paralelo",
+        "b": "t:programacion-avanzada-en-paralelo",
+        "id": "e:rel:fundamentos-de-programacion-en-paralelo:programacion-avanzada-en-paralelo",
+        "label": "relates"
+      },
+      {
+        "a": "t:sistemas-operativos",
+        "b": "t:computo-distribuido",
+        "id": "e:rel:sistemas-operativos:computo-distribuido",
+        "label": "relates"
+      },
+      {
+        "a": "t:circuitos-digitales-y-electricos",
+        "b": "t:sistemas-operativos",
+        "id": "e:rel:circuitos-digitales-y-electricos:sistemas-operativos",
+        "label": "relates"
+      },
+      {
+        "a": "t:modelacion-digital",
+        "b": "t:multimedios-y-graficas-computacionales",
+        "id": "e:rel:modelacion-digital:multimedios-y-graficas-computacionales",
+        "label": "relates"
+      },
+      {
+        "a": "t:multimedios-y-graficas-computacionales",
+        "b": "t:graficacion-avanzada-por-computadora",
+        "id": "e:rel:multimedios-y-graficas-computacionales:graficacion-avanzada-por-computadora",
+        "label": "relates"
+      },
+      {
+        "a": "t:graficacion-avanzada-por-computadora",
+        "b": "t:soluciones-graficas-para-moviles",
+        "id": "e:rel:graficacion-avanzada-por-computadora:soluciones-graficas-para-moviles",
+        "label": "relates"
+      },
+      {
+        "a": "t:procesamiento-de-imagenes",
+        "b": "t:realidad-aumentada",
+        "id": "e:rel:procesamiento-de-imagenes:realidad-aumentada",
+        "label": "relates"
+      },
+      {
+        "a": "t:multimedios-y-graficas-computacionales",
+        "b": "t:procesamiento-de-imagenes",
+        "id": "e:rel:multimedios-y-graficas-computacionales:procesamiento-de-imagenes",
+        "label": "relates"
+      },
+      {
+        "a": "t:desarrollo-de-videojuegos",
+        "b": "t:inteligencia-artificial-en-videojuegos",
+        "id": "e:rel:desarrollo-de-videojuegos:inteligencia-artificial-en-videojuegos",
+        "label": "relates"
+      },
+      {
+        "a": "t:desarrollo-de-videojuegos",
+        "b": "t:simulacion-grafica",
+        "id": "e:rel:desarrollo-de-videojuegos:simulacion-grafica",
+        "label": "relates"
+      },
+      {
+        "a": "t:fisica",
+        "b": "t:simulacion-grafica",
+        "id": "e:rel:fisica:simulacion-grafica",
+        "label": "relates"
+      },
+      {
+        "a": "t:geometria-computacional",
+        "b": "t:algebra-geometrica-conformal",
+        "id": "e:rel:geometria-computacional:algebra-geometrica-conformal",
+        "label": "relates"
+      },
+      {
+        "a": "t:introduccion-a-las-bases-de-datos",
+        "b": "t:desarrollo-de-aplicaciones-web",
+        "id": "e:rel:introduccion-a-las-bases-de-datos:desarrollo-de-aplicaciones-web",
+        "label": "relates"
+      },
+      {
+        "a": "t:diseno-de-interfaces",
+        "b": "t:desarrollo-de-aplicaciones-web",
+        "id": "e:rel:diseno-de-interfaces:desarrollo-de-aplicaciones-web",
+        "label": "relates"
+      },
+      {
+        "a": "t:diseno-de-interfaces",
+        "b": "t:realidad-aumentada",
+        "id": "e:rel:diseno-de-interfaces:realidad-aumentada",
+        "label": "relates"
+      },
+      {
+        "a": "t:redaccion",
+        "b": "t:ingenieria-de-software",
+        "id": "e:rel:redaccion:ingenieria-de-software",
+        "label": "relates"
+      },
+      {
+        "a": "t:ingenieria-de-software",
+        "b": "t:direccion-de-proyectos",
+        "id": "e:rel:ingenieria-de-software:direccion-de-proyectos",
+        "label": "relates"
+      },
+      {
+        "a": "t:direccion-de-proyectos",
+        "b": "t:direccion-de-empresas",
+        "id": "e:rel:direccion-de-proyectos:direccion-de-empresas",
+        "label": "relates"
+      },
+      {
+        "a": "t:entorno-economico",
+        "b": "t:proyectos-de-inversion-e-introduccion-a-la-valuacion-de-empresas",
+        "id": "e:rel:entorno-economico:proyectos-de-inversion-e-introduccion-a-la-valuacion-de-empresas",
+        "label": "relates"
+      },
+      {
+        "a": "t:proyectos-de-inversion-e-introduccion-a-la-valuacion-de-empresas",
+        "b": "t:emprendedores",
+        "id": "e:rel:proyectos-de-inversion-e-introduccion-a-la-valuacion-de-empresas:emprendedores",
+        "label": "relates"
+      },
+      {
+        "a": "t:etica",
+        "b": "t:etica-profesional",
+        "id": "e:rel:etica:etica-profesional",
+        "label": "relates"
+      },
+      {
+        "a": "t:persona-y-sociedad",
+        "b": "t:filosofia-social",
+        "id": "e:rel:persona-y-sociedad:filosofia-social",
+        "label": "relates"
+      },
+      {
+        "a": "t:historia-de-la-cultura",
+        "b": "t:hombre-y-mundo-contemporaneo",
+        "id": "e:rel:historia-de-la-cultura:hombre-y-mundo-contemporaneo",
+        "label": "relates"
+      },
+      {
+        "a": "t:antropologia-teologica-i",
+        "b": "t:antropologia-teologica-ii",
+        "id": "e:rel:antropologia-teologica-i:antropologia-teologica-ii",
+        "label": "relates"
       }
     ]
   }

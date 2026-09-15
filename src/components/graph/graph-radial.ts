@@ -63,10 +63,25 @@ const polar = (angle: number, radius: number): [number, number] => [
   radius * Math.sin(angle - Math.PI / 2),
 ];
 
+/** Same-level links arc outside the rings; the wider the gap, the wider the bow. */
+const outerLinkPath = (source: RadialNode, target: RadialNode): string => {
+  const delta =
+    ((target.angle - source.angle + Math.PI) % (Math.PI * 2)) - Math.PI;
+  const mid = source.angle + delta / 2;
+  const bulge = source.tip + 60 + (Math.abs(delta) / Math.PI) * 420;
+  const [x0, y0] = polar(source.angle, source.tip);
+  const [cx, cy] = polar(mid, bulge);
+  const [x1, y1] = polar(target.angle, target.tip);
+  return `M${x0},${y0}Q${cx},${cy},${x1},${y1}`;
+};
+
 export const radialLinkPath = (
   source: RadialNode,
   target: RadialNode
 ): string => {
+  if (source.proximity === target.proximity) {
+    return outerLinkPath(source, target);
+  }
   const mid = (source.angle + target.angle) / 2;
   const [x0, y0] = polar(source.angle, source.tip);
   const [cx1, cy1] = polar(mid, source.tip);

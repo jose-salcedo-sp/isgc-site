@@ -109,9 +109,9 @@ const strokeEdges = (
     ) {
       continue;
     }
-    let alpha = 0.12;
+    let alpha = 0.3;
     if (hubs && highlight) {
-      alpha = hubs.has(edge.a) || hubs.has(edge.b) ? 0.85 : 0.03;
+      alpha = hubs.has(edge.a) || hubs.has(edge.b) ? 0.9 : 0.04;
     }
     if (alpha < 0.02) {
       continue;
@@ -160,11 +160,13 @@ const highlightAround = (
     }
     for (const nb of node.neighbors) {
       const child = layout.byId.get(nb.id);
-      if (!child || child.proximity <= node.proximity || highlight.has(nb.id)) {
+      if (!child || child.proximity < node.proximity || highlight.has(nb.id)) {
         continue;
       }
       highlight.add(nb.id);
-      queue.push(nb.id);
+      if (child.proximity > node.proximity) {
+        queue.push(nb.id);
+      }
     }
   }
   return highlight;
