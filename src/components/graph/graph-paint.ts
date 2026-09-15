@@ -1,5 +1,6 @@
-import type { GraphKind } from "./graph-model";
+import type { GraphKind, GraphText } from "./graph-model";
 import type { RadialLayout, RadialNode } from "./graph-radial";
+import { KIND_ORDER } from "./graph-theme";
 
 export interface Transform {
   k: number;
@@ -246,7 +247,7 @@ const paintRadialLabel = (
   }
   ctx.textAlign = flip ? "right" : "left";
   const weight = emphasis ? 700 : 600;
-  const face = "ui-sans-serif, system-ui, sans-serif";
+  const face = "Satoshi, ui-sans-serif, system-ui, sans-serif";
   ctx.font = `${weight} ${size}px ${face}`;
   const room = node.tip - node.radius - RADIAL_LABEL_GAP * 2;
   const full = ctx.measureText(node.label).width;
@@ -333,12 +334,37 @@ const fillSectors = (
     ctx.arc(0, 0, node.tip, a1, a0, true);
     ctx.closePath();
     const color = palette.kinds[node.kind];
-    ctx.fillStyle = withAlpha(color, alpha * (emphasis ? 0.4 : 0.12));
+    ctx.fillStyle = emphasis
+      ? withAlpha(color, alpha * 0.34)
+      : withAlpha(palette.ink, alpha * 0.05);
     ctx.fill();
-    ctx.strokeStyle = withAlpha(shade(color, 0.55), alpha * 0.9);
+    ctx.strokeStyle = withAlpha(shade(color, 0.55), alpha * 0.85);
     ctx.lineWidth = inv;
     ctx.stroke();
   }
+};
+
+/** The hole carries the summary, so the chart says what it shows. */
+const paintCenter = (
+  ctx: CanvasRenderingContext2D,
+  layout: RadialLayout,
+  palette: Palette,
+  text: GraphText
+): void => {
+  const face = "Satoshi, ui-sans-serif, system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = withAlpha(palette.ink, 0.92);
+  ctx.font = `700 64px ${face}`;
+  ctx.fillText("ISGC", 0, -26);
+  ctx.fillStyle = withAlpha(palette.ink, 0.55);
+  ctx.font = `600 22px ${face}`;
+  const counts = KIND_ORDER.flatMap((kind) => {
+    const count = layout.kindCounts[kind];
+    return count ? [`${count} ${text.kinds[kind].toLowerCase()}`] : [];
+  });
+  ctx.fillText(counts.join(" · "), 0, 30);
+  ctx.textAlign = "left";
 };
 
 const fillNodes = (
@@ -382,6 +408,7 @@ export const paintGraph = (input: {
   paths: readonly Path2D[];
   selectedId: string | null;
   size: { dpr: number; h: number; w: number };
+  text: GraphText;
   transform: Transform;
 }): void => {
   const ctx = input.canvas.getContext("2d");
@@ -428,6 +455,7 @@ export const paintGraph = (input: {
     inv,
     box
   );
+  paintCenter(ctx, input.layout, input.palette, input.text);
   fillNodes(
     ctx,
     input.layout.nodes,

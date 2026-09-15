@@ -16,6 +16,8 @@ import type { Palette, Transform } from "./graph-paint";
 import { pickSlice } from "./graph-radial";
 import type { RadialLayout, RadialNode } from "./graph-radial";
 import { OUTER_EXTENT } from "./graph-theme";
+import { GraphTip } from "./graph-tip";
+import { moveTip } from "./tip-content";
 
 const GraphCanvas = ({
   activeKinds,
@@ -53,6 +55,7 @@ const GraphCanvas = ({
     layout,
     matches: searchIds,
     selectedId,
+    text,
   });
   const dragRef = useRef<{
     lastX: number;
@@ -79,10 +82,11 @@ const GraphCanvas = ({
       layout,
       matches: searchIds,
       selectedId,
+      text,
     };
     pathsRef.current = layout.edges.map((edge) => new Path2D(edge.path));
     kickDraw.current();
-  }, [activeKinds, layout, searchIds, selectedId]);
+  }, [activeKinds, layout, searchIds, selectedId, text]);
 
   useEffect(() => {
     const wrap = wrapRef.current;
@@ -106,6 +110,7 @@ const GraphCanvas = ({
         paths: pathsRef.current,
         selectedId: scene.selectedId,
         size: sizeRef.current,
+        text: scene.text,
         transform: transformRef.current,
       });
     };
@@ -192,31 +197,6 @@ const GraphCanvas = ({
     return pickSlice(sceneRef.current.layout.nodes, wx, wy);
   };
 
-  const moveTip = (
-    event: { clientX: number; clientY: number },
-    hit: RadialNode | null
-  ) => {
-    const tip = tipRef.current;
-    if (!tip) {
-      return;
-    }
-    if (!hit) {
-      tip.hidden = true;
-      return;
-    }
-    tip.hidden = false;
-    tip.style.left = `${event.clientX + 14}px`;
-    tip.style.top = `${event.clientY + 10}px`;
-    const label = tip.querySelector("[data-tip-label]");
-    const kind = tip.querySelector("[data-tip-kind]");
-    if (label) {
-      label.textContent = hit.label;
-    }
-    if (kind) {
-      kind.textContent = `${text.kinds[hit.kind]} · ${hit.degree} ${hit.degree === 1 ? text.connectionOne : text.connectionMany}`;
-    }
-  };
-
   const onPointerDown = (event: ReactPointerEvent<HTMLCanvasElement>) => {
     event.currentTarget.setPointerCapture(event.pointerId);
     dragRef.current = {
@@ -249,7 +229,7 @@ const GraphCanvas = ({
       hoverRef.current = id;
       requestDraw();
     }
-    moveTip(event, hit);
+    moveTip(tipRef.current, event, hit, text);
   };
 
   const releaseDrag = (event: ReactPointerEvent<HTMLCanvasElement>) => {
@@ -305,14 +285,7 @@ const GraphCanvas = ({
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
       />
-      <div
-        className="border-border bg-background pointer-events-none fixed z-20 max-w-64 rounded-md border px-2.5 py-1.5 shadow-sm"
-        hidden
-        ref={tipRef}
-      >
-        <div className="text-foreground text-xs" data-tip-label />
-        <div className="text-muted-foreground text-xs" data-tip-kind />
-      </div>
+      <GraphTip tipRef={tipRef} />
     </div>
   );
 };

@@ -49,7 +49,7 @@ export const GraphLegend = ({
   query: string;
   text: GraphText;
 }) => (
-  <div className="pointer-events-auto absolute top-4 left-4 z-10 w-56">
+  <div className="border-border bg-background/70 pointer-events-auto absolute top-4 left-4 z-10 w-60 rounded-xl border p-3 shadow-lg backdrop-blur-md">
     <h2 className="text-foreground text-sm font-semibold">{text.title}</h2>
     <p className="text-muted-foreground mb-3 text-xs">
       {layout.nodes.length.toLocaleString()} elementos ·{" "}
