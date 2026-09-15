@@ -77,7 +77,6 @@ const strokeEdges = (
   paths: readonly Path2D[],
   kinds: ReadonlySet<GraphKind>,
   hubs: ReadonlySet<string> | null,
-  highlight: ReadonlySet<string> | null,
   palette: Palette,
   inv: number,
   box: { bottom: number; left: number; right: number; top: number }
@@ -95,6 +94,9 @@ const strokeEdges = (
     if (Math.abs(source.proximity - target.proximity) === 1) {
       continue;
     }
+    if (!(hubs?.has(edge.a) || hubs?.has(edge.b))) {
+      continue;
+    }
     if (
       offscreen(
         source.x,
@@ -109,16 +111,8 @@ const strokeEdges = (
     ) {
       continue;
     }
-    let alpha = 0.3;
-    if (hubs && highlight) {
-      alpha = hubs.has(edge.a) || hubs.has(edge.b) ? 0.9 : 0.04;
-    }
-    if (alpha < 0.02) {
-      continue;
-    }
-    ctx.strokeStyle = withAlpha(palette.kinds[source.kind], alpha);
-    ctx.lineWidth =
-      (hubs && (hubs.has(source.id) || hubs.has(target.id)) ? 1.4 : 0.7) * inv;
+    ctx.strokeStyle = withAlpha(palette.kinds[source.kind], 0.9);
+    ctx.lineWidth = 1.6 * inv;
     ctx.stroke(path);
   }
 };
@@ -399,7 +393,6 @@ export const paintGraph = (input: {
     input.paths,
     input.kinds,
     hubs,
-    highlight,
     input.palette,
     inv,
     box
