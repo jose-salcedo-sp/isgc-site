@@ -57,7 +57,10 @@ export const SiteMotion = () => {
     const media = gsap.matchMedia();
     const active = new Set<HTMLElement>();
     const timers = new Set<ReturnType<typeof setTimeout>>();
-    const ctx = gsap.context();
+    const ctx = gsap.context(() => {
+      // Populated on demand by ctx.add below; gsap.context() with no function
+      // returns the ambient context instead of a new one.
+    });
     const motion = () =>
       !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     media.add("(prefers-reduced-motion: no-preference)", () => {
