@@ -220,7 +220,6 @@ const paintRadialLabel = (
   node: RadialNode,
   color: string,
   alpha: number,
-  inv: number,
   emphasis: boolean,
   size = 12.5
 ): void => {
@@ -244,16 +243,6 @@ const paintRadialLabel = (
   const gap = RADIAL_LABEL_GAP;
   const x = flip ? -gap : gap;
   ctx.fillText(node.label, x, 0);
-  if (emphasis) {
-    const { width } = ctx.measureText(node.label);
-    const y = size * 0.42;
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(flip ? x - width : x + width, y);
-    ctx.lineWidth = Math.max(1.5 * inv, size * 0.06);
-    ctx.strokeStyle = withAlpha(color, alpha);
-    ctx.stroke();
-  }
   ctx.restore();
 };
 
@@ -297,7 +286,6 @@ const paintSliceNode = (
     node,
     color,
     alpha,
-    inv,
     emphasis,
     LABEL_SIZE[node.kind] ?? 11
   );
