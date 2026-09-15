@@ -1,6 +1,5 @@
 import type { GraphKind } from "./graph-model";
 import type { RadialLayout, RadialNode } from "./graph-radial";
-import { RING_RADIUS } from "./graph-theme";
 
 export interface Transform {
   k: number;
@@ -17,7 +16,6 @@ export interface Palette {
 
 export const MIN_K = 0.05;
 export const MAX_K = 12;
-const LABEL_ZOOM = 1.6;
 
 export const clampK = (value: number): number =>
   Math.min(MAX_K, Math.max(MIN_K, value));
@@ -58,6 +56,20 @@ export const withAlpha = (color: string, alpha: number): string => {
   return `rgba(${r},${g},${b},${alpha})`;
 };
 
+/** Slice borders are the slice's own color, darkened. */
+export const shade = (color: string, factor: number): string => {
+  const hex = HEX.exec(color.trim());
+  const raw = hex?.groups?.body;
+  if (!raw) {
+    return color;
+  }
+  const body =
+    raw.length === 3 ? [...raw].map((ch) => `${ch}${ch}`).join("") : raw;
+  const channel = (at: number): number =>
+    Math.round(Number.parseInt(body.slice(at, at + 2), 16) * factor);
+  return `rgb(${channel(0)},${channel(2)},${channel(4)})`;
+};
+
 const offscreen = (
   ax: number,
   ay: number,
@@ -78,11 +90,11 @@ const strokeEdges = (
   layout: RadialLayout,
   paths: readonly Path2D[],
   kinds: ReadonlySet<GraphKind>,
-  hubs: ReadonlySet<string> | null,
-  highlight: ReadonlySet<string> | null,
+  core: ReadonlySet<string> | null,
   palette: Palette,
   inv: number,
-  box: { bottom: number; left: number; right: number; top: number }
+  box: { bottom: number; left: number; right: number; top: number },
+  progress: number
 ): void => {
   for (const [index, edge] of layout.edges.entries()) {
     const source = layout.byId.get(edge.a);
@@ -92,6 +104,12 @@ const strokeEdges = (
       continue;
     }
     if (!kinds.has(source.kind) || !kinds.has(target.kind)) {
+      continue;
+    }
+    if (Math.abs(source.proximity - target.proximity) === 1) {
+      continue;
+    }
+    if (!(core?.has(edge.a) || core?.has(edge.b))) {
       continue;
     }
     if (
@@ -108,17 +126,12 @@ const strokeEdges = (
     ) {
       continue;
     }
-    let alpha = 0.12;
-    if (hubs && highlight) {
-      alpha = hubs.has(edge.a) || hubs.has(edge.b) ? 0.85 : 0.03;
-    }
-    if (alpha < 0.02) {
-      continue;
-    }
-    ctx.strokeStyle = withAlpha(palette.kinds[source.kind], alpha);
-    ctx.lineWidth =
-      (hubs && (hubs.has(source.id) || hubs.has(target.id)) ? 1.4 : 0.7) * inv;
+    ctx.strokeStyle = withAlpha(palette.kinds.semester, 0.95);
+    ctx.lineWidth = 1.8 * inv;
+    ctx.setLineDash([edge.length, edge.length]);
+    ctx.lineDashOffset = edge.length * (1 - progress);
     ctx.stroke(path);
+    ctx.setLineDash([]);
   }
 };
 
@@ -139,24 +152,60 @@ const focusHubs = (
   return hubs;
 };
 
-const highlightAround = (
+/** A slice lights up together with everything nested inside it. */
+const nestedUnder = (
   layout: RadialLayout,
-  hubs: ReadonlySet<string> | null
-): Set<string> | null => {
-  if (!hubs) {
-    return null;
-  }
-  const highlight = new Set(hubs);
-  for (const id of hubs) {
-    const node = layout.byId.get(id);
+  hubs: ReadonlySet<string>
+): Set<string> => {
+  const core = new Set(hubs);
+  const queue = [...hubs];
+  let head = 0;
+  while (head < queue.length) {
+    const id = queue[head];
+    head += 1;
+    const node = id ? layout.byId.get(id) : undefined;
     if (!node) {
       continue;
     }
     for (const nb of node.neighbors) {
-      highlight.add(nb.id);
+      const child = layout.byId.get(nb.id);
+      if (!child || child.proximity <= node.proximity || core.has(nb.id)) {
+        continue;
+      }
+      core.add(nb.id);
+      queue.push(nb.id);
     }
   }
-  return highlight;
+  return core;
+};
+
+/**
+ * Classes and subjects also pull in the subjects they relate to; semesters
+ * stay inside their own wedge, so their relations are neither lit nor drawn.
+ */
+interface FocusSets {
+  core: Set<string> | null;
+  highlight: Set<string> | null;
+}
+
+const focusSets = (
+  layout: RadialLayout,
+  hubs: ReadonlySet<string> | null
+): FocusSets => {
+  if (!hubs) {
+    return { core: null, highlight: null };
+  }
+  const core = nestedUnder(layout, hubs);
+  const highlight = new Set(core);
+  for (const id of core) {
+    const node = layout.byId.get(id);
+    for (const nb of node?.neighbors ?? []) {
+      if (layout.byId.get(nb.id)?.proximity === node?.proximity) {
+        highlight.add(nb.id);
+      }
+    }
+  }
+  return { core, highlight };
 };
 
 const nodeAlpha = (
@@ -174,6 +223,147 @@ const nodeAlpha = (
   return alpha;
 };
 
+const RADIAL_LABEL_GAP = 8;
+
+/** Semesters and classes read outward along their own slice instead of on a dot. */
+const paintRadialLabel = (
+  ctx: CanvasRenderingContext2D,
+  node: RadialNode,
+  color: string,
+  alpha: number,
+  emphasis: boolean,
+  size = 12.5
+): void => {
+  const flip = Math.cos(node.angle - Math.PI / 2) < 0;
+  ctx.save();
+  ctx.rotate(node.angle - Math.PI / 2);
+  ctx.translate(node.radius, 0);
+  if (flip) {
+    ctx.rotate(Math.PI);
+  }
+  ctx.textAlign = flip ? "right" : "left";
+  const weight = emphasis ? 700 : 600;
+  const face = "Satoshi, ui-sans-serif, system-ui, sans-serif";
+  ctx.font = `${weight} ${size}px ${face}`;
+  const room = node.tip - node.radius - RADIAL_LABEL_GAP * 2;
+  const full = ctx.measureText(node.label).width;
+  if (full > room) {
+    ctx.font = `${weight} ${size * (room / full)}px ${face}`;
+  }
+  ctx.fillStyle = withAlpha(color, alpha);
+  const gap = RADIAL_LABEL_GAP;
+  const x = flip ? -gap : gap;
+  ctx.fillText(node.label, x, 0);
+  ctx.restore();
+};
+
+/** Anchor dot where a class ring ends and its outward links begin. */
+const paintTip = (
+  ctx: CanvasRenderingContext2D,
+  node: RadialNode,
+  color: string,
+  alpha: number,
+  inv: number,
+  emphasis: boolean,
+  ink: string
+): void => {
+  ctx.beginPath();
+  ctx.arc(node.tipX, node.tipY, emphasis ? 9 : 6, 0, Math.PI * 2);
+  ctx.fillStyle = withAlpha(color, alpha);
+  ctx.fill();
+  if (emphasis) {
+    ctx.lineWidth = Math.max(1.5 * inv, 2);
+    ctx.strokeStyle = withAlpha(ink, alpha);
+    ctx.stroke();
+  }
+};
+
+/** Label heights in world pixels, so titles grow and shrink with the zoom. */
+const LABEL_SIZE: Partial<Record<GraphKind, number>> = {
+  course: 26,
+  semester: 46,
+  subject: 20,
+};
+
+const paintSliceNode = (
+  ctx: CanvasRenderingContext2D,
+  node: RadialNode,
+  opts: {
+    alpha: number;
+    emphasis: boolean;
+    inv: number;
+    lit: boolean;
+    palette: Palette;
+  }
+): void => {
+  const { alpha, emphasis, inv, palette } = opts;
+  const color = palette.kinds[node.kind];
+  paintRadialLabel(
+    ctx,
+    node,
+    color,
+    alpha,
+    emphasis,
+    LABEL_SIZE[node.kind] ?? 11
+  );
+  if (node.kind === "subject") {
+    const dot = opts.lit ? palette.kinds.semester : color;
+    paintTip(ctx, node, dot, alpha, inv, emphasis, palette.ink);
+  }
+};
+
+/** Donut segments: one annular sector per slice, one band per level. */
+const fillSectors = (
+  ctx: CanvasRenderingContext2D,
+  nodes: readonly RadialNode[],
+  kinds: ReadonlySet<GraphKind>,
+  matches: ReadonlySet<string> | null,
+  highlight: ReadonlySet<string> | null,
+  selected: string | null,
+  hovered: string | null,
+  palette: Palette,
+  inv: number
+): void => {
+  for (const node of nodes) {
+    if (!kinds.has(node.kind) || node.tip <= node.radius) {
+      continue;
+    }
+    const alpha = nodeAlpha(node, matches, highlight);
+    const emphasis = node.id === selected || node.id === hovered;
+    const a0 = node.a0 - Math.PI / 2;
+    const a1 = node.a1 - Math.PI / 2;
+    ctx.beginPath();
+    ctx.arc(0, 0, node.radius, a0, a1);
+    ctx.arc(0, 0, node.tip, a1, a0, true);
+    ctx.closePath();
+    const color = palette.kinds[node.kind];
+    ctx.fillStyle = emphasis
+      ? withAlpha(color, alpha * 0.34)
+      : withAlpha(palette.ink, alpha * 0.05);
+    ctx.fill();
+    ctx.strokeStyle = withAlpha(shade(color, 0.55), alpha * 0.85);
+    ctx.lineWidth = inv;
+    ctx.stroke();
+    if (node.kind === "subject" && highlight?.has(node.id)) {
+      ctx.beginPath();
+      ctx.arc(0, 0, node.tip, a0, a1);
+      ctx.strokeStyle = withAlpha(palette.kinds.semester, 0.95);
+      ctx.lineWidth = 2.4 * inv;
+      ctx.stroke();
+    }
+  }
+};
+
+/** The hole carries the wordmark. */
+const paintCenter = (ctx: CanvasRenderingContext2D, palette: Palette): void => {
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = withAlpha(palette.ink, 0.92);
+  ctx.font = "700 64px Satoshi, ui-sans-serif, system-ui, sans-serif";
+  ctx.fillText("ISGC", 0, 0);
+  ctx.textAlign = "left";
+};
+
 const fillNodes = (
   ctx: CanvasRenderingContext2D,
   nodes: readonly RadialNode[],
@@ -183,48 +373,31 @@ const fillNodes = (
   hovered: string | null,
   highlight: ReadonlySet<string> | null,
   palette: Palette,
-  t: Transform,
   inv: number,
   box: { bottom: number; left: number; right: number; top: number }
 ): void => {
-  const showLabels = t.k > LABEL_ZOOM;
-  const minScreen = 0.6 * inv;
   ctx.textBaseline = "middle";
   for (const node of nodes) {
     if (!kinds.has(node.kind)) {
       continue;
     }
     if (
-      node.x < box.left ||
-      node.x > box.right ||
-      node.y < box.top ||
-      node.y > box.bottom
+      node.tipX < box.left ||
+      node.tipX > box.right ||
+      node.tipY < box.top ||
+      node.tipY > box.bottom
     ) {
       continue;
     }
     const alpha = nodeAlpha(node, matches, highlight);
-    const force =
-      node.id === selected ||
-      node.id === hovered ||
-      node.kind === "program" ||
-      node.kind === "semester";
-    if (!force && node.r < minScreen && t.k < 0.35) {
-      continue;
-    }
-    ctx.beginPath();
-    ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
-    ctx.fillStyle = withAlpha(palette.kinds[node.kind], alpha);
-    ctx.fill();
-    if (node.id === selected || node.id === hovered) {
-      ctx.lineWidth = 2 * inv;
-      ctx.strokeStyle = palette.ink;
-      ctx.stroke();
-    }
-    if ((showLabels || force) && alpha > 0.5) {
-      ctx.font = `${(force ? 13 : 10.5) * inv}px ui-sans-serif, system-ui, sans-serif`;
-      ctx.fillStyle = withAlpha(palette.ink, alpha);
-      ctx.fillText(node.label, node.x + node.r + 4 * inv, node.y);
-    }
+    const emphasis = node.id === selected || node.id === hovered;
+    paintSliceNode(ctx, node, {
+      alpha,
+      emphasis,
+      inv,
+      lit: highlight?.has(node.id) ?? false,
+      palette,
+    });
   }
 };
 
@@ -237,6 +410,7 @@ export const paintGraph = (input: {
   palette: Palette;
   paths: readonly Path2D[];
   selectedId: string | null;
+  arcProgress: number;
   size: { dpr: number; h: number; w: number };
   transform: Transform;
 }): void => {
@@ -248,7 +422,7 @@ export const paintGraph = (input: {
   const t = input.transform;
   const selected = input.selectedId;
   const hubs = focusHubs(selected, input.hoveredId);
-  const highlight = highlightAround(input.layout, hubs);
+  const { core, highlight } = focusSets(input.layout, hubs);
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.fillStyle = input.palette.bg;
   ctx.fillRect(0, 0, w, h);
@@ -263,27 +437,29 @@ export const paintGraph = (input: {
     right: (w / 2 - t.x) * inv + pad,
     top: (-h / 2 - t.y) * inv - pad,
   };
-  for (const radius of RING_RADIUS) {
-    if (!radius) {
-      continue;
-    }
-    ctx.beginPath();
-    ctx.arc(0, 0, radius, 0, Math.PI * 2);
-    ctx.strokeStyle = input.palette.ring;
-    ctx.lineWidth = inv;
-    ctx.stroke();
-  }
+  fillSectors(
+    ctx,
+    input.layout.nodes,
+    input.kinds,
+    input.matches,
+    highlight,
+    selected,
+    input.hoveredId,
+    input.palette,
+    inv
+  );
   strokeEdges(
     ctx,
     input.layout,
     input.paths,
     input.kinds,
-    hubs,
-    highlight,
+    core,
     input.palette,
     inv,
-    box
+    box,
+    input.arcProgress
   );
+  paintCenter(ctx, input.palette);
   fillNodes(
     ctx,
     input.layout.nodes,
@@ -293,7 +469,6 @@ export const paintGraph = (input: {
     input.hoveredId,
     highlight,
     input.palette,
-    t,
     inv,
     box
   );
