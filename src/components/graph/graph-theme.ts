@@ -4,7 +4,7 @@ import type { GraphKind } from "./graph-model";
 export const RING_RADIUS = [0, 240, 480, 980] as const;
 
 /** Outer end of each ring, where its links and dots sit. */
-export const TIP_RADIUS = [0, 440, 900, 980] as const;
+export const TIP_RADIUS = [0, 440, 900, 1240] as const;
 
 export const KIND_ORDER = [
   "program",

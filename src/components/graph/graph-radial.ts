@@ -8,6 +8,8 @@ export interface RadialNeighbor {
 }
 
 export interface RadialNode {
+  a0: number;
+  a1: number;
   angle: number;
   credits?: number;
   degree: number;
@@ -91,6 +93,8 @@ const assignAngles = (
   equal = false
 ): void => {
   node.data.angle = start + span / 2;
+  node.data.a0 = start;
+  node.data.a1 = start + span;
   const total = leafCount(node);
   let cursor = start;
   for (const child of node.children) {
@@ -126,6 +130,8 @@ const seedNodes = (nodes: readonly GraphNode[]) => {
       continue;
     }
     const placed: RadialNode = {
+      a0: 0,
+      a1: 0,
       angle: 0,
       credits: node.credits,
       degree: 0,
@@ -287,6 +293,8 @@ const hubTree = (): TreeNode => ({
   childIds: new Set(),
   children: [],
   data: {
+    a0: 0,
+    a1: 0,
     angle: 0,
     degree: 0,
     id: "",

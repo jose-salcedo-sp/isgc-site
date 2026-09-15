@@ -17,7 +17,6 @@ export interface Palette {
 
 export const MIN_K = 0.05;
 export const MAX_K = 12;
-const LABEL_ZOOM = 1.6;
 
 export const clampK = (value: number): number =>
   Math.min(MAX_K, Math.max(MIN_K, value));
@@ -233,6 +232,12 @@ const paintTip = (
   }
 };
 
+const LABEL_SIZE: Partial<Record<GraphKind, number>> = {
+  course: 11,
+  semester: 14,
+  subject: 10,
+};
+
 const paintSliceNode = (
   ctx: CanvasRenderingContext2D,
   node: RadialNode,
@@ -240,7 +245,6 @@ const paintSliceNode = (
 ): void => {
   const { alpha, emphasis, inv, palette } = opts;
   const color = palette.kinds[node.kind];
-  const semesterRing = node.kind === "semester";
   paintRadialLabel(
     ctx,
     node,
@@ -248,39 +252,38 @@ const paintSliceNode = (
     alpha,
     inv,
     emphasis,
-    semesterRing ? 13 : 10.5
+    LABEL_SIZE[node.kind] ?? 11
   );
-  if (!semesterRing) {
+  if (node.kind === "subject") {
     paintTip(ctx, node, color, alpha, inv, emphasis, palette.ink);
   }
 };
 
-const paintDotNode = (
+/** Spokes on the slice boundaries: strong per semester, faint per class. */
+const strokeSpokes = (
   ctx: CanvasRenderingContext2D,
-  node: RadialNode,
-  opts: {
-    alpha: number;
-    emphasis: boolean;
-    inv: number;
-    palette: Palette;
-    showLabel: boolean;
-    size: number;
-  }
+  nodes: readonly RadialNode[],
+  kinds: ReadonlySet<GraphKind>,
+  palette: Palette,
+  inv: number
 ): void => {
-  const { alpha, emphasis, inv, palette } = opts;
-  ctx.beginPath();
-  ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
-  ctx.fillStyle = withAlpha(palette.kinds[node.kind], alpha);
-  ctx.fill();
-  if (emphasis) {
-    ctx.lineWidth = 2 * inv;
-    ctx.strokeStyle = palette.ink;
+  const outer = TIP_RADIUS.at(-1) ?? 0;
+  for (const node of nodes) {
+    const from =
+      node.kind === "semester" ? RING_RADIUS[1] : (RING_RADIUS[2] ?? 0);
+    if (node.kind === "subject" || !kinds.has(node.kind)) {
+      continue;
+    }
+    const a = node.a0 - Math.PI / 2;
+    ctx.beginPath();
+    ctx.moveTo((from ?? 0) * Math.cos(a), (from ?? 0) * Math.sin(a));
+    ctx.lineTo(outer * Math.cos(a), outer * Math.sin(a));
+    ctx.strokeStyle = withAlpha(
+      palette.ink,
+      node.kind === "semester" ? 0.22 : 0.07
+    );
+    ctx.lineWidth = (node.kind === "semester" ? 1.2 : 0.6) * inv;
     ctx.stroke();
-  }
-  if (opts.showLabel) {
-    ctx.font = `${opts.size * inv}px ui-sans-serif, system-ui, sans-serif`;
-    ctx.fillStyle = withAlpha(palette.ink, alpha);
-    ctx.fillText(node.label, node.x + node.r + 4 * inv, node.y);
   }
 };
 
@@ -293,47 +296,25 @@ const fillNodes = (
   hovered: string | null,
   highlight: ReadonlySet<string> | null,
   palette: Palette,
-  t: Transform,
   inv: number,
   box: { bottom: number; left: number; right: number; top: number }
 ): void => {
-  const showLabels = t.k > LABEL_ZOOM;
-  const minScreen = 0.6 * inv;
   ctx.textBaseline = "middle";
   for (const node of nodes) {
     if (!kinds.has(node.kind)) {
       continue;
     }
     if (
-      node.x < box.left ||
-      node.x > box.right ||
-      node.y < box.top ||
-      node.y > box.bottom
+      node.tipX < box.left ||
+      node.tipX > box.right ||
+      node.tipY < box.top ||
+      node.tipY > box.bottom
     ) {
       continue;
     }
     const alpha = nodeAlpha(node, matches, highlight);
-    const force =
-      node.id === selected ||
-      node.id === hovered ||
-      node.kind === "program" ||
-      node.kind === "semester";
-    if (!force && node.r < minScreen && t.k < 0.35) {
-      continue;
-    }
     const emphasis = node.id === selected || node.id === hovered;
-    if (node.kind === "semester" || node.kind === "course") {
-      paintSliceNode(ctx, node, { alpha, emphasis, inv, palette });
-      continue;
-    }
-    paintDotNode(ctx, node, {
-      alpha,
-      emphasis,
-      inv,
-      palette,
-      showLabel: (showLabels || force) && alpha > 0.5,
-      size: force ? 13 : 10.5,
-    });
+    paintSliceNode(ctx, node, { alpha, emphasis, inv, palette });
   }
 };
 
@@ -382,6 +363,7 @@ export const paintGraph = (input: {
     ctx.lineWidth = inv;
     ctx.stroke();
   }
+  strokeSpokes(ctx, input.layout.nodes, input.kinds, input.palette, inv);
   strokeEdges(
     ctx,
     input.layout,
@@ -402,7 +384,6 @@ export const paintGraph = (input: {
     input.hoveredId,
     highlight,
     input.palette,
-    t,
     inv,
     box
   );
