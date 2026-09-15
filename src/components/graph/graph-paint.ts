@@ -92,6 +92,9 @@ const strokeEdges = (
     if (!kinds.has(source.kind) || !kinds.has(target.kind)) {
       continue;
     }
+    if (Math.abs(source.proximity - target.proximity) === 1) {
+      continue;
+    }
     if (
       offscreen(
         source.x,
@@ -137,6 +140,7 @@ const focusHubs = (
   return hubs;
 };
 
+/** A slice lights up together with everything nested inside it. */
 const highlightAround = (
   layout: RadialLayout,
   hubs: ReadonlySet<string> | null
@@ -145,13 +149,22 @@ const highlightAround = (
     return null;
   }
   const highlight = new Set(hubs);
-  for (const id of hubs) {
-    const node = layout.byId.get(id);
+  const queue = [...hubs];
+  let head = 0;
+  while (head < queue.length) {
+    const id = queue[head];
+    head += 1;
+    const node = id ? layout.byId.get(id) : undefined;
     if (!node) {
       continue;
     }
     for (const nb of node.neighbors) {
+      const child = layout.byId.get(nb.id);
+      if (!child || child.proximity <= node.proximity || highlight.has(nb.id)) {
+        continue;
+      }
       highlight.add(nb.id);
+      queue.push(nb.id);
     }
   }
   return highlight;
