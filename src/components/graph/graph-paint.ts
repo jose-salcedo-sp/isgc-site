@@ -1,6 +1,6 @@
 import type { GraphKind } from "./graph-model";
 import type { RadialLayout, RadialNode } from "./graph-radial";
-import { RING_RADIUS } from "./graph-theme";
+import { RING_RADIUS, TIP_RADIUS } from "./graph-theme";
 
 export interface Transform {
   k: number;
@@ -176,14 +176,15 @@ const nodeAlpha = (
 
 const RADIAL_LABEL_GAP = 8;
 
-/** Semesters read outward along their own radius instead of sitting on a dot. */
+/** Semesters and classes read outward along their own slice instead of on a dot. */
 const paintRadialLabel = (
   ctx: CanvasRenderingContext2D,
   node: RadialNode,
   color: string,
   alpha: number,
   inv: number,
-  emphasis: boolean
+  emphasis: boolean,
+  size = 12.5
 ): void => {
   const flip = Math.cos(node.angle - Math.PI / 2) < 0;
   ctx.save();
@@ -193,7 +194,7 @@ const paintRadialLabel = (
     ctx.rotate(Math.PI);
   }
   ctx.textAlign = flip ? "right" : "left";
-  ctx.font = `${emphasis ? 700 : 600} ${12.5 * inv}px ui-sans-serif, system-ui, sans-serif`;
+  ctx.font = `${emphasis ? 700 : 600} ${size * inv}px ui-sans-serif, system-ui, sans-serif`;
   ctx.fillStyle = withAlpha(color, alpha);
   const gap = RADIAL_LABEL_GAP * inv;
   const x = flip ? -gap : gap;
@@ -209,6 +210,49 @@ const paintRadialLabel = (
     ctx.stroke();
   }
   ctx.restore();
+};
+
+/** Anchor dot where a class ring ends and its outward links begin. */
+const paintTip = (
+  ctx: CanvasRenderingContext2D,
+  node: RadialNode,
+  color: string,
+  alpha: number,
+  inv: number,
+  emphasis: boolean,
+  ink: string
+): void => {
+  ctx.beginPath();
+  ctx.arc(node.tipX, node.tipY, (emphasis ? 4 : 2.6) * inv, 0, Math.PI * 2);
+  ctx.fillStyle = withAlpha(color, alpha);
+  ctx.fill();
+  if (emphasis) {
+    ctx.lineWidth = 1.5 * inv;
+    ctx.strokeStyle = withAlpha(ink, alpha);
+    ctx.stroke();
+  }
+};
+
+const paintSliceNode = (
+  ctx: CanvasRenderingContext2D,
+  node: RadialNode,
+  opts: { alpha: number; emphasis: boolean; inv: number; palette: Palette }
+): void => {
+  const { alpha, emphasis, inv, palette } = opts;
+  const color = palette.kinds[node.kind];
+  const semesterRing = node.kind === "semester";
+  paintRadialLabel(
+    ctx,
+    node,
+    color,
+    alpha,
+    inv,
+    emphasis,
+    semesterRing ? 13 : 10.5
+  );
+  if (!semesterRing) {
+    paintTip(ctx, node, color, alpha, inv, emphasis, palette.ink);
+  }
 };
 
 const paintDotNode = (
@@ -278,9 +322,8 @@ const fillNodes = (
       continue;
     }
     const emphasis = node.id === selected || node.id === hovered;
-    if (node.kind === "semester") {
-      const { semester } = palette.kinds;
-      paintRadialLabel(ctx, node, semester, alpha, inv, emphasis);
+    if (node.kind === "semester" || node.kind === "course") {
+      paintSliceNode(ctx, node, { alpha, emphasis, inv, palette });
       continue;
     }
     paintDotNode(ctx, node, {
@@ -329,7 +372,7 @@ export const paintGraph = (input: {
     right: (w / 2 - t.x) * inv + pad,
     top: (-h / 2 - t.y) * inv - pad,
   };
-  for (const radius of RING_RADIUS) {
+  for (const radius of [...RING_RADIUS, ...TIP_RADIUS]) {
     if (!radius) {
       continue;
     }

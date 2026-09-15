@@ -1,5 +1,5 @@
 import type { GraphEdge, GraphKind, GraphNode } from "./graph-model";
-import { RING_RADIUS, nodeRadius } from "./graph-theme";
+import { RING_RADIUS, TIP_RADIUS, nodeRadius } from "./graph-theme";
 
 export interface RadialNeighbor {
   edge: string;
@@ -20,6 +20,9 @@ export interface RadialNode {
   proximity: number;
   r: number;
   radius: number;
+  tip: number;
+  tipX: number;
+  tipY: number;
   x: number;
   y: number;
 }
@@ -44,8 +47,14 @@ interface TreeNode {
   data: RadialNode;
 }
 
+const ringIndex = (proximity: number): number =>
+  Math.min(Math.max(proximity, 0), RING_RADIUS.length - 1);
+
 const ringFor = (proximity: number): number =>
-  RING_RADIUS[Math.min(Math.max(proximity, 0), RING_RADIUS.length - 1)] ?? 0;
+  RING_RADIUS[ringIndex(proximity)] ?? 0;
+
+const tipFor = (proximity: number): number =>
+  TIP_RADIUS[ringIndex(proximity)] ?? 0;
 
 const polar = (angle: number, radius: number): [number, number] => [
   radius * Math.cos(angle - Math.PI / 2),
@@ -57,8 +66,8 @@ export const radialLinkPath = (
   target: RadialNode
 ): string => {
   const mid = (source.angle + target.angle) / 2;
-  const [x0, y0] = polar(source.angle, source.radius);
-  const [cx1, cy1] = polar(mid, source.radius);
+  const [x0, y0] = polar(source.angle, source.tip);
+  const [cx1, cy1] = polar(mid, source.tip);
   const [cx2, cy2] = polar(mid, target.radius);
   const [x1, y1] = polar(target.angle, target.radius);
   return `M${x0},${y0}C${cx1},${cy1},${cx2},${cy2},${x1},${y1}`;
@@ -129,6 +138,9 @@ const seedNodes = (nodes: readonly GraphNode[]) => {
       proximity: node.proximity ?? (node.kind === "program" ? 0 : 4),
       r: 0,
       radius: 0,
+      tip: 0,
+      tipX: 0,
+      tipY: 0,
       x: 0,
       y: 0,
     };
@@ -285,6 +297,9 @@ const hubTree = (): TreeNode => ({
     proximity: 0,
     r: 0,
     radius: 0,
+    tip: 0,
+    tipX: 0,
+    tipY: 0,
     x: 0,
     y: 0,
   },
@@ -300,9 +315,13 @@ const walkSort = (node: TreeNode): void => {
 const placeXY = (byId: Map<string, RadialNode>): void => {
   for (const node of byId.values()) {
     node.radius = ringFor(node.proximity);
+    node.tip = tipFor(node.proximity);
     const [x, y] = polar(node.angle, node.radius);
     node.x = x;
     node.y = y;
+    const [tx, ty] = polar(node.angle, node.tip);
+    node.tipX = tx;
+    node.tipY = ty;
   }
 };
 
