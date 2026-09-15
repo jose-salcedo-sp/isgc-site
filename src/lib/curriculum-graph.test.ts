@@ -11,7 +11,7 @@ describe("curriculum graph", () => {
     );
     expect(curriculumGraph.edges).toStrictEqual(curriculum.graph.edges);
     expect(curriculumGraph.text.title).toBe(curriculum.graph.text.title);
-    expect(curriculumGraph.text.kinds.course).toBe("Classes");
+    expect(curriculumGraph.text.kinds.course).toBe("Materias");
   });
 
   it("starts at the semester ring with no node at the center", () => {

@@ -52,8 +52,8 @@ export const GraphLegend = ({
   <div className="pointer-events-auto absolute top-4 left-4 z-10 w-56">
     <h1 className="text-foreground text-sm font-semibold">{text.title}</h1>
     <p className="text-muted-foreground mb-3 text-xs">
-      {layout.nodes.length.toLocaleString()} nodes ·{" "}
-      {layout.edges.length.toLocaleString()} links
+      {layout.nodes.length.toLocaleString()} elementos ·{" "}
+      {layout.edges.length.toLocaleString()} {text.connections.toLowerCase()}
     </p>
     <label className="sr-only" htmlFor="graph-search">
       {text.searchLabel}

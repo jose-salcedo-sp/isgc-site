@@ -704,90 +704,90 @@
   ],
   "graph": {
     "text": {
-      "close": "Close",
-      "connections": "Connections",
-      "connectionMany": "connections",
-      "connectionOne": "connection",
-      "credits": "credits",
+      "close": "Cerrar",
+      "connections": "Conexiones",
+      "connectionMany": "conexiones",
+      "connectionOne": "conexión",
+      "credits": "créditos",
       "kinds": {
-        "course": "Classes",
-        "program": "Program",
-        "semester": "Semesters",
-        "subject": "Subjects"
+        "course": "Materias",
+        "program": "Programa",
+        "semester": "Semestres",
+        "subject": "Temas"
       },
-      "noLinks": "No links on this node.",
-      "search": "Search",
-      "searchLabel": "Search nodes",
-      "title": "Major at a glance"
+      "noLinks": "Sin conexiones.",
+      "search": "Buscar",
+      "searchLabel": "Buscar en el plan",
+      "title": "La carrera de un vistazo"
     },
     "nodes": [
       {
         "id": "semester-1",
         "kind": "semester",
-        "label": "1st Semester",
+        "label": "1er Semestre",
         "order": 1,
         "proximity": 1
       },
       {
         "id": "semester-2",
         "kind": "semester",
-        "label": "2nd Semester",
+        "label": "2do Semestre",
         "order": 2,
         "proximity": 1
       },
       {
         "id": "semester-3",
         "kind": "semester",
-        "label": "3rd Semester",
+        "label": "3er Semestre",
         "order": 3,
         "proximity": 1
       },
       {
         "id": "semester-4",
         "kind": "semester",
-        "label": "4th Semester",
+        "label": "4to Semestre",
         "order": 4,
         "proximity": 1
       },
       {
         "id": "semester-5",
         "kind": "semester",
-        "label": "5th Semester",
+        "label": "5to Semestre",
         "order": 5,
         "proximity": 1
       },
       {
         "id": "semester-6",
         "kind": "semester",
-        "label": "6th Semester",
+        "label": "6to Semestre",
         "order": 6,
         "proximity": 1
       },
       {
         "id": "semester-7",
         "kind": "semester",
-        "label": "7th Semester",
+        "label": "7mo Semestre",
         "order": 7,
         "proximity": 1
       },
       {
         "id": "semester-8",
         "kind": "semester",
-        "label": "8th Semester",
+        "label": "8vo Semestre",
         "order": 8,
         "proximity": 1
       },
       {
         "id": "semester-9",
         "kind": "semester",
-        "label": "9th Semester",
+        "label": "9no Semestre",
         "order": 9,
         "proximity": 1
       },
       {
         "id": "semester-10",
         "kind": "semester",
-        "label": "10th Semester",
+        "label": "10mo Semestre",
         "order": 10,
         "proximity": 1
       },
