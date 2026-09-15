@@ -70,13 +70,6 @@ const CarreraPage = () => (
         title="Consulta tu plan de estudios"
         description="Revisa tus materias en Tu Ruta Ideal. Para conocer el programa completo, requisitos y equivalencias, solicita el plan vigente a Coordinación."
       />
-      <div className="graph-surface rounded-card mt-2 h-[min(85vh,820px)] overflow-hidden">
-        <GraphView
-          initialEdges={curriculumGraph.edges}
-          initialNodes={curriculumGraph.nodes}
-          text={curriculumGraph.text}
-        />
-      </div>
       <div className="mt-8 flex flex-wrap gap-5">
         <ExternalLink href={externalLinks.tuRutaIdeal}>
           Abrir Tu Ruta Ideal
@@ -89,6 +82,13 @@ const CarreraPage = () => (
         </a>
       </div>
     </PageSection>
+    <section className="graph-surface h-[min(90vh,900px)] w-full">
+      <GraphView
+        initialEdges={curriculumGraph.edges}
+        initialNodes={curriculumGraph.nodes}
+        text={curriculumGraph.text}
+      />
+    </section>
     <PageSection tone="marfil">
       <SectionHeading
         title="Dos formas de profundizar"
