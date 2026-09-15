@@ -174,6 +174,72 @@ const nodeAlpha = (
   return alpha;
 };
 
+const RADIAL_LABEL_GAP = 8;
+
+/** Semesters read outward along their own radius instead of sitting on a dot. */
+const paintRadialLabel = (
+  ctx: CanvasRenderingContext2D,
+  node: RadialNode,
+  color: string,
+  alpha: number,
+  inv: number,
+  emphasis: boolean
+): void => {
+  const flip = Math.cos(node.angle - Math.PI / 2) < 0;
+  ctx.save();
+  ctx.rotate(node.angle - Math.PI / 2);
+  ctx.translate(node.radius, 0);
+  if (flip) {
+    ctx.rotate(Math.PI);
+  }
+  ctx.textAlign = flip ? "right" : "left";
+  ctx.font = `${emphasis ? 700 : 600} ${12.5 * inv}px ui-sans-serif, system-ui, sans-serif`;
+  ctx.fillStyle = withAlpha(color, alpha);
+  const gap = RADIAL_LABEL_GAP * inv;
+  const x = flip ? -gap : gap;
+  ctx.fillText(node.label, x, 0);
+  if (emphasis) {
+    const { width } = ctx.measureText(node.label);
+    const y = 5 * inv;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(flip ? x - width : x + width, y);
+    ctx.lineWidth = 1.5 * inv;
+    ctx.strokeStyle = withAlpha(color, alpha);
+    ctx.stroke();
+  }
+  ctx.restore();
+};
+
+const paintDotNode = (
+  ctx: CanvasRenderingContext2D,
+  node: RadialNode,
+  opts: {
+    alpha: number;
+    emphasis: boolean;
+    inv: number;
+    palette: Palette;
+    showLabel: boolean;
+    size: number;
+  }
+): void => {
+  const { alpha, emphasis, inv, palette } = opts;
+  ctx.beginPath();
+  ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
+  ctx.fillStyle = withAlpha(palette.kinds[node.kind], alpha);
+  ctx.fill();
+  if (emphasis) {
+    ctx.lineWidth = 2 * inv;
+    ctx.strokeStyle = palette.ink;
+    ctx.stroke();
+  }
+  if (opts.showLabel) {
+    ctx.font = `${opts.size * inv}px ui-sans-serif, system-ui, sans-serif`;
+    ctx.fillStyle = withAlpha(palette.ink, alpha);
+    ctx.fillText(node.label, node.x + node.r + 4 * inv, node.y);
+  }
+};
+
 const fillNodes = (
   ctx: CanvasRenderingContext2D,
   nodes: readonly RadialNode[],
@@ -211,20 +277,20 @@ const fillNodes = (
     if (!force && node.r < minScreen && t.k < 0.35) {
       continue;
     }
-    ctx.beginPath();
-    ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
-    ctx.fillStyle = withAlpha(palette.kinds[node.kind], alpha);
-    ctx.fill();
-    if (node.id === selected || node.id === hovered) {
-      ctx.lineWidth = 2 * inv;
-      ctx.strokeStyle = palette.ink;
-      ctx.stroke();
+    const emphasis = node.id === selected || node.id === hovered;
+    if (node.kind === "semester") {
+      const { semester } = palette.kinds;
+      paintRadialLabel(ctx, node, semester, alpha, inv, emphasis);
+      continue;
     }
-    if ((showLabels || force) && alpha > 0.5) {
-      ctx.font = `${(force ? 13 : 10.5) * inv}px ui-sans-serif, system-ui, sans-serif`;
-      ctx.fillStyle = withAlpha(palette.ink, alpha);
-      ctx.fillText(node.label, node.x + node.r + 4 * inv, node.y);
-    }
+    paintDotNode(ctx, node, {
+      alpha,
+      emphasis,
+      inv,
+      palette,
+      showLabel: (showLabels || force) && alpha > 0.5,
+      size: force ? 13 : 10.5,
+    });
   }
 };
 
