@@ -1,5 +1,11 @@
 import type { GraphEdge, GraphKind, GraphNode } from "./graph-model";
-import { RING_RADIUS, nodeRadius } from "./graph-theme";
+import {
+  ARC_BASE,
+  ARC_SPAN,
+  RING_RADIUS,
+  TIP_RADIUS,
+  nodeRadius,
+} from "./graph-theme";
 
 export interface RadialNeighbor {
   edge: string;
@@ -8,6 +14,8 @@ export interface RadialNeighbor {
 }
 
 export interface RadialNode {
+  a0: number;
+  a1: number;
   angle: number;
   credits?: number;
   degree: number;
@@ -20,6 +28,9 @@ export interface RadialNode {
   proximity: number;
   r: number;
   radius: number;
+  tip: number;
+  tipX: number;
+  tipY: number;
   x: number;
   y: number;
 }
@@ -28,6 +39,7 @@ export interface RadialEdge {
   a: string;
   b: string;
   label: string;
+  length: number;
   path: string;
 }
 
@@ -44,24 +56,93 @@ interface TreeNode {
   data: RadialNode;
 }
 
+const ringIndex = (proximity: number): number =>
+  Math.min(Math.max(proximity, 0), RING_RADIUS.length - 1);
+
 const ringFor = (proximity: number): number =>
-  RING_RADIUS[Math.min(Math.max(proximity, 0), RING_RADIUS.length - 1)] ?? 0;
+  RING_RADIUS[ringIndex(proximity)] ?? 0;
+
+const tipFor = (proximity: number): number =>
+  TIP_RADIUS[ringIndex(proximity)] ?? 0;
 
 const polar = (angle: number, radius: number): [number, number] => [
   radius * Math.cos(angle - Math.PI / 2),
   radius * Math.sin(angle - Math.PI / 2),
 ];
 
+const ARC_STEPS = 48;
+
+/**
+ * Same-level links bow outside the rings. Sampling radius as `tip + h·sin(πs)`
+ * keeps every point at or beyond the outer edge, which a Bézier through a
+ * single control point does not for widely separated slices.
+ */
+interface Link {
+  d: string;
+  length: number;
+}
+
+const outerLinkPath = (source: RadialNode, target: RadialNode): Link => {
+  const delta =
+    ((target.angle - source.angle + Math.PI) % (Math.PI * 2)) - Math.PI;
+  const height = ARC_BASE + (Math.abs(delta) / Math.PI) * ARC_SPAN;
+  let [px, py] = polar(source.angle, source.tip);
+  let d = `M${px},${py}`;
+  let length = 0;
+  for (let step = 1; step <= ARC_STEPS; step += 1) {
+    const s = step / ARC_STEPS;
+    const [x, y] = polar(
+      source.angle + delta * s,
+      source.tip + height * Math.sin(Math.PI * s)
+    );
+    length += Math.hypot(x - px, y - py);
+    d += `L${x},${y}`;
+    px = x;
+    py = y;
+  }
+  return { d, length };
+};
+
 export const radialLinkPath = (
   source: RadialNode,
   target: RadialNode
-): string => {
+): Link => {
+  if (source.proximity === target.proximity) {
+    return outerLinkPath(source, target);
+  }
   const mid = (source.angle + target.angle) / 2;
-  const [x0, y0] = polar(source.angle, source.radius);
-  const [cx1, cy1] = polar(mid, source.radius);
+  const [x0, y0] = polar(source.angle, source.tip);
+  const [cx1, cy1] = polar(mid, source.tip);
   const [cx2, cy2] = polar(mid, target.radius);
   const [x1, y1] = polar(target.angle, target.radius);
-  return `M${x0},${y0}C${cx1},${cy1},${cx2},${cy2},${x1},${y1}`;
+  return {
+    d: `M${x0},${y0}C${cx1},${cy1},${cx2},${cy2},${x1},${y1}`,
+    length: Math.hypot(x1 - x0, y1 - y0),
+  };
+};
+
+const TWO_PI = Math.PI * 2;
+
+/** Finds the slice under a world point: inside its band and its angular wedge. */
+export const pickSlice = (
+  nodes: readonly RadialNode[],
+  x: number,
+  y: number
+): RadialNode | null => {
+  const radius = Math.hypot(x, y);
+  const raw = Math.atan2(y, x) + Math.PI / 2;
+  const angle = ((raw % TWO_PI) + TWO_PI) % TWO_PI;
+  for (const node of nodes) {
+    if (
+      radius >= node.radius &&
+      radius <= node.tip &&
+      angle >= node.a0 &&
+      angle < node.a1
+    ) {
+      return node;
+    }
+  }
+  return null;
 };
 
 const leafCount = (node: TreeNode): number => {
@@ -75,12 +156,21 @@ const leafCount = (node: TreeNode): number => {
   return sum;
 };
 
-const assignAngles = (node: TreeNode, start: number, span: number): void => {
+const assignAngles = (
+  node: TreeNode,
+  start: number,
+  span: number,
+  equal = false
+): void => {
   node.data.angle = start + span / 2;
+  node.data.a0 = start;
+  node.data.a1 = start + span;
   const total = leafCount(node);
   let cursor = start;
   for (const child of node.children) {
-    const childSpan = span * (leafCount(child) / total);
+    const childSpan = equal
+      ? span / node.children.length
+      : span * (leafCount(child) / total);
     assignAngles(child, cursor, childSpan);
     cursor += childSpan;
   }
@@ -110,6 +200,8 @@ const seedNodes = (nodes: readonly GraphNode[]) => {
       continue;
     }
     const placed: RadialNode = {
+      a0: 0,
+      a1: 0,
       angle: 0,
       credits: node.credits,
       degree: 0,
@@ -122,6 +214,9 @@ const seedNodes = (nodes: readonly GraphNode[]) => {
       proximity: node.proximity ?? (node.kind === "program" ? 0 : 4),
       r: 0,
       radius: 0,
+      tip: 0,
+      tipX: 0,
+      tipY: 0,
       x: 0,
       y: 0,
     };
@@ -222,15 +317,15 @@ const attachOrphans = (
 
 const growTree = (
   rootId: string,
-  nodes: readonly GraphNode[],
   byId: Map<string, RadialNode>,
-  trees: Map<string, TreeNode>
+  trees: Map<string, TreeNode>,
+  visited: Set<string>
 ): TreeNode | null => {
   const rootTree = trees.get(rootId);
-  if (!rootTree) {
+  if (!rootTree || visited.has(rootId)) {
     return null;
   }
-  const visited = new Set([rootId]);
+  visited.add(rootId);
   const queue = [rootId];
   let head = 0;
   while (head < queue.length) {
@@ -260,9 +355,33 @@ const growTree = (
       }
     }
   }
-  attachOrphans(nodes, byId, trees, rootTree, visited);
   return rootTree;
 };
+
+/** Anchors the innermost ring without drawing a node at the center. */
+const hubTree = (): TreeNode => ({
+  childIds: new Set(),
+  children: [],
+  data: {
+    a0: 0,
+    a1: 0,
+    angle: 0,
+    degree: 0,
+    id: "",
+    kind: "program",
+    label: "",
+    neighbors: [],
+    order: 0,
+    proximity: 0,
+    r: 0,
+    radius: 0,
+    tip: 0,
+    tipX: 0,
+    tipY: 0,
+    x: 0,
+    y: 0,
+  },
+});
 
 const walkSort = (node: TreeNode): void => {
   node.children.sort(sortKids);
@@ -274,9 +393,13 @@ const walkSort = (node: TreeNode): void => {
 const placeXY = (byId: Map<string, RadialNode>): void => {
   for (const node of byId.values()) {
     node.radius = ringFor(node.proximity);
+    node.tip = tipFor(node.proximity);
     const [x, y] = polar(node.angle, node.radius);
     node.x = x;
     node.y = y;
+    const [tx, ty] = polar(node.angle, node.tip);
+    node.tipX = tx;
+    node.tipY = ty;
   }
 };
 
@@ -291,11 +414,13 @@ const edgePaths = (
     if (!source || !target) {
       continue;
     }
+    const link = radialLinkPath(source, target);
     radialEdges.push({
       a: edge.a,
       b: edge.b,
       label: edge.label,
-      path: radialLinkPath(source, target),
+      length: link.length,
+      path: link.d,
     });
   }
   return radialEdges;
@@ -310,16 +435,24 @@ export const layoutRadial = (
   }
   const { byId, kindCounts, trees } = seedNodes(nodes);
   const kept = wireEdges(byId, edges);
-  const rootRaw = nodes.find((node) => node.kind === "program") ?? nodes[0];
-  if (!rootRaw) {
+  const inner = Math.min(...[...byId.values()].map((node) => node.proximity));
+  const visited = new Set<string>();
+  const hub = hubTree();
+  for (const node of nodes) {
+    if (byId.get(node.id)?.proximity !== inner) {
+      continue;
+    }
+    const tree = growTree(node.id, byId, trees, visited);
+    if (tree) {
+      pushChild(hub, tree);
+    }
+  }
+  if (hub.children.length === 0) {
     return { byId, edges: [], kindCounts, nodes: [] };
   }
-  const rootTree = growTree(rootRaw.id, nodes, byId, trees);
-  if (!rootTree) {
-    return { byId, edges: [], kindCounts, nodes: [] };
-  }
-  walkSort(rootTree);
-  assignAngles(rootTree, 0, Math.PI * 2);
+  attachOrphans(nodes, byId, trees, hub, visited);
+  walkSort(hub);
+  assignAngles(hub, 0, Math.PI * 2, true);
   placeXY(byId);
   return {
     byId,

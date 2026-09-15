@@ -1,8 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import { buildHitGrid, findNear } from "./graph-hit";
 import type { GraphEdge, GraphNode } from "./graph-model";
-import { layoutRadial } from "./graph-radial";
+import { layoutRadial, pickSlice, radialLinkPath } from "./graph-radial";
 import { RING_RADIUS } from "./graph-theme";
 
 const edge = (
@@ -50,6 +49,41 @@ describe("radial layout", () => {
     expect(subject.radius).toBe(RING_RADIUS[3]);
   });
 
+  it("splits the innermost ring into equal slices regardless of class count", () => {
+    const nodes: GraphNode[] = [
+      {
+        id: "a",
+        kind: "semester",
+        label: "Semester 1",
+        order: 1,
+        proximity: 1,
+      },
+      {
+        id: "b",
+        kind: "semester",
+        label: "Semester 2",
+        order: 2,
+        proximity: 1,
+      },
+      { id: "c1", kind: "course", label: "Calc", order: 1, proximity: 2 },
+      { id: "c2", kind: "course", label: "Algebra", order: 2, proximity: 2 },
+      { id: "c3", kind: "course", label: "Physics", order: 1, proximity: 2 },
+    ];
+    const layout = layoutRadial(nodes, [
+      edge("a", "c1", "e1"),
+      edge("a", "c2", "e2"),
+      edge("b", "c3", "e3"),
+    ]);
+    const a = layout.byId.get("a");
+    const b = layout.byId.get("b");
+    if (!a || !b) {
+      throw new Error("missing nodes");
+    }
+    expect(a.angle).toBeCloseTo(Math.PI / 2);
+    expect(b.angle).toBeCloseTo((3 * Math.PI) / 2);
+    expect(a.radius).toBe(RING_RADIUS[1]);
+  });
+
   it("gives sibling semesters distinct angles", () => {
     const nodes: GraphNode[] = [
       { id: "program", kind: "program", label: "CSE", proximity: 0 },
@@ -82,16 +116,49 @@ describe("radial layout", () => {
   });
 });
 
-describe("hit grid", () => {
-  it("returns the closest node inside the search radius", () => {
-    const grid = buildHitGrid(
-      [
-        { id: "a", x: 0, y: 0 },
-        { id: "b", x: 40, y: 0 },
-      ],
-      16
-    );
-    expect(findNear(grid, 2, 1, 8)?.id).toBe("a");
-    expect(findNear(grid, 100, 100, 8)).toBeNull();
+describe("links between slices on the same ring", () => {
+  it("stays outside the outer ring along the whole arc", () => {
+    const nodes: GraphNode[] = [
+      { id: "a", kind: "subject", label: "A", order: 1, proximity: 3 },
+      { id: "b", kind: "subject", label: "B", order: 2, proximity: 3 },
+      { id: "c", kind: "subject", label: "C", order: 3, proximity: 3 },
+    ];
+    const layout = layoutRadial(nodes, []);
+    const a = layout.byId.get("a");
+    const c = layout.byId.get("c");
+    if (!a || !c) {
+      throw new Error("missing nodes");
+    }
+    const points = radialLinkPath(a, c)
+      .d.slice(1)
+      .split("L")
+      .map((pair) => pair.split(",").map(Number));
+    expect(points.length).toBeGreaterThan(8);
+    for (const [x, y] of points) {
+      expect(Math.hypot(x ?? 0, y ?? 0)).toBeGreaterThanOrEqual(a.tip - 0.001);
+    }
+  });
+});
+
+describe("slice picking", () => {
+  const nodes: GraphNode[] = [
+    { id: "a", kind: "semester", label: "Semester 1", order: 1, proximity: 1 },
+    { id: "b", kind: "semester", label: "Semester 2", order: 2, proximity: 1 },
+  ];
+  const layout = layoutRadial(nodes, []);
+
+  it("returns the slice whose band and wedge contain the point", () => {
+    const a = layout.byId.get("a");
+    if (!a) {
+      throw new Error("missing node");
+    }
+    const mid = (a.radius + a.tip) / 2;
+    expect(pickSlice(layout.nodes, mid, 0)?.id).toBe("a");
+    expect(pickSlice(layout.nodes, -mid, 0)?.id).toBe("b");
+  });
+
+  it("returns null inside the hole and outside the outer ring", () => {
+    expect(pickSlice(layout.nodes, 0, 0)).toBeNull();
+    expect(pickSlice(layout.nodes, 9000, 0)).toBeNull();
   });
 });

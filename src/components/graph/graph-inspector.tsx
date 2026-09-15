@@ -74,7 +74,7 @@ export const GraphInspector = ({
         ) : (
           selected.connections.map(({ edge, edgeId, node }) => (
             <button
-              className="hover:bg-muted flex w-full items-center gap-2 rounded-md px-1 py-1 text-left text-xs"
+              className="hover:bg-muted flex min-h-11 w-full items-center gap-2 rounded-md px-2 text-left text-xs"
               key={edgeId}
               type="button"
               onClick={() => {

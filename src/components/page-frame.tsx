@@ -18,7 +18,7 @@ export const PageIntro = ({
   description: string;
 }) => (
   <section className="bg-tinto text-white">
-    <div className="mx-auto max-w-[1200px] px-5 py-10 sm:py-14 lg:px-6">
+    <div className="mx-auto max-w-300 px-5 py-10 sm:py-14 lg:px-6">
       <h1 className="max-w-4xl font-serif text-3xl leading-tight sm:text-5xl">
         {title}
       </h1>
@@ -43,7 +43,7 @@ export const PageSection = ({
     id={id}
     className={`${tone === "marfil" ? "bg-marfil" : "bg-white"} py-16 sm:py-20`}
   >
-    <div className="mx-auto max-w-[1200px] px-5 lg:px-6">{children}</div>
+    <div className="mx-auto max-w-300 px-5 lg:px-6">{children}</div>
   </section>
 );
 

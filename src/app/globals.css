@@ -25,9 +25,23 @@
   --border: color-mix(in oklab, var(--foreground) 12%, transparent);
   --graph-program: #5d1028;
   --graph-semester: #8a1538;
-  --graph-course: #b08d4f;
+  --graph-course: #7d602a;
   --graph-subject: #625d59;
   --graph-ring: color-mix(in oklab, var(--foreground) 10%, transparent);
+}
+
+/* Dark panel the curriculum donut sits on; the canvas reads these at runtime. */
+.graph-surface {
+  --background: #272326;
+  --foreground: #f2ece3;
+  --muted: color-mix(in oklab, var(--foreground) 14%, transparent);
+  --muted-foreground: #cfc7bd;
+  --border: color-mix(in oklab, var(--foreground) 24%, transparent);
+  --graph-semester: #e08a9c;
+  --graph-course: #e2c58f;
+  --graph-subject: #b9b1a9;
+  --graph-ring: color-mix(in oklab, var(--foreground) 18%, transparent);
+  background: var(--background);
 }
 
 @theme inline {

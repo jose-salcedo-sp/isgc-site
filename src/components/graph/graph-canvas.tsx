@@ -3,10 +3,9 @@
 import { useEffect, useRef } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
 
-import { buildHitGrid, findNear } from "./graph-hit";
-import type { HitGrid } from "./graph-hit";
 import type { GraphKind, GraphText } from "./graph-model";
 import {
+  clampK,
   focusOn,
   paintGraph,
   playFocus,
@@ -14,7 +13,16 @@ import {
   zoomAt,
 } from "./graph-paint";
 import type { Palette, Transform } from "./graph-paint";
+import { pickSlice } from "./graph-radial";
 import type { RadialLayout, RadialNode } from "./graph-radial";
+import { OUTER_EXTENT } from "./graph-theme";
+import { GraphTip } from "./graph-tip";
+import { moveTip } from "./tip-content";
+
+const ARC_DRAW_MS = 500;
+
+const reduced = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const GraphCanvas = ({
   activeKinds,
@@ -37,10 +45,11 @@ const GraphCanvas = ({
   const transformRef = useRef<Transform>({ k: 0.45, x: 0, y: 0 });
   const hoverRef = useRef<string | null>(null);
   const sizeRef = useRef({ dpr: 1, h: 600, w: 800 });
-  const gridRef = useRef<HitGrid<RadialNode> | null>(null);
   const pathsRef = useRef<Path2D[]>([]);
   const paletteRef = useRef<Palette | null>(null);
   const rafRef = useRef(0);
+  const fitted = useRef(false);
+  const arcStart = useRef(0);
   const cancelFocus = useRef(() => {
     /* filled when a focus tween starts */
   });
@@ -60,16 +69,15 @@ const GraphCanvas = ({
     pointer: number;
   } | null>(null);
 
+  const startArcs = () => {
+    arcStart.current = performance.now();
+  };
+
   const animateTo = (to: Transform) => {
     cancelFocus.current();
-    cancelFocus.current = playFocus(
-      transformRef.current,
-      to,
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-      () => {
-        kickDraw.current();
-      }
-    );
+    cancelFocus.current = playFocus(transformRef.current, to, reduced(), () => {
+      kickDraw.current();
+    });
   };
 
   useEffect(() => {
@@ -79,7 +87,6 @@ const GraphCanvas = ({
       matches: searchIds,
       selectedId,
     };
-    gridRef.current = buildHitGrid(layout.nodes);
     pathsRef.current = layout.edges.map((edge) => new Path2D(edge.path));
     kickDraw.current();
   }, [activeKinds, layout, searchIds, selectedId]);
@@ -96,7 +103,12 @@ const GraphCanvas = ({
         return;
       }
       const scene = sceneRef.current;
+      const elapsed = performance.now() - arcStart.current;
+      const arcProgress = reduced()
+        ? 1
+        : Math.min(1, Math.max(0, elapsed / ARC_DRAW_MS));
       paintGraph({
+        arcProgress,
         canvas,
         hoveredId: hoverRef.current,
         kinds: scene.kinds,
@@ -108,6 +120,9 @@ const GraphCanvas = ({
         size: sizeRef.current,
         transform: transformRef.current,
       });
+      if (arcProgress < 1) {
+        kickDraw.current();
+      }
     };
     const requestDraw = () => {
       if (rafRef.current) {
@@ -123,6 +138,12 @@ const GraphCanvas = ({
       const rect = wrap.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       sizeRef.current = { dpr, h: rect.height, w: rect.width };
+      if (!fitted.current && rect.width > 0 && rect.height > 0) {
+        fitted.current = true;
+        transformRef.current.k = clampK(
+          (Math.min(rect.width, rect.height) * 0.94) / (OUTER_EXTENT * 2)
+        );
+      }
       canvas.width = Math.max(1, Math.floor(rect.width * dpr));
       canvas.height = Math.max(1, Math.floor(rect.height * dpr));
       paletteRef.current = readPalette(wrap);
@@ -182,37 +203,8 @@ const GraphCanvas = ({
   };
 
   const hitAt = (clientX: number, clientY: number): RadialNode | null => {
-    const grid = gridRef.current;
-    if (!grid) {
-      return null;
-    }
     const [wx, wy] = worldPoint(clientX, clientY);
-    return findNear(grid, wx, wy, 18 / transformRef.current.k);
-  };
-
-  const moveTip = (
-    event: { clientX: number; clientY: number },
-    hit: RadialNode | null
-  ) => {
-    const tip = tipRef.current;
-    if (!tip) {
-      return;
-    }
-    if (!hit) {
-      tip.hidden = true;
-      return;
-    }
-    tip.hidden = false;
-    tip.style.left = `${event.clientX + 14}px`;
-    tip.style.top = `${event.clientY + 10}px`;
-    const label = tip.querySelector("[data-tip-label]");
-    const kind = tip.querySelector("[data-tip-kind]");
-    if (label) {
-      label.textContent = hit.label;
-    }
-    if (kind) {
-      kind.textContent = `${text.kinds[hit.kind]} · ${hit.degree} ${hit.degree === 1 ? text.connectionOne : text.connectionMany}`;
-    }
+    return pickSlice(sceneRef.current.layout.nodes, wx, wy);
   };
 
   const onPointerDown = (event: ReactPointerEvent<HTMLCanvasElement>) => {
@@ -245,9 +237,10 @@ const GraphCanvas = ({
     const id = hit?.id ?? null;
     if (hoverRef.current !== id) {
       hoverRef.current = id;
+      startArcs();
       requestDraw();
     }
-    moveTip(event, hit);
+    moveTip(tipRef.current, event, hit, text);
   };
 
   const releaseDrag = (event: ReactPointerEvent<HTMLCanvasElement>) => {
@@ -268,6 +261,7 @@ const GraphCanvas = ({
       return;
     }
     const hit = hitAt(event.clientX, event.clientY);
+    startArcs();
     onSelect(hit ? hit.id : null);
     if (hit) {
       animateTo(focusOn(hit.x, hit.y, transformRef.current.k, sizeRef.current));
@@ -293,7 +287,7 @@ const GraphCanvas = ({
   return (
     <div className="h-full w-full" ref={wrapRef}>
       <canvas
-        aria-label={text.title}
+        aria-hidden="true"
         className="block h-full w-full cursor-grab touch-none active:cursor-grabbing"
         ref={canvasRef}
         onLostPointerCapture={onLostPointerCapture}
@@ -303,14 +297,7 @@ const GraphCanvas = ({
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
       />
-      <div
-        className="border-border bg-background pointer-events-none fixed z-20 max-w-64 rounded-md border px-2.5 py-1.5 shadow-sm"
-        hidden
-        ref={tipRef}
-      >
-        <div className="text-foreground text-xs" data-tip-label />
-        <div className="text-muted-foreground text-xs" data-tip-kind />
-      </div>
+      <GraphTip tipRef={tipRef} />
     </div>
   );
 };
