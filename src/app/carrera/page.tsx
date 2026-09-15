@@ -1,5 +1,4 @@
-import Link from "next/link";
-
+import { GraphView } from "@/components/graph/graph-view";
 import { FaqAccordion } from "@/components/home-interactions";
 import {
   ExternalLink,
@@ -9,6 +8,7 @@ import {
   SectionHeading,
 } from "@/components/page-frame";
 import { externalLinks, specialties } from "@/content/site-content";
+import { curriculumGraph } from "@/lib/curriculum-graph";
 
 export const metadata = {
   description: "Conoce la formación, el plan y las áreas de ISGC.",
@@ -70,13 +70,14 @@ const CarreraPage = () => (
         title="Consulta tu plan de estudios"
         description="Revisa tus materias en Tu Ruta Ideal. Para conocer el programa completo, requisitos y equivalencias, solicita el plan vigente a Coordinación."
       />
+      <div className="graph-surface rounded-card mt-2 h-[min(85vh,820px)] overflow-hidden">
+        <GraphView
+          initialEdges={curriculumGraph.edges}
+          initialNodes={curriculumGraph.nodes}
+          text={curriculumGraph.text}
+        />
+      </div>
       <div className="mt-8 flex flex-wrap gap-5">
-        <Link
-          href="/carrera/plan-de-estudios"
-          className="text-tinto decoration-dorado font-semibold underline decoration-2 underline-offset-4"
-        >
-          Ver el mapa del plan de estudios ↗
-        </Link>
         <ExternalLink href={externalLinks.tuRutaIdeal}>
           Abrir Tu Ruta Ideal
         </ExternalLink>

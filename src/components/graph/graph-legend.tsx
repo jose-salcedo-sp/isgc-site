@@ -50,7 +50,7 @@ export const GraphLegend = ({
   text: GraphText;
 }) => (
   <div className="pointer-events-auto absolute top-4 left-4 z-10 w-56">
-    <h1 className="text-foreground text-sm font-semibold">{text.title}</h1>
+    <h2 className="text-foreground text-sm font-semibold">{text.title}</h2>
     <p className="text-muted-foreground mb-3 text-xs">
       {layout.nodes.length.toLocaleString()} elementos ·{" "}
       {layout.edges.length.toLocaleString()} {text.connections.toLowerCase()}

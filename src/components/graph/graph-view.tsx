@@ -113,7 +113,7 @@ export const GraphView = ({
   );
 
   return (
-    <div className="flex h-dvh min-h-0 flex-col overflow-hidden">
+    <div className="flex h-full min-h-0 flex-col overflow-hidden">
       <nav aria-label={text.title} className="sr-only">
         <Outline layout={layout} nodes={roots} onSelect={setSelected} />
       </nav>

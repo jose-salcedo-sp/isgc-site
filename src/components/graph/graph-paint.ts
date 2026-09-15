@@ -56,6 +56,20 @@ export const withAlpha = (color: string, alpha: number): string => {
   return `rgba(${r},${g},${b},${alpha})`;
 };
 
+/** Slice borders are the slice's own color, darkened. */
+export const shade = (color: string, factor: number): string => {
+  const hex = HEX.exec(color.trim());
+  const raw = hex?.groups?.body;
+  if (!raw) {
+    return color;
+  }
+  const body =
+    raw.length === 3 ? [...raw].map((ch) => `${ch}${ch}`).join("") : raw;
+  const channel = (at: number): number =>
+    Math.round(Number.parseInt(body.slice(at, at + 2), 16) * factor);
+  return `rgb(${channel(0)},${channel(2)},${channel(4)})`;
+};
+
 const offscreen = (
   ax: number,
   ay: number,
@@ -318,12 +332,10 @@ const fillSectors = (
     ctx.arc(0, 0, node.radius, a0, a1);
     ctx.arc(0, 0, node.tip, a1, a0, true);
     ctx.closePath();
-    ctx.fillStyle = withAlpha(
-      palette.kinds[node.kind],
-      alpha * (emphasis ? 0.26 : 0.07)
-    );
+    const color = palette.kinds[node.kind];
+    ctx.fillStyle = withAlpha(color, alpha * (emphasis ? 0.4 : 0.12));
     ctx.fill();
-    ctx.strokeStyle = withAlpha(palette.ink, alpha * 0.16);
+    ctx.strokeStyle = withAlpha(shade(color, 0.55), alpha * 0.9);
     ctx.lineWidth = inv;
     ctx.stroke();
   }
