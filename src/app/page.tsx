@@ -320,7 +320,7 @@ const CampusLifeSection = () => (
           alt="Imagen de referencia de un campus universitario"
           width={1400}
           height={760}
-          className="rounded-card aspect-[16/7] w-full object-cover"
+          className="rounded-card aspect-16/7 w-full object-cover"
         />
         <p className="text-piedra mt-3 text-sm">
           Imagen de referencia del campus.

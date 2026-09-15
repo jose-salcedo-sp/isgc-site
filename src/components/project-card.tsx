@@ -26,7 +26,7 @@ export const ProjectCard = ({
         width={1200}
         height={600}
         sizes="(max-width: 767px) 100vw, 550px"
-        className="rounded-card aspect-[2/1] w-full object-cover"
+        className="rounded-card aspect-2/1 w-full object-cover"
       />
       <figcaption className="text-piedra mt-2 text-xs">
         Imagen ilustrativa de referencia.
