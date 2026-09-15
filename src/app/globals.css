@@ -14,7 +14,8 @@
   --radius-card: 16px;
 }
 
-/* Curriculum graph palette; graph-paint.ts reads these off the root element. */
+/* Graph palette; graph-paint.ts reads these off the root element and expects
+   hex values for every node color. */
 :root {
   --font-satoshi: "Satoshi";
   --background: #f7f4ee;
@@ -22,10 +23,10 @@
   --muted: color-mix(in oklab, var(--foreground) 6%, transparent);
   --muted-foreground: #625d59;
   --border: color-mix(in oklab, var(--foreground) 12%, transparent);
-  --graph-program: #5a54c9;
-  --graph-semester: #2a9d8f;
-  --graph-course: #e07a3d;
-  --graph-subject: #c45c7a;
+  --graph-program: #5d1028;
+  --graph-semester: #8a1538;
+  --graph-course: #b08d4f;
+  --graph-subject: #625d59;
   --graph-ring: color-mix(in oklab, var(--foreground) 10%, transparent);
 }
 
@@ -40,10 +41,6 @@
   --color-graph-course: var(--graph-course);
   --color-graph-subject: var(--graph-subject);
   --color-graph-ring: var(--graph-ring);
-}
-
-:root {
-  --font-satoshi: "Satoshi";
 }
 
 * {
