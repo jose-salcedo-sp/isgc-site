@@ -76,7 +76,7 @@ const strokeEdges = (
   layout: RadialLayout,
   paths: readonly Path2D[],
   kinds: ReadonlySet<GraphKind>,
-  hubs: ReadonlySet<string> | null,
+  core: ReadonlySet<string> | null,
   palette: Palette,
   inv: number,
   box: { bottom: number; left: number; right: number; top: number }
@@ -94,7 +94,7 @@ const strokeEdges = (
     if (Math.abs(source.proximity - target.proximity) === 1) {
       continue;
     }
-    if (!(hubs?.has(edge.a) || hubs?.has(edge.b))) {
+    if (!(core?.has(edge.a) || core?.has(edge.b))) {
       continue;
     }
     if (
@@ -135,14 +135,11 @@ const focusHubs = (
 };
 
 /** A slice lights up together with everything nested inside it. */
-const highlightAround = (
+const nestedUnder = (
   layout: RadialLayout,
-  hubs: ReadonlySet<string> | null
-): Set<string> | null => {
-  if (!hubs) {
-    return null;
-  }
-  const highlight = new Set(hubs);
+  hubs: ReadonlySet<string>
+): Set<string> => {
+  const core = new Set(hubs);
   const queue = [...hubs];
   let head = 0;
   while (head < queue.length) {
@@ -154,16 +151,50 @@ const highlightAround = (
     }
     for (const nb of node.neighbors) {
       const child = layout.byId.get(nb.id);
-      if (!child || child.proximity < node.proximity || highlight.has(nb.id)) {
+      if (!child || child.proximity <= node.proximity || core.has(nb.id)) {
         continue;
       }
-      highlight.add(nb.id);
-      if (child.proximity > node.proximity) {
-        queue.push(nb.id);
+      core.add(nb.id);
+      queue.push(nb.id);
+    }
+  }
+  return core;
+};
+
+/**
+ * Classes and subjects also pull in the subjects they relate to; semesters
+ * stay inside their own wedge, so their relations are neither lit nor drawn.
+ */
+interface FocusSets {
+  core: Set<string> | null;
+  highlight: Set<string> | null;
+}
+
+const focusSets = (
+  layout: RadialLayout,
+  hubs: ReadonlySet<string> | null
+): FocusSets => {
+  if (!hubs) {
+    return { core: null, highlight: null };
+  }
+  const core = nestedUnder(layout, hubs);
+  const relational = [...hubs].some((id) => {
+    const kind = layout.byId.get(id)?.kind;
+    return kind === "course" || kind === "subject";
+  });
+  if (!relational) {
+    return { core: null, highlight: core };
+  }
+  const highlight = new Set(core);
+  for (const id of core) {
+    const node = layout.byId.get(id);
+    for (const nb of node?.neighbors ?? []) {
+      if (layout.byId.get(nb.id)?.proximity === node?.proximity) {
+        highlight.add(nb.id);
       }
     }
   }
-  return highlight;
+  return { core, highlight };
 };
 
 const nodeAlpha = (
@@ -361,7 +392,7 @@ export const paintGraph = (input: {
   const t = input.transform;
   const selected = input.selectedId;
   const hubs = focusHubs(selected, input.hoveredId);
-  const highlight = highlightAround(input.layout, hubs);
+  const { core, highlight } = focusSets(input.layout, hubs);
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.fillStyle = input.palette.bg;
   ctx.fillRect(0, 0, w, h);
@@ -392,7 +423,7 @@ export const paintGraph = (input: {
     input.layout,
     input.paths,
     input.kinds,
-    hubs,
+    core,
     input.palette,
     inv,
     box
