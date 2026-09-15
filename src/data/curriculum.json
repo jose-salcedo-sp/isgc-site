@@ -1301,6 +1301,405 @@
         "label": "Especialidad",
         "order": 56,
         "proximity": 2
+      },
+      {
+        "id": "t:calculo-diferencial",
+        "kind": "subject",
+        "label": "Derivadas",
+        "order": 0,
+        "proximity": 3
+      },
+      {
+        "id": "t:algebra",
+        "kind": "subject",
+        "label": "Ecuaciones y funciones",
+        "order": 1,
+        "proximity": 3
+      },
+      {
+        "id": "t:analisis-y-diseno-de-algoritmos",
+        "kind": "subject",
+        "label": "Complejidad algorítmica",
+        "order": 2,
+        "proximity": 3
+      },
+      {
+        "id": "t:redaccion",
+        "kind": "subject",
+        "label": "Documentación técnica",
+        "order": 3,
+        "proximity": 3
+      },
+      {
+        "id": "t:fisica",
+        "kind": "subject",
+        "label": "Mecánica",
+        "order": 4,
+        "proximity": 3
+      },
+      {
+        "id": "t:historia-de-la-cultura",
+        "kind": "subject",
+        "label": "Contexto histórico",
+        "order": 5,
+        "proximity": 3
+      },
+      {
+        "id": "t:calculo-integral",
+        "kind": "subject",
+        "label": "Integrales",
+        "order": 6,
+        "proximity": 3
+      },
+      {
+        "id": "t:entorno-economico",
+        "kind": "subject",
+        "label": "Decisiones de negocio",
+        "order": 7,
+        "proximity": 3
+      },
+      {
+        "id": "t:programacion-orientada-a-objetos",
+        "kind": "subject",
+        "label": "Clases y herencia",
+        "order": 8,
+        "proximity": 3
+      },
+      {
+        "id": "t:programacion-avanzada",
+        "kind": "subject",
+        "label": "Abstracción",
+        "order": 9,
+        "proximity": 3
+      },
+      {
+        "id": "t:circuitos-digitales-y-electricos",
+        "kind": "subject",
+        "label": "Lógica digital",
+        "order": 10,
+        "proximity": 3
+      },
+      {
+        "id": "t:modelacion-digital",
+        "kind": "subject",
+        "label": "Modelado 3D",
+        "order": 11,
+        "proximity": 3
+      },
+      {
+        "id": "t:persona-y-sociedad",
+        "kind": "subject",
+        "label": "Responsabilidad social",
+        "order": 12,
+        "proximity": 3
+      },
+      {
+        "id": "t:algebra-lineal",
+        "kind": "subject",
+        "label": "Matrices y transformaciones",
+        "order": 13,
+        "proximity": 3
+      },
+      {
+        "id": "t:desarrollo-de-aplicaciones-web",
+        "kind": "subject",
+        "label": "APIs e interfaces web",
+        "order": 14,
+        "proximity": 3
+      },
+      {
+        "id": "t:programacion-y-estructura-de-datos",
+        "kind": "subject",
+        "label": "Estructuras de datos",
+        "order": 15,
+        "proximity": 3
+      },
+      {
+        "id": "t:proyectos-de-inversion-e-introduccion-a-la-valuacion-de-empresas",
+        "kind": "subject",
+        "label": "Valuación de proyectos",
+        "order": 16,
+        "proximity": 3
+      },
+      {
+        "id": "t:quimica",
+        "kind": "subject",
+        "label": "Principios químicos",
+        "order": 17,
+        "proximity": 3
+      },
+      {
+        "id": "t:direccion-de-proyectos",
+        "kind": "subject",
+        "label": "Planeación y estimación",
+        "order": 18,
+        "proximity": 3
+      },
+      {
+        "id": "t:etica",
+        "kind": "subject",
+        "label": "Criterio moral",
+        "order": 19,
+        "proximity": 3
+      },
+      {
+        "id": "t:calculo-vectorial",
+        "kind": "subject",
+        "label": "Campos vectoriales",
+        "order": 20,
+        "proximity": 3
+      },
+      {
+        "id": "t:matematicas-de-la-computacion",
+        "kind": "subject",
+        "label": "Matemática discreta",
+        "order": 21,
+        "proximity": 3
+      },
+      {
+        "id": "t:introduccion-a-las-bases-de-datos",
+        "kind": "subject",
+        "label": "Modelo relacional",
+        "order": 22,
+        "proximity": 3
+      },
+      {
+        "id": "t:multimedios-y-graficas-computacionales",
+        "kind": "subject",
+        "label": "Pipeline gráfico",
+        "order": 23,
+        "proximity": 3
+      },
+      {
+        "id": "t:sistemas-operativos",
+        "kind": "subject",
+        "label": "Procesos y memoria",
+        "order": 24,
+        "proximity": 3
+      },
+      {
+        "id": "t:desarrollo-de-plugins",
+        "kind": "subject",
+        "label": "Integración por APIs",
+        "order": 25,
+        "proximity": 3
+      },
+      {
+        "id": "t:antropologia-teologica-i",
+        "kind": "subject",
+        "label": "Persona y sentido",
+        "order": 26,
+        "proximity": 3
+      },
+      {
+        "id": "t:probabilidad-y-estadistica",
+        "kind": "subject",
+        "label": "Inferencia estadística",
+        "order": 27,
+        "proximity": 3
+      },
+      {
+        "id": "t:ecuaciones-diferenciales",
+        "kind": "subject",
+        "label": "Modelos dinámicos",
+        "order": 28,
+        "proximity": 3
+      },
+      {
+        "id": "t:ingenieria-de-software",
+        "kind": "subject",
+        "label": "Requerimientos y diseño",
+        "order": 29,
+        "proximity": 3
+      },
+      {
+        "id": "t:procesamiento-de-imagenes",
+        "kind": "subject",
+        "label": "Filtros de imagen",
+        "order": 30,
+        "proximity": 3
+      },
+      {
+        "id": "t:metodos-numericos",
+        "kind": "subject",
+        "label": "Aproximación numérica",
+        "order": 31,
+        "proximity": 3
+      },
+      {
+        "id": "t:desarrollo-de-videojuegos",
+        "kind": "subject",
+        "label": "Motores de juego",
+        "order": 32,
+        "proximity": 3
+      },
+      {
+        "id": "t:antropologia-teologica-ii",
+        "kind": "subject",
+        "label": "Persona y trascendencia",
+        "order": 33,
+        "proximity": 3
+      },
+      {
+        "id": "t:algebra-geometrica-conformal",
+        "kind": "subject",
+        "label": "Transformaciones geométricas",
+        "order": 34,
+        "proximity": 3
+      },
+      {
+        "id": "t:soluciones-graficas-para-moviles",
+        "kind": "subject",
+        "label": "GPU móvil",
+        "order": 35,
+        "proximity": 3
+      },
+      {
+        "id": "t:geometria-computacional",
+        "kind": "subject",
+        "label": "Algoritmos geométricos",
+        "order": 36,
+        "proximity": 3
+      },
+      {
+        "id": "t:computo-distribuido",
+        "kind": "subject",
+        "label": "Cómputo en la nube",
+        "order": 37,
+        "proximity": 3
+      },
+      {
+        "id": "t:seminario-de-aplicaciones-alternativas",
+        "kind": "subject",
+        "label": "Aplicaciones no convencionales",
+        "order": 38,
+        "proximity": 3
+      },
+      {
+        "id": "t:realidad-aumentada",
+        "kind": "subject",
+        "label": "Tracking y registro",
+        "order": 39,
+        "proximity": 3
+      },
+      {
+        "id": "t:filosofia-social",
+        "kind": "subject",
+        "label": "Bien común",
+        "order": 40,
+        "proximity": 3
+      },
+      {
+        "id": "t:inteligencia-artificial-en-videojuegos",
+        "kind": "subject",
+        "label": "Pathfinding y agentes",
+        "order": 41,
+        "proximity": 3
+      },
+      {
+        "id": "t:fundamentos-de-programacion-en-paralelo",
+        "kind": "subject",
+        "label": "Hilos y sincronización",
+        "order": 42,
+        "proximity": 3
+      },
+      {
+        "id": "t:diseno-de-interfaces",
+        "kind": "subject",
+        "label": "Usabilidad",
+        "order": 43,
+        "proximity": 3
+      },
+      {
+        "id": "t:graficacion-avanzada-por-computadora",
+        "kind": "subject",
+        "label": "Shaders e iluminación",
+        "order": 44,
+        "proximity": 3
+      },
+      {
+        "id": "t:tecnicas-de-interpretacion-avanzadas",
+        "kind": "subject",
+        "label": "Interpretación avanzada",
+        "order": 45,
+        "proximity": 3
+      },
+      {
+        "id": "t:hombre-y-mundo-contemporaneo",
+        "kind": "subject",
+        "label": "Cultura contemporánea",
+        "order": 46,
+        "proximity": 3
+      },
+      {
+        "id": "t:optativa-i",
+        "kind": "subject",
+        "label": "Materia optativa",
+        "order": 47,
+        "proximity": 3
+      },
+      {
+        "id": "t:compiladores",
+        "kind": "subject",
+        "label": "Análisis léxico y sintáctico",
+        "order": 48,
+        "proximity": 3
+      },
+      {
+        "id": "t:programacion-avanzada-en-paralelo",
+        "kind": "subject",
+        "label": "Rendimiento paralelo",
+        "order": 49,
+        "proximity": 3
+      },
+      {
+        "id": "t:emprendedores",
+        "kind": "subject",
+        "label": "Validación de negocio",
+        "order": 50,
+        "proximity": 3
+      },
+      {
+        "id": "t:simulacion-grafica",
+        "kind": "subject",
+        "label": "Simulación en tiempo real",
+        "order": 51,
+        "proximity": 3
+      },
+      {
+        "id": "t:direccion-de-empresas",
+        "kind": "subject",
+        "label": "Estrategia y operación",
+        "order": 52,
+        "proximity": 3
+      },
+      {
+        "id": "t:etica-profesional",
+        "kind": "subject",
+        "label": "Deontología",
+        "order": 53,
+        "proximity": 3
+      },
+      {
+        "id": "t:optativa-ii",
+        "kind": "subject",
+        "label": "Materia optativa",
+        "order": 54,
+        "proximity": 3
+      },
+      {
+        "id": "t:especialidad-9",
+        "kind": "subject",
+        "label": "Especialidad 4+1",
+        "order": 55,
+        "proximity": 3
+      },
+      {
+        "id": "t:especialidad-10",
+        "kind": "subject",
+        "label": "Continuación de especialidad",
+        "order": 56,
+        "proximity": 3
       }
     ],
     "edges": [
@@ -1645,6 +2044,348 @@
         "b": "especialidad-10",
         "id": "e:semester-10:especialidad-10",
         "label": "includes"
+      },
+      {
+        "a": "calculo-diferencial",
+        "b": "t:calculo-diferencial",
+        "id": "e:calculo-diferencial:t:calculo-diferencial",
+        "label": "covers"
+      },
+      {
+        "a": "algebra",
+        "b": "t:algebra",
+        "id": "e:algebra:t:algebra",
+        "label": "covers"
+      },
+      {
+        "a": "analisis-y-diseno-de-algoritmos",
+        "b": "t:analisis-y-diseno-de-algoritmos",
+        "id": "e:analisis-y-diseno-de-algoritmos:t:analisis-y-diseno-de-algoritmos",
+        "label": "covers"
+      },
+      {
+        "a": "redaccion",
+        "b": "t:redaccion",
+        "id": "e:redaccion:t:redaccion",
+        "label": "covers"
+      },
+      {
+        "a": "fisica",
+        "b": "t:fisica",
+        "id": "e:fisica:t:fisica",
+        "label": "covers"
+      },
+      {
+        "a": "historia-de-la-cultura",
+        "b": "t:historia-de-la-cultura",
+        "id": "e:historia-de-la-cultura:t:historia-de-la-cultura",
+        "label": "covers"
+      },
+      {
+        "a": "calculo-integral",
+        "b": "t:calculo-integral",
+        "id": "e:calculo-integral:t:calculo-integral",
+        "label": "covers"
+      },
+      {
+        "a": "entorno-economico",
+        "b": "t:entorno-economico",
+        "id": "e:entorno-economico:t:entorno-economico",
+        "label": "covers"
+      },
+      {
+        "a": "programacion-orientada-a-objetos",
+        "b": "t:programacion-orientada-a-objetos",
+        "id": "e:programacion-orientada-a-objetos:t:programacion-orientada-a-objetos",
+        "label": "covers"
+      },
+      {
+        "a": "programacion-avanzada",
+        "b": "t:programacion-avanzada",
+        "id": "e:programacion-avanzada:t:programacion-avanzada",
+        "label": "covers"
+      },
+      {
+        "a": "circuitos-digitales-y-electricos",
+        "b": "t:circuitos-digitales-y-electricos",
+        "id": "e:circuitos-digitales-y-electricos:t:circuitos-digitales-y-electricos",
+        "label": "covers"
+      },
+      {
+        "a": "modelacion-digital",
+        "b": "t:modelacion-digital",
+        "id": "e:modelacion-digital:t:modelacion-digital",
+        "label": "covers"
+      },
+      {
+        "a": "persona-y-sociedad",
+        "b": "t:persona-y-sociedad",
+        "id": "e:persona-y-sociedad:t:persona-y-sociedad",
+        "label": "covers"
+      },
+      {
+        "a": "algebra-lineal",
+        "b": "t:algebra-lineal",
+        "id": "e:algebra-lineal:t:algebra-lineal",
+        "label": "covers"
+      },
+      {
+        "a": "desarrollo-de-aplicaciones-web",
+        "b": "t:desarrollo-de-aplicaciones-web",
+        "id": "e:desarrollo-de-aplicaciones-web:t:desarrollo-de-aplicaciones-web",
+        "label": "covers"
+      },
+      {
+        "a": "programacion-y-estructura-de-datos",
+        "b": "t:programacion-y-estructura-de-datos",
+        "id": "e:programacion-y-estructura-de-datos:t:programacion-y-estructura-de-datos",
+        "label": "covers"
+      },
+      {
+        "a": "proyectos-de-inversion-e-introduccion-a-la-valuacion-de-empresas",
+        "b": "t:proyectos-de-inversion-e-introduccion-a-la-valuacion-de-empresas",
+        "id": "e:proyectos-de-inversion-e-introduccion-a-la-valuacion-de-empresas:t:proyectos-de-inversion-e-introduccion-a-la-valuacion-de-empresas",
+        "label": "covers"
+      },
+      {
+        "a": "quimica",
+        "b": "t:quimica",
+        "id": "e:quimica:t:quimica",
+        "label": "covers"
+      },
+      {
+        "a": "direccion-de-proyectos",
+        "b": "t:direccion-de-proyectos",
+        "id": "e:direccion-de-proyectos:t:direccion-de-proyectos",
+        "label": "covers"
+      },
+      {
+        "a": "etica",
+        "b": "t:etica",
+        "id": "e:etica:t:etica",
+        "label": "covers"
+      },
+      {
+        "a": "calculo-vectorial",
+        "b": "t:calculo-vectorial",
+        "id": "e:calculo-vectorial:t:calculo-vectorial",
+        "label": "covers"
+      },
+      {
+        "a": "matematicas-de-la-computacion",
+        "b": "t:matematicas-de-la-computacion",
+        "id": "e:matematicas-de-la-computacion:t:matematicas-de-la-computacion",
+        "label": "covers"
+      },
+      {
+        "a": "introduccion-a-las-bases-de-datos",
+        "b": "t:introduccion-a-las-bases-de-datos",
+        "id": "e:introduccion-a-las-bases-de-datos:t:introduccion-a-las-bases-de-datos",
+        "label": "covers"
+      },
+      {
+        "a": "multimedios-y-graficas-computacionales",
+        "b": "t:multimedios-y-graficas-computacionales",
+        "id": "e:multimedios-y-graficas-computacionales:t:multimedios-y-graficas-computacionales",
+        "label": "covers"
+      },
+      {
+        "a": "sistemas-operativos",
+        "b": "t:sistemas-operativos",
+        "id": "e:sistemas-operativos:t:sistemas-operativos",
+        "label": "covers"
+      },
+      {
+        "a": "desarrollo-de-plugins",
+        "b": "t:desarrollo-de-plugins",
+        "id": "e:desarrollo-de-plugins:t:desarrollo-de-plugins",
+        "label": "covers"
+      },
+      {
+        "a": "antropologia-teologica-i",
+        "b": "t:antropologia-teologica-i",
+        "id": "e:antropologia-teologica-i:t:antropologia-teologica-i",
+        "label": "covers"
+      },
+      {
+        "a": "probabilidad-y-estadistica",
+        "b": "t:probabilidad-y-estadistica",
+        "id": "e:probabilidad-y-estadistica:t:probabilidad-y-estadistica",
+        "label": "covers"
+      },
+      {
+        "a": "ecuaciones-diferenciales",
+        "b": "t:ecuaciones-diferenciales",
+        "id": "e:ecuaciones-diferenciales:t:ecuaciones-diferenciales",
+        "label": "covers"
+      },
+      {
+        "a": "ingenieria-de-software",
+        "b": "t:ingenieria-de-software",
+        "id": "e:ingenieria-de-software:t:ingenieria-de-software",
+        "label": "covers"
+      },
+      {
+        "a": "procesamiento-de-imagenes",
+        "b": "t:procesamiento-de-imagenes",
+        "id": "e:procesamiento-de-imagenes:t:procesamiento-de-imagenes",
+        "label": "covers"
+      },
+      {
+        "a": "metodos-numericos",
+        "b": "t:metodos-numericos",
+        "id": "e:metodos-numericos:t:metodos-numericos",
+        "label": "covers"
+      },
+      {
+        "a": "desarrollo-de-videojuegos",
+        "b": "t:desarrollo-de-videojuegos",
+        "id": "e:desarrollo-de-videojuegos:t:desarrollo-de-videojuegos",
+        "label": "covers"
+      },
+      {
+        "a": "antropologia-teologica-ii",
+        "b": "t:antropologia-teologica-ii",
+        "id": "e:antropologia-teologica-ii:t:antropologia-teologica-ii",
+        "label": "covers"
+      },
+      {
+        "a": "algebra-geometrica-conformal",
+        "b": "t:algebra-geometrica-conformal",
+        "id": "e:algebra-geometrica-conformal:t:algebra-geometrica-conformal",
+        "label": "covers"
+      },
+      {
+        "a": "soluciones-graficas-para-moviles",
+        "b": "t:soluciones-graficas-para-moviles",
+        "id": "e:soluciones-graficas-para-moviles:t:soluciones-graficas-para-moviles",
+        "label": "covers"
+      },
+      {
+        "a": "geometria-computacional",
+        "b": "t:geometria-computacional",
+        "id": "e:geometria-computacional:t:geometria-computacional",
+        "label": "covers"
+      },
+      {
+        "a": "computo-distribuido",
+        "b": "t:computo-distribuido",
+        "id": "e:computo-distribuido:t:computo-distribuido",
+        "label": "covers"
+      },
+      {
+        "a": "seminario-de-aplicaciones-alternativas",
+        "b": "t:seminario-de-aplicaciones-alternativas",
+        "id": "e:seminario-de-aplicaciones-alternativas:t:seminario-de-aplicaciones-alternativas",
+        "label": "covers"
+      },
+      {
+        "a": "realidad-aumentada",
+        "b": "t:realidad-aumentada",
+        "id": "e:realidad-aumentada:t:realidad-aumentada",
+        "label": "covers"
+      },
+      {
+        "a": "filosofia-social",
+        "b": "t:filosofia-social",
+        "id": "e:filosofia-social:t:filosofia-social",
+        "label": "covers"
+      },
+      {
+        "a": "inteligencia-artificial-en-videojuegos",
+        "b": "t:inteligencia-artificial-en-videojuegos",
+        "id": "e:inteligencia-artificial-en-videojuegos:t:inteligencia-artificial-en-videojuegos",
+        "label": "covers"
+      },
+      {
+        "a": "fundamentos-de-programacion-en-paralelo",
+        "b": "t:fundamentos-de-programacion-en-paralelo",
+        "id": "e:fundamentos-de-programacion-en-paralelo:t:fundamentos-de-programacion-en-paralelo",
+        "label": "covers"
+      },
+      {
+        "a": "diseno-de-interfaces",
+        "b": "t:diseno-de-interfaces",
+        "id": "e:diseno-de-interfaces:t:diseno-de-interfaces",
+        "label": "covers"
+      },
+      {
+        "a": "graficacion-avanzada-por-computadora",
+        "b": "t:graficacion-avanzada-por-computadora",
+        "id": "e:graficacion-avanzada-por-computadora:t:graficacion-avanzada-por-computadora",
+        "label": "covers"
+      },
+      {
+        "a": "tecnicas-de-interpretacion-avanzadas",
+        "b": "t:tecnicas-de-interpretacion-avanzadas",
+        "id": "e:tecnicas-de-interpretacion-avanzadas:t:tecnicas-de-interpretacion-avanzadas",
+        "label": "covers"
+      },
+      {
+        "a": "hombre-y-mundo-contemporaneo",
+        "b": "t:hombre-y-mundo-contemporaneo",
+        "id": "e:hombre-y-mundo-contemporaneo:t:hombre-y-mundo-contemporaneo",
+        "label": "covers"
+      },
+      {
+        "a": "optativa-i",
+        "b": "t:optativa-i",
+        "id": "e:optativa-i:t:optativa-i",
+        "label": "covers"
+      },
+      {
+        "a": "compiladores",
+        "b": "t:compiladores",
+        "id": "e:compiladores:t:compiladores",
+        "label": "covers"
+      },
+      {
+        "a": "programacion-avanzada-en-paralelo",
+        "b": "t:programacion-avanzada-en-paralelo",
+        "id": "e:programacion-avanzada-en-paralelo:t:programacion-avanzada-en-paralelo",
+        "label": "covers"
+      },
+      {
+        "a": "emprendedores",
+        "b": "t:emprendedores",
+        "id": "e:emprendedores:t:emprendedores",
+        "label": "covers"
+      },
+      {
+        "a": "simulacion-grafica",
+        "b": "t:simulacion-grafica",
+        "id": "e:simulacion-grafica:t:simulacion-grafica",
+        "label": "covers"
+      },
+      {
+        "a": "direccion-de-empresas",
+        "b": "t:direccion-de-empresas",
+        "id": "e:direccion-de-empresas:t:direccion-de-empresas",
+        "label": "covers"
+      },
+      {
+        "a": "etica-profesional",
+        "b": "t:etica-profesional",
+        "id": "e:etica-profesional:t:etica-profesional",
+        "label": "covers"
+      },
+      {
+        "a": "optativa-ii",
+        "b": "t:optativa-ii",
+        "id": "e:optativa-ii:t:optativa-ii",
+        "label": "covers"
+      },
+      {
+        "a": "especialidad-9",
+        "b": "t:especialidad-9",
+        "id": "e:especialidad-9:t:especialidad-9",
+        "label": "covers"
+      },
+      {
+        "a": "especialidad-10",
+        "b": "t:especialidad-10",
+        "id": "e:especialidad-10:t:especialidad-10",
+        "label": "covers"
       }
     ]
   }
