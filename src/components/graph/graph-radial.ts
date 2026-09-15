@@ -1,5 +1,11 @@
 import type { GraphEdge, GraphKind, GraphNode } from "./graph-model";
-import { RING_RADIUS, TIP_RADIUS, nodeRadius } from "./graph-theme";
+import {
+  ARC_BASE,
+  ARC_SPAN,
+  RING_RADIUS,
+  TIP_RADIUS,
+  nodeRadius,
+} from "./graph-theme";
 
 export interface RadialNeighbor {
   edge: string;
@@ -73,7 +79,7 @@ const ARC_STEPS = 48;
 const outerLinkPath = (source: RadialNode, target: RadialNode): string => {
   const delta =
     ((target.angle - source.angle + Math.PI) % (Math.PI * 2)) - Math.PI;
-  const height = 70 + (Math.abs(delta) / Math.PI) * 460;
+  const height = ARC_BASE + (Math.abs(delta) / Math.PI) * ARC_SPAN;
   const [x0, y0] = polar(source.angle, source.tip);
   let path = `M${x0},${y0}`;
   for (let step = 1; step <= ARC_STEPS; step += 1) {

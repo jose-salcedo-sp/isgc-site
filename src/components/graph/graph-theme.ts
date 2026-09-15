@@ -6,6 +6,13 @@ export const RING_RADIUS = [0, 200, 440, 900] as const;
 /** Outer end of each ring, where its links and dots sit. */
 export const TIP_RADIUS = [0, 440, 900, 1200] as const;
 
+/** Same-ring arcs bow this far past the outer edge at most. */
+export const ARC_BASE = 40;
+export const ARC_SPAN = 300;
+
+/** Radius the view has to fit: the outer ring plus the widest arc. */
+export const OUTER_EXTENT = (TIP_RADIUS.at(-1) ?? 0) + ARC_BASE + ARC_SPAN;
+
 export const KIND_ORDER = [
   "program",
   "semester",

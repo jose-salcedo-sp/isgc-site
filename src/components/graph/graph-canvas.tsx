@@ -5,6 +5,7 @@ import type { PointerEvent as ReactPointerEvent } from "react";
 
 import type { GraphKind, GraphText } from "./graph-model";
 import {
+  clampK,
   focusOn,
   paintGraph,
   playFocus,
@@ -14,6 +15,7 @@ import {
 import type { Palette, Transform } from "./graph-paint";
 import { pickSlice } from "./graph-radial";
 import type { RadialLayout, RadialNode } from "./graph-radial";
+import { OUTER_EXTENT } from "./graph-theme";
 
 const GraphCanvas = ({
   activeKinds,
@@ -39,6 +41,7 @@ const GraphCanvas = ({
   const pathsRef = useRef<Path2D[]>([]);
   const paletteRef = useRef<Palette | null>(null);
   const rafRef = useRef(0);
+  const fitted = useRef(false);
   const cancelFocus = useRef(() => {
     /* filled when a focus tween starts */
   });
@@ -120,6 +123,12 @@ const GraphCanvas = ({
       const rect = wrap.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       sizeRef.current = { dpr, h: rect.height, w: rect.width };
+      if (!fitted.current && rect.width > 0 && rect.height > 0) {
+        fitted.current = true;
+        transformRef.current.k = clampK(
+          (Math.min(rect.width, rect.height) * 0.94) / (OUTER_EXTENT * 2)
+        );
+      }
       canvas.width = Math.max(1, Math.floor(rect.width * dpr));
       canvas.height = Math.max(1, Math.floor(rect.height * dpr));
       paletteRef.current = readPalette(wrap);
