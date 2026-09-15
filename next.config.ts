@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
         source: "/:path*",
       },
     ]),
-  reactCompiler: true,
+  reactCompiler: process.env.NODE_ENV === "production",
 };
 
 export default nextConfig;

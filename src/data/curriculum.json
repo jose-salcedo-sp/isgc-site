@@ -1,0 +1,1719 @@
+{
+  "program": {
+    "id": "isgc",
+    "name": "Ingeniería en Sistemas y Gráficas Computacionales",
+    "nameEn": "Computer Science and Engineering",
+    "campus": "Universidad Panamericana, campus Guadalajara",
+    "rvoe": "SEP 20160122",
+    "rvoeDate": "2016-03-09",
+    "plan": "2015",
+    "modality": "escolarizada",
+    "semesters": 10,
+    "address": "Álvaro del Portillo 49, Colonia Ciudad Granja, Zapopan, Jalisco, CP 45010",
+    "summary": "Formación de ingenieros que diseñan software, productos digitales y experiencias gráficas para industria real: visión computacional, programación, realidad mixta, cómputo en paralelo y en la nube, representación gráfica de datos y big data.",
+    "designedWith": ["Google", "Tacit Knowledge", "NASA"],
+    "notes": {
+      "courseNamesAndCredits": "Official names, semester placement, and credits come from the plan de estudios PDF linked from the program page.",
+      "descriptions": "UP does not publish per-course syllabi on these pages. Course descriptions are short glance-view summaries inferred from official titles and the published program focus, not official learning objectives.",
+      "subjects": "Subject nodes live in graph.nodes (kind: subject) and graph.edges. Empty until syllabi exist."
+    }
+  },
+  "sources": [
+    {
+      "role": "program-page",
+      "url": "https://movil.up.edu.mx/gdl/ingenieria-en-sistemas-y-graficas-computacionales"
+    },
+    {
+      "role": "plan-de-estudios",
+      "url": "https://movil.up.edu.mx/hubfs/gdl/inbound/plan-de-estudios/Ingenieria_Sistemas_Graficas_Computacionales.pdf"
+    },
+    {
+      "role": "faculty-page",
+      "url": "https://www.up.edu.mx/educacion-facultad-de-ingenieria-oferta-academica-licenciatura-ingenieria-en-sistemas-y-graficas-computacionales/"
+    },
+    {
+      "role": "child",
+      "url": "https://blog.up.edu.mx/gdl/como-crear-startups-exitosas-como-ingeniero-en-sistemas"
+    },
+    {
+      "role": "child",
+      "url": "https://blog.up.edu.mx/gdl/importancia-de-la-ingenieria-en-sistemas-en-el-desarrollo-de-inteligencia-artificial"
+    },
+    {
+      "role": "child",
+      "url": "https://blog.up.edu.mx/gdl/ingenieros-en-sistemas-como-crean-soluciones-que-utilizamos-diario"
+    }
+  ],
+  "glanceAreas": [
+    {
+      "id": "software",
+      "name": "Desarrollo de software",
+      "description": "Algoritmos, orientación a objetos, estructuras de datos, web, bases de datos, sistemas operativos, ingeniería de software, plugins y compiladores."
+    },
+    {
+      "id": "ai",
+      "name": "Inteligencia artificial",
+      "description": "Datos, probabilidad, procesamiento de imágenes, IA en videojuegos y modelos para reconocimiento de patrones y decisión."
+    },
+    {
+      "id": "vr",
+      "name": "Realidad virtual y mixta",
+      "description": "Realidad aumentada, interfaces, simulación gráfica y experiencias inmersivas."
+    },
+    {
+      "id": "graphics",
+      "name": "Gráficas computacionales",
+      "description": "Modelación digital, multimedia, geometría, álgebra geométrica conformal, graficación avanzada, videojuegos y soluciones gráficas móviles."
+    },
+    {
+      "id": "data",
+      "name": "Data science",
+      "description": "Estadística, métodos numéricos, cómputo distribuido y paralelo, y la especialidad de ciencia de datos en el 4+1."
+    }
+  ],
+  "careerFields": [
+    "Simulación gráfica",
+    "Visión computacional",
+    "Inteligencia artificial",
+    "Ingeniería de software",
+    "Emprendimiento con base tecnológica",
+    "Educación inteligente",
+    "Desarrollo de apps y videojuegos",
+    "Interacción avanzada humano-computadora"
+  ],
+  "courses": [
+    {
+      "id": "calculo-diferencial",
+      "name": "Cálculo Diferencial",
+      "semester": 1,
+      "credits": 8,
+      "kind": "required",
+      "areas": ["math"],
+      "description": "Límites, continuidad y derivadas para modelar cambio. Base matemática para física, gráficas y análisis de algoritmos."
+    },
+    {
+      "id": "algebra",
+      "name": "Álgebra",
+      "semester": 1,
+      "credits": 8,
+      "kind": "required",
+      "areas": ["math"],
+      "description": "Álgebra universitaria: ecuaciones, funciones y estructuras algebraicas usadas en programación y matemáticas discretas posteriores."
+    },
+    {
+      "id": "analisis-y-diseno-de-algoritmos",
+      "name": "Análisis y Diseño de Algoritmos",
+      "semester": 1,
+      "credits": 8,
+      "kind": "required",
+      "areas": ["software"],
+      "description": "Cómo plantear un problema, diseñar la solución paso a paso y medir eficiencia. Primer curso de pensamiento computacional del plan."
+    },
+    {
+      "id": "redaccion",
+      "name": "Redacción",
+      "semester": 1,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["humanities"],
+      "description": "Escritura clara y correcta en español: reportes, argumentos y documentación que un ingeniero necesita comunicar."
+    },
+    {
+      "id": "fisica",
+      "name": "Física",
+      "semester": 1,
+      "credits": 7,
+      "kind": "required",
+      "areas": ["science"],
+      "description": "Mecánica y principios físicos que luego aparecen en simulación, videojuegos y modelado del mundo real."
+    },
+    {
+      "id": "historia-de-la-cultura",
+      "name": "Historia de la Cultura",
+      "semester": 1,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["humanities"],
+      "description": "Formación humanística UP: contexto cultural e histórico para situar la tecnología en la sociedad."
+    },
+    {
+      "id": "calculo-integral",
+      "name": "Cálculo Integral",
+      "semester": 2,
+      "credits": 8,
+      "kind": "required",
+      "areas": ["math"],
+      "description": "Integrales y aplicaciones: áreas, acumulación y herramientas para probabilidad, física y métodos numéricos."
+    },
+    {
+      "id": "entorno-economico",
+      "name": "Entorno Económico",
+      "semester": 2,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["business"],
+      "description": "Cómo funciona el entorno económico en el que se venden productos de software y se toman decisiones de negocio."
+    },
+    {
+      "id": "programacion-orientada-a-objetos",
+      "name": "Programación Orientada a Objetos",
+      "semester": 2,
+      "credits": 8,
+      "kind": "required",
+      "areas": ["software"],
+      "description": "Clases, objetos, herencia y diseño modular. Base para casi todo el software del resto de la carrera."
+    },
+    {
+      "id": "programacion-avanzada",
+      "name": "Programación Avanzada",
+      "semester": 2,
+      "credits": 8,
+      "kind": "required",
+      "areas": ["software"],
+      "description": "Técnicas de programación más allá de lo introductorio: abstracción, bibliotecas y código listo para proyectos más grandes."
+    },
+    {
+      "id": "circuitos-digitales-y-electricos",
+      "name": "Circuitos Digitales y Eléctricos",
+      "semester": 2,
+      "credits": 5,
+      "kind": "required",
+      "areas": ["systems", "science"],
+      "description": "Lógica digital y circuitos: cómo la máquina representa bits y ejecuta instrucciones debajo del software."
+    },
+    {
+      "id": "modelacion-digital",
+      "name": "Modelación Digital",
+      "semester": 2,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["graphics"],
+      "description": "Representar formas y escenas en 2D/3D con herramientas digitales. Entrada al eje de gráficas del programa."
+    },
+    {
+      "id": "persona-y-sociedad",
+      "name": "Persona y Sociedad",
+      "semester": 2,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["humanities"],
+      "description": "Formación antropológica UP: persona, comunidad y responsabilidad social del ingeniero."
+    },
+    {
+      "id": "algebra-lineal",
+      "name": "Álgebra Lineal",
+      "semester": 3,
+      "credits": 8,
+      "kind": "required",
+      "areas": ["math", "graphics"],
+      "description": "Vectores, matrices y transformaciones. Matemática central de gráficas, visión, IA y simulación."
+    },
+    {
+      "id": "desarrollo-de-aplicaciones-web",
+      "name": "Desarrollo de Aplicaciones Web",
+      "semester": 3,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["software"],
+      "description": "Construir aplicaciones en el navegador y el servidor: interfaces, APIs y productos digitales en la web."
+    },
+    {
+      "id": "programacion-y-estructura-de-datos",
+      "name": "Programación y Estructura de Datos",
+      "semester": 3,
+      "credits": 8,
+      "kind": "required",
+      "areas": ["software"],
+      "description": "Listas, árboles, grafos, tablas hash y cómo elegir la estructura correcta para rendimiento y claridad."
+    },
+    {
+      "id": "proyectos-de-inversion-e-introduccion-a-la-valuacion-de-empresas",
+      "name": "Proyectos de Inversión e Introducción a la Valuación de Empresas",
+      "semester": 3,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["business"],
+      "description": "Evaluar si un proyecto o empresa vale la pena: costos, retorno y valuación básica para emprender o decidir inversión."
+    },
+    {
+      "id": "quimica",
+      "name": "Química",
+      "semester": 3,
+      "credits": 7,
+      "kind": "required",
+      "areas": ["science"],
+      "description": "Principios químicos de formación ingenieril; contexto científico junto a física y matemáticas."
+    },
+    {
+      "id": "direccion-de-proyectos",
+      "name": "Dirección de Proyectos",
+      "semester": 3,
+      "credits": 4,
+      "kind": "required",
+      "areas": ["business"],
+      "description": "Planear, estimar y coordinar trabajo técnico: alcance, tiempos, equipo y entrega."
+    },
+    {
+      "id": "etica",
+      "name": "Ética",
+      "semester": 3,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["humanities"],
+      "description": "Criterio moral para decidir en conflictos profesionales, de datos, de producto y de impacto social."
+    },
+    {
+      "id": "calculo-vectorial",
+      "name": "Cálculo Vectorial",
+      "semester": 4,
+      "credits": 8,
+      "kind": "required",
+      "areas": ["math", "graphics"],
+      "description": "Campos vectoriales, curvas y superficies. Herramienta para geometría, física y gráficas 3D."
+    },
+    {
+      "id": "matematicas-de-la-computacion",
+      "name": "Matemáticas de la Computación",
+      "semester": 4,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["math", "software"],
+      "description": "Matemática discreta para computación: lógica, combinatoria, grafos y fundamentos de lenguajes y algoritmos."
+    },
+    {
+      "id": "introduccion-a-las-bases-de-datos",
+      "name": "Introducción a las Bases de Datos",
+      "semester": 4,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["software", "data"],
+      "description": "Modelar, consultar y persistir información: diseño relacional y uso de bases de datos en aplicaciones."
+    },
+    {
+      "id": "multimedios-y-graficas-computacionales",
+      "name": "Multimedios y Gráficas Computacionales",
+      "semester": 4,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["graphics"],
+      "description": "Imagen, audio, video y el pipeline gráfico: cómo la computadora genera y combina medios."
+    },
+    {
+      "id": "sistemas-operativos",
+      "name": "Sistemas Operativos",
+      "semester": 4,
+      "credits": 4,
+      "kind": "required",
+      "areas": ["systems"],
+      "description": "Procesos, memoria, archivos y concurrencia: el software que administra el hardware."
+    },
+    {
+      "id": "desarrollo-de-plugins",
+      "name": "Desarrollo de Plugins",
+      "semester": 4,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["software", "graphics"],
+      "description": "Extender herramientas existentes (motores, DCC o hosts) con plugins: APIs, empaquetado e integración."
+    },
+    {
+      "id": "antropologia-teologica-i",
+      "name": "Antropología Teológica I",
+      "semester": 4,
+      "credits": 4,
+      "kind": "required",
+      "areas": ["humanities"],
+      "description": "Bloque de identidad UP: persona y sentido, en diálogo con la formación profesional."
+    },
+    {
+      "id": "probabilidad-y-estadistica",
+      "name": "Probabilidad y Estadística",
+      "semester": 5,
+      "credits": 8,
+      "kind": "required",
+      "areas": ["math", "data", "ai"],
+      "description": "Incertidumbre, muestreo e inferencia. Base para IA, ciencia de datos y modelos probabilísticos."
+    },
+    {
+      "id": "ecuaciones-diferenciales",
+      "name": "Ecuaciones Diferenciales",
+      "semester": 5,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["math"],
+      "description": "Modelos de sistemas que cambian en el tiempo: física, control y simulación."
+    },
+    {
+      "id": "ingenieria-de-software",
+      "name": "Ingeniería de Software",
+      "semester": 5,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["software"],
+      "description": "Requerimientos, diseño, calidad y proceso para construir software que se pueda mantener y entregar en equipo."
+    },
+    {
+      "id": "procesamiento-de-imagenes",
+      "name": "Procesamiento de Imágenes",
+      "semester": 5,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["graphics", "ai"],
+      "description": "Filtros, transformación y análisis de imágenes digitales. Puente entre gráficas y visión computacional."
+    },
+    {
+      "id": "metodos-numericos",
+      "name": "Métodos Numéricos",
+      "semester": 5,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["math", "software"],
+      "description": "Aproximar soluciones en la computadora: raíces, sistemas lineales, interpolación e integración numérica."
+    },
+    {
+      "id": "desarrollo-de-videojuegos",
+      "name": "Desarrollo de Videojuegos",
+      "semester": 5,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["graphics", "software"],
+      "description": "Gameplay, motores y producción de un juego: integración de gráficos, input y lógica en un producto jugable."
+    },
+    {
+      "id": "antropologia-teologica-ii",
+      "name": "Antropología Teológica II",
+      "semester": 5,
+      "credits": 4,
+      "kind": "required",
+      "areas": ["humanities"],
+      "description": "Continúa la formación teológica y antropológica del tronco común UP."
+    },
+    {
+      "id": "algebra-geometrica-conformal",
+      "name": "Álgebra Geométrica Conformal",
+      "semester": 6,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["math", "graphics"],
+      "description": "Álgebra geométrica para representar transformaciones, esferas y geometría 3D de forma unificada. Sello distintivo del plan de gráficas."
+    },
+    {
+      "id": "soluciones-graficas-para-moviles",
+      "name": "Soluciones Gráficas para Móviles",
+      "semester": 6,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["graphics", "software"],
+      "description": "Gráficos e interfaces en teléfonos y tablets: rendimiento, GPU móvil y experiencias visuales en apps."
+    },
+    {
+      "id": "geometria-computacional",
+      "name": "Geometría Computacional",
+      "semester": 6,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["graphics", "software"],
+      "description": "Algoritmos sobre puntos, polígonos y espacio: envolventes, intersecciones, triangulación y consultas espaciales."
+    },
+    {
+      "id": "computo-distribuido",
+      "name": "Cómputo Distribuido",
+      "semester": 6,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["systems", "data"],
+      "description": "Sistemas en varias máquinas: red, consistencia, fallos y cómputo en la nube."
+    },
+    {
+      "id": "seminario-de-aplicaciones-alternativas",
+      "name": "Seminario de Aplicaciones Alternativas",
+      "semester": 6,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["software", "graphics"],
+      "description": "Proyectos y aplicaciones no convencionales del cómputo y las gráficas: explorar usos en industria, arte, salud u otros dominios."
+    },
+    {
+      "id": "realidad-aumentada",
+      "name": "Realidad Aumentada",
+      "semester": 6,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["vr", "graphics"],
+      "description": "Superponer gráficos al mundo real: tracking, registro de cámara e interacción en AR."
+    },
+    {
+      "id": "filosofia-social",
+      "name": "Filosofía Social",
+      "semester": 6,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["humanities"],
+      "description": "Sociedad, bien común y crítica de instituciones; marco para el impacto de la tecnología."
+    },
+    {
+      "id": "inteligencia-artificial-en-videojuegos",
+      "name": "Inteligencia Artificial en Videojuegos",
+      "semester": 7,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["ai", "graphics"],
+      "description": "Agentes, pathfinding, decisión y comportamiento para NPCs y sistemas de juego."
+    },
+    {
+      "id": "fundamentos-de-programacion-en-paralelo",
+      "name": "Fundamentos de Programación en Paralelo",
+      "semester": 7,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["systems", "software"],
+      "description": "Dividir trabajo en hilos y núcleos: sincronización, GPU/CPU y el modelo mental del paralelismo."
+    },
+    {
+      "id": "diseno-de-interfaces",
+      "name": "Diseño de Interfaces",
+      "semester": 7,
+      "credits": 8,
+      "kind": "required",
+      "areas": ["software", "vr"],
+      "description": "Diseñar la interacción persona-computadora: usabilidad, prototipos y interfaces para software y experiencias inmersivas."
+    },
+    {
+      "id": "graficacion-avanzada-por-computadora",
+      "name": "Graficación Avanzada por Computadora",
+      "semester": 7,
+      "credits": 8,
+      "kind": "required",
+      "areas": ["graphics"],
+      "description": "Pipeline de render avanzado: iluminación, shaders, GPU y técnicas de imagen de alta calidad."
+    },
+    {
+      "id": "tecnicas-de-interpretacion-avanzadas",
+      "name": "Técnicas de Interpretación Avanzadas",
+      "semester": 7,
+      "credits": 4,
+      "kind": "required",
+      "areas": ["graphics", "software"],
+      "description": "Técnicas avanzadas de interpretación (visual o computacional) aplicadas al eje gráfico-técnico del semestre. El PDF no detalla el temario."
+    },
+    {
+      "id": "hombre-y-mundo-contemporaneo",
+      "name": "Hombre y Mundo Contemporáneo",
+      "semester": 7,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["humanities"],
+      "description": "Lectura del mundo actual: cultura, tecnología y persona en el tronco humanístico UP."
+    },
+    {
+      "id": "optativa-i",
+      "name": "Optativa I",
+      "semester": 7,
+      "credits": 6,
+      "kind": "elective-slot",
+      "areas": [],
+      "description": "Elige una materia del bloque Optativas I · II (todas de 6 créditos en el plan publicado)."
+    },
+    {
+      "id": "compiladores",
+      "name": "Compiladores",
+      "semester": 8,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["software"],
+      "description": "Cómo un lenguaje se vuelve código ejecutable: análisis léxico/sintáctico, semántica y generación de código."
+    },
+    {
+      "id": "programacion-avanzada-en-paralelo",
+      "name": "Programación Avanzada en Paralelo",
+      "semester": 8,
+      "credits": 8,
+      "kind": "required",
+      "areas": ["systems", "software"],
+      "description": "Paralelismo a mayor escala: rendimiento, patrones avanzados y aprovechamiento de hardware paralelo."
+    },
+    {
+      "id": "emprendedores",
+      "name": "Emprendedores",
+      "semester": 8,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["business"],
+      "description": "De la idea al emprendimiento: validar, prototipar y plantear un negocio de base tecnológica."
+    },
+    {
+      "id": "simulacion-grafica",
+      "name": "Simulación Gráfica",
+      "semester": 8,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["graphics", "vr"],
+      "description": "Simular fenómenos y entornos en pantalla: física visual, tiempo real y representación gráfica de sistemas."
+    },
+    {
+      "id": "direccion-de-empresas",
+      "name": "Dirección de Empresas",
+      "semester": 8,
+      "credits": 4,
+      "kind": "required",
+      "areas": ["business"],
+      "description": "Cómo se dirige una organización: estrategia, personas y operación, más allá del código."
+    },
+    {
+      "id": "etica-profesional",
+      "name": "Ética Profesional",
+      "semester": 8,
+      "credits": 6,
+      "kind": "required",
+      "areas": ["humanities"],
+      "description": "Deontología del ingeniero: confidencialidad, calidad, conflicto de interés y responsabilidad frente al usuario."
+    },
+    {
+      "id": "optativa-ii",
+      "name": "Optativa II",
+      "semester": 8,
+      "credits": 6,
+      "kind": "elective-slot",
+      "areas": [],
+      "description": "Segunda optativa del mismo catálogo de seis materias."
+    },
+    {
+      "id": "especialidad-9",
+      "name": "Especialidad",
+      "semester": 9,
+      "credits": null,
+      "kind": "specialty-slot",
+      "areas": [],
+      "description": "Año 4+1: un año de especialidad (dos semestres) para graduarte con un segundo título. El plan no publica créditos de este bloque."
+    },
+    {
+      "id": "especialidad-10",
+      "name": "Especialidad",
+      "semester": 10,
+      "credits": null,
+      "kind": "specialty-slot",
+      "areas": [],
+      "description": "Continúa la especialidad elegida. Opciones listadas en specialties."
+    }
+  ],
+  "electives": [
+    {
+      "id": "estereografia",
+      "name": "Estereografía",
+      "credits": 6,
+      "kind": "elective",
+      "areas": ["graphics", "vr"],
+      "description": "Imagen y percepción en estereoscopía / 3D: profundidad, cámaras y contenido para visión binocular."
+    },
+    {
+      "id": "simulacion-discreta",
+      "name": "Simulación Discreta",
+      "credits": 6,
+      "kind": "elective",
+      "areas": ["data", "software"],
+      "description": "Modelar sistemas como eventos discretos (filas, procesos, redes) y analizarlos por simulación."
+    },
+    {
+      "id": "fundamentos-de-mercadotecnia",
+      "name": "Fundamentos de Mercadotecnia",
+      "credits": 6,
+      "kind": "elective",
+      "areas": ["business"],
+      "description": "Mercado, cliente y posicionamiento: cómo se comunica y vende un producto tecnológico."
+    },
+    {
+      "id": "gramaticas-computacionales",
+      "name": "Gramáticas Computacionales",
+      "credits": 6,
+      "kind": "elective",
+      "areas": ["software"],
+      "description": "Gramáticas formales y lenguajes: base teórica para compiladores, parsers y procesamiento de lenguaje."
+    },
+    {
+      "id": "desarrollo-avanzado-de-plugins",
+      "name": "Desarrollo avanzado de Plugins",
+      "credits": 6,
+      "kind": "elective",
+      "areas": ["software", "graphics"],
+      "description": "Plugins de mayor complejidad: APIs profundas, rendimiento e integración profesional con hosts."
+    },
+    {
+      "id": "modelos-probabilisticos",
+      "name": "Modelos Probabilísticos",
+      "credits": 6,
+      "kind": "elective",
+      "areas": ["data", "ai"],
+      "description": "Modelos que razonan con incertidumbre: probabilidad aplicada a datos, IA y decisión."
+    }
+  ],
+  "specialties": [
+    {
+      "id": "automatizacion-y-control",
+      "name": "Automatización y Control",
+      "semesters": [9, 10],
+      "description": "Especialidad 4+1 en sistemas de control y automatización de procesos."
+    },
+    {
+      "id": "ciencia-de-datos",
+      "name": "Ciencia de Datos",
+      "semesters": [9, 10],
+      "description": "Especialidad 4+1 en análisis de datos, modelado y decisión basada en información."
+    },
+    {
+      "id": "diseno-y-tecnologia",
+      "name": "Diseño y Tecnología",
+      "semesters": [9, 10],
+      "description": "Especialidad 4+1 en la intersección de diseño de producto y tecnología."
+    },
+    {
+      "id": "direccion-de-operaciones",
+      "name": "Dirección de Operaciones",
+      "semesters": [9, 10],
+      "description": "Especialidad 4+1 en operación, cadena de valor y gestión del día a día de una empresa."
+    },
+    {
+      "id": "efectos-visuales",
+      "name": "Efectos Visuales",
+      "semesters": [9, 10],
+      "description": "Especialidad 4+1 en VFX: imagen, composición y producción visual de alto nivel."
+    },
+    {
+      "id": "ingenieria-y-gestion-de-proyectos",
+      "name": "Ingeniería y Gestión de Proyectos",
+      "semesters": [9, 10],
+      "description": "Especialidad 4+1 en dirigir proyectos de ingeniería de punta a punta."
+    },
+    {
+      "id": "optimizacion-de-procesos",
+      "name": "Optimización de procesos",
+      "semesters": [9, 10],
+      "description": "Especialidad 4+1 en mejorar y optimizar procesos productivos o de servicio."
+    },
+    {
+      "id": "sistemas-de-calidad",
+      "name": "Sistemas de Calidad",
+      "semesters": [9, 10],
+      "description": "Especialidad 4+1 en calidad, normas y mejora continua."
+    },
+    {
+      "id": "sistemas-de-manufactura-avanzada",
+      "name": "Sistemas de Manufactura Avanzada",
+      "semesters": [9, 10],
+      "description": "Especialidad 4+1 en manufactura avanzada y sistemas de producción."
+    }
+  ],
+  "graph": {
+    "text": {
+      "close": "Close",
+      "connections": "Connections",
+      "connectionMany": "connections",
+      "connectionOne": "connection",
+      "credits": "credits",
+      "kinds": {
+        "course": "Classes",
+        "program": "Program",
+        "semester": "Semesters",
+        "subject": "Subjects"
+      },
+      "noLinks": "No links on this node.",
+      "search": "Search",
+      "searchLabel": "Search nodes",
+      "title": "Major at a glance"
+    },
+    "nodes": [
+      {
+        "description": "Formación de ingenieros que diseñan software, productos digitales y experiencias gráficas para industria real: visión computacional, programación, realidad mixta, cómputo en paralelo y en la nube, representación gráfica de datos y big data.",
+        "id": "program",
+        "kind": "program",
+        "label": "Computer Science and Engineering",
+        "order": 0,
+        "proximity": 0
+      },
+      {
+        "id": "semester-1",
+        "kind": "semester",
+        "label": "Semester 1",
+        "order": 1,
+        "proximity": 1
+      },
+      {
+        "id": "semester-2",
+        "kind": "semester",
+        "label": "Semester 2",
+        "order": 2,
+        "proximity": 1
+      },
+      {
+        "id": "semester-3",
+        "kind": "semester",
+        "label": "Semester 3",
+        "order": 3,
+        "proximity": 1
+      },
+      {
+        "id": "semester-4",
+        "kind": "semester",
+        "label": "Semester 4",
+        "order": 4,
+        "proximity": 1
+      },
+      {
+        "id": "semester-5",
+        "kind": "semester",
+        "label": "Semester 5",
+        "order": 5,
+        "proximity": 1
+      },
+      {
+        "id": "semester-6",
+        "kind": "semester",
+        "label": "Semester 6",
+        "order": 6,
+        "proximity": 1
+      },
+      {
+        "id": "semester-7",
+        "kind": "semester",
+        "label": "Semester 7",
+        "order": 7,
+        "proximity": 1
+      },
+      {
+        "id": "semester-8",
+        "kind": "semester",
+        "label": "Semester 8",
+        "order": 8,
+        "proximity": 1
+      },
+      {
+        "id": "semester-9",
+        "kind": "semester",
+        "label": "Semester 9",
+        "order": 9,
+        "proximity": 1
+      },
+      {
+        "id": "semester-10",
+        "kind": "semester",
+        "label": "Semester 10",
+        "order": 10,
+        "proximity": 1
+      },
+      {
+        "description": "Límites, continuidad y derivadas para modelar cambio. Base matemática para física, gráficas y análisis de algoritmos.",
+        "id": "calculo-diferencial",
+        "kind": "course",
+        "label": "Cálculo Diferencial",
+        "order": 0,
+        "proximity": 2,
+        "credits": 8
+      },
+      {
+        "description": "Álgebra universitaria: ecuaciones, funciones y estructuras algebraicas usadas en programación y matemáticas discretas posteriores.",
+        "id": "algebra",
+        "kind": "course",
+        "label": "Álgebra",
+        "order": 1,
+        "proximity": 2,
+        "credits": 8
+      },
+      {
+        "description": "Cómo plantear un problema, diseñar la solución paso a paso y medir eficiencia. Primer curso de pensamiento computacional del plan.",
+        "id": "analisis-y-diseno-de-algoritmos",
+        "kind": "course",
+        "label": "Análisis y Diseño de Algoritmos",
+        "order": 2,
+        "proximity": 2,
+        "credits": 8
+      },
+      {
+        "description": "Escritura clara y correcta en español: reportes, argumentos y documentación que un ingeniero necesita comunicar.",
+        "id": "redaccion",
+        "kind": "course",
+        "label": "Redacción",
+        "order": 3,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Mecánica y principios físicos que luego aparecen en simulación, videojuegos y modelado del mundo real.",
+        "id": "fisica",
+        "kind": "course",
+        "label": "Física",
+        "order": 4,
+        "proximity": 2,
+        "credits": 7
+      },
+      {
+        "description": "Formación humanística UP: contexto cultural e histórico para situar la tecnología en la sociedad.",
+        "id": "historia-de-la-cultura",
+        "kind": "course",
+        "label": "Historia de la Cultura",
+        "order": 5,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Integrales y aplicaciones: áreas, acumulación y herramientas para probabilidad, física y métodos numéricos.",
+        "id": "calculo-integral",
+        "kind": "course",
+        "label": "Cálculo Integral",
+        "order": 6,
+        "proximity": 2,
+        "credits": 8
+      },
+      {
+        "description": "Cómo funciona el entorno económico en el que se venden productos de software y se toman decisiones de negocio.",
+        "id": "entorno-economico",
+        "kind": "course",
+        "label": "Entorno Económico",
+        "order": 7,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Clases, objetos, herencia y diseño modular. Base para casi todo el software del resto de la carrera.",
+        "id": "programacion-orientada-a-objetos",
+        "kind": "course",
+        "label": "Programación Orientada a Objetos",
+        "order": 8,
+        "proximity": 2,
+        "credits": 8
+      },
+      {
+        "description": "Técnicas de programación más allá de lo introductorio: abstracción, bibliotecas y código listo para proyectos más grandes.",
+        "id": "programacion-avanzada",
+        "kind": "course",
+        "label": "Programación Avanzada",
+        "order": 9,
+        "proximity": 2,
+        "credits": 8
+      },
+      {
+        "description": "Lógica digital y circuitos: cómo la máquina representa bits y ejecuta instrucciones debajo del software.",
+        "id": "circuitos-digitales-y-electricos",
+        "kind": "course",
+        "label": "Circuitos Digitales y Eléctricos",
+        "order": 10,
+        "proximity": 2,
+        "credits": 5
+      },
+      {
+        "description": "Representar formas y escenas en 2D/3D con herramientas digitales. Entrada al eje de gráficas del programa.",
+        "id": "modelacion-digital",
+        "kind": "course",
+        "label": "Modelación Digital",
+        "order": 11,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Formación antropológica UP: persona, comunidad y responsabilidad social del ingeniero.",
+        "id": "persona-y-sociedad",
+        "kind": "course",
+        "label": "Persona y Sociedad",
+        "order": 12,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Vectores, matrices y transformaciones. Matemática central de gráficas, visión, IA y simulación.",
+        "id": "algebra-lineal",
+        "kind": "course",
+        "label": "Álgebra Lineal",
+        "order": 13,
+        "proximity": 2,
+        "credits": 8
+      },
+      {
+        "description": "Construir aplicaciones en el navegador y el servidor: interfaces, APIs y productos digitales en la web.",
+        "id": "desarrollo-de-aplicaciones-web",
+        "kind": "course",
+        "label": "Desarrollo de Aplicaciones Web",
+        "order": 14,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Listas, árboles, grafos, tablas hash y cómo elegir la estructura correcta para rendimiento y claridad.",
+        "id": "programacion-y-estructura-de-datos",
+        "kind": "course",
+        "label": "Programación y Estructura de Datos",
+        "order": 15,
+        "proximity": 2,
+        "credits": 8
+      },
+      {
+        "description": "Evaluar si un proyecto o empresa vale la pena: costos, retorno y valuación básica para emprender o decidir inversión.",
+        "id": "proyectos-de-inversion-e-introduccion-a-la-valuacion-de-empresas",
+        "kind": "course",
+        "label": "Proyectos de Inversión e Introducción a la Valuación de Empresas",
+        "order": 16,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Principios químicos de formación ingenieril; contexto científico junto a física y matemáticas.",
+        "id": "quimica",
+        "kind": "course",
+        "label": "Química",
+        "order": 17,
+        "proximity": 2,
+        "credits": 7
+      },
+      {
+        "description": "Planear, estimar y coordinar trabajo técnico: alcance, tiempos, equipo y entrega.",
+        "id": "direccion-de-proyectos",
+        "kind": "course",
+        "label": "Dirección de Proyectos",
+        "order": 18,
+        "proximity": 2,
+        "credits": 4
+      },
+      {
+        "description": "Criterio moral para decidir en conflictos profesionales, de datos, de producto y de impacto social.",
+        "id": "etica",
+        "kind": "course",
+        "label": "Ética",
+        "order": 19,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Campos vectoriales, curvas y superficies. Herramienta para geometría, física y gráficas 3D.",
+        "id": "calculo-vectorial",
+        "kind": "course",
+        "label": "Cálculo Vectorial",
+        "order": 20,
+        "proximity": 2,
+        "credits": 8
+      },
+      {
+        "description": "Matemática discreta para computación: lógica, combinatoria, grafos y fundamentos de lenguajes y algoritmos.",
+        "id": "matematicas-de-la-computacion",
+        "kind": "course",
+        "label": "Matemáticas de la Computación",
+        "order": 21,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Modelar, consultar y persistir información: diseño relacional y uso de bases de datos en aplicaciones.",
+        "id": "introduccion-a-las-bases-de-datos",
+        "kind": "course",
+        "label": "Introducción a las Bases de Datos",
+        "order": 22,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Imagen, audio, video y el pipeline gráfico: cómo la computadora genera y combina medios.",
+        "id": "multimedios-y-graficas-computacionales",
+        "kind": "course",
+        "label": "Multimedios y Gráficas Computacionales",
+        "order": 23,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Procesos, memoria, archivos y concurrencia: el software que administra el hardware.",
+        "id": "sistemas-operativos",
+        "kind": "course",
+        "label": "Sistemas Operativos",
+        "order": 24,
+        "proximity": 2,
+        "credits": 4
+      },
+      {
+        "description": "Extender herramientas existentes (motores, DCC o hosts) con plugins: APIs, empaquetado e integración.",
+        "id": "desarrollo-de-plugins",
+        "kind": "course",
+        "label": "Desarrollo de Plugins",
+        "order": 25,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Bloque de identidad UP: persona y sentido, en diálogo con la formación profesional.",
+        "id": "antropologia-teologica-i",
+        "kind": "course",
+        "label": "Antropología Teológica I",
+        "order": 26,
+        "proximity": 2,
+        "credits": 4
+      },
+      {
+        "description": "Incertidumbre, muestreo e inferencia. Base para IA, ciencia de datos y modelos probabilísticos.",
+        "id": "probabilidad-y-estadistica",
+        "kind": "course",
+        "label": "Probabilidad y Estadística",
+        "order": 27,
+        "proximity": 2,
+        "credits": 8
+      },
+      {
+        "description": "Modelos de sistemas que cambian en el tiempo: física, control y simulación.",
+        "id": "ecuaciones-diferenciales",
+        "kind": "course",
+        "label": "Ecuaciones Diferenciales",
+        "order": 28,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Requerimientos, diseño, calidad y proceso para construir software que se pueda mantener y entregar en equipo.",
+        "id": "ingenieria-de-software",
+        "kind": "course",
+        "label": "Ingeniería de Software",
+        "order": 29,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Filtros, transformación y análisis de imágenes digitales. Puente entre gráficas y visión computacional.",
+        "id": "procesamiento-de-imagenes",
+        "kind": "course",
+        "label": "Procesamiento de Imágenes",
+        "order": 30,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Aproximar soluciones en la computadora: raíces, sistemas lineales, interpolación e integración numérica.",
+        "id": "metodos-numericos",
+        "kind": "course",
+        "label": "Métodos Numéricos",
+        "order": 31,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Gameplay, motores y producción de un juego: integración de gráficos, input y lógica en un producto jugable.",
+        "id": "desarrollo-de-videojuegos",
+        "kind": "course",
+        "label": "Desarrollo de Videojuegos",
+        "order": 32,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Continúa la formación teológica y antropológica del tronco común UP.",
+        "id": "antropologia-teologica-ii",
+        "kind": "course",
+        "label": "Antropología Teológica II",
+        "order": 33,
+        "proximity": 2,
+        "credits": 4
+      },
+      {
+        "description": "Álgebra geométrica para representar transformaciones, esferas y geometría 3D de forma unificada. Sello distintivo del plan de gráficas.",
+        "id": "algebra-geometrica-conformal",
+        "kind": "course",
+        "label": "Álgebra Geométrica Conformal",
+        "order": 34,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Gráficos e interfaces en teléfonos y tablets: rendimiento, GPU móvil y experiencias visuales en apps.",
+        "id": "soluciones-graficas-para-moviles",
+        "kind": "course",
+        "label": "Soluciones Gráficas para Móviles",
+        "order": 35,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Algoritmos sobre puntos, polígonos y espacio: envolventes, intersecciones, triangulación y consultas espaciales.",
+        "id": "geometria-computacional",
+        "kind": "course",
+        "label": "Geometría Computacional",
+        "order": 36,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Sistemas en varias máquinas: red, consistencia, fallos y cómputo en la nube.",
+        "id": "computo-distribuido",
+        "kind": "course",
+        "label": "Cómputo Distribuido",
+        "order": 37,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Proyectos y aplicaciones no convencionales del cómputo y las gráficas: explorar usos en industria, arte, salud u otros dominios.",
+        "id": "seminario-de-aplicaciones-alternativas",
+        "kind": "course",
+        "label": "Seminario de Aplicaciones Alternativas",
+        "order": 38,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Superponer gráficos al mundo real: tracking, registro de cámara e interacción en AR.",
+        "id": "realidad-aumentada",
+        "kind": "course",
+        "label": "Realidad Aumentada",
+        "order": 39,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Sociedad, bien común y crítica de instituciones; marco para el impacto de la tecnología.",
+        "id": "filosofia-social",
+        "kind": "course",
+        "label": "Filosofía Social",
+        "order": 40,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Agentes, pathfinding, decisión y comportamiento para NPCs y sistemas de juego.",
+        "id": "inteligencia-artificial-en-videojuegos",
+        "kind": "course",
+        "label": "Inteligencia Artificial en Videojuegos",
+        "order": 41,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Dividir trabajo en hilos y núcleos: sincronización, GPU/CPU y el modelo mental del paralelismo.",
+        "id": "fundamentos-de-programacion-en-paralelo",
+        "kind": "course",
+        "label": "Fundamentos de Programación en Paralelo",
+        "order": 42,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Diseñar la interacción persona-computadora: usabilidad, prototipos y interfaces para software y experiencias inmersivas.",
+        "id": "diseno-de-interfaces",
+        "kind": "course",
+        "label": "Diseño de Interfaces",
+        "order": 43,
+        "proximity": 2,
+        "credits": 8
+      },
+      {
+        "description": "Pipeline de render avanzado: iluminación, shaders, GPU y técnicas de imagen de alta calidad.",
+        "id": "graficacion-avanzada-por-computadora",
+        "kind": "course",
+        "label": "Graficación Avanzada por Computadora",
+        "order": 44,
+        "proximity": 2,
+        "credits": 8
+      },
+      {
+        "description": "Técnicas avanzadas de interpretación (visual o computacional) aplicadas al eje gráfico-técnico del semestre. El PDF no detalla el temario.",
+        "id": "tecnicas-de-interpretacion-avanzadas",
+        "kind": "course",
+        "label": "Técnicas de Interpretación Avanzadas",
+        "order": 45,
+        "proximity": 2,
+        "credits": 4
+      },
+      {
+        "description": "Lectura del mundo actual: cultura, tecnología y persona en el tronco humanístico UP.",
+        "id": "hombre-y-mundo-contemporaneo",
+        "kind": "course",
+        "label": "Hombre y Mundo Contemporáneo",
+        "order": 46,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Elige una materia del bloque Optativas I · II (todas de 6 créditos en el plan publicado).",
+        "id": "optativa-i",
+        "kind": "course",
+        "label": "Optativa I",
+        "order": 47,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Cómo un lenguaje se vuelve código ejecutable: análisis léxico/sintáctico, semántica y generación de código.",
+        "id": "compiladores",
+        "kind": "course",
+        "label": "Compiladores",
+        "order": 48,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Paralelismo a mayor escala: rendimiento, patrones avanzados y aprovechamiento de hardware paralelo.",
+        "id": "programacion-avanzada-en-paralelo",
+        "kind": "course",
+        "label": "Programación Avanzada en Paralelo",
+        "order": 49,
+        "proximity": 2,
+        "credits": 8
+      },
+      {
+        "description": "De la idea al emprendimiento: validar, prototipar y plantear un negocio de base tecnológica.",
+        "id": "emprendedores",
+        "kind": "course",
+        "label": "Emprendedores",
+        "order": 50,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Simular fenómenos y entornos en pantalla: física visual, tiempo real y representación gráfica de sistemas.",
+        "id": "simulacion-grafica",
+        "kind": "course",
+        "label": "Simulación Gráfica",
+        "order": 51,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Cómo se dirige una organización: estrategia, personas y operación, más allá del código.",
+        "id": "direccion-de-empresas",
+        "kind": "course",
+        "label": "Dirección de Empresas",
+        "order": 52,
+        "proximity": 2,
+        "credits": 4
+      },
+      {
+        "description": "Deontología del ingeniero: confidencialidad, calidad, conflicto de interés y responsabilidad frente al usuario.",
+        "id": "etica-profesional",
+        "kind": "course",
+        "label": "Ética Profesional",
+        "order": 53,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Segunda optativa del mismo catálogo de seis materias.",
+        "id": "optativa-ii",
+        "kind": "course",
+        "label": "Optativa II",
+        "order": 54,
+        "proximity": 2,
+        "credits": 6
+      },
+      {
+        "description": "Año 4+1: un año de especialidad (dos semestres) para graduarte con un segundo título. El plan no publica créditos de este bloque.",
+        "id": "especialidad-9",
+        "kind": "course",
+        "label": "Especialidad",
+        "order": 55,
+        "proximity": 2
+      },
+      {
+        "description": "Continúa la especialidad elegida. Opciones listadas en specialties.",
+        "id": "especialidad-10",
+        "kind": "course",
+        "label": "Especialidad",
+        "order": 56,
+        "proximity": 2
+      }
+    ],
+    "edges": [
+      {
+        "a": "program",
+        "b": "semester-1",
+        "id": "e:program:semester-1",
+        "label": "includes"
+      },
+      {
+        "a": "program",
+        "b": "semester-2",
+        "id": "e:program:semester-2",
+        "label": "includes"
+      },
+      {
+        "a": "program",
+        "b": "semester-3",
+        "id": "e:program:semester-3",
+        "label": "includes"
+      },
+      {
+        "a": "program",
+        "b": "semester-4",
+        "id": "e:program:semester-4",
+        "label": "includes"
+      },
+      {
+        "a": "program",
+        "b": "semester-5",
+        "id": "e:program:semester-5",
+        "label": "includes"
+      },
+      {
+        "a": "program",
+        "b": "semester-6",
+        "id": "e:program:semester-6",
+        "label": "includes"
+      },
+      {
+        "a": "program",
+        "b": "semester-7",
+        "id": "e:program:semester-7",
+        "label": "includes"
+      },
+      {
+        "a": "program",
+        "b": "semester-8",
+        "id": "e:program:semester-8",
+        "label": "includes"
+      },
+      {
+        "a": "program",
+        "b": "semester-9",
+        "id": "e:program:semester-9",
+        "label": "includes"
+      },
+      {
+        "a": "program",
+        "b": "semester-10",
+        "id": "e:program:semester-10",
+        "label": "includes"
+      },
+      {
+        "a": "semester-1",
+        "b": "calculo-diferencial",
+        "id": "e:semester-1:calculo-diferencial",
+        "label": "includes"
+      },
+      {
+        "a": "semester-1",
+        "b": "algebra",
+        "id": "e:semester-1:algebra",
+        "label": "includes"
+      },
+      {
+        "a": "semester-1",
+        "b": "analisis-y-diseno-de-algoritmos",
+        "id": "e:semester-1:analisis-y-diseno-de-algoritmos",
+        "label": "includes"
+      },
+      {
+        "a": "semester-1",
+        "b": "redaccion",
+        "id": "e:semester-1:redaccion",
+        "label": "includes"
+      },
+      {
+        "a": "semester-1",
+        "b": "fisica",
+        "id": "e:semester-1:fisica",
+        "label": "includes"
+      },
+      {
+        "a": "semester-1",
+        "b": "historia-de-la-cultura",
+        "id": "e:semester-1:historia-de-la-cultura",
+        "label": "includes"
+      },
+      {
+        "a": "semester-2",
+        "b": "calculo-integral",
+        "id": "e:semester-2:calculo-integral",
+        "label": "includes"
+      },
+      {
+        "a": "semester-2",
+        "b": "entorno-economico",
+        "id": "e:semester-2:entorno-economico",
+        "label": "includes"
+      },
+      {
+        "a": "semester-2",
+        "b": "programacion-orientada-a-objetos",
+        "id": "e:semester-2:programacion-orientada-a-objetos",
+        "label": "includes"
+      },
+      {
+        "a": "semester-2",
+        "b": "programacion-avanzada",
+        "id": "e:semester-2:programacion-avanzada",
+        "label": "includes"
+      },
+      {
+        "a": "semester-2",
+        "b": "circuitos-digitales-y-electricos",
+        "id": "e:semester-2:circuitos-digitales-y-electricos",
+        "label": "includes"
+      },
+      {
+        "a": "semester-2",
+        "b": "modelacion-digital",
+        "id": "e:semester-2:modelacion-digital",
+        "label": "includes"
+      },
+      {
+        "a": "semester-2",
+        "b": "persona-y-sociedad",
+        "id": "e:semester-2:persona-y-sociedad",
+        "label": "includes"
+      },
+      {
+        "a": "semester-3",
+        "b": "algebra-lineal",
+        "id": "e:semester-3:algebra-lineal",
+        "label": "includes"
+      },
+      {
+        "a": "semester-3",
+        "b": "desarrollo-de-aplicaciones-web",
+        "id": "e:semester-3:desarrollo-de-aplicaciones-web",
+        "label": "includes"
+      },
+      {
+        "a": "semester-3",
+        "b": "programacion-y-estructura-de-datos",
+        "id": "e:semester-3:programacion-y-estructura-de-datos",
+        "label": "includes"
+      },
+      {
+        "a": "semester-3",
+        "b": "proyectos-de-inversion-e-introduccion-a-la-valuacion-de-empresas",
+        "id": "e:semester-3:proyectos-de-inversion-e-introduccion-a-la-valuacion-de-empresas",
+        "label": "includes"
+      },
+      {
+        "a": "semester-3",
+        "b": "quimica",
+        "id": "e:semester-3:quimica",
+        "label": "includes"
+      },
+      {
+        "a": "semester-3",
+        "b": "direccion-de-proyectos",
+        "id": "e:semester-3:direccion-de-proyectos",
+        "label": "includes"
+      },
+      {
+        "a": "semester-3",
+        "b": "etica",
+        "id": "e:semester-3:etica",
+        "label": "includes"
+      },
+      {
+        "a": "semester-4",
+        "b": "calculo-vectorial",
+        "id": "e:semester-4:calculo-vectorial",
+        "label": "includes"
+      },
+      {
+        "a": "semester-4",
+        "b": "matematicas-de-la-computacion",
+        "id": "e:semester-4:matematicas-de-la-computacion",
+        "label": "includes"
+      },
+      {
+        "a": "semester-4",
+        "b": "introduccion-a-las-bases-de-datos",
+        "id": "e:semester-4:introduccion-a-las-bases-de-datos",
+        "label": "includes"
+      },
+      {
+        "a": "semester-4",
+        "b": "multimedios-y-graficas-computacionales",
+        "id": "e:semester-4:multimedios-y-graficas-computacionales",
+        "label": "includes"
+      },
+      {
+        "a": "semester-4",
+        "b": "sistemas-operativos",
+        "id": "e:semester-4:sistemas-operativos",
+        "label": "includes"
+      },
+      {
+        "a": "semester-4",
+        "b": "desarrollo-de-plugins",
+        "id": "e:semester-4:desarrollo-de-plugins",
+        "label": "includes"
+      },
+      {
+        "a": "semester-4",
+        "b": "antropologia-teologica-i",
+        "id": "e:semester-4:antropologia-teologica-i",
+        "label": "includes"
+      },
+      {
+        "a": "semester-5",
+        "b": "probabilidad-y-estadistica",
+        "id": "e:semester-5:probabilidad-y-estadistica",
+        "label": "includes"
+      },
+      {
+        "a": "semester-5",
+        "b": "ecuaciones-diferenciales",
+        "id": "e:semester-5:ecuaciones-diferenciales",
+        "label": "includes"
+      },
+      {
+        "a": "semester-5",
+        "b": "ingenieria-de-software",
+        "id": "e:semester-5:ingenieria-de-software",
+        "label": "includes"
+      },
+      {
+        "a": "semester-5",
+        "b": "procesamiento-de-imagenes",
+        "id": "e:semester-5:procesamiento-de-imagenes",
+        "label": "includes"
+      },
+      {
+        "a": "semester-5",
+        "b": "metodos-numericos",
+        "id": "e:semester-5:metodos-numericos",
+        "label": "includes"
+      },
+      {
+        "a": "semester-5",
+        "b": "desarrollo-de-videojuegos",
+        "id": "e:semester-5:desarrollo-de-videojuegos",
+        "label": "includes"
+      },
+      {
+        "a": "semester-5",
+        "b": "antropologia-teologica-ii",
+        "id": "e:semester-5:antropologia-teologica-ii",
+        "label": "includes"
+      },
+      {
+        "a": "semester-6",
+        "b": "algebra-geometrica-conformal",
+        "id": "e:semester-6:algebra-geometrica-conformal",
+        "label": "includes"
+      },
+      {
+        "a": "semester-6",
+        "b": "soluciones-graficas-para-moviles",
+        "id": "e:semester-6:soluciones-graficas-para-moviles",
+        "label": "includes"
+      },
+      {
+        "a": "semester-6",
+        "b": "geometria-computacional",
+        "id": "e:semester-6:geometria-computacional",
+        "label": "includes"
+      },
+      {
+        "a": "semester-6",
+        "b": "computo-distribuido",
+        "id": "e:semester-6:computo-distribuido",
+        "label": "includes"
+      },
+      {
+        "a": "semester-6",
+        "b": "seminario-de-aplicaciones-alternativas",
+        "id": "e:semester-6:seminario-de-aplicaciones-alternativas",
+        "label": "includes"
+      },
+      {
+        "a": "semester-6",
+        "b": "realidad-aumentada",
+        "id": "e:semester-6:realidad-aumentada",
+        "label": "includes"
+      },
+      {
+        "a": "semester-6",
+        "b": "filosofia-social",
+        "id": "e:semester-6:filosofia-social",
+        "label": "includes"
+      },
+      {
+        "a": "semester-7",
+        "b": "inteligencia-artificial-en-videojuegos",
+        "id": "e:semester-7:inteligencia-artificial-en-videojuegos",
+        "label": "includes"
+      },
+      {
+        "a": "semester-7",
+        "b": "fundamentos-de-programacion-en-paralelo",
+        "id": "e:semester-7:fundamentos-de-programacion-en-paralelo",
+        "label": "includes"
+      },
+      {
+        "a": "semester-7",
+        "b": "diseno-de-interfaces",
+        "id": "e:semester-7:diseno-de-interfaces",
+        "label": "includes"
+      },
+      {
+        "a": "semester-7",
+        "b": "graficacion-avanzada-por-computadora",
+        "id": "e:semester-7:graficacion-avanzada-por-computadora",
+        "label": "includes"
+      },
+      {
+        "a": "semester-7",
+        "b": "tecnicas-de-interpretacion-avanzadas",
+        "id": "e:semester-7:tecnicas-de-interpretacion-avanzadas",
+        "label": "includes"
+      },
+      {
+        "a": "semester-7",
+        "b": "hombre-y-mundo-contemporaneo",
+        "id": "e:semester-7:hombre-y-mundo-contemporaneo",
+        "label": "includes"
+      },
+      {
+        "a": "semester-7",
+        "b": "optativa-i",
+        "id": "e:semester-7:optativa-i",
+        "label": "includes"
+      },
+      {
+        "a": "semester-8",
+        "b": "compiladores",
+        "id": "e:semester-8:compiladores",
+        "label": "includes"
+      },
+      {
+        "a": "semester-8",
+        "b": "programacion-avanzada-en-paralelo",
+        "id": "e:semester-8:programacion-avanzada-en-paralelo",
+        "label": "includes"
+      },
+      {
+        "a": "semester-8",
+        "b": "emprendedores",
+        "id": "e:semester-8:emprendedores",
+        "label": "includes"
+      },
+      {
+        "a": "semester-8",
+        "b": "simulacion-grafica",
+        "id": "e:semester-8:simulacion-grafica",
+        "label": "includes"
+      },
+      {
+        "a": "semester-8",
+        "b": "direccion-de-empresas",
+        "id": "e:semester-8:direccion-de-empresas",
+        "label": "includes"
+      },
+      {
+        "a": "semester-8",
+        "b": "etica-profesional",
+        "id": "e:semester-8:etica-profesional",
+        "label": "includes"
+      },
+      {
+        "a": "semester-8",
+        "b": "optativa-ii",
+        "id": "e:semester-8:optativa-ii",
+        "label": "includes"
+      },
+      {
+        "a": "semester-9",
+        "b": "especialidad-9",
+        "id": "e:semester-9:especialidad-9",
+        "label": "includes"
+      },
+      {
+        "a": "semester-10",
+        "b": "especialidad-10",
+        "id": "e:semester-10:especialidad-10",
+        "label": "includes"
+      }
+    ]
+  }
+}

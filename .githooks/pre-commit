@@ -3,13 +3,15 @@
 set -e
 cd "$(git rev-parse --show-toplevel)"
 
-staged=$(git diff --cached --name-only --diff-filter=ACMR)
+staged=$(git diff --cached --name-only --diff-filter=ACMR |
+  grep -E '\.(cjs|css|js|json|jsx|md|mjs|ts|tsx)$' |
+  grep -vE '(^|/)package-lock\.json$' || true)
 if [ -z "$staged" ]; then
   exit 0
 fi
 
-git diff --cached --name-only --diff-filter=ACMR -z |
+echo "$staged" | tr '\n' '\0' |
   xargs -0 npm exec -- ultracite fix --
 
-git diff --cached --name-only --diff-filter=ACMR -z |
+echo "$staged" | tr '\n' '\0' |
   xargs -0 git add --
