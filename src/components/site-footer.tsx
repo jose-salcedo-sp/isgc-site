@@ -4,7 +4,7 @@ import { externalLinks } from "@/content/site-content";
 
 export const SiteFooter = () => (
   <footer className="bg-grafito py-10 text-white">
-    <div className="mx-auto flex max-w-[1200px] flex-col gap-8 px-5 lg:flex-row lg:items-end lg:justify-between lg:px-6">
+    <div className="mx-auto flex max-w-300 flex-col gap-8 px-5 lg:flex-row lg:items-end lg:justify-between lg:px-6">
       <div>
         <Link href="/" className="font-serif text-3xl">
           ISGC

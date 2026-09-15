@@ -41,7 +41,7 @@ const campusNews = [
 
 const HeroSection = () => (
   <section id="inicio" className="bg-tinto text-white">
-    <div className="hero-layout mx-auto grid max-w-[1200px] items-center gap-8 px-5 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:px-6 lg:py-14">
+    <div className="hero-layout mx-auto grid max-w-300 items-center gap-8 px-5 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:px-6 lg:py-14">
       <div className="min-w-0">
         <h1 className="hero-title">
           Ingeniería en Sistemas y Gráficas Computacionales.
@@ -189,7 +189,7 @@ const ProjectsSection = () => (
 
 const StudyPlanSection = () => (
   <section id="plan" className="bg-tinto py-12 text-white sm:py-16">
-    <div className="mx-auto grid max-w-[1200px] items-center gap-8 px-5 lg:grid-cols-[1fr_auto] lg:px-6">
+    <div className="mx-auto grid max-w-300 items-center gap-8 px-5 lg:grid-cols-[1fr_auto] lg:px-6">
       <div>
         <h2 className="max-w-2xl font-serif text-4xl leading-tight sm:text-5xl">
           Tu ruta, semestre a semestre.

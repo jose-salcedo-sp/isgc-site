@@ -11,7 +11,7 @@ export const SiteHeader = () => {
 
   return (
     <header className="bg-tinto sticky top-0 z-50 text-white shadow-sm">
-      <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-5 px-5 py-3 lg:px-6">
+      <div className="mx-auto flex max-w-300 items-center justify-between gap-5 px-5 py-3 lg:px-6">
         <Link
           href="/"
           className="flex shrink-0 items-center gap-3"
@@ -80,7 +80,7 @@ export const SiteHeader = () => {
           className="px-5 py-3 lg:hidden"
           aria-label="Navegación móvil"
         >
-          <div className="mx-auto grid max-w-[1200px] gap-1">
+          <div className="mx-auto grid max-w-300 gap-1">
             {primaryNavigation.map((link) => (
               <Link
                 key={link.href}
