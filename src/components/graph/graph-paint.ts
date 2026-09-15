@@ -205,18 +205,25 @@ const paintRadialLabel = (
     ctx.rotate(Math.PI);
   }
   ctx.textAlign = flip ? "right" : "left";
-  ctx.font = `${emphasis ? 700 : 600} ${size * inv}px ui-sans-serif, system-ui, sans-serif`;
+  const weight = emphasis ? 700 : 600;
+  const face = "ui-sans-serif, system-ui, sans-serif";
+  ctx.font = `${weight} ${size}px ${face}`;
+  const room = node.tip - node.radius - RADIAL_LABEL_GAP * 2;
+  const full = ctx.measureText(node.label).width;
+  if (full > room) {
+    ctx.font = `${weight} ${size * (room / full)}px ${face}`;
+  }
   ctx.fillStyle = withAlpha(color, alpha);
-  const gap = RADIAL_LABEL_GAP * inv;
+  const gap = RADIAL_LABEL_GAP;
   const x = flip ? -gap : gap;
   ctx.fillText(node.label, x, 0);
   if (emphasis) {
     const { width } = ctx.measureText(node.label);
-    const y = 5 * inv;
+    const y = size * 0.42;
     ctx.beginPath();
     ctx.moveTo(x, y);
     ctx.lineTo(flip ? x - width : x + width, y);
-    ctx.lineWidth = 1.5 * inv;
+    ctx.lineWidth = Math.max(1.5 * inv, size * 0.06);
     ctx.strokeStyle = withAlpha(color, alpha);
     ctx.stroke();
   }
@@ -234,20 +241,21 @@ const paintTip = (
   ink: string
 ): void => {
   ctx.beginPath();
-  ctx.arc(node.tipX, node.tipY, (emphasis ? 4 : 2.6) * inv, 0, Math.PI * 2);
+  ctx.arc(node.tipX, node.tipY, emphasis ? 9 : 6, 0, Math.PI * 2);
   ctx.fillStyle = withAlpha(color, alpha);
   ctx.fill();
   if (emphasis) {
-    ctx.lineWidth = 1.5 * inv;
+    ctx.lineWidth = Math.max(1.5 * inv, 2);
     ctx.strokeStyle = withAlpha(ink, alpha);
     ctx.stroke();
   }
 };
 
+/** Label heights in world pixels, so titles grow and shrink with the zoom. */
 const LABEL_SIZE: Partial<Record<GraphKind, number>> = {
-  course: 11,
-  semester: 14,
-  subject: 10,
+  course: 26,
+  semester: 46,
+  subject: 20,
 };
 
 const paintSliceNode = (
