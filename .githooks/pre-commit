@@ -5,7 +5,7 @@ cd "$(git rev-parse --show-toplevel)"
 
 staged=$(git diff --cached --name-only --diff-filter=ACMR |
   grep -E '\.(cjs|css|js|json|jsx|md|mjs|ts|tsx)$' |
-  grep -vE '(^|/)package-lock\.json$' || true)
+  grep -vE '(^|/)(package-lock\.json|next-env\.d\.ts)$' || true)
 if [ -z "$staged" ]; then
   exit 0
 fi
