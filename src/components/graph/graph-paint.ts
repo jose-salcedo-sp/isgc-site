@@ -94,7 +94,8 @@ const strokeEdges = (
   core: ReadonlySet<string> | null,
   palette: Palette,
   inv: number,
-  box: { bottom: number; left: number; right: number; top: number }
+  box: { bottom: number; left: number; right: number; top: number },
+  progress: number
 ): void => {
   for (const [index, edge] of layout.edges.entries()) {
     const source = layout.byId.get(edge.a);
@@ -126,9 +127,12 @@ const strokeEdges = (
     ) {
       continue;
     }
-    ctx.strokeStyle = withAlpha(palette.kinds[source.kind], 0.9);
-    ctx.lineWidth = 1.6 * inv;
+    ctx.strokeStyle = withAlpha(palette.kinds.semester, 0.95);
+    ctx.lineWidth = 1.8 * inv;
+    ctx.setLineDash([edge.length, edge.length]);
+    ctx.lineDashOffset = edge.length * (1 - progress);
     ctx.stroke(path);
+    ctx.setLineDash([]);
   }
 };
 
@@ -193,13 +197,6 @@ const focusSets = (
     return { core: null, highlight: null };
   }
   const core = nestedUnder(layout, hubs);
-  const relational = [...hubs].some((id) => {
-    const kind = layout.byId.get(id)?.kind;
-    return kind === "course" || kind === "subject";
-  });
-  if (!relational) {
-    return { core: null, highlight: core };
-  }
   const highlight = new Set(core);
   for (const id of core) {
     const node = layout.byId.get(id);
@@ -292,7 +289,13 @@ const LABEL_SIZE: Partial<Record<GraphKind, number>> = {
 const paintSliceNode = (
   ctx: CanvasRenderingContext2D,
   node: RadialNode,
-  opts: { alpha: number; emphasis: boolean; inv: number; palette: Palette }
+  opts: {
+    alpha: number;
+    emphasis: boolean;
+    inv: number;
+    lit: boolean;
+    palette: Palette;
+  }
 ): void => {
   const { alpha, emphasis, inv, palette } = opts;
   const color = palette.kinds[node.kind];
@@ -305,7 +308,8 @@ const paintSliceNode = (
     LABEL_SIZE[node.kind] ?? 11
   );
   if (node.kind === "subject") {
-    paintTip(ctx, node, color, alpha, inv, emphasis, palette.ink);
+    const dot = opts.lit ? palette.kinds.semester : color;
+    paintTip(ctx, node, dot, alpha, inv, emphasis, palette.ink);
   }
 };
 
@@ -338,8 +342,11 @@ const fillSectors = (
       ? withAlpha(color, alpha * 0.34)
       : withAlpha(palette.ink, alpha * 0.05);
     ctx.fill();
-    ctx.strokeStyle = withAlpha(shade(color, 0.55), alpha * 0.85);
-    ctx.lineWidth = inv;
+    const lit = node.kind === "subject" && (highlight?.has(node.id) ?? false);
+    ctx.strokeStyle = lit
+      ? withAlpha(palette.kinds.semester, 0.95)
+      : withAlpha(shade(color, 0.55), alpha * 0.85);
+    ctx.lineWidth = lit ? 1.6 * inv : inv;
     ctx.stroke();
   }
 };
@@ -394,7 +401,13 @@ const fillNodes = (
     }
     const alpha = nodeAlpha(node, matches, highlight);
     const emphasis = node.id === selected || node.id === hovered;
-    paintSliceNode(ctx, node, { alpha, emphasis, inv, palette });
+    paintSliceNode(ctx, node, {
+      alpha,
+      emphasis,
+      inv,
+      lit: highlight?.has(node.id) ?? false,
+      palette,
+    });
   }
 };
 
@@ -407,6 +420,7 @@ export const paintGraph = (input: {
   palette: Palette;
   paths: readonly Path2D[];
   selectedId: string | null;
+  arcProgress: number;
   size: { dpr: number; h: number; w: number };
   text: GraphText;
   transform: Transform;
@@ -453,7 +467,8 @@ export const paintGraph = (input: {
     core,
     input.palette,
     inv,
-    box
+    box,
+    input.arcProgress
   );
   paintCenter(ctx, input.layout, input.palette, input.text);
   fillNodes(

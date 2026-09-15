@@ -130,7 +130,7 @@ describe("links between slices on the same ring", () => {
       throw new Error("missing nodes");
     }
     const points = radialLinkPath(a, c)
-      .slice(1)
+      .d.slice(1)
       .split("L")
       .map((pair) => pair.split(",").map(Number));
     expect(points.length).toBeGreaterThan(8);

@@ -39,6 +39,7 @@ export interface RadialEdge {
   a: string;
   b: string;
   label: string;
+  length: number;
   path: string;
 }
 
@@ -76,27 +77,36 @@ const ARC_STEPS = 48;
  * keeps every point at or beyond the outer edge, which a Bézier through a
  * single control point does not for widely separated slices.
  */
-const outerLinkPath = (source: RadialNode, target: RadialNode): string => {
+interface Link {
+  d: string;
+  length: number;
+}
+
+const outerLinkPath = (source: RadialNode, target: RadialNode): Link => {
   const delta =
     ((target.angle - source.angle + Math.PI) % (Math.PI * 2)) - Math.PI;
   const height = ARC_BASE + (Math.abs(delta) / Math.PI) * ARC_SPAN;
-  const [x0, y0] = polar(source.angle, source.tip);
-  let path = `M${x0},${y0}`;
+  let [px, py] = polar(source.angle, source.tip);
+  let d = `M${px},${py}`;
+  let length = 0;
   for (let step = 1; step <= ARC_STEPS; step += 1) {
     const s = step / ARC_STEPS;
     const [x, y] = polar(
       source.angle + delta * s,
       source.tip + height * Math.sin(Math.PI * s)
     );
-    path += `L${x},${y}`;
+    length += Math.hypot(x - px, y - py);
+    d += `L${x},${y}`;
+    px = x;
+    py = y;
   }
-  return path;
+  return { d, length };
 };
 
 export const radialLinkPath = (
   source: RadialNode,
   target: RadialNode
-): string => {
+): Link => {
   if (source.proximity === target.proximity) {
     return outerLinkPath(source, target);
   }
@@ -105,7 +115,10 @@ export const radialLinkPath = (
   const [cx1, cy1] = polar(mid, source.tip);
   const [cx2, cy2] = polar(mid, target.radius);
   const [x1, y1] = polar(target.angle, target.radius);
-  return `M${x0},${y0}C${cx1},${cy1},${cx2},${cy2},${x1},${y1}`;
+  return {
+    d: `M${x0},${y0}C${cx1},${cy1},${cx2},${cy2},${x1},${y1}`,
+    length: Math.hypot(x1 - x0, y1 - y0),
+  };
 };
 
 const TWO_PI = Math.PI * 2;
@@ -401,11 +414,13 @@ const edgePaths = (
     if (!source || !target) {
       continue;
     }
+    const link = radialLinkPath(source, target);
     radialEdges.push({
       a: edge.a,
       b: edge.b,
       label: edge.label,
-      path: radialLinkPath(source, target),
+      length: link.length,
+      path: link.d,
     });
   }
   return radialEdges;

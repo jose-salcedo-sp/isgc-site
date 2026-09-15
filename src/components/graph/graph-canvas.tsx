@@ -19,6 +19,11 @@ import { OUTER_EXTENT } from "./graph-theme";
 import { GraphTip } from "./graph-tip";
 import { moveTip } from "./tip-content";
 
+const ARC_DRAW_MS = 500;
+
+const reduced = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 const GraphCanvas = ({
   activeKinds,
   layout,
@@ -44,6 +49,7 @@ const GraphCanvas = ({
   const paletteRef = useRef<Palette | null>(null);
   const rafRef = useRef(0);
   const fitted = useRef(false);
+  const arcStart = useRef(0);
   const cancelFocus = useRef(() => {
     /* filled when a focus tween starts */
   });
@@ -64,16 +70,15 @@ const GraphCanvas = ({
     pointer: number;
   } | null>(null);
 
+  const startArcs = () => {
+    arcStart.current = performance.now();
+  };
+
   const animateTo = (to: Transform) => {
     cancelFocus.current();
-    cancelFocus.current = playFocus(
-      transformRef.current,
-      to,
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-      () => {
-        kickDraw.current();
-      }
-    );
+    cancelFocus.current = playFocus(transformRef.current, to, reduced(), () => {
+      kickDraw.current();
+    });
   };
 
   useEffect(() => {
@@ -100,7 +105,12 @@ const GraphCanvas = ({
         return;
       }
       const scene = sceneRef.current;
+      const elapsed = performance.now() - arcStart.current;
+      const arcProgress = reduced()
+        ? 1
+        : Math.min(1, Math.max(0, elapsed / ARC_DRAW_MS));
       paintGraph({
+        arcProgress,
         canvas,
         hoveredId: hoverRef.current,
         kinds: scene.kinds,
@@ -113,6 +123,9 @@ const GraphCanvas = ({
         text: scene.text,
         transform: transformRef.current,
       });
+      if (arcProgress < 1) {
+        kickDraw.current();
+      }
     };
     const requestDraw = () => {
       if (rafRef.current) {
@@ -227,6 +240,7 @@ const GraphCanvas = ({
     const id = hit?.id ?? null;
     if (hoverRef.current !== id) {
       hoverRef.current = id;
+      startArcs();
       requestDraw();
     }
     moveTip(tipRef.current, event, hit, text);
@@ -250,6 +264,7 @@ const GraphCanvas = ({
       return;
     }
     const hit = hitAt(event.clientX, event.clientY);
+    startArcs();
     onSelect(hit ? hit.id : null);
     if (hit) {
       animateTo(focusOn(hit.x, hit.y, transformRef.current.k, sizeRef.current));
