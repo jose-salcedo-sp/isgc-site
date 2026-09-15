@@ -3,8 +3,6 @@
 import { useEffect, useRef } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
 
-import { buildHitGrid, findNear } from "./graph-hit";
-import type { HitGrid } from "./graph-hit";
 import type { GraphKind, GraphText } from "./graph-model";
 import {
   focusOn,
@@ -14,6 +12,7 @@ import {
   zoomAt,
 } from "./graph-paint";
 import type { Palette, Transform } from "./graph-paint";
+import { pickSlice } from "./graph-radial";
 import type { RadialLayout, RadialNode } from "./graph-radial";
 
 const GraphCanvas = ({
@@ -37,7 +36,6 @@ const GraphCanvas = ({
   const transformRef = useRef<Transform>({ k: 0.45, x: 0, y: 0 });
   const hoverRef = useRef<string | null>(null);
   const sizeRef = useRef({ dpr: 1, h: 600, w: 800 });
-  const gridRef = useRef<HitGrid<RadialNode> | null>(null);
   const pathsRef = useRef<Path2D[]>([]);
   const paletteRef = useRef<Palette | null>(null);
   const rafRef = useRef(0);
@@ -79,7 +77,6 @@ const GraphCanvas = ({
       matches: searchIds,
       selectedId,
     };
-    gridRef.current = buildHitGrid(layout.nodes);
     pathsRef.current = layout.edges.map((edge) => new Path2D(edge.path));
     kickDraw.current();
   }, [activeKinds, layout, searchIds, selectedId]);
@@ -182,12 +179,8 @@ const GraphCanvas = ({
   };
 
   const hitAt = (clientX: number, clientY: number): RadialNode | null => {
-    const grid = gridRef.current;
-    if (!grid) {
-      return null;
-    }
     const [wx, wy] = worldPoint(clientX, clientY);
-    return findNear(grid, wx, wy, 18 / transformRef.current.k);
+    return pickSlice(sceneRef.current.layout.nodes, wx, wy);
   };
 
   const moveTip = (

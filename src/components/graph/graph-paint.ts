@@ -1,6 +1,5 @@
 import type { GraphKind } from "./graph-model";
 import type { RadialLayout, RadialNode } from "./graph-radial";
-import { RING_RADIUS, TIP_RADIUS } from "./graph-theme";
 
 export interface Transform {
   k: number;
@@ -259,30 +258,37 @@ const paintSliceNode = (
   }
 };
 
-/** Spokes on the slice boundaries: strong per semester, faint per class. */
-const strokeSpokes = (
+/** Donut segments: one annular sector per slice, one band per level. */
+const fillSectors = (
   ctx: CanvasRenderingContext2D,
   nodes: readonly RadialNode[],
   kinds: ReadonlySet<GraphKind>,
+  matches: ReadonlySet<string> | null,
+  highlight: ReadonlySet<string> | null,
+  selected: string | null,
+  hovered: string | null,
   palette: Palette,
   inv: number
 ): void => {
-  const outer = TIP_RADIUS.at(-1) ?? 0;
   for (const node of nodes) {
-    const from =
-      node.kind === "semester" ? RING_RADIUS[1] : (RING_RADIUS[2] ?? 0);
-    if (node.kind === "subject" || !kinds.has(node.kind)) {
+    if (!kinds.has(node.kind) || node.tip <= node.radius) {
       continue;
     }
-    const a = node.a0 - Math.PI / 2;
+    const alpha = nodeAlpha(node, matches, highlight);
+    const emphasis = node.id === selected || node.id === hovered;
+    const a0 = node.a0 - Math.PI / 2;
+    const a1 = node.a1 - Math.PI / 2;
     ctx.beginPath();
-    ctx.moveTo((from ?? 0) * Math.cos(a), (from ?? 0) * Math.sin(a));
-    ctx.lineTo(outer * Math.cos(a), outer * Math.sin(a));
-    ctx.strokeStyle = withAlpha(
-      palette.ink,
-      node.kind === "semester" ? 0.22 : 0.07
+    ctx.arc(0, 0, node.radius, a0, a1);
+    ctx.arc(0, 0, node.tip, a1, a0, true);
+    ctx.closePath();
+    ctx.fillStyle = withAlpha(
+      palette.kinds[node.kind],
+      alpha * (emphasis ? 0.26 : 0.07)
     );
-    ctx.lineWidth = (node.kind === "semester" ? 1.2 : 0.6) * inv;
+    ctx.fill();
+    ctx.strokeStyle = withAlpha(palette.ink, alpha * 0.16);
+    ctx.lineWidth = inv;
     ctx.stroke();
   }
 };
@@ -353,17 +359,17 @@ export const paintGraph = (input: {
     right: (w / 2 - t.x) * inv + pad,
     top: (-h / 2 - t.y) * inv - pad,
   };
-  for (const radius of [...RING_RADIUS, ...TIP_RADIUS]) {
-    if (!radius) {
-      continue;
-    }
-    ctx.beginPath();
-    ctx.arc(0, 0, radius, 0, Math.PI * 2);
-    ctx.strokeStyle = input.palette.ring;
-    ctx.lineWidth = inv;
-    ctx.stroke();
-  }
-  strokeSpokes(ctx, input.layout.nodes, input.kinds, input.palette, inv);
+  fillSectors(
+    ctx,
+    input.layout.nodes,
+    input.kinds,
+    input.matches,
+    highlight,
+    selected,
+    input.hoveredId,
+    input.palette,
+    inv
+  );
   strokeEdges(
     ctx,
     input.layout,

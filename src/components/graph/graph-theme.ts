@@ -1,10 +1,10 @@
 import type { GraphKind } from "./graph-model";
 
 /** Where each ring's labels start. */
-export const RING_RADIUS = [0, 240, 480, 980] as const;
+export const RING_RADIUS = [0, 200, 440, 920] as const;
 
 /** Outer end of each ring, where its links and dots sit. */
-export const TIP_RADIUS = [0, 440, 900, 1240] as const;
+export const TIP_RADIUS = [0, 420, 900, 1200] as const;
 
 export const KIND_ORDER = [
   "program",

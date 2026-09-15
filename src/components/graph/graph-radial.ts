@@ -75,6 +75,30 @@ export const radialLinkPath = (
   return `M${x0},${y0}C${cx1},${cy1},${cx2},${cy2},${x1},${y1}`;
 };
 
+const TWO_PI = Math.PI * 2;
+
+/** Finds the slice under a world point: inside its band and its angular wedge. */
+export const pickSlice = (
+  nodes: readonly RadialNode[],
+  x: number,
+  y: number
+): RadialNode | null => {
+  const radius = Math.hypot(x, y);
+  const raw = Math.atan2(y, x) + Math.PI / 2;
+  const angle = ((raw % TWO_PI) + TWO_PI) % TWO_PI;
+  for (const node of nodes) {
+    if (
+      radius >= node.radius &&
+      radius <= node.tip &&
+      angle >= node.a0 &&
+      angle < node.a1
+    ) {
+      return node;
+    }
+  }
+  return null;
+};
+
 const leafCount = (node: TreeNode): number => {
   if (node.children.length === 0) {
     return 1;
