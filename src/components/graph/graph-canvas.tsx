@@ -61,7 +61,6 @@ const GraphCanvas = ({
     layout,
     matches: searchIds,
     selectedId,
-    text,
   });
   const dragRef = useRef<{
     lastX: number;
@@ -87,11 +86,10 @@ const GraphCanvas = ({
       layout,
       matches: searchIds,
       selectedId,
-      text,
     };
     pathsRef.current = layout.edges.map((edge) => new Path2D(edge.path));
     kickDraw.current();
-  }, [activeKinds, layout, searchIds, selectedId, text]);
+  }, [activeKinds, layout, searchIds, selectedId]);
 
   useEffect(() => {
     const wrap = wrapRef.current;
@@ -120,7 +118,6 @@ const GraphCanvas = ({
         paths: pathsRef.current,
         selectedId: scene.selectedId,
         size: sizeRef.current,
-        text: scene.text,
         transform: transformRef.current,
       });
       if (arcProgress < 1) {
