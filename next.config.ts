@@ -14,6 +14,9 @@ const nextConfig: NextConfig = {
         source: "/:path*",
       },
     ]),
+  images: {
+    remotePatterns: [{ hostname: "images.unsplash.com", protocol: "https" }],
+  },
   reactCompiler: process.env.NODE_ENV === "production",
 };
 

@@ -25,13 +25,13 @@ export const clampK = (value: number): number =>
 const fallbackKind = (css: CSSStyleDeclaration, kind: GraphKind): string =>
   css.getPropertyValue(`--graph-${kind}`).trim() ||
   css.getPropertyValue("--foreground").trim() ||
-  "#5a54c9";
+  "#8a1538";
 
 export const readPalette = (root: HTMLElement): Palette => {
   const css = getComputedStyle(root);
   return {
-    bg: css.getPropertyValue("--background").trim() || "#f5f4f9",
-    ink: css.getPropertyValue("--foreground").trim() || "#1e1b2e",
+    bg: css.getPropertyValue("--background").trim() || "#f7f4ee",
+    ink: css.getPropertyValue("--foreground").trim() || "#262326",
     kinds: {
       course: fallbackKind(css, "course"),
       program: fallbackKind(css, "program"),

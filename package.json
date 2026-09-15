@@ -21,6 +21,7 @@
     "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {
+    "gsap": "^3",
     "next": "^16",
     "react": "^19",
     "react-dom": "^19"
