@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
@@ -91,6 +92,7 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => (
       />
       {children}
       <SiteMotion />
+      <Analytics />
     </body>
   </html>
 );
