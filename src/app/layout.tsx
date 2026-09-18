@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 
+import { siteUrl } from "@/lib/site";
+
+const defaultSiteUrl = "https://isgc-site.vercel.app";
+
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) =>
   children;
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://isgc-site.vercel.app"
-  ),
+  metadataBase: URL.canParse(siteUrl)
+    ? new URL(siteUrl)
+    : new URL(defaultSiteUrl),
 };
 
 export default RootLayout;
