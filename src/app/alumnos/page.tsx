@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import {
   FaqAccordion,
   StudentResourceSearch,
@@ -8,21 +10,40 @@ import {
   PageSection,
   SectionHeading,
 } from "@/components/page-frame";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
 import {
   externalLinks,
   getCurrentHomepageEvents,
   quickAccess,
 } from "@/content/site-content";
+import { siteUrl } from "@/lib/site";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
-export const metadata = {
-  description: "Accesos, recursos y avisos para alumnos de ISGC.",
-  title: "Alumnos | ISGC",
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/alumnos",
+  },
+  description:
+    "Centro de alumnos ISGC en la Universidad Panamericana Guadalajara: accesos frecuentes, trámites, recursos de estudio, avisos y herramientas para tu formación.",
+  openGraph: {
+    description:
+      "Centro de alumnos ISGC en la Universidad Panamericana Guadalajara: accesos frecuentes, trámites, recursos de estudio, avisos y herramientas para tu formación.",
+    title: "Alumnos | ISGC",
+    type: "website",
+    url: `${siteUrl}/alumnos`,
+  },
+  title: "Alumnos",
 };
 
 const AlumnosPage = () => (
   <PageFrame>
+    <BreadcrumbJsonLd
+      items={[
+        { name: "Inicio", path: "/" },
+        { name: "Alumnos", path: "/alumnos" },
+      ]}
+    />
     <PageIntro
       title="Todo lo que necesitas para seguir avanzando."
       description="Avisos, accesos frecuentes, trámites, estudio y desarrollo profesional en un solo lugar."

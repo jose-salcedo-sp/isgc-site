@@ -50,7 +50,6 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => (
         contactPoint={{
           contactType: "Coordinación académica",
           email: org.coordination.email,
-          name: org.coordination.name,
         }}
         description={org.summary}
         logo={`${siteUrl}/isgc-logo-embedded.png`}

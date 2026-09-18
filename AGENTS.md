@@ -26,8 +26,19 @@ Next.js App Router (TS, strict) · React 19 · React Compiler · Tailwind v4 · 
 src/
   app/           Next.js routes
   lib/           shared utilities and tests
+  components/seo JSON-LD helpers (next-seo + local JsonLd)
 .cursor/rules/   project rules Cursor injects into every session
 ```
+
+## SEO
+
+- Canonical origin lives in `src/lib/site.ts` (`siteUrl` and org constants).
+- Route metadata uses Next.js `metadata` exports: title (≤ 60 chars rendered), description (120–160 chars), canonical, and Open Graph.
+- Structured data: `OrganizationJsonLd` in `layout.tsx`; local `<JsonLd>` for Course, FAQPage, and BreadcrumbList.
+- New routes must export metadata, be added to `siteRoutes` in `src/lib/site.ts`, and appear in `src/app/sitemap.ts`.
+- Guard test: `src/lib/seo.test.ts` statically parses page sources for metadata bounds and sitemap coverage — do not import page modules in that test.
+- No hand-written `<meta>` tags in JSX; JSON-LD claims must match visible page content.
+- See `.cursor/rules/03-seo.mdc` for the full contract.
 
 ## Workflow
 

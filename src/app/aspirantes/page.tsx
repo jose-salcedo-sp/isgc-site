@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import { FaqAccordion } from "@/components/home-interactions";
 import {
   ExternalLink,
@@ -6,15 +8,42 @@ import {
   PageSection,
   SectionHeading,
 } from "@/components/page-frame";
-import { externalLinks } from "@/content/site-content";
+import { JsonLd } from "@/components/seo/json-ld";
+import { audienceFaqs, externalLinks } from "@/content/site-content";
+import { siteUrl } from "@/lib/site";
 
-export const metadata = {
-  description: "Información para conocer ISGC, admisiones y opciones de apoyo.",
-  title: "Aspirantes | ISGC",
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/aspirantes",
+  },
+  description:
+    "Información para aspirantes a la Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: admisiones, becas y visitas.",
+  openGraph: {
+    description:
+      "Información para aspirantes a la Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: admisiones, becas y visitas.",
+    title: "Aspirantes | ISGC",
+    type: "website",
+    url: `${siteUrl}/aspirantes`,
+  },
+  title: "Aspirantes",
 };
 
 const AspirantesPage = () => (
   <PageFrame>
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: audienceFaqs.aspirantes.map((faq) => ({
+          "@type": "Question",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+          name: faq.question,
+        })),
+      }}
+    />
     <PageIntro
       title="Empieza por conocer cómo puedes entrar y qué vas a construir aquí."
       description="Encuentra el proceso oficial de admisión, opciones de apoyo económico, una visita al campus y un contacto directo."
