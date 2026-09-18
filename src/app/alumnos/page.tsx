@@ -10,8 +10,9 @@ import {
   PageSection,
   SectionHeading,
 } from "@/components/page-frame";
-import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
+import { FaqJsonLd } from "@/components/seo/faq-json-ld";
 import {
+  audienceFaqs,
   externalLinks,
   getCurrentHomepageEvents,
   quickAccess,
@@ -29,24 +30,26 @@ export const metadata: Metadata = {
   openGraph: {
     description:
       "Centro de alumnos ISGC en la Universidad Panamericana Guadalajara: accesos frecuentes, trámites, recursos de estudio, avisos y herramientas para tu formación.",
-    title: "Alumnos | ISGC",
+    title: "Centro de alumnos UP Guadalajara | ISGC",
     type: "website",
     url: `${siteUrl}/alumnos`,
   },
-  title: "Alumnos",
+  title: "Centro de alumnos UP Guadalajara",
+  twitter: {
+    description:
+      "Centro de alumnos ISGC en la Universidad Panamericana Guadalajara: accesos frecuentes, trámites, recursos de estudio, avisos y herramientas para tu formación.",
+    title: "Centro de alumnos UP Guadalajara | ISGC",
+  },
 };
 
 const AlumnosPage = () => (
   <PageFrame>
-    <BreadcrumbJsonLd
-      items={[
-        { name: "Inicio", path: "/" },
-        { name: "Alumnos", path: "/alumnos" },
-      ]}
-    />
+    <FaqJsonLd items={audienceFaqs.alumnos} />
     <PageIntro
-      title="Todo lo que necesitas para seguir avanzando."
+      crumb={{ name: "Alumnos", path: "/alumnos" }}
       description="Avisos, accesos frecuentes, trámites, estudio y desarrollo profesional en un solo lugar."
+      lede="Todo lo que necesitas para seguir avanzando."
+      title="Centro de alumnos de Ingeniería en Sistemas y Gráficas Computacionales"
     />
     <PageSection>
       <SectionHeading title="Avisos y próximos eventos" />
@@ -130,7 +133,7 @@ const AlumnosPage = () => (
         </article>
       </div>
     </PageSection>
-    <PageSection>
+    <PageSection id="faq">
       <SectionHeading title="Preguntas de alumnos" />
       <FaqAccordion audience="alumnos" />
     </PageSection>

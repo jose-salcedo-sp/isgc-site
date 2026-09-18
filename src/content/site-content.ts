@@ -158,9 +158,6 @@ export const getCurrentHomepageEvents = () =>
       new Date(`${event.expiresAt}T23:59:59-06:00`).getTime() >= Date.now()
   );
 
-export const campusImage =
-  "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&w=1400&q=85";
-
 export const capabilities = [
   {
     text: "Entiende un problema, ordénalo y encuentra una ruta clara para resolverlo.",
@@ -208,8 +205,6 @@ export const projects = [
   {
     authors: "Equipo Media Lab",
     date: "Archivo · 2015",
-    image:
-      "https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=1200&q=85",
     learning:
       "Diseñar una experiencia que conecte investigación, tecnología y divulgación.",
     process:
@@ -219,8 +214,6 @@ export const projects = [
   {
     authors: "Ejemplo ilustrativo",
     date: "Ejemplo de aplicación",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85",
     learning:
       "Comunicar hallazgos con claridad y tomar decisiones a partir de datos.",
     process:

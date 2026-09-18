@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import type { projects } from "@/content/site-content";
 
 export const ProjectCard = ({
@@ -19,18 +17,5 @@ export const ProjectCard = ({
         ? "Proyecto realizado en 2015."
         : "Aplicación ilustrativa de análisis de datos."}
     </p>
-    <figure className="mt-auto pt-6">
-      <Image
-        src={project.image}
-        alt=""
-        width={1200}
-        height={600}
-        sizes="(max-width: 767px) 100vw, 550px"
-        className="rounded-card aspect-2/1 w-full object-cover"
-      />
-      <figcaption className="text-piedra mt-2 text-xs">
-        Imagen ilustrativa de referencia.
-      </figcaption>
-    </figure>
   </article>
 );

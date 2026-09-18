@@ -8,7 +8,7 @@ import {
   PageSection,
   SectionHeading,
 } from "@/components/page-frame";
-import { JsonLd } from "@/components/seo/json-ld";
+import { FaqJsonLd } from "@/components/seo/faq-json-ld";
 import { audienceFaqs, externalLinks } from "@/content/site-content";
 import { siteUrl } from "@/lib/site";
 
@@ -21,32 +21,26 @@ export const metadata: Metadata = {
   openGraph: {
     description:
       "Información para aspirantes a la Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: admisiones, becas y visitas.",
-    title: "Aspirantes | ISGC",
+    title: "Admisiones UP Guadalajara | ISGC",
     type: "website",
     url: `${siteUrl}/aspirantes`,
   },
-  title: "Aspirantes",
+  title: "Admisiones UP Guadalajara",
+  twitter: {
+    description:
+      "Información para aspirantes a la Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: admisiones, becas y visitas.",
+    title: "Admisiones UP Guadalajara | ISGC",
+  },
 };
 
 const AspirantesPage = () => (
   <PageFrame>
-    <JsonLd
-      data={{
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: audienceFaqs.aspirantes.map((faq) => ({
-          "@type": "Question",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: faq.answer,
-          },
-          name: faq.question,
-        })),
-      }}
-    />
+    <FaqJsonLd items={audienceFaqs.aspirantes} />
     <PageIntro
-      title="Empieza por conocer cómo puedes entrar y qué vas a construir aquí."
+      crumb={{ name: "Aspirantes", path: "/aspirantes" }}
       description="Encuentra el proceso oficial de admisión, opciones de apoyo económico, una visita al campus y un contacto directo."
+      lede="Empieza por conocer cómo puedes entrar y qué vas a construir aquí."
+      title="Admisión a Ingeniería en Sistemas y Gráficas Computacionales"
     />
     <PageSection>
       <SectionHeading
@@ -130,7 +124,7 @@ const AspirantesPage = () => (
         </a>
       </div>
     </PageSection>
-    <PageSection tone="marfil">
+    <PageSection id="faq" tone="marfil">
       <SectionHeading title="Preguntas de aspirantes" />
       <FaqAccordion audience="aspirantes" />
     </PageSection>

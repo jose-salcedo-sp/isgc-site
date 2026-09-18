@@ -6,7 +6,6 @@ import {
   PageSection,
   SectionHeading,
 } from "@/components/page-frame";
-import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
 import {
   campusSpaces,
   coordination,
@@ -27,24 +26,25 @@ export const metadata: Metadata = {
   openGraph: {
     description:
       "Comunidad ISGC en la Universidad Panamericana Guadalajara: equipo académico, espacios del campus, coordinación, noticias y eventos de Ingeniería en Sistemas.",
-    title: "Comunidad | ISGC",
+    title: "Comunidad UP Guadalajara | ISGC",
     type: "website",
     url: `${siteUrl}/comunidad`,
   },
-  title: "Comunidad",
+  title: "Comunidad UP Guadalajara",
+  twitter: {
+    description:
+      "Comunidad ISGC en la Universidad Panamericana Guadalajara: equipo académico, espacios del campus, coordinación, noticias y eventos de Ingeniería en Sistemas.",
+    title: "Comunidad UP Guadalajara | ISGC",
+  },
 };
 
 const ComunidadPage = () => (
   <PageFrame>
-    <BreadcrumbJsonLd
-      items={[
-        { name: "Inicio", path: "/" },
-        { name: "Comunidad", path: "/comunidad" },
-      ]}
-    />
     <PageIntro
-      title="La carrera también se construye con otras personas."
+      crumb={{ name: "Comunidad", path: "/comunidad" }}
       description="Conoce al equipo académico, los espacios del campus y las noticias que conectan a la comunidad ISGC."
+      lede="La carrera también se construye con otras personas."
+      title="Comunidad de Ingeniería en Sistemas y Gráficas Computacionales"
     />
     <PageSection>
       <SectionHeading title="Equipo académico" />
