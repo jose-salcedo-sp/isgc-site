@@ -25,10 +25,22 @@
     "mobileAria": "Navegación móvil",
     "openMenu": "Abrir menú",
     "items": [
-      { "href": "/carrera", "label": "Carrera" },
-      { "href": "/proyectos", "label": "Proyectos" },
-      { "href": "/comunidad", "label": "Comunidad" },
-      { "href": "/alumnos", "label": "Alumnos" }
+      {
+        "href": "/carrera",
+        "label": "Carrera"
+      },
+      {
+        "href": "/proyectos",
+        "label": "Proyectos"
+      },
+      {
+        "href": "/comunidad",
+        "label": "Comunidad"
+      },
+      {
+        "href": "/alumnos",
+        "label": "Alumnos"
+      }
     ]
   },
   "locales": {
@@ -59,9 +71,18 @@
     "title": "La carrera de un vistazo"
   },
   "quickAccess": [
-    { "id": "up4u", "label": "UP4U" },
-    { "id": "ruta", "label": "Tu Ruta Ideal" },
-    { "id": "directory", "label": "Directorio institucional" }
+    {
+      "id": "up4u",
+      "label": "UP4U"
+    },
+    {
+      "id": "ruta",
+      "label": "Tu Ruta Ideal"
+    },
+    {
+      "id": "directory",
+      "label": "Directorio institucional"
+    }
   ],
   "resources": {
     "searchLabel": "Buscar recursos",
@@ -221,10 +242,22 @@
     }
   ],
   "mediaLab": [
-    { "date": "2013", "title": "Pirámide de Chichén Itzá" },
-    { "date": "2014", "title": "LARVA Game Studios" },
-    { "date": "2014", "title": "Montaña rusa virtual" },
-    { "date": "2015", "title": "Fósiles en realidad aumentada" }
+    {
+      "date": "2013",
+      "title": "Pirámide de Chichén Itzá"
+    },
+    {
+      "date": "2014",
+      "title": "LARVA Game Studios"
+    },
+    {
+      "date": "2014",
+      "title": "Montaña rusa virtual"
+    },
+    {
+      "date": "2015",
+      "title": "Fósiles en realidad aumentada"
+    }
   ],
   "faqs": {
     "alumnos": [
@@ -618,6 +651,236 @@
       ],
       "helpTitle": "¿Quieres orientación?",
       "helpText": "Escribe a Coordinación para resolver dudas sobre prácticas, empleo o cómo presentar tu trabajo."
+    }
+  },
+  "courses": {
+    "calculo-diferencial": {
+      "name": "Cálculo Diferencial",
+      "description": "Límites, continuidad y derivadas para modelar cambio. Base matemática para física, gráficas y análisis de algoritmos."
+    },
+    "algebra": {
+      "name": "Álgebra",
+      "description": "Álgebra universitaria: ecuaciones, funciones y estructuras algebraicas usadas en programación y matemáticas discretas posteriores."
+    },
+    "analisis-y-diseno-de-algoritmos": {
+      "name": "Análisis y Diseño de Algoritmos",
+      "description": "Cómo plantear un problema, diseñar la solución paso a paso y medir eficiencia. Primer curso de pensamiento computacional del plan."
+    },
+    "redaccion": {
+      "name": "Redacción",
+      "description": "Escritura clara y correcta en español: reportes, argumentos y documentación que un ingeniero necesita comunicar."
+    },
+    "fisica": {
+      "name": "Física",
+      "description": "Mecánica y principios físicos que luego aparecen en simulación, videojuegos y modelado del mundo real."
+    },
+    "historia-de-la-cultura": {
+      "name": "Historia de la Cultura",
+      "description": "Formación humanística UP: contexto cultural e histórico para situar la tecnología en la sociedad."
+    },
+    "calculo-integral": {
+      "name": "Cálculo Integral",
+      "description": "Integrales y aplicaciones: áreas, acumulación y herramientas para probabilidad, física y métodos numéricos."
+    },
+    "entorno-economico": {
+      "name": "Entorno Económico",
+      "description": "Cómo funciona el entorno económico en el que se venden productos de software y se toman decisiones de negocio."
+    },
+    "programacion-orientada-a-objetos": {
+      "name": "Programación Orientada a Objetos",
+      "description": "Clases, objetos, herencia y diseño modular. Base para casi todo el software del resto de la carrera."
+    },
+    "programacion-avanzada": {
+      "name": "Programación Avanzada",
+      "description": "Técnicas de programación más allá de lo introductorio: abstracción, bibliotecas y código listo para proyectos más grandes."
+    },
+    "circuitos-digitales-y-electricos": {
+      "name": "Circuitos Digitales y Eléctricos",
+      "description": "Lógica digital y circuitos: cómo la máquina representa bits y ejecuta instrucciones debajo del software."
+    },
+    "modelacion-digital": {
+      "name": "Modelación Digital",
+      "description": "Representar formas y escenas en 2D/3D con herramientas digitales. Entrada al eje de gráficas del programa."
+    },
+    "persona-y-sociedad": {
+      "name": "Persona y Sociedad",
+      "description": "Formación antropológica UP: persona, comunidad y responsabilidad social del ingeniero."
+    },
+    "algebra-lineal": {
+      "name": "Álgebra Lineal",
+      "description": "Vectores, matrices y transformaciones. Matemática central de gráficas, visión, IA y simulación."
+    },
+    "desarrollo-de-aplicaciones-web": {
+      "name": "Desarrollo de Aplicaciones Web",
+      "description": "Construir aplicaciones en el navegador y el servidor: interfaces, APIs y productos digitales en la web."
+    },
+    "programacion-y-estructura-de-datos": {
+      "name": "Programación y Estructura de Datos",
+      "description": "Listas, árboles, grafos, tablas hash y cómo elegir la estructura correcta para rendimiento y claridad."
+    },
+    "proyectos-de-inversion-e-introduccion-a-la-valuacion-de-empresas": {
+      "name": "Proyectos de Inversión e Introducción a la Valuación de Empresas",
+      "description": "Evaluar si un proyecto o empresa vale la pena: costos, retorno y valuación básica para emprender o decidir inversión."
+    },
+    "quimica": {
+      "name": "Química",
+      "description": "Principios químicos de formación ingenieril; contexto científico junto a física y matemáticas."
+    },
+    "direccion-de-proyectos": {
+      "name": "Dirección de Proyectos",
+      "description": "Planear, estimar y coordinar trabajo técnico: alcance, tiempos, equipo y entrega."
+    },
+    "etica": {
+      "name": "Ética",
+      "description": "Criterio moral para decidir en conflictos profesionales, de datos, de producto y de impacto social."
+    },
+    "calculo-vectorial": {
+      "name": "Cálculo Vectorial",
+      "description": "Campos vectoriales, curvas y superficies. Herramienta para geometría, física y gráficas 3D."
+    },
+    "matematicas-de-la-computacion": {
+      "name": "Matemáticas de la Computación",
+      "description": "Matemática discreta para computación: lógica, combinatoria, grafos y fundamentos de lenguajes y algoritmos."
+    },
+    "introduccion-a-las-bases-de-datos": {
+      "name": "Introducción a las Bases de Datos",
+      "description": "Modelar, consultar y persistir información: diseño relacional y uso de bases de datos en aplicaciones."
+    },
+    "multimedios-y-graficas-computacionales": {
+      "name": "Multimedios y Gráficas Computacionales",
+      "description": "Imagen, audio, video y el pipeline gráfico: cómo la computadora genera y combina medios."
+    },
+    "sistemas-operativos": {
+      "name": "Sistemas Operativos",
+      "description": "Procesos, memoria, archivos y concurrencia: el software que administra el hardware."
+    },
+    "desarrollo-de-plugins": {
+      "name": "Desarrollo de Plugins",
+      "description": "Extender herramientas existentes (motores, DCC o hosts) con plugins: APIs, empaquetado e integración."
+    },
+    "antropologia-teologica-i": {
+      "name": "Antropología Teológica I",
+      "description": "Bloque de identidad UP: persona y sentido, en diálogo con la formación profesional."
+    },
+    "probabilidad-y-estadistica": {
+      "name": "Probabilidad y Estadística",
+      "description": "Incertidumbre, muestreo e inferencia. Base para IA, ciencia de datos y modelos probabilísticos."
+    },
+    "ecuaciones-diferenciales": {
+      "name": "Ecuaciones Diferenciales",
+      "description": "Modelos de sistemas que cambian en el tiempo: física, control y simulación."
+    },
+    "ingenieria-de-software": {
+      "name": "Ingeniería de Software",
+      "description": "Requerimientos, diseño, calidad y proceso para construir software que se pueda mantener y entregar en equipo."
+    },
+    "procesamiento-de-imagenes": {
+      "name": "Procesamiento de Imágenes",
+      "description": "Filtros, transformación y análisis de imágenes digitales. Puente entre gráficas y visión computacional."
+    },
+    "metodos-numericos": {
+      "name": "Métodos Numéricos",
+      "description": "Aproximar soluciones en la computadora: raíces, sistemas lineales, interpolación e integración numérica."
+    },
+    "desarrollo-de-videojuegos": {
+      "name": "Desarrollo de Videojuegos",
+      "description": "Gameplay, motores y producción de un juego: integración de gráficos, input y lógica en un producto jugable."
+    },
+    "antropologia-teologica-ii": {
+      "name": "Antropología Teológica II",
+      "description": "Continúa la formación teológica y antropológica del tronco común UP."
+    },
+    "algebra-geometrica-conformal": {
+      "name": "Álgebra Geométrica Conformal",
+      "description": "Álgebra geométrica para representar transformaciones, esferas y geometría 3D de forma unificada. Sello distintivo del plan de gráficas."
+    },
+    "soluciones-graficas-para-moviles": {
+      "name": "Soluciones Gráficas para Móviles",
+      "description": "Gráficos e interfaces en teléfonos y tablets: rendimiento, GPU móvil y experiencias visuales en apps."
+    },
+    "geometria-computacional": {
+      "name": "Geometría Computacional",
+      "description": "Algoritmos sobre puntos, polígonos y espacio: envolventes, intersecciones, triangulación y consultas espaciales."
+    },
+    "computo-distribuido": {
+      "name": "Cómputo Distribuido",
+      "description": "Sistemas en varias máquinas: red, consistencia, fallos y cómputo en la nube."
+    },
+    "seminario-de-aplicaciones-alternativas": {
+      "name": "Seminario de Aplicaciones Alternativas",
+      "description": "Proyectos y aplicaciones no convencionales del cómputo y las gráficas: explorar usos en industria, arte, salud u otros dominios."
+    },
+    "realidad-aumentada": {
+      "name": "Realidad Aumentada",
+      "description": "Superponer gráficos al mundo real: tracking, registro de cámara e interacción en AR."
+    },
+    "filosofia-social": {
+      "name": "Filosofía Social",
+      "description": "Sociedad, bien común y crítica de instituciones; marco para el impacto de la tecnología."
+    },
+    "inteligencia-artificial-en-videojuegos": {
+      "name": "Inteligencia Artificial en Videojuegos",
+      "description": "Agentes, pathfinding, decisión y comportamiento para NPCs y sistemas de juego."
+    },
+    "fundamentos-de-programacion-en-paralelo": {
+      "name": "Fundamentos de Programación en Paralelo",
+      "description": "Dividir trabajo en hilos y núcleos: sincronización, GPU/CPU y el modelo mental del paralelismo."
+    },
+    "diseno-de-interfaces": {
+      "name": "Diseño de Interfaces",
+      "description": "Diseñar la interacción persona-computadora: usabilidad, prototipos y interfaces para software y experiencias inmersivas."
+    },
+    "graficacion-avanzada-por-computadora": {
+      "name": "Graficación Avanzada por Computadora",
+      "description": "Pipeline de render avanzado: iluminación, shaders, GPU y técnicas de imagen de alta calidad."
+    },
+    "tecnicas-de-interpretacion-avanzadas": {
+      "name": "Técnicas de Interpretación Avanzadas",
+      "description": "Técnicas avanzadas de interpretación (visual o computacional) aplicadas al eje gráfico-técnico del semestre. El PDF no detalla el temario."
+    },
+    "hombre-y-mundo-contemporaneo": {
+      "name": "Hombre y Mundo Contemporáneo",
+      "description": "Lectura del mundo actual: cultura, tecnología y persona en el tronco humanístico UP."
+    },
+    "optativa-i": {
+      "name": "Optativa I",
+      "description": "Elige una materia del bloque Optativas I · II (todas de 6 créditos en el plan publicado)."
+    },
+    "compiladores": {
+      "name": "Compiladores",
+      "description": "Cómo un lenguaje se vuelve código ejecutable: análisis léxico/sintáctico, semántica y generación de código."
+    },
+    "programacion-avanzada-en-paralelo": {
+      "name": "Programación Avanzada en Paralelo",
+      "description": "Paralelismo a mayor escala: rendimiento, patrones avanzados y aprovechamiento de hardware paralelo."
+    },
+    "emprendedores": {
+      "name": "Emprendedores",
+      "description": "De la idea al emprendimiento: validar, prototipar y plantear un negocio de base tecnológica."
+    },
+    "simulacion-grafica": {
+      "name": "Simulación Gráfica",
+      "description": "Simular fenómenos y entornos en pantalla: física visual, tiempo real y representación gráfica de sistemas."
+    },
+    "direccion-de-empresas": {
+      "name": "Dirección de Empresas",
+      "description": "Cómo se dirige una organización: estrategia, personas y operación, más allá del código."
+    },
+    "etica-profesional": {
+      "name": "Ética Profesional",
+      "description": "Deontología del ingeniero: confidencialidad, calidad, conflicto de interés y responsabilidad frente al usuario."
+    },
+    "optativa-ii": {
+      "name": "Optativa II",
+      "description": "Segunda optativa del mismo catálogo de seis materias."
+    },
+    "especialidad-9": {
+      "name": "Especialidad",
+      "description": "Año 4+1: un año de especialidad (dos semestres) para graduarte con un segundo título. El plan no publica créditos de este bloque."
+    },
+    "especialidad-10": {
+      "name": "Especialidad",
+      "description": "Continúa la especialidad elegida. Opciones listadas en specialties."
     }
   }
 }

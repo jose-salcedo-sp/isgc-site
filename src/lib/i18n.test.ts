@@ -17,6 +17,12 @@ describe("i18n", () => {
     expect(pageKeys(enUS)).toStrictEqual(pageKeys(es));
   });
 
+  it("keeps the same course ids in every locale", () => {
+    const courseIds = Object.keys(es.courses).toSorted();
+    expect(Object.keys(enGB.courses).toSorted()).toStrictEqual(courseIds);
+    expect(Object.keys(enUS.courses).toSorted()).toStrictEqual(courseIds);
+  });
+
   it("negotiates locale from Accept-Language", () => {
     expect(negotiateLocale("en-GB,en;q=0.8")).toBe("en-GB");
     expect(negotiateLocale("en-US,en;q=0.5")).toBe("en-US");
