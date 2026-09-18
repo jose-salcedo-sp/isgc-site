@@ -7,7 +7,6 @@ import {
   SectionHeading,
 } from "@/components/page-frame";
 import { ProjectCard } from "@/components/project-card";
-import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
 import { mediaLabArchive, projects } from "@/content/site-content";
 import { siteUrl } from "@/lib/site";
 
@@ -20,24 +19,25 @@ export const metadata: Metadata = {
   openGraph: {
     description:
       "Proyectos de Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: Media Lab, código, datos y experiencias digitales.",
-    title: "Proyectos | ISGC",
+    title: "Proyectos y Media Lab | ISGC",
     type: "website",
     url: `${siteUrl}/proyectos`,
   },
-  title: "Proyectos",
+  title: "Proyectos y Media Lab",
+  twitter: {
+    description:
+      "Proyectos de Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: Media Lab, código, datos y experiencias digitales.",
+    title: "Proyectos y Media Lab | ISGC",
+  },
 };
 
 const ProyectosPage = () => (
   <PageFrame>
-    <BreadcrumbJsonLd
-      items={[
-        { name: "Inicio", path: "/" },
-        { name: "Proyectos", path: "/proyectos" },
-      ]}
-    />
     <PageIntro
-      title="Lo que aprendes toma forma en proyectos."
+      crumb={{ name: "Proyectos", path: "/proyectos" }}
       description="Explora problemas, procesos y resultados de equipos que trabajan con código, datos, visualización y experiencias digitales."
+      lede="Lo que aprendes toma forma en proyectos."
+      title="Proyectos de Ingeniería en Sistemas y Gráficas Computacionales"
     />
     <PageSection>
       <SectionHeading

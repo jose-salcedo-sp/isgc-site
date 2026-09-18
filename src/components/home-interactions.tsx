@@ -142,13 +142,15 @@ export const FaqAccordion = ({
           <h3 className="text-grafito py-4 font-serif text-2xl">
             {group.title}
           </h3>
-          {group.items.map((item) => {
+          {group.items.map((item, index) => {
             const key = `${group.title}-${item.question}`;
+            const panelId = `faq-${group.title}-${index}`;
             const isOpen = open === key;
             return (
               <div key={key}>
                 <button
                   type="button"
+                  aria-controls={panelId}
                   aria-expanded={isOpen}
                   onClick={() => setOpen(isOpen ? null : key)}
                   className="text-grafito flex w-full items-center justify-between gap-6 py-5 text-left font-semibold"
@@ -161,11 +163,13 @@ export const FaqAccordion = ({
                     {isOpen ? "−" : "+"}
                   </span>
                 </button>
-                {isOpen && (
-                  <p className="text-piedra max-w-2xl pr-8 pb-5">
-                    {item.answer}
-                  </p>
-                )}
+                <p
+                  className="text-piedra max-w-2xl pr-8 pb-5"
+                  hidden={!isOpen}
+                  id={panelId}
+                >
+                  {item.answer}
+                </p>
               </div>
             );
           })}

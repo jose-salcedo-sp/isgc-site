@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import { GraphView } from "@/components/graph/graph-view";
-import { FaqAccordion } from "@/components/home-interactions";
 import {
   ExternalLink,
   PageFrame,
@@ -11,8 +10,9 @@ import {
 } from "@/components/page-frame";
 import { JsonLd } from "@/components/seo/json-ld";
 import { externalLinks, specialties } from "@/content/site-content";
+import curriculum from "@/data/curriculum.json";
 import { curriculumGraph } from "@/lib/curriculum-graph";
-import { org, siteUrl } from "@/lib/site";
+import { org, siteUrl, universityUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: {
@@ -23,12 +23,34 @@ export const metadata: Metadata = {
   openGraph: {
     description:
       "Explora la Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: plan de estudios, mapa curricular y especialización.",
-    title: "Carrera | ISGC",
+    title: "Plan de estudios UP Guadalajara | ISGC",
     type: "website",
     url: `${siteUrl}/carrera`,
   },
-  title: "Carrera",
+  title: "Plan de estudios UP Guadalajara",
+  twitter: {
+    description:
+      "Explora la Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: plan de estudios, mapa curricular y especialización.",
+    title: "Plan de estudios UP Guadalajara | ISGC",
+  },
 };
+
+const carreraDescription =
+  "Ingeniería en Sistemas y Gráficas Computacionales combina programación, datos, gráficas y proyectos para que aprendas haciendo.";
+
+const planSemesters = Array.from(
+  { length: curriculum.program.semesters },
+  (_, index) => {
+    const semester = index + 1;
+
+    return {
+      courses: curriculum.courses.filter(
+        (course) => course.semester === semester
+      ),
+      semester,
+    };
+  }
+);
 
 const CarreraPage = () => (
   <PageFrame>
@@ -36,21 +58,22 @@ const CarreraPage = () => (
       data={{
         "@context": "https://schema.org",
         "@type": "Course",
-        courseMode: "full-time",
-        description: org.summary,
-        educationalCredentialAwarded: org.rvoe,
+        description: carreraDescription,
+        educationalCredentialAwarded: org.name,
+        identifier: org.rvoe,
         name: org.name,
         provider: {
           "@type": "CollegeOrUniversity",
           name: org.campus,
-          url: siteUrl,
+          url: universityUrl,
         },
-        timeRequired: "P5Y",
       }}
     />
     <PageIntro
-      title="Aprende a construir sistemas, experiencias y herramientas que hacen diferencia."
-      description="Ingeniería en Sistemas y Gráficas Computacionales combina programación, datos, gráficas y proyectos para que aprendas haciendo."
+      crumb={{ name: "Carrera", path: "/carrera" }}
+      description={carreraDescription}
+      lede="Aprende a construir sistemas, experiencias y herramientas que hacen diferencia."
+      title="Plan de estudios de Ingeniería en Sistemas y Gráficas Computacionales"
     />
     <PageSection>
       <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]">
@@ -99,8 +122,30 @@ const CarreraPage = () => (
     <PageSection id="semestres">
       <SectionHeading
         title="Consulta tu plan de estudios"
-        description="Revisa tus materias en Tu Ruta Ideal. Para conocer el programa completo, requisitos y equivalencias, solicita el plan vigente a Coordinación."
+        description={`Plan ${org.plan} · diez semestres · ${curriculum.courses.length} materias. ${org.campus}. RVOE ${org.rvoe}.`}
       />
+      <ul className="grid gap-4 md:grid-cols-2">
+        {curriculum.glanceAreas.map((area) => (
+          <li key={area.id} className="rounded-card bg-marfil p-6">
+            <h3 className="text-grafito font-serif text-2xl">{area.name}</h3>
+            <p className="text-piedra mt-3">{area.description}</p>
+          </li>
+        ))}
+      </ul>
+      <ol className="mt-10 grid gap-6 md:grid-cols-2">
+        {planSemesters.map((item) => (
+          <li key={item.semester} className="rounded-card bg-marfil p-6">
+            <h3 className="text-grafito font-serif text-2xl">
+              Semestre {item.semester}
+            </h3>
+            <ul className="text-piedra mt-4 list-disc space-y-1 pl-5">
+              {item.courses.map((course) => (
+                <li key={course.id}>{course.name}</li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ol>
       <div className="mt-8 flex flex-wrap gap-5">
         <ExternalLink href={externalLinks.tuRutaIdeal}>
           Abrir Tu Ruta Ideal
@@ -122,9 +167,9 @@ const CarreraPage = () => (
           Tu carrera <em className="text-dorado not-italic">de un vistazo</em>.
         </h2>
         <p className="text-muted-foreground mt-5 max-w-2xl text-lg leading-relaxed">
-          Diez semestres, 57 materias y los temas que las conectan. Pasa el
-          cursor por cualquier parte del mapa para ver de dónde viene y hacia
-          dónde lleva.
+          Diez semestres, 57 materias y los temas que las conectan. {org.campus}
+          . RVOE {org.rvoe}. Pasa el cursor por cualquier parte del mapa para
+          ver de dónde viene y hacia dónde lleva.
         </p>
         <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
           {[
@@ -141,7 +186,7 @@ const CarreraPage = () => (
             </li>
           ))}
         </ul>
-        <div className="mx-auto mt-10 aspect-square w-full max-w-[860px]">
+        <div className="mx-auto mt-10 aspect-square w-full max-w-215">
           <GraphView
             initialEdges={curriculumGraph.edges}
             initialNodes={curriculumGraph.nodes}
@@ -150,7 +195,7 @@ const CarreraPage = () => (
         </div>
       </div>
     </section>
-    <PageSection tone="marfil">
+    <PageSection tone="marfil" id="especializacion">
       <SectionHeading
         title="Dos formas de profundizar"
         description="Explora estas áreas en tus proyectos y confirma la oferta vigente con Coordinación."
@@ -193,10 +238,6 @@ const CarreraPage = () => (
           </p>
         </article>
       </div>
-    </PageSection>
-    <PageSection tone="marfil">
-      <SectionHeading title="Preguntas de ingreso" />
-      <FaqAccordion audience="aspirantes" />
     </PageSection>
   </PageFrame>
 );

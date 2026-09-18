@@ -7,7 +7,6 @@ import {
   PageSection,
   SectionHeading,
 } from "@/components/page-frame";
-import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
 import { siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -19,11 +18,16 @@ export const metadata: Metadata = {
   openGraph: {
     description:
       "Oportunidades para alumnos de Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: prácticas, empleo y perfil.",
-    title: "Oportunidades | ISGC",
+    title: "Prácticas y empleo UP Guadalajara | ISGC",
     type: "website",
     url: `${siteUrl}/oportunidades`,
   },
-  title: "Oportunidades",
+  title: "Prácticas y empleo UP Guadalajara",
+  twitter: {
+    description:
+      "Oportunidades para alumnos de Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: prácticas, empleo y perfil.",
+    title: "Prácticas y empleo UP Guadalajara | ISGC",
+  },
 };
 
 const portals = [
@@ -46,15 +50,11 @@ const portals = [
 
 const OportunidadesPage = () => (
   <PageFrame>
-    <BreadcrumbJsonLd
-      items={[
-        { name: "Inicio", path: "/" },
-        { name: "Oportunidades", path: "/oportunidades" },
-      ]}
-    />
     <PageIntro
-      title="Empieza a construir experiencia antes de egresar."
+      crumb={{ name: "Oportunidades", path: "/oportunidades" }}
       description="Encuentra prácticas, empleo y herramientas para presentar mejor lo que sabes hacer."
+      lede="Empieza a construir experiencia antes de egresar."
+      title="Prácticas y empleo en Ingeniería en Sistemas y Gráficas Computacionales"
     />
     <PageSection>
       <SectionHeading title="Tu perfil en tres pasos" />

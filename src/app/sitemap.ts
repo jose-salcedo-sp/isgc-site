@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { siteRoutes, siteUrl } from "@/lib/site";
+import { siteLastModified, siteRoutes, siteUrl } from "@/lib/site";
 
 const routeConfig: Record<
   (typeof siteRoutes)[number],
@@ -19,14 +19,12 @@ const routeConfig: Record<
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
-
   return siteRoutes.map((route) => {
     const { changeFrequency, priority } = routeConfig[route];
 
     return {
       changeFrequency,
-      lastModified,
+      lastModified: siteLastModified,
       priority,
       url: `${siteUrl}${route === "/" ? "" : route}`,
     };

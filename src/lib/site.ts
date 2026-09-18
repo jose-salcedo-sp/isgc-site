@@ -1,11 +1,12 @@
-import { coordination } from "@/content/site-content";
+import { coordination, externalLinks } from "@/content/site-content";
 import curriculum from "@/data/curriculum.json";
 
 export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000");
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://isgc-site.vercel.app";
+
+export const universityUrl = externalLinks.admissions;
+
+export const siteLastModified = new Date("2026-09-18T00:00:00.000Z");
 
 const { program } = curriculum;
 

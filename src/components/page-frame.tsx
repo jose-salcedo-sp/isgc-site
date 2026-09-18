@@ -1,3 +1,6 @@
+import Link from "next/link";
+
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ChapterVisual } from "@/components/site-motion";
@@ -11,17 +14,45 @@ export const PageFrame = ({ children }: { children: React.ReactNode }) => (
 );
 
 export const PageIntro = ({
-  title,
+  crumb,
   description,
+  lede,
+  title,
 }: {
-  title: string;
+  crumb: { name: string; path: string };
   description: string;
+  lede?: string;
+  title: string;
 }) => (
   <section className="bg-tinto text-white">
     <div className="mx-auto max-w-300 px-5 py-10 sm:py-14 lg:px-6">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", path: "/" },
+          { name: crumb.name, path: crumb.path },
+        ]}
+      />
+      <nav aria-label="Miga de pan" className="mb-6 text-sm text-white/70">
+        <ol className="flex flex-wrap items-center gap-2">
+          <li>
+            <Link href="/" className="underline underline-offset-4">
+              Inicio
+            </Link>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" className="text-white">
+            {crumb.name}
+          </li>
+        </ol>
+      </nav>
       <h1 className="max-w-4xl font-serif text-3xl leading-tight sm:text-5xl">
         {title}
       </h1>
+      {lede ? (
+        <p className="mt-5 max-w-2xl text-xl font-medium text-[#e2c58f] sm:text-2xl">
+          {lede}
+        </p>
+      ) : null}
       <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
         {description}
       </p>

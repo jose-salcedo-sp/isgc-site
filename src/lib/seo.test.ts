@@ -4,7 +4,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 import sitemap from "@/app/sitemap";
-import { siteRoutes } from "@/lib/site";
+import { siteLastModified, siteRoutes } from "@/lib/site";
 
 const appDir = path.join(process.cwd(), "src/app");
 const titleSuffix = " | ISGC";
@@ -127,6 +127,9 @@ describe("seo metadata", () => {
       expect(paths).toContain(route);
     }
     expect(entries).toHaveLength(siteRoutes.length);
+    expect(entries.map((entry) => entry.lastModified)).toStrictEqual(
+      siteRoutes.map(() => siteLastModified)
+    );
   });
 
   it("keeps sitemap.ts aligned with page routes", () => {

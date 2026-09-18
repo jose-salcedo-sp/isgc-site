@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
-import { FaqAccordion } from "@/components/home-interactions";
 import { HomeMotion } from "@/components/home-motion";
 import { LabVisual } from "@/components/lab-visual";
 import { LearningStory } from "@/components/learning-story";
@@ -11,12 +9,9 @@ import {
   PageSection,
   SectionHeading,
 } from "@/components/page-frame";
-import { ProjectCard } from "@/components/project-card";
 import {
   capabilities,
-  campusImage,
   externalLinks,
-  faculty,
   getCurrentHomepageEvents,
   projects,
   quickAccess,
@@ -41,6 +36,11 @@ export const metadata: Metadata = {
   },
   title: {
     absolute: "ISGC | Ingeniería en Sistemas y Gráficas Computacionales",
+  },
+  twitter: {
+    description:
+      "Conoce la Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: software, datos, gráficas y proyectos aplicados.",
+    title: "ISGC | Ingeniería en Sistemas y Gráficas Computacionales",
   },
 };
 
@@ -175,12 +175,16 @@ const CareerSection = () => (
         </article>
       ))}
     </div>
+    <p className="text-piedra mt-10 max-w-2xl">
+      En el plan puedes profundizar en{" "}
+      {specialties.map((specialty) => specialty.title).join(" y ")}.
+    </p>
     <div className="mt-8">
       <Link
         href="/carrera"
         className="text-tinto decoration-dorado font-semibold underline decoration-2 underline-offset-4"
       >
-        Conoce cómo se aprende ↗
+        Conoce el plan de estudios ↗
       </Link>
     </div>
   </PageSection>
@@ -196,12 +200,18 @@ const ProjectsSection = () => (
         href="/proyectos"
         className="text-tinto decoration-dorado font-semibold underline decoration-2 underline-offset-4"
       >
-        Ver todos ↗
+        Ver proyectos ↗
       </Link>
     </div>
-    <div className="mt-9 grid gap-6 md:grid-cols-2">
+    <div className="mt-9 grid gap-4 md:grid-cols-2">
       {projects.map((project) => (
-        <ProjectCard key={project.title} project={project} />
+        <article
+          key={project.title}
+          className="rounded-card shadow-soft/50 bg-white p-6"
+        >
+          <h3 className="text-grafito font-serif text-2xl">{project.title}</h3>
+          <p className="text-piedra mt-3">{project.process}</p>
+        </article>
       ))}
     </div>
   </PageSection>
@@ -231,80 +241,24 @@ const StudyPlanSection = () => (
   </section>
 );
 
-const SpecialtiesSection = () => (
-  <PageSection id="formacion">
-    <SectionHeading
-      title="Un camino común, distintas formas de construir."
-      description="Explora estas áreas a través de tus proyectos y confirma la oferta académica vigente con Coordinación."
-    />
-    <div className="grid gap-5 md:grid-cols-2">
-      {specialties.map((specialty) => (
-        <article
-          key={specialty.title}
-          className="rounded-card bg-marfil shadow-soft/50 p-7"
-        >
-          <h3 className="text-grafito font-serif text-3xl">
-            {specialty.title}
-          </h3>
-          <p className="text-piedra mt-4 text-lg">{specialty.text}</p>
-          <div className="mt-7 grid gap-3 sm:grid-cols-3">
-            {specialty.subjects.map((subject) => (
-              <p key={subject} className="text-grafito pt-3 font-semibold">
-                {subject}
-              </p>
-            ))}
-          </div>
-        </article>
-      ))}
-    </div>
-    <Link
-      href="/carrera#semestres"
-      className="text-tinto decoration-dorado mt-8 inline-flex font-semibold underline decoration-2 underline-offset-4"
-    >
-      Consulta tu plan de estudios ↗
-    </Link>
-  </PageSection>
-);
-
 const CommunitySection = () => (
   <PageSection tone="marfil" id="comunidad">
-    <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-      <h2 className="text-grafito font-serif text-4xl sm:text-5xl">
-        Conoce a las personas detrás de los proyectos.
-      </h2>
-      <Link
-        href="/comunidad"
-        className="text-tinto decoration-dorado font-semibold underline decoration-2 underline-offset-4"
-      >
-        Ver comunidad ↗
-      </Link>
-    </div>
-    <div className="mt-9 grid gap-4 md:grid-cols-3">
-      {faculty.map((person) => (
-        <article
-          key={person.name}
-          className="rounded-card shadow-soft/50 bg-white p-6"
+    <div className="grid gap-8 lg:grid-cols-2">
+      <div>
+        <h2 className="text-grafito font-serif text-4xl sm:text-5xl">
+          Conoce a las personas detrás de los proyectos.
+        </h2>
+        <p className="text-piedra mt-4 max-w-xl text-lg">
+          Dirección, academia y los espacios del campus donde se resuelven dudas
+          y se construye en equipo.
+        </p>
+        <Link
+          href="/comunidad"
+          className="text-tinto decoration-dorado mt-6 inline-flex font-semibold underline decoration-2 underline-offset-4"
         >
-          <div className="bg-tinto flex h-12 w-12 items-center justify-center rounded-full font-serif text-xl text-white">
-            {person.name
-              .split(" ")
-              .map((part) => part[0])
-              .slice(0, 2)
-              .join("")}
-          </div>
-          <h3 className="text-grafito mt-4 font-serif text-xl">
-            {person.name}
-          </h3>
-          <p className="text-tinto mt-1 font-semibold">{person.role}</p>
-          <p className="text-piedra mt-2 text-sm">{person.area}</p>
-          <a
-            href={`mailto:${person.email}`}
-            className="text-tinto mt-4 inline-flex text-sm font-semibold underline underline-offset-4"
-          >
-            {person.email}
-          </a>
-        </article>
-      ))}
+          Ver comunidad ↗
+        </Link>
+      </div>
       <Link
         href="/oportunidades"
         className="rounded-card bg-tinto hover:shadow-soft flex items-end p-7 text-white transition sm:p-9"
@@ -335,17 +289,7 @@ const CampusLifeSection = () => (
         </Link>
       </div>
       <div>
-        <Image
-          src={campusImage}
-          alt="Imagen de referencia de un campus universitario"
-          width={1400}
-          height={760}
-          className="rounded-card aspect-16/7 w-full object-cover"
-        />
-        <p className="text-piedra mt-3 text-sm">
-          Imagen de referencia del campus.
-        </p>
-        <div className="mt-6 grid gap-3 sm:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-3">
           {campusNews.map((item) => (
             <article
               key={item.title}
@@ -408,13 +352,31 @@ const Home = () => (
     <CareerSection />
     <ProjectsSection />
     <StudyPlanSection />
-    <SpecialtiesSection />
     <CommunitySection />
     <CampusLifeSection />
     <NextStepSection />
     <PageSection id="faq">
       <SectionHeading title="Preguntas frecuentes" />
-      <FaqAccordion />
+      <div className="grid gap-4 md:grid-cols-2">
+        <Link
+          href="/aspirantes#faq"
+          className="rounded-card hover:shadow-soft bg-white p-7 transition"
+        >
+          <h3 className="text-grafito font-serif text-2xl">Aspirantes</h3>
+          <p className="text-piedra mt-3">
+            Admisiones, apoyo económico y lo que vas a aprender en ISGC.
+          </p>
+        </Link>
+        <Link
+          href="/alumnos#faq"
+          className="rounded-card hover:shadow-soft bg-white p-7 transition"
+        >
+          <h3 className="text-grafito font-serif text-2xl">Alumnos</h3>
+          <p className="text-piedra mt-3">
+            Plan de estudios, trámites y servicios escolares.
+          </p>
+        </Link>
+      </div>
     </PageSection>
   </PageFrame>
 );
