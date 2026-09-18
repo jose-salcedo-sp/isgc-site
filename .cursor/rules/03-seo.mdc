@@ -1,0 +1,12 @@
+---
+description: SEO metadata and structured data conventions for this site.
+globs: ["src/app/**/*", "src/components/seo/**/*", "src/lib/site.ts"]
+alwaysApply: false
+---
+# SEO
+
+- Every route exports `metadata` with `title` (≤ 60 chars rendered) and `description` (≤ 160 chars).
+- Every route sets `alternates.canonical` to its path.
+- Structured data uses `next-seo` components or the local `<JsonLd>` server component — no hand-written `<meta>` tags in JSX.
+- New routes must be added to `src/app/sitemap.ts`.
+- JSON-LD claims must match visible page content.
