@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import { GraphView } from "@/components/graph/graph-view";
 import { FaqAccordion } from "@/components/home-interactions";
 import {
@@ -7,16 +9,45 @@ import {
   PageSection,
   SectionHeading,
 } from "@/components/page-frame";
+import { JsonLd } from "@/components/seo/json-ld";
 import { externalLinks, specialties } from "@/content/site-content";
 import { curriculumGraph } from "@/lib/curriculum-graph";
+import { org, siteUrl } from "@/lib/site";
 
-export const metadata = {
-  description: "Conoce la formación, el plan y las áreas de ISGC.",
-  title: "Carrera | ISGC",
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/carrera",
+  },
+  description:
+    "Explora la Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: plan de estudios, mapa curricular y especialización.",
+  openGraph: {
+    description:
+      "Explora la Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: plan de estudios, mapa curricular y especialización.",
+    title: "Carrera | ISGC",
+    type: "website",
+    url: `${siteUrl}/carrera`,
+  },
+  title: "Carrera",
 };
 
 const CarreraPage = () => (
   <PageFrame>
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "Course",
+        courseMode: "full-time",
+        description: org.summary,
+        educationalCredentialAwarded: org.rvoe,
+        name: org.name,
+        provider: {
+          "@type": "CollegeOrUniversity",
+          name: org.campus,
+          url: siteUrl,
+        },
+        timeRequired: "P5Y",
+      }}
+    />
     <PageIntro
       title="Aprende a construir sistemas, experiencias y herramientas que hacen diferencia."
       description="Ingeniería en Sistemas y Gráficas Computacionales combina programación, datos, gráficas y proyectos para que aprendas haciendo."

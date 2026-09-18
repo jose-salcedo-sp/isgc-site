@@ -1,9 +1,12 @@
+import type { Metadata } from "next";
+
 import {
   PageFrame,
   PageIntro,
   PageSection,
   SectionHeading,
 } from "@/components/page-frame";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
 import {
   campusSpaces,
   coordination,
@@ -11,16 +14,34 @@ import {
   faculty,
   homepageEvents,
 } from "@/content/site-content";
+import { siteUrl } from "@/lib/site";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
-export const metadata = {
-  description: "Personas, espacios, noticias y eventos de ISGC.",
-  title: "Comunidad | ISGC",
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/comunidad",
+  },
+  description:
+    "Comunidad ISGC en la Universidad Panamericana Guadalajara: equipo académico, espacios del campus, coordinación, noticias y eventos de Ingeniería en Sistemas.",
+  openGraph: {
+    description:
+      "Comunidad ISGC en la Universidad Panamericana Guadalajara: equipo académico, espacios del campus, coordinación, noticias y eventos de Ingeniería en Sistemas.",
+    title: "Comunidad | ISGC",
+    type: "website",
+    url: `${siteUrl}/comunidad`,
+  },
+  title: "Comunidad",
 };
 
 const ComunidadPage = () => (
   <PageFrame>
+    <BreadcrumbJsonLd
+      items={[
+        { name: "Inicio", path: "/" },
+        { name: "Comunidad", path: "/comunidad" },
+      ]}
+    />
     <PageIntro
       title="La carrera también se construye con otras personas."
       description="Conoce al equipo académico, los espacios del campus y las noticias que conectan a la comunidad ISGC."

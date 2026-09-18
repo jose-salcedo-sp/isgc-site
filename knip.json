@@ -1,7 +1,8 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "entry": [
-    "src/app/**/{page,layout,route,loading,error,not-found,default,template,middleware}.{ts,tsx}",
+    "src/app/**/{page,layout,route,loading,error,not-found,default,template,middleware,sitemap,robots,opengraph-image}.{ts,tsx}",
+    "src/app/{icon,apple-icon}.png",
     "src/middleware.ts",
     "src/app/api/**/route.ts"
   ],

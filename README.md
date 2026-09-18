@@ -31,6 +31,10 @@ Open [http://localhost:3000](http://localhost:3000).
 
 PRs to `main` require code owner approval (see `.github/CODEOWNERS`).
 
+## SEO
+
+Site metadata, sitemap, robots, and JSON-LD live under `src/app/` with shared constants in `src/lib/site.ts`. Production URL is set via `NEXT_PUBLIC_SITE_URL` (falls back to Vercel production URL or `http://localhost:3000`). Sitemap and robots are served at `/sitemap.xml` and `/robots.txt`. Route metadata and sitemap coverage are checked by `src/lib/seo.test.ts` — run `npm run test -- src/lib/seo.test.ts` after changing route metadata.
+
 ## Agent context
 
 Read `AGENTS.md` and `.cursor/rules/` before making changes.

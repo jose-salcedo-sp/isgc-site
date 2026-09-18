@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,8 +22,27 @@ import {
   quickAccess,
   specialties,
 } from "@/content/site-content";
+import { siteUrl } from "@/lib/site";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+  description:
+    "Conoce la Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: software, datos, gráficas y proyectos aplicados.",
+  openGraph: {
+    description:
+      "Conoce la Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: software, datos, gráficas y proyectos aplicados.",
+    title: "ISGC | Ingeniería en Sistemas y Gráficas Computacionales",
+    type: "website",
+    url: siteUrl,
+  },
+  title: {
+    absolute: "ISGC | Ingeniería en Sistemas y Gráficas Computacionales",
+  },
+};
 
 const campusNews = [
   {

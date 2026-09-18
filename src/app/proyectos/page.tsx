@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import {
   PageFrame,
   PageIntro,
@@ -5,15 +7,34 @@ import {
   SectionHeading,
 } from "@/components/page-frame";
 import { ProjectCard } from "@/components/project-card";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
 import { mediaLabArchive, projects } from "@/content/site-content";
+import { siteUrl } from "@/lib/site";
 
-export const metadata = {
-  description: "Proyectos, Media Lab y resultados de aprendizaje de ISGC.",
-  title: "Proyectos | ISGC",
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/proyectos",
+  },
+  description:
+    "Proyectos de Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: Media Lab, código, datos y experiencias digitales.",
+  openGraph: {
+    description:
+      "Proyectos de Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: Media Lab, código, datos y experiencias digitales.",
+    title: "Proyectos | ISGC",
+    type: "website",
+    url: `${siteUrl}/proyectos`,
+  },
+  title: "Proyectos",
 };
 
 const ProyectosPage = () => (
   <PageFrame>
+    <BreadcrumbJsonLd
+      items={[
+        { name: "Inicio", path: "/" },
+        { name: "Proyectos", path: "/proyectos" },
+      ]}
+    />
     <PageIntro
       title="Lo que aprendes toma forma en proyectos."
       description="Explora problemas, procesos y resultados de equipos que trabajan con código, datos, visualización y experiencias digitales."
