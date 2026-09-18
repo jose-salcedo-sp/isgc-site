@@ -4,6 +4,8 @@ import { animate, inView, scroll, stagger } from "motion";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 
+import { stripLocale } from "@/lib/i18n";
+
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 const CURTAIN_MS = 350;
 const NAV_RESET_MS = 2500;
@@ -33,24 +35,34 @@ export const ChapterVisual = ({ words }: { words: readonly string[] }) => (
 );
 
 const playChapterIntro = (): void => {
-  animate(
-    "#contenido > section:first-of-type :is(h1, p)",
-    { opacity: [0, 1], y: [30, 0] },
-    {
-      delay: stagger(0.12, { startDelay: 0.2 }),
-      duration: 0.85,
-      ease: EASE_OUT,
-    }
+  const heroCopy = document.querySelectorAll<HTMLElement>(
+    "#contenido > section:first-of-type :is(h1, p)"
   );
-  animate(
-    ".chapter-words > span",
-    { opacity: [0, 1], y: [35, 0] },
-    {
-      delay: stagger(0.15, { startDelay: 0.35 }),
-      duration: 0.9,
-      ease: EASE_OUT,
-    }
+  if (heroCopy.length) {
+    animate(
+      [...heroCopy],
+      { opacity: [0, 1], y: [30, 0] },
+      {
+        delay: stagger(0.12, { startDelay: 0.2 }),
+        duration: 0.85,
+        ease: EASE_OUT,
+      }
+    );
+  }
+  const chapterWords = document.querySelectorAll<HTMLElement>(
+    ".chapter-words > span"
   );
+  if (chapterWords.length) {
+    animate(
+      [...chapterWords],
+      { opacity: [0, 1], y: [35, 0] },
+      {
+        delay: stagger(0.15, { startDelay: 0.35 }),
+        duration: 0.9,
+        ease: EASE_OUT,
+      }
+    );
+  }
 };
 
 const linkToScroll = (): (() => void)[] => {
@@ -141,7 +153,7 @@ export const SiteMotion = () => {
         sheet.style.transformOrigin = "top";
         animate(sheet, { scaleY: [1, 0] }, { duration: 0.65, ease: EASE_OUT });
       }
-      if (pathname !== "/") {
+      if (stripLocale(pathname) !== "/") {
         playChapterIntro();
         stops.push(...linkToScroll(), ...revealSections());
       }
