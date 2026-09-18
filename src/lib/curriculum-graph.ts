@@ -7,12 +7,7 @@ import type {
 import curriculum from "@/data/curriculum.json";
 
 const graphKind = (kind: string): GraphKind => {
-  if (
-    kind === "course" ||
-    kind === "program" ||
-    kind === "semester" ||
-    kind === "subject"
-  ) {
+  if (kind === "course" || kind === "program" || kind === "semester") {
     return kind;
   }
   throw new Error(`Unknown graph kind: ${kind}`);
@@ -30,7 +25,6 @@ export const curriculumGraph = {
       course: curriculum.graph.text.kinds.course,
       program: curriculum.graph.text.kinds.program,
       semester: curriculum.graph.text.kinds.semester,
-      subject: curriculum.graph.text.kinds.subject,
     },
   },
 } satisfies {

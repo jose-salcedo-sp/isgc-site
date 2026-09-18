@@ -15,7 +15,7 @@ import {
 import type { Palette, Transform } from "./graph-paint";
 import { pickSlice } from "./graph-radial";
 import type { RadialLayout, RadialNode } from "./graph-radial";
-import { OUTER_EXTENT } from "./graph-theme";
+import { TIP_RADIUS } from "./graph-theme";
 import { GraphTip } from "./graph-tip";
 import { moveTip } from "./tip-content";
 
@@ -141,7 +141,8 @@ const GraphCanvas = ({
       if (!fitted.current && rect.width > 0 && rect.height > 0) {
         fitted.current = true;
         transformRef.current.k = clampK(
-          (Math.min(rect.width, rect.height) * 0.94) / (OUTER_EXTENT * 2)
+          (Math.min(rect.width, rect.height) * 0.96) /
+            ((TIP_RADIUS.at(-1) ?? 1) * 2)
         );
       }
       canvas.width = Math.max(1, Math.floor(rect.width * dpr));

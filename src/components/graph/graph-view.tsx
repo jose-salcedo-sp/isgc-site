@@ -95,11 +95,11 @@ export const GraphView = ({
   );
 
   return (
-    <div className="flex h-full min-h-0 flex-col overflow-hidden">
+    <div className="relative">
       <nav aria-label={text.title} className="sr-only">
         <Outline layout={layout} nodes={roots} onSelect={setSelected} />
       </nav>
-      <div className="relative min-h-0 flex-1">
+      <div className="relative h-[min(70vh,52rem)] w-full">
         <GraphCanvas
           activeKinds={ALL_KINDS}
           layout={layout}
@@ -108,17 +108,25 @@ export const GraphView = ({
           text={text}
           onSelect={setSelected}
         />
-        {selectedNode ? (
-          <GraphInspector
-            selected={{ ...selectedNode, connections }}
-            text={text}
-            onClose={() => {
-              setSelected(null);
-            }}
-            onJump={setSelected}
-          />
-        ) : null}
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 left-0 z-10 hidden w-[min(20%,12rem)] md:block"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 right-0 z-10 hidden w-[min(20%,12rem)] md:block"
+        />
       </div>
+      {selectedNode ? (
+        <GraphInspector
+          selected={{ ...selectedNode, connections }}
+          text={text}
+          onClose={() => {
+            setSelected(null);
+          }}
+          onJump={setSelected}
+        />
+      ) : null}
     </div>
   );
 };

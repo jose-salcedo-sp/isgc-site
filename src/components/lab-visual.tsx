@@ -1,12 +1,21 @@
 import Link from "next/link";
 
-/** Lightweight, original vector illustration; no stock project attribution. */
-export const LabVisual = () => (
+import type { Dictionary } from "@/lib/dictionary";
+import { localizedPath } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n";
+
+export const LabVisual = ({
+  dict,
+  locale,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+}) => (
   <div className="lab-panel">
     <svg
       viewBox="0 0 480 260"
       className="lab-scene w-full"
-      aria-label="Ilustración geométrica de un objeto tridimensional sobre una retícula de coordenadas"
+      aria-label={dict.pages.home.lab.aria}
     >
       <defs>
         <pattern
@@ -41,12 +50,12 @@ export const LabVisual = () => (
       </g>
     </svg>
     <div className="p-5">
-      <p className="text-lg font-bold">Del código a lo que imaginas.</p>
+      <p className="text-lg font-bold">{dict.pages.home.lab.text}</p>
       <Link
-        href="/proyectos"
+        href={localizedPath(locale, "/proyectos")}
         className="mt-4 inline-flex items-center gap-4 font-semibold text-white underline decoration-[#e2c58f] underline-offset-4"
       >
-        Explora los proyectos <span aria-hidden="true">→</span>
+        {dict.pages.home.lab.cta} <span aria-hidden="true">→</span>
       </Link>
     </div>
   </div>

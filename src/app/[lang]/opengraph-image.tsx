@@ -1,11 +1,21 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "ISGC — Ingeniería en Sistemas y Gráficas Computacionales";
+import { getDictionary } from "@/lib/dictionary";
+import { defaultLocale, hasLocale } from "@/lib/i18n";
+
+export const alt = "ISGC";
 export const size = { height: 630, width: 1200 };
 export const contentType = "image/png";
 
-const OpenGraphImage = () =>
-  new ImageResponse(
+const OpenGraphImage = async ({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) => {
+  const { lang } = await params;
+  const dict = getDictionary(hasLocale(lang) ? lang : defaultLocale);
+
+  return new ImageResponse(
     <div
       style={{
         alignItems: "center",
@@ -41,7 +51,7 @@ const OpenGraphImage = () =>
           textAlign: "center",
         }}
       >
-        Ingeniería en Sistemas y Gráficas Computacionales
+        {dict.pages.home.hero.title.replace(/\.$/u, "")}
       </p>
       <p
         style={{
@@ -55,5 +65,6 @@ const OpenGraphImage = () =>
     </div>,
     { ...size }
   );
+};
 
 export default OpenGraphImage;

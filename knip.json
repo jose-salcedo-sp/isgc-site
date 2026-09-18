@@ -4,6 +4,7 @@
     "src/app/**/{page,layout,route,loading,error,not-found,default,template,middleware,sitemap,robots,opengraph-image}.{ts,tsx}",
     "src/app/{icon,apple-icon}.png",
     "src/middleware.ts",
+    "src/proxy.ts",
     "src/app/api/**/route.ts"
   ],
   "project": ["src/**/*.{ts,tsx}"],

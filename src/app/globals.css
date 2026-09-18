@@ -24,7 +24,6 @@
   --graph-program: #5d1028;
   --graph-semester: #8a1538;
   --graph-course: #7d602a;
-  --graph-subject: #625d59;
   --graph-ring: color-mix(in oklab, var(--foreground) 10%, transparent);
 }
 
@@ -37,7 +36,6 @@
   --border: color-mix(in oklab, var(--foreground) 24%, transparent);
   --graph-semester: #e08a9c;
   --graph-course: #e2c58f;
-  --graph-subject: #b9b1a9;
   --graph-ring: color-mix(in oklab, var(--foreground) 18%, transparent);
   background: var(--background);
 }
@@ -51,7 +49,6 @@
   --color-graph-program: var(--graph-program);
   --color-graph-semester: var(--graph-semester);
   --color-graph-course: var(--graph-course);
-  --color-graph-subject: var(--graph-subject);
   --color-graph-ring: var(--graph-ring);
 }
 

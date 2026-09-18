@@ -1,0 +1,623 @@
+{
+  "htmlLang": "es",
+  "ogLocale": "es_MX",
+  "meta": {
+    "titleDefault": "ISGC | Ingeniería en Sistemas y Gráficas Computacionales",
+    "titleTemplate": "%s | ISGC"
+  },
+  "seo": {
+    "contactType": "Coordinación académica",
+    "departmentDescription": "Formación de ingenieros que diseñan software, productos digitales y experiencias gráficas para industria real."
+  },
+  "common": {
+    "skipToContent": "Saltar al contenido",
+    "home": "Inicio",
+    "breadcrumb": "Miga de pan",
+    "privacy": "Privacidad",
+    "regulations": "Reglamentos",
+    "admissions": "Admisiones",
+    "students": "Alumnos",
+    "language": "Idioma",
+    "homeAria": "ISGC, inicio"
+  },
+  "nav": {
+    "mainAria": "Navegación principal",
+    "mobileAria": "Navegación móvil",
+    "openMenu": "Abrir menú",
+    "items": [
+      { "href": "/carrera", "label": "Carrera" },
+      { "href": "/proyectos", "label": "Proyectos" },
+      { "href": "/comunidad", "label": "Comunidad" },
+      { "href": "/alumnos", "label": "Alumnos" }
+    ]
+  },
+  "locales": {
+    "es": "Español",
+    "en-GB": "English (UK)",
+    "en-US": "English (US)"
+  },
+  "brand": {
+    "campusShort": "UP · Guadalajara",
+    "footerBlurb": "Ingeniería en Sistemas y Gráficas Computacionales · Universidad Panamericana Guadalajara."
+  },
+  "graph": {
+    "close": "Cerrar",
+    "connectionMany": "caminos",
+    "connectionOne": "camino",
+    "continues": "Sigue con",
+    "credits": "créditos",
+    "inPlan": "En el plan",
+    "kinds": {
+      "course": "Materia",
+      "program": "Programa",
+      "semester": "Semestre"
+    },
+    "noLinks": "Elige otra materia para ver cómo se encadena.",
+    "search": "Buscar",
+    "searchLabel": "Buscar en el plan",
+    "thisSemester": "En este semestre",
+    "title": "La carrera de un vistazo"
+  },
+  "quickAccess": [
+    { "id": "up4u", "label": "UP4U" },
+    { "id": "ruta", "label": "Tu Ruta Ideal" },
+    { "id": "directory", "label": "Directorio institucional" }
+  ],
+  "resources": {
+    "searchLabel": "Buscar recursos",
+    "placeholder": "Buscar un recurso",
+    "empty": "No encontramos ese recurso.",
+    "open": "Ingresar",
+    "direct": "Abre este recurso directamente.",
+    "groups": {
+      "study": "Estudio",
+      "procedures": "Trámites",
+      "career": "Desarrollo profesional"
+    },
+    "items": [
+      {
+        "id": "office365",
+        "group": "study",
+        "label": "Office 365",
+        "description": "Correo, archivos y herramientas de trabajo."
+      },
+      {
+        "id": "gpa",
+        "group": "study",
+        "label": "GPA Calculator",
+        "description": "Convierte tu promedio al estándar GPA."
+      },
+      {
+        "id": "leetcode",
+        "group": "study",
+        "label": "LeetCode · Blind 75",
+        "description": "Problemas para practicar entrevistas técnicas."
+      },
+      {
+        "id": "payments",
+        "group": "procedures",
+        "label": "Portal de pagos",
+        "description": "Realiza tus pagos en línea."
+      },
+      {
+        "id": "treasury",
+        "group": "procedures",
+        "label": "Tesorería",
+        "description": "Formas de pago, referencias y documentos."
+      },
+      {
+        "id": "kardex",
+        "group": "procedures",
+        "label": "Kardex",
+        "description": "Solicita documentos y constancias."
+      },
+      {
+        "id": "school-services",
+        "group": "procedures",
+        "label": "Servicios Escolares",
+        "description": "Normativa y gestiones académicas."
+      },
+      {
+        "id": "regulations",
+        "group": "procedures",
+        "label": "Reglamentos",
+        "description": "Reglamento general y de Ingenierías."
+      },
+      {
+        "id": "linkedin",
+        "group": "career",
+        "label": "LinkedIn",
+        "description": "Construye tu perfil profesional."
+      },
+      {
+        "id": "internships",
+        "group": "career",
+        "label": "Portales de prácticas",
+        "description": "Explora vacantes y oportunidades."
+      },
+      {
+        "id": "github",
+        "group": "career",
+        "label": "GitHub",
+        "description": "Organiza y comparte tu trabajo."
+      }
+    ]
+  },
+  "events": {
+    "becas": {
+      "date": "24 de septiembre de 2026",
+      "text": "Consulta requisitos y documentación antes de iniciar tu solicitud.",
+      "title": "Convocatoria de becas"
+    },
+    "egresados": {
+      "date": "10 de octubre de 2026",
+      "text": "Conoce cómo nuestros egresados conectan la carrera con su campo profesional.",
+      "title": "Panel de egresados"
+    }
+  },
+  "faculty": {
+    "arturo": {
+      "area": "Computación y formación profesional",
+      "role": "Dirección de ISGC"
+    },
+    "carolina": {
+      "area": "Programación y proyectos aplicados",
+      "role": "Academia de Cómputo"
+    }
+  },
+  "spaces": [
+    {
+      "location": "Edificio A · Ingenierías · 2.º piso",
+      "text": "Espacio para prácticas y proyectos de computación.",
+      "title": "Laboratorios CIAC"
+    },
+    {
+      "location": "Edificio C · 3.º piso",
+      "text": "Resuelve dudas sobre la carrera, materias y proyectos.",
+      "title": "Oficina de Dirección"
+    },
+    {
+      "location": "Edificio C · 3.º piso",
+      "text": "Encuentra orientación sobre materias, profesores y procesos académicos.",
+      "title": "Coordinación"
+    }
+  ],
+  "specialties": [
+    {
+      "subjects": [
+        "Programación",
+        "Probabilidad y estadística",
+        "Bases de datos"
+      ],
+      "text": "Encuentra patrones, explica decisiones y construye soluciones a partir de información real.",
+      "title": "Ciencia de datos"
+    },
+    {
+      "subjects": [
+        "Geometría computacional",
+        "Modelado 3D",
+        "Animación digital"
+      ],
+      "text": "Combina matemáticas, programación y sensibilidad visual para crear experiencias digitales.",
+      "title": "Efectos visuales"
+    }
+  ],
+  "projects": [
+    {
+      "authors": "Equipo Media Lab",
+      "caption": "Proyecto realizado en 2015.",
+      "date": "Archivo · 2015",
+      "learning": "Diseñar una experiencia que conecte investigación, tecnología y divulgación.",
+      "process": "Modelado, interacción y visualización digital para acercar piezas paleontológicas al público.",
+      "title": "Realidad aumentada para descubrir el pasado"
+    },
+    {
+      "authors": "Ejemplo ilustrativo",
+      "caption": "Aplicación ilustrativa de análisis de datos.",
+      "date": "Ejemplo de aplicación",
+      "learning": "Comunicar hallazgos con claridad y tomar decisiones a partir de datos.",
+      "process": "Análisis y visualización para convertir información compleja en preguntas que se puedan discutir.",
+      "title": "Datos para entender nuestro entorno"
+    }
+  ],
+  "mediaLab": [
+    { "date": "2013", "title": "Pirámide de Chichén Itzá" },
+    { "date": "2014", "title": "LARVA Game Studios" },
+    { "date": "2014", "title": "Montaña rusa virtual" },
+    { "date": "2015", "title": "Fósiles en realidad aumentada" }
+  ],
+  "faqs": {
+    "alumnos": [
+      {
+        "answer": "Abre Tu Ruta Ideal para planear tus materias y solicita a Coordinación el plan oficial vigente.",
+        "question": "¿Dónde consulto mi plan de estudios?"
+      },
+      {
+        "answer": "Busca el recurso en Alumnos para encontrar el área responsable y su acceso directo.",
+        "question": "¿A quién contacto para un trámite?"
+      },
+      {
+        "answer": "Están agrupados en el Centro de alumnos, junto con los accesos de Tesorería y Servicios Escolares.",
+        "question": "¿Dónde veo reglamentos y servicios escolares?"
+      }
+    ],
+    "aspirantes": [
+      {
+        "answer": "Programación, sistemas, datos y gráficas computacionales a través de proyectos y fundamentos técnicos.",
+        "question": "¿Qué aprenderé en ISGC?"
+      },
+      {
+        "answer": "Consulta el proceso oficial y las fechas directamente en Admisiones de la Universidad Panamericana.",
+        "question": "¿Dónde consulto admisiones?"
+      },
+      {
+        "answer": "Revisa la convocatoria de becas y financiamiento, sus requisitos y fechas en el portal institucional.",
+        "question": "¿Hay opciones de apoyo económico?"
+      }
+    ]
+  },
+  "chapters": {
+    "alumnos": ["Explora", "Resuelve", "Avanza"],
+    "aspirantes": ["Imagina", "Da el paso", "Empieza"],
+    "carrera": ["Entiende", "Construye", "Comparte"],
+    "comunidad": ["Conecta", "Colabora", "Crea"],
+    "oportunidades": ["Construye", "Muéstralo", "Trasciende"],
+    "proyectos": ["Código", "Experiencia", "Impacto"]
+  },
+  "pages": {
+    "home": {
+      "meta": {
+        "title": "ISGC | Ingeniería en Sistemas y Gráficas Computacionales",
+        "description": "Conoce la Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: software, datos, gráficas y proyectos aplicados."
+      },
+      "hero": {
+        "title": "Ingeniería en Sistemas y Gráficas Computacionales.",
+        "lede": "Construye lo que sigue.",
+        "text": "Aprende a crear software, datos y experiencias digitales con rigor técnico y responsabilidad hacia las personas.",
+        "careerCta": "Conoce la carrera",
+        "studentCta": "Soy alumno"
+      },
+      "lab": {
+        "aria": "Ilustración geométrica de un objeto tridimensional sobre una retícula de coordenadas",
+        "text": "Del código a lo que imaginas.",
+        "cta": "Explora los proyectos"
+      },
+      "news": {
+        "title": "Lo que necesitas ahora",
+        "description": "Avisos, próximos eventos y accesos directos para avanzar sin rodeos.",
+        "emptyTitle": "Mantente al día",
+        "emptyText": "Consulta con Coordinación las próximas actividades y las convocatorias vigentes.",
+        "contact": "Contacta a Coordinación",
+        "details": "Ver detalles",
+        "quickTitle": "Accesos frecuentes"
+      },
+      "story": {
+        "eyebrow": "De la curiosidad al impacto",
+        "line1": "Una idea.",
+        "line2Before": "Todo lo que ",
+        "line2Emphasis": "puede ser.",
+        "caption": "IMAGINA · CONSTRUYE · TRANSFORMA",
+        "cta": "Descubre lo que ya estamos creando",
+        "steps": [
+          {
+            "number": "01",
+            "title": "Todo empieza con una pregunta.",
+            "text": "¿Y si pudieras construir eso que imaginas? Observa lo que te rodea, encuentra un problema y convierte tu curiosidad en una idea."
+          },
+          {
+            "number": "02",
+            "title": "La idea toma forma contigo.",
+            "text": "Escribe, prueba, equivócate y vuelve a intentar. Con código, datos y gráficas, cada decisión convierte lo abstracto en algo que funciona."
+          },
+          {
+            "number": "03",
+            "title": "Alguien más lo hace parte de su vida.",
+            "text": "Una herramienta que ayuda. Una experiencia que conecta. Lo que aprendes cobra sentido cuando otras personas pueden usarlo."
+          }
+        ]
+      },
+      "career": {
+        "title": "Aprende haciendo cosas que otros pueden usar.",
+        "text": "En ISGC aprendes a programar, modelar y prototipar mientras trabajas sobre problemas que existen fuera de la pantalla.",
+        "deepen": "En el plan puedes profundizar en",
+        "join": " y ",
+        "cta": "Conoce el plan de estudios"
+      },
+      "capabilities": [
+        {
+          "title": "Piensa en sistemas",
+          "text": "Entiende un problema, ordénalo y encuentra una ruta clara para resolverlo."
+        },
+        {
+          "title": "Prototipa y construye",
+          "text": "Diseña software, datos y experiencias digitales que se pueden probar y mejorar."
+        },
+        {
+          "title": "Trabaja con personas",
+          "text": "Colabora con claridad y crea productos que funcionen para quienes los usan."
+        }
+      ],
+      "projects": {
+        "title": "Proyectos que explican cómo aprendemos.",
+        "cta": "Ver proyectos"
+      },
+      "plan": {
+        "title": "Tu ruta, semestre a semestre.",
+        "text": "Explora la progresión académica, las materias y las opciones para profundizar en lo que te interesa.",
+        "cta": "Abrir Tu Ruta Ideal"
+      },
+      "community": {
+        "title": "Conoce a las personas detrás de los proyectos.",
+        "text": "Dirección, academia y los espacios del campus donde se resuelven dudas y se construye en equipo.",
+        "cta": "Ver comunidad",
+        "internships": "Encuentra prácticas y primeros proyectos."
+      },
+      "campus": {
+        "title": "Qué pasa dentro y fuera del campus.",
+        "text": "Encuentra noticias, eventos y espacios para conectar con la comunidad.",
+        "cta": "Ver comunidad",
+        "items": [
+          {
+            "title": "Proyectos que salen del salón",
+            "text": "Conoce las experiencias, equipos y resultados que forman parte de la vida de ISGC."
+          },
+          {
+            "title": "Espacios para aprender y colaborar",
+            "text": "Ubica laboratorios, coordinación y los espacios donde sucede el trabajo diario."
+          },
+          {
+            "title": "Prácticas y primeros proyectos",
+            "text": "Encuentra rutas para empezar a construir experiencia profesional mientras estudias."
+          }
+        ]
+      },
+      "next": {
+        "title": "¿Qué necesitas hoy?",
+        "admissionsTitle": "Conoce admisiones y becas.",
+        "admissionsText": "Consulta el proceso oficial, las opciones de apoyo y el contacto de Admisiones.",
+        "admissionsCta": "Ir a Admisiones",
+        "studentsTitle": "Resuelve tu próxima tarea.",
+        "studentsText": "Encuentra accesos frecuentes, trámites, recursos de estudio y oportunidades.",
+        "studentsCta": "Ir al centro de alumnos"
+      },
+      "faq": {
+        "title": "Preguntas frecuentes",
+        "applicantsTitle": "Aspirantes",
+        "applicantsText": "Admisiones, apoyo económico y lo que vas a aprender en ISGC.",
+        "studentsTitle": "Alumnos",
+        "studentsText": "Plan de estudios, trámites y servicios escolares."
+      }
+    },
+    "carrera": {
+      "meta": {
+        "title": "Plan de estudios UP Guadalajara",
+        "description": "Explora la Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: plan de estudios, mapa curricular y especialización."
+      },
+      "crumb": "Carrera",
+      "title": "Plan de estudios de Ingeniería en Sistemas y Gráficas Computacionales",
+      "lede": "Aprende a construir sistemas, experiencias y herramientas que hacen diferencia.",
+      "description": "Ingeniería en Sistemas y Gráficas Computacionales combina programación, datos, gráficas y proyectos para que aprendas haciendo.",
+      "wideTitle": "Una formación amplia para problemas que todavía no tienen nombre.",
+      "wideText": "Vas a programar, modelar, analizar y presentar ideas. La carrera se mueve entre fundamentos técnicos y proyectos donde tienes que tomar decisiones.",
+      "learnTitle": "Cómo se aprende",
+      "learnDescription": "La teoría toma forma cuando la conviertes en algo que puede probarse, explicarse y mejorar.",
+      "learn": [
+        {
+          "title": "Entender",
+          "text": "Observa un problema, formula preguntas y construye una base sólida."
+        },
+        {
+          "title": "Construir",
+          "text": "Programa, diseña prototipos y trabaja con herramientas que se usan fuera del aula."
+        },
+        {
+          "title": "Compartir",
+          "text": "Presenta decisiones, recibe retroalimentación y trabaja con otras personas."
+        }
+      ],
+      "planTitle": "Consulta tu plan de estudios",
+      "planMeta": "Plan {plan} · diez semestres · {courses} materias. {campus}. RVOE {rvoe}.",
+      "semester": "Semestre {n}",
+      "semesterLabels": [
+        "1er Semestre",
+        "2do Semestre",
+        "3er Semestre",
+        "4to Semestre",
+        "5to Semestre",
+        "6to Semestre",
+        "7mo Semestre",
+        "8vo Semestre",
+        "9no Semestre",
+        "10mo Semestre"
+      ],
+      "rutaCta": "Abrir Tu Ruta Ideal",
+      "planCta": "Solicitar el plan oficial",
+      "planSubject": "Plan de estudios ISGC",
+      "mapEyebrow": "Plan 2015",
+      "mapTitleBefore": "Tu carrera ",
+      "mapTitleEmphasis": "de un vistazo",
+      "mapText": "Diez semestres y 57 materias que se encadenan hacia lo que vas a construir. {campus}. RVOE {rvoe}. Elige un semestre o una materia para ver qué la sostiene y hacia dónde te lleva.",
+      "legendSemester": "Semestres",
+      "legendCourse": "Materias",
+      "trackTitle": "Dos formas de profundizar",
+      "trackDescription": "Explora estas áreas en tus proyectos y confirma la oferta vigente con Coordinación.",
+      "doubleTitle": "Doble carrera",
+      "doubleText": "Consulta con Coordinación la disponibilidad, el semestre de incorporación, las equivalencias y los costos de una doble carrera.",
+      "fieldTitle": "Campo profesional",
+      "fieldText": "Software, datos, visualización, producto digital, automatización, investigación y emprendimiento.",
+      "areas": {
+        "software": {
+          "name": "Desarrollo de software",
+          "description": "Algoritmos, orientación a objetos, estructuras de datos, web, bases de datos, sistemas operativos, ingeniería de software, plugins y compiladores."
+        },
+        "ai": {
+          "name": "Inteligencia artificial",
+          "description": "Datos, probabilidad, procesamiento de imágenes, IA en videojuegos y modelos para reconocimiento de patrones y decisión."
+        },
+        "vr": {
+          "name": "Realidad virtual y mixta",
+          "description": "Realidad aumentada, interfaces, simulación gráfica y experiencias inmersivas."
+        },
+        "graphics": {
+          "name": "Gráficas computacionales",
+          "description": "Modelación digital, multimedia, geometría, álgebra geométrica conformal, graficación avanzada, videojuegos y soluciones gráficas móviles."
+        },
+        "data": {
+          "name": "Data science",
+          "description": "Estadística, métodos numéricos, cómputo distribuido y paralelo, y la especialidad de ciencia de datos en el 4+1."
+        }
+      }
+    },
+    "proyectos": {
+      "meta": {
+        "title": "Proyectos y Media Lab",
+        "description": "Proyectos de Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: Media Lab, código, datos y experiencias digitales."
+      },
+      "crumb": "Proyectos",
+      "title": "Proyectos de Ingeniería en Sistemas y Gráficas Computacionales",
+      "lede": "Lo que aprendes toma forma en proyectos.",
+      "description": "Explora problemas, procesos y resultados de equipos que trabajan con código, datos, visualización y experiencias digitales.",
+      "exploreTitle": "Explora lo que puedes construir",
+      "exploreDescription": "Un proyecto del archivo de Media Lab y un ejemplo de aplicación de datos.",
+      "archiveTitle": "Media Lab",
+      "archiveDescription": "Un archivo de investigación aplicada, visualización y experiencias interactivas.",
+      "realized": "Realizado en {date}.",
+      "archiveNote": "Los proyectos de 2013 a 2015 se presentan como archivo histórico. El catálogo de proyectos actuales crecerá con fichas de equipo, proceso y resultado.",
+      "shareTitle": "¿Tienes un proyecto para mostrar?",
+      "shareText": "Comparte el problema, el proceso, el resultado y las personas que lo hicieron posible.",
+      "shareCta": "Contactar a Coordinación",
+      "shareSubject": "Proyecto ISGC"
+    },
+    "comunidad": {
+      "meta": {
+        "title": "Comunidad UP Guadalajara",
+        "description": "Comunidad ISGC en la Universidad Panamericana Guadalajara: equipo académico, espacios del campus, coordinación, noticias y eventos de Ingeniería en Sistemas."
+      },
+      "crumb": "Comunidad",
+      "title": "Comunidad de Ingeniería en Sistemas y Gráficas Computacionales",
+      "lede": "La carrera también se construye con otras personas.",
+      "description": "Conoce al equipo académico, los espacios del campus y las noticias que conectan a la comunidad ISGC.",
+      "facultyTitle": "Equipo académico",
+      "newsTitle": "Noticias y eventos",
+      "newsEmpty": "Consulta con Coordinación las próximas actividades. Aquí podrás consultar las noticias publicadas y su archivo.",
+      "spacesTitle": "Espacios para encontrarnos",
+      "spacesDescription": "Ubica los puntos donde puedes estudiar, resolver dudas o trabajar con otras personas.",
+      "mapCta": "Abrir mapa del campus",
+      "contactTitle": "Contacta a Coordinación",
+      "coordLocation": "Edificio C · 3.º piso"
+    },
+    "alumnos": {
+      "meta": {
+        "title": "Centro de alumnos UP Guadalajara",
+        "description": "Centro de alumnos ISGC en la Universidad Panamericana Guadalajara: accesos frecuentes, trámites, recursos de estudio, avisos y herramientas para tu formación."
+      },
+      "crumb": "Alumnos",
+      "title": "Centro de alumnos de Ingeniería en Sistemas y Gráficas Computacionales",
+      "lede": "Todo lo que necesitas para seguir avanzando.",
+      "description": "Avisos, accesos frecuentes, trámites, estudio y desarrollo profesional en un solo lugar.",
+      "eventsTitle": "Avisos y próximos eventos",
+      "eventsEmpty": "Consulta con Coordinación las próximas actividades y convocatorias vigentes.",
+      "quickTitle": "Accesos frecuentes",
+      "resourcesTitle": "Recursos para tu día a día",
+      "resourcesDescription": "Busca por nombre y abre cada herramienta en su destino correspondiente.",
+      "coordTitle": "Coordinación",
+      "coordText": "Edificio C · 3.º piso. Para dudas sobre materias, profesores y procesos académicos.",
+      "regsTitle": "Reglamentos y servicios",
+      "regsText": "Consulta los documentos y procedimientos institucionales.",
+      "regsCta": "Abrir Servicios Escolares",
+      "faqTitle": "Preguntas de alumnos",
+      "faqGroup": "Alumnos"
+    },
+    "aspirantes": {
+      "meta": {
+        "title": "Admisiones UP Guadalajara",
+        "description": "Información para aspirantes a la Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: admisiones, becas y visitas."
+      },
+      "crumb": "Aspirantes",
+      "title": "Admisión a Ingeniería en Sistemas y Gráficas Computacionales",
+      "lede": "Empieza por conocer cómo puedes entrar y qué vas a construir aquí.",
+      "description": "Encuentra el proceso oficial de admisión, opciones de apoyo económico, una visita al campus y un contacto directo.",
+      "processTitle": "Tu proceso de ingreso",
+      "processDescription": "Revisa cada paso en la convocatoria oficial y confirma fechas antes de enviar tus documentos.",
+      "steps": [
+        {
+          "title": "Conoce la carrera",
+          "text": "Explora el perfil y las áreas de trabajo."
+        },
+        {
+          "title": "Revisa requisitos",
+          "text": "Consulta documentos, fechas y condiciones."
+        },
+        {
+          "title": "Completa tu proceso",
+          "text": "Da seguimiento a tu registro con Admisiones."
+        },
+        {
+          "title": "Empieza tu ruta",
+          "text": "Conoce el campus y prepárate para comenzar."
+        }
+      ],
+      "admissionsCta": "Ir a Admisiones",
+      "aidTitle": "Becas y financiamiento",
+      "aidDescription": "Consulta convocatorias, requisitos y fechas directamente en los portales institucionales.",
+      "aidCardTitle": "Apoyo económico",
+      "aidCardText": "Revisa las opciones disponibles y prepara la documentación que solicita cada convocatoria.",
+      "aidCta": "Consultar becas y financiamiento",
+      "visitTitle": "Visita el campus",
+      "visitText": "Conoce los espacios de Ingenierías y ubica laboratorios, coordinación y áreas de encuentro.",
+      "visitCta": "Abrir mapa del campus",
+      "askTitle": "¿Tienes una pregunta?",
+      "askText": "Escríbenos para orientarte sobre el proceso, la carrera o una visita.",
+      "faqTitle": "Preguntas de aspirantes",
+      "faqGroup": "Aspirantes"
+    },
+    "oportunidades": {
+      "meta": {
+        "title": "Prácticas y empleo UP Guadalajara",
+        "description": "Oportunidades para alumnos de Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: prácticas, empleo y perfil."
+      },
+      "crumb": "Oportunidades",
+      "title": "Prácticas y empleo en Ingeniería en Sistemas y Gráficas Computacionales",
+      "lede": "Empieza a construir experiencia antes de egresar.",
+      "description": "Encuentra prácticas, empleo y herramientas para presentar mejor lo que sabes hacer.",
+      "profileTitle": "Tu perfil en tres pasos",
+      "steps": [
+        {
+          "title": "Ordena tu trabajo",
+          "text": "Reúne proyectos, decisiones y resultados en un portafolio."
+        },
+        {
+          "title": "Cuenta lo que sabes",
+          "text": "Actualiza tu CV y tu perfil de LinkedIn con ejemplos concretos."
+        },
+        {
+          "title": "Comparte tu código",
+          "text": "Usa GitHub para mostrar procesos, repositorios y documentación."
+        }
+      ],
+      "linkedin": "Abrir LinkedIn",
+      "github": "Abrir GitHub",
+      "portalsTitle": "Portales para buscar oportunidades",
+      "visitPortal": "Visitar portal",
+      "portals": [
+        {
+          "href": "https://work.hirellama.com/",
+          "text": "Vacantes y oportunidades para perfiles digitales.",
+          "title": "Hirellama"
+        },
+        {
+          "href": "https://jobs.intel.com/ListJobs/All/Country-MX",
+          "text": "Consulta posiciones abiertas en México.",
+          "title": "Intel México"
+        },
+        {
+          "href": "https://www.empleojaltec.mx/",
+          "text": "Explora opciones de empleo en la región.",
+          "title": "Empleo Jalisco"
+        }
+      ],
+      "helpTitle": "¿Quieres orientación?",
+      "helpText": "Escribe a Coordinación para resolver dudas sobre prácticas, empleo o cómo presentar tu trabajo."
+    }
+  }
+}

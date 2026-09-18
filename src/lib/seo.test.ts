@@ -4,6 +4,8 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 import sitemap from "@/app/sitemap";
+import { getDictionary } from "@/lib/dictionary";
+import { locales, sitePaths } from "@/lib/i18n";
 import { siteLastModified, siteRoutes } from "@/lib/site";
 
 const appDir = path.join(process.cwd(), "src/app");
@@ -11,6 +13,16 @@ const titleSuffix = " | ISGC";
 const maxTitleLength = 60;
 const maxDescriptionLength = 160;
 const minDescriptionLength = 120;
+
+const pageKey = {
+  "/": "home",
+  "/alumnos": "alumnos",
+  "/aspirantes": "aspirantes",
+  "/carrera": "carrera",
+  "/comunidad": "comunidad",
+  "/oportunidades": "oportunidades",
+  "/proyectos": "proyectos",
+} as const;
 
 const findPageFiles = (dir: string): string[] => {
   const entries = readdirSync(dir, { withFileTypes: true });
@@ -23,50 +35,18 @@ const findPageFiles = (dir: string): string[] => {
   });
 };
 
-const routeFromPageFile = (file: string): string =>
-  file.replace(`${appDir}`, "").replace("/page.tsx", "") || "/";
-
-const metadataBlock = (source: string): string | null => {
-  const start = source.indexOf("export const metadata");
-  return start === -1 ? null : source.slice(start);
+const routeFromPageFile = (file: string): string => {
+  const relative =
+    file.replace(`${appDir}`, "").replace("/page.tsx", "") || "/";
+  return relative.replace("/[lang]", "") || "/";
 };
 
-const parseDescription = (source: string): string | null => {
-  const block = metadataBlock(source);
-  if (!block) {
-    return null;
-  }
-  const match = block.match(/\n {2}description:\s*\n?\s*"(?<text>[^"]+)"/u);
-  return match?.groups?.text ?? null;
-};
-
-const parseRenderedTitle = (source: string): string | null => {
-  const block = metadataBlock(source);
-  if (!block) {
-    return null;
-  }
-
-  const absoluteMatch = block.match(
-    /\n {2}title:\s*\{[\s\S]*?\n {4}absolute:\s*"(?<text>[^"]+)"/u
-  );
-  if (absoluteMatch?.groups?.text) {
-    return absoluteMatch.groups.text;
-  }
-
-  const stringMatch = block.match(/\n {2}title:\s*"(?<text>[^"]+)"/u);
-  if (stringMatch?.groups?.text) {
-    return `${stringMatch.groups.text}${titleSuffix}`;
-  }
-
-  return null;
-};
-
-const collectMetadataIssues = (pageFiles: string[]): string[] => {
+const collectPageIssues = (pageFiles: string[]): string[] => {
   const issues: string[] = [];
 
-  if (pageFiles.length !== siteRoutes.length) {
+  if (pageFiles.length !== sitePaths.length) {
     issues.push(
-      `expected ${siteRoutes.length} page routes, found ${pageFiles.length}`
+      `expected ${sitePaths.length} page routes, found ${pageFiles.length}`
     );
   }
 
@@ -74,38 +54,12 @@ const collectMetadataIssues = (pageFiles: string[]): string[] => {
     const route = routeFromPageFile(file);
     const source = readFileSync(file, "utf-8");
 
-    if (!/export const metadata:\s*Metadata\s*=/u.test(source)) {
-      issues.push(`${route}: missing metadata export`);
-      continue;
+    if (!/export const generateMetadata/u.test(source)) {
+      issues.push(`${route}: missing generateMetadata export`);
     }
 
-    const description = parseDescription(source);
-    if (description) {
-      if (description.length > maxDescriptionLength) {
-        issues.push(
-          `${route}: description exceeds ${maxDescriptionLength} chars`
-        );
-      }
-      if (description.length < minDescriptionLength) {
-        issues.push(
-          `${route}: description below ${minDescriptionLength} chars`
-        );
-      }
-    } else {
-      issues.push(`${route}: missing description`);
-    }
-
-    const renderedTitle = parseRenderedTitle(source);
-    if (renderedTitle) {
-      if (renderedTitle.length > maxTitleLength) {
-        issues.push(`${route}: title exceeds ${maxTitleLength} chars`);
-      }
-    } else {
-      issues.push(`${route}: missing title`);
-    }
-
-    if (!/alternates:\s*\{\s*canonical:/u.test(source)) {
-      issues.push(`${route}: missing alternates.canonical`);
+    if (!/pageMetadata\(/u.test(source)) {
+      issues.push(`${route}: metadata helper not used`);
     }
   }
 
@@ -115,11 +69,40 @@ const collectMetadataIssues = (pageFiles: string[]): string[] => {
 describe("seo metadata", () => {
   const pageFiles = findPageFiles(appDir).toSorted();
 
-  it("exports metadata on every route", () => {
-    expect(collectMetadataIssues(pageFiles)).toStrictEqual([]);
+  it("exports generateMetadata on every route", () => {
+    expect(collectPageIssues(pageFiles)).toStrictEqual([]);
   });
 
-  it("lists every route in sitemap.ts", () => {
+  it("keeps dictionary titles and descriptions within bounds", () => {
+    const issues: string[] = [];
+
+    for (const locale of locales) {
+      const dict = getDictionary(locale);
+      for (const route of sitePaths) {
+        const { description, title } = dict.pages[pageKey[route]].meta;
+        const rendered = route === "/" ? title : `${title}${titleSuffix}`;
+        if (description.length > maxDescriptionLength) {
+          issues.push(
+            `${locale} ${route}: description exceeds ${maxDescriptionLength} chars`
+          );
+        }
+        if (description.length < minDescriptionLength) {
+          issues.push(
+            `${locale} ${route}: description below ${minDescriptionLength} chars (${description.length})`
+          );
+        }
+        if (rendered.length > maxTitleLength) {
+          issues.push(
+            `${locale} ${route}: title exceeds ${maxTitleLength} chars (${rendered.length})`
+          );
+        }
+      }
+    }
+
+    expect(issues).toStrictEqual([]);
+  });
+
+  it("lists every localized route in sitemap.ts", () => {
     const entries = sitemap();
     const paths = entries.map((entry) => new URL(entry.url).pathname);
 
@@ -134,6 +117,6 @@ describe("seo metadata", () => {
 
   it("keeps sitemap.ts aligned with page routes", () => {
     const routesFromPages = pageFiles.map(routeFromPageFile).toSorted();
-    expect([...siteRoutes].toSorted()).toStrictEqual(routesFromPages);
+    expect([...sitePaths].toSorted()).toStrictEqual(routesFromPages);
   });
 });

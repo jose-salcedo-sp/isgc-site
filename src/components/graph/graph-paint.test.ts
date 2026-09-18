@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest";
 
-import { FOCUS_K, clampK, focusOn } from "./graph-paint";
+import { clampK, focusOn } from "./graph-paint";
 
 describe("graph focus transform", () => {
-  it("zooms to FOCUS_K and pans the node onto the open canvas", () => {
+  it("keeps the current zoom and pans the node clear of the left inspector", () => {
     const next = focusOn(100, 50, 0.55, { h: 800, w: 1200 });
-    expect(next.k).toBe(FOCUS_K);
-    expect(next.x).toBe((1200 - 336) / 2 - 1200 / 2 - 100 * FOCUS_K);
-    expect(next.y).toBe(800 / 2 - 800 / 2 - 50 * FOCUS_K);
+    expect(next.k).toBe(0.55);
+    expect(next.x).toBe((1200 + 472) / 2 - 1200 / 2 - 100 * 0.55);
+    expect(next.y).toBe(-50 * 0.55);
   });
 
   it("keeps a higher current zoom", () => {
@@ -15,11 +15,11 @@ describe("graph focus transform", () => {
     expect(next.k).toBe(4);
   });
 
-  it("shifts up on compact width so the inspector does not cover the node", () => {
-    const next = focusOn(0, 0, FOCUS_K, { h: 700, w: 400 });
-    expect(next.k).toBe(FOCUS_K);
+  it("centers on compact width where the inspector sits below", () => {
+    const next = focusOn(0, 0, 0.7, { h: 700, w: 400 });
+    expect(next.k).toBe(0.7);
     expect(next.x).toBe(0);
-    expect(next.y).toBe((700 - 280) / 2 - 700 / 2);
+    expect(next.y).toBe(0);
   });
 
   it("clamps extreme zoom", () => {

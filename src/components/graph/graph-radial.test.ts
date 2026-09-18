@@ -17,7 +17,7 @@ const edge = (
 });
 
 describe("radial layout", () => {
-  it("pins the program at the origin and children on later rings", () => {
+  it("pins children on later rings without a third subject ring", () => {
     const nodes: GraphNode[] = [
       { id: "program", kind: "program", label: "CSE", proximity: 0 },
       {
@@ -28,25 +28,21 @@ describe("radial layout", () => {
         proximity: 1,
       },
       { id: "c1", kind: "course", label: "Calc", order: 1, proximity: 2 },
-      { id: "sub", kind: "subject", label: "Limits", order: 1, proximity: 3 },
     ];
     const layout = layoutRadial(nodes, [
       edge("program", "s1", "e1"),
       edge("s1", "c1", "e2"),
-      edge("c1", "sub", "e3"),
     ]);
     const program = layout.byId.get("program");
     const semester = layout.byId.get("s1");
     const course = layout.byId.get("c1");
-    const subject = layout.byId.get("sub");
-    if (!program || !semester || !course || !subject) {
+    if (!program || !semester || !course) {
       throw new Error("missing nodes");
     }
     expect(program.x).toBe(0);
     expect(program.y).toBe(0);
     expect(semester.radius).toBe(RING_RADIUS[1]);
     expect(course.radius).toBe(RING_RADIUS[2]);
-    expect(subject.radius).toBe(RING_RADIUS[3]);
   });
 
   it("splits the innermost ring into equal slices regardless of class count", () => {
@@ -119,9 +115,9 @@ describe("radial layout", () => {
 describe("links between slices on the same ring", () => {
   it("stays outside the outer ring along the whole arc", () => {
     const nodes: GraphNode[] = [
-      { id: "a", kind: "subject", label: "A", order: 1, proximity: 3 },
-      { id: "b", kind: "subject", label: "B", order: 2, proximity: 3 },
-      { id: "c", kind: "subject", label: "C", order: 3, proximity: 3 },
+      { id: "a", kind: "course", label: "A", order: 1, proximity: 2 },
+      { id: "b", kind: "course", label: "B", order: 2, proximity: 2 },
+      { id: "c", kind: "course", label: "C", order: 3, proximity: 2 },
     ];
     const layout = layoutRadial(nodes, []);
     const a = layout.byId.get("a");
