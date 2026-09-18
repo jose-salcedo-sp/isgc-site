@@ -34,7 +34,6 @@ export const readPalette = (root: HTMLElement): Palette => {
       course: fallbackKind(css, "course"),
       program: fallbackKind(css, "program"),
       semester: fallbackKind(css, "semester"),
-      subject: fallbackKind(css, "subject"),
     },
     ring: css.getPropertyValue("--graph-ring").trim() || "rgba(0,0,0,0.08)",
   };
@@ -180,8 +179,8 @@ const nestedUnder = (
 };
 
 /**
- * Classes and subjects also pull in the subjects they relate to; semesters
- * stay inside their own wedge, so their relations are neither lit nor drawn.
+ * Classes also pull in the classes they relate to; semesters stay inside
+ * their own wedge, so their relations are neither lit nor drawn.
  */
 interface FocusSets {
   core: Set<string> | null;
@@ -282,7 +281,6 @@ const paintTip = (
 const LABEL_SIZE: Partial<Record<GraphKind, number>> = {
   course: 26,
   semester: 46,
-  subject: 20,
 };
 
 const paintSliceNode = (
@@ -306,7 +304,7 @@ const paintSliceNode = (
     emphasis,
     LABEL_SIZE[node.kind] ?? 11
   );
-  if (node.kind === "subject") {
+  if (node.kind === "course") {
     const dot = opts.lit ? palette.kinds.semester : color;
     paintTip(ctx, node, dot, alpha, inv, emphasis, palette.ink);
   }
@@ -344,7 +342,7 @@ const fillSectors = (
     ctx.strokeStyle = withAlpha(shade(color, 0.55), alpha * 0.85);
     ctx.lineWidth = inv;
     ctx.stroke();
-    if (node.kind === "subject" && highlight?.has(node.id)) {
+    if (node.kind === "course" && highlight?.has(node.id)) {
       ctx.beginPath();
       ctx.arc(0, 0, node.tip, a0, a1);
       ctx.strokeStyle = withAlpha(palette.kinds.semester, 0.95);
@@ -490,9 +488,7 @@ export const zoomAt = (
   transform.y = my - size.h / 2 - wy * nextK;
 };
 
-export const FOCUS_K = 2.8;
-const INSPECTOR_RESERVE_X = 336;
-const INSPECTOR_RESERVE_Y = 288;
+const INSPECTOR_RESERVE_X = 472;
 const COMPACT_W = 768;
 
 export const focusOn = (
@@ -501,12 +497,11 @@ export const focusOn = (
   currentK: number,
   size: { h: number; w: number }
 ): Transform => {
-  const k = clampK(Math.max(currentK, FOCUS_K));
-  const wide = size.w >= COMPACT_W;
-  const reserveX = wide ? Math.min(INSPECTOR_RESERVE_X, size.w * 0.42) : 0;
-  const reserveY = wide ? 0 : Math.min(INSPECTOR_RESERVE_Y, size.h * 0.4);
-  const sx = (size.w - reserveX) / 2;
-  const sy = (size.h - reserveY) / 2;
+  const k = clampK(currentK);
+  const reserveX =
+    size.w >= COMPACT_W ? Math.min(INSPECTOR_RESERVE_X, size.w * 0.42) : 0;
+  const sx = (size.w + reserveX) / 2;
+  const sy = size.h / 2;
   return {
     k,
     x: sx - size.w / 2 - wx * k,

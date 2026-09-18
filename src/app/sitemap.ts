@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
 
-import { siteLastModified, siteRoutes, siteUrl } from "@/lib/site";
+import { locales, localizedPath, sitePaths } from "@/lib/i18n";
+import { siteLastModified, siteUrl } from "@/lib/site";
 
 const routeConfig: Record<
-  (typeof siteRoutes)[number],
+  (typeof sitePaths)[number],
   {
     changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
     priority: number;
@@ -19,14 +20,21 @@ const routeConfig: Record<
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return siteRoutes.map((route) => {
-    const { changeFrequency, priority } = routeConfig[route];
+  return locales.flatMap((locale) =>
+    sitePaths.map((path) => {
+      const { changeFrequency, priority } = routeConfig[path];
+      const languages: Record<string, string> = {};
+      for (const item of locales) {
+        languages[item] = `${siteUrl}${localizedPath(item, path)}`;
+      }
 
-    return {
-      changeFrequency,
-      lastModified: siteLastModified,
-      priority,
-      url: `${siteUrl}${route === "/" ? "" : route}`,
-    };
-  });
+      return {
+        alternates: { languages },
+        changeFrequency,
+        lastModified: siteLastModified,
+        priority,
+        url: `${siteUrl}${localizedPath(locale, path)}`,
+      };
+    })
+  );
 }

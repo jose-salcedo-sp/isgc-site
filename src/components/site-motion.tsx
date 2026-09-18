@@ -4,15 +4,6 @@ import { animate, inView, scroll, stagger } from "motion";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 
-const chapters = {
-  "/alumnos": ["Explora", "Resuelve", "Avanza"],
-  "/aspirantes": ["Imagina", "Da el paso", "Empieza"],
-  "/carrera": ["Entiende", "Construye", "Comparte"],
-  "/comunidad": ["Conecta", "Colabora", "Crea"],
-  "/oportunidades": ["Construye", "Muéstralo", "Trasciende"],
-  "/proyectos": ["Código", "Experiencia", "Impacto"],
-} satisfies Record<string, [string, string, string]>;
-
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 const CURTAIN_MS = 350;
 const NAV_RESET_MS = 2500;
@@ -20,40 +11,30 @@ const NAV_RESET_MS = 2500;
 const reduced = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-export const ChapterVisual = () => {
-  const pathname = usePathname();
-  // SAFETY: `Object.hasOwn` confirms `pathname` is one of the `chapters` keys.
-  const words: readonly string[] | undefined = Object.hasOwn(chapters, pathname)
-    ? chapters[pathname as keyof typeof chapters]
-    : undefined;
-  if (!words) {
-    return null;
-  }
-  return (
-    <div className="chapter-visual" aria-hidden="true">
-      <div className="chapter-wire">
-        <i />
-        <i />
-        <i />
-      </div>
-      <div className="chapter-words">
-        {words.map((word, i) => (
-          <span key={word}>
-            <small>0{i + 1}</small>
-            {word}
-          </span>
-        ))}
-      </div>
-      <div className="chapter-track">
-        <i />
-      </div>
+export const ChapterVisual = ({ words }: { words: readonly string[] }) => (
+  <div className="chapter-visual" aria-hidden="true">
+    <div className="chapter-wire">
+      <i />
+      <i />
+      <i />
     </div>
-  );
-};
+    <div className="chapter-words">
+      {words.map((word, i) => (
+        <span key={word}>
+          <small>0{i + 1}</small>
+          {word}
+        </span>
+      ))}
+    </div>
+    <div className="chapter-track">
+      <i />
+    </div>
+  </div>
+);
 
 const playChapterIntro = (): void => {
   animate(
-    "#contenido > section:first-child :is(h1, p)",
+    "#contenido > section:first-of-type :is(h1, p)",
     { opacity: [0, 1], y: [30, 0] },
     {
       delay: stagger(0.12, { startDelay: 0.2 }),
@@ -112,7 +93,7 @@ const linkToScroll = (): (() => void)[] => {
 const revealSections = (): (() => void)[] => {
   const stops: (() => void)[] = [];
   const sections = document.querySelectorAll<HTMLElement>(
-    "#contenido > section:not(:first-child)"
+    "#contenido > section:not(:first-of-type)"
   );
   for (const section of sections) {
     const heading = section.querySelector("h2");

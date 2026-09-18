@@ -11,7 +11,7 @@ describe("curriculum graph", () => {
     );
     expect(curriculumGraph.edges).toStrictEqual(curriculum.graph.edges);
     expect(curriculumGraph.text.title).toBe(curriculum.graph.text.title);
-    expect(curriculumGraph.text.kinds.course).toBe("Materias");
+    expect(curriculumGraph.text.kinds.course).toBe("Materia");
   });
 
   it("starts at the semester ring with no node at the center", () => {
@@ -31,6 +31,23 @@ describe("curriculum graph", () => {
             edge.a === `semester-${course.semester}` && edge.b === course.id
         )
       ).toBeTruthy();
+    }
+  });
+
+  it("connects classes to classes, not a third ring", () => {
+    const byId = new Map(curriculumGraph.nodes.map((node) => [node.id, node]));
+    expect(
+      curriculumGraph.nodes.every(
+        (node) => node.kind === "course" || node.kind === "semester"
+      )
+    ).toBeTruthy();
+    const relates = curriculumGraph.edges.filter(
+      (edge) => edge.label === "relates"
+    );
+    expect(relates.length).toBeGreaterThan(0);
+    for (const edge of relates) {
+      expect(byId.get(edge.a)?.kind).toBe("course");
+      expect(byId.get(edge.b)?.kind).toBe("course");
     }
   });
 });

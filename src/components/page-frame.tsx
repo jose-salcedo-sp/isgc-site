@@ -4,39 +4,62 @@ import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ChapterVisual } from "@/components/site-motion";
+import type { Dictionary } from "@/lib/dictionary";
+import { localizedPath } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n";
 
-export const PageFrame = ({ children }: { children: React.ReactNode }) => (
+export const PageFrame = ({
+  children,
+  dict,
+  locale,
+}: {
+  children: React.ReactNode;
+  dict: Dictionary;
+  locale: Locale;
+}) => (
   <>
-    <SiteHeader />
+    <SiteHeader dict={dict} locale={locale} />
     <main id="contenido">{children}</main>
-    <SiteFooter />
+    <SiteFooter dict={dict} locale={locale} />
   </>
 );
 
 export const PageIntro = ({
+  chapters,
   crumb,
   description,
+  dict,
   lede,
+  locale,
   title,
 }: {
+  chapters: readonly string[];
   crumb: { name: string; path: string };
   description: string;
+  dict: Dictionary;
   lede?: string;
+  locale: Locale;
   title: string;
 }) => (
   <section className="bg-tinto text-white">
     <div className="mx-auto max-w-300 px-5 py-10 sm:py-14 lg:px-6">
       <BreadcrumbJsonLd
         items={[
-          { name: "Inicio", path: "/" },
-          { name: crumb.name, path: crumb.path },
+          { name: dict.common.home, path: localizedPath(locale, "/") },
+          { name: crumb.name, path: localizedPath(locale, crumb.path) },
         ]}
       />
-      <nav aria-label="Miga de pan" className="mb-6 text-sm text-white/70">
+      <nav
+        aria-label={dict.common.breadcrumb}
+        className="mb-6 text-sm text-white/70"
+      >
         <ol className="flex flex-wrap items-center gap-2">
           <li>
-            <Link href="/" className="underline underline-offset-4">
-              Inicio
+            <Link
+              href={localizedPath(locale, "/")}
+              className="underline underline-offset-4"
+            >
+              {dict.common.home}
             </Link>
           </li>
           <li aria-hidden="true">/</li>
@@ -56,7 +79,7 @@ export const PageIntro = ({
       <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
         {description}
       </p>
-      <ChapterVisual />
+      <ChapterVisual words={chapters} />
     </div>
   </section>
 );

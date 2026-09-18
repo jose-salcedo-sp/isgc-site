@@ -1,15 +1,17 @@
-export type GraphKind = "program" | "semester" | "course" | "subject";
+export type GraphKind = "program" | "semester" | "course";
 
 export interface GraphText {
   close: string;
   connectionMany: string;
   connectionOne: string;
-  connections: string;
+  continues: string;
   credits: string;
+  inPlan: string;
   kinds: Record<GraphKind, string>;
   noLinks: string;
   search: string;
   searchLabel: string;
+  thisSemester: string;
   title: string;
 }
 
