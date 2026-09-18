@@ -19,6 +19,9 @@ const satoshi = localFont({
 });
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
   description:
     "Conoce la Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara: software, datos, gráficas y proyectos aplicados.",
   metadataBase: new URL(siteUrl),
