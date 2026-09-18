@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
@@ -93,6 +94,7 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => (
       {children}
       <SiteMotion />
       <Analytics />
+      <SpeedInsights />
     </body>
   </html>
 );
