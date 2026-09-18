@@ -12,6 +12,7 @@ import {
 import { JsonLd } from "@/components/seo/json-ld";
 import { externalLinks } from "@/content/site-content";
 import curriculum from "@/data/curriculum.json";
+import { localizedCourseName, localizedGraphNodes } from "@/lib/course-copy";
 import { curriculumGraph } from "@/lib/curriculum-graph";
 import { getDictionary } from "@/lib/dictionary";
 import { fill, hasLocale } from "@/lib/i18n";
@@ -51,15 +52,11 @@ const CarreraPage = async ({ params }: LocaleParams) => {
   const dict = getDictionary(lang);
   const copy = dict.pages.carrera;
   const { areas } = copy;
-  const graphNodes = curriculumGraph.nodes.map((node) => {
-    if (node.kind !== "semester" || node.order === undefined) {
-      return node;
-    }
-    return {
-      ...node,
-      label: copy.semesterLabels[node.order - 1] ?? node.label,
-    };
-  });
+  const graphNodes = localizedGraphNodes(
+    curriculumGraph.nodes,
+    dict,
+    copy.semesterLabels
+  );
 
   return (
     <PageFrame dict={dict} locale={lang}>
@@ -150,7 +147,9 @@ const CarreraPage = async ({ params }: LocaleParams) => {
               </h3>
               <ul className="text-piedra mt-4 list-disc space-y-1 pl-5">
                 {item.courses.map((course) => (
-                  <li key={course.id}>{course.name}</li>
+                  <li key={course.id}>
+                    {localizedCourseName(dict, course.id, course.name)}
+                  </li>
                 ))}
               </ul>
             </li>

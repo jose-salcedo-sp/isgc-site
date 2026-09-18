@@ -648,5 +648,235 @@
       "helpTitle": "Would you like guidance?",
       "helpText": "Write to Coordination with questions about internships, jobs or how to present your work."
     }
+  },
+  "courses": {
+    "calculo-diferencial": {
+      "name": "Differential Calculus",
+      "description": "Limits, continuity and derivatives to model change. Mathematical foundation for physics, graphics and algorithm analysis."
+    },
+    "algebra": {
+      "name": "Algebra",
+      "description": "University algebra: equations, functions and algebraic structures used in programming and later discrete mathematics."
+    },
+    "analisis-y-diseno-de-algoritmos": {
+      "name": "Analysis and Design of Algorithms",
+      "description": "How to frame a problem, design a step-by-step solution and measure efficiency. The plan's first course in computational thinking."
+    },
+    "redaccion": {
+      "name": "Writing",
+      "description": "Clear, correct writing: reports, arguments and documentation an engineer needs to communicate."
+    },
+    "fisica": {
+      "name": "Physics",
+      "description": "Mechanics and physical principles that later appear in simulation, video games and real-world modeling."
+    },
+    "historia-de-la-cultura": {
+      "name": "History of Culture",
+      "description": "UP humanistic formation: cultural and historical context for placing technology in society."
+    },
+    "calculo-integral": {
+      "name": "Integral Calculus",
+      "description": "Integrals and applications: area, accumulation and tools for probability, physics and numerical methods."
+    },
+    "entorno-economico": {
+      "name": "Economic Environment",
+      "description": "How the economic environment works where software products are sold and business decisions are made."
+    },
+    "programacion-orientada-a-objetos": {
+      "name": "Object-Oriented Programming",
+      "description": "Classes, objects, inheritance and modular design. Foundation for most of the software in the rest of the program."
+    },
+    "programacion-avanzada": {
+      "name": "Advanced Programming",
+      "description": "Programming techniques beyond the introductory level: abstraction, libraries and code ready for larger projects."
+    },
+    "circuitos-digitales-y-electricos": {
+      "name": "Digital and Electrical Circuits",
+      "description": "Digital logic and circuits: how the machine represents bits and executes instructions beneath the software."
+    },
+    "modelacion-digital": {
+      "name": "Digital Modelling",
+      "description": "Represent shapes and scenes in 2D/3D with digital tools. Entry point to the program's graphics track."
+    },
+    "persona-y-sociedad": {
+      "name": "Person and Society",
+      "description": "UP anthropological formation: person, community and the engineer's social responsibility."
+    },
+    "algebra-lineal": {
+      "name": "Linear Algebra",
+      "description": "Vectors, matrices and transformations. Core mathematics for graphics, vision, AI and simulation."
+    },
+    "desarrollo-de-aplicaciones-web": {
+      "name": "Web Application Development",
+      "description": "Build applications in the browser and on the server: interfaces, APIs and digital products on the web."
+    },
+    "programacion-y-estructura-de-datos": {
+      "name": "Programming and Data Structures",
+      "description": "Lists, trees, graphs, hash tables and how to choose the right structure for performance and clarity."
+    },
+    "proyectos-de-inversion-e-introduccion-a-la-valuacion-de-empresas": {
+      "name": "Investment Projects and Introduction to Business Valuation",
+      "description": "Assess whether a project or company is worth pursuing: costs, return and basic valuation for entrepreneurship or investment decisions."
+    },
+    "quimica": {
+      "name": "Chemistry",
+      "description": "Chemical principles in engineering formation; scientific context alongside physics and mathematics."
+    },
+    "direccion-de-proyectos": {
+      "name": "Project Management",
+      "description": "Plan, estimate and coordinate technical work: scope, timelines, team and delivery."
+    },
+    "etica": {
+      "name": "Ethics",
+      "description": "Moral judgement for professional, data, product and social-impact conflicts."
+    },
+    "calculo-vectorial": {
+      "name": "Vector Calculus",
+      "description": "Vector fields, curves and surfaces. Tool for geometry, physics and 3D graphics."
+    },
+    "matematicas-de-la-computacion": {
+      "name": "Mathematics for Computing",
+      "description": "Discrete mathematics for computing: logic, combinatorics, graphs and foundations of languages and algorithms."
+    },
+    "introduccion-a-las-bases-de-datos": {
+      "name": "Introduction to Databases",
+      "description": "Model, query and persist information: relational design and database use in applications."
+    },
+    "multimedios-y-graficas-computacionales": {
+      "name": "Multimedia and Computer Graphics",
+      "description": "Image, audio, video and the graphics pipeline: how the computer generates and combines media."
+    },
+    "sistemas-operativos": {
+      "name": "Operating Systems",
+      "description": "Processes, memory, files and concurrency: the software that manages the hardware."
+    },
+    "desarrollo-de-plugins": {
+      "name": "Plugin Development",
+      "description": "Extend existing tools (engines, DCC or hosts) with plugins: APIs, packaging and integration."
+    },
+    "antropologia-teologica-i": {
+      "name": "Theological Anthropology I",
+      "description": "UP identity block: person and meaning, in dialogue with professional formation."
+    },
+    "probabilidad-y-estadistica": {
+      "name": "Probability and Statistics",
+      "description": "Uncertainty, sampling and inference. Foundation for AI, data science and probabilistic models."
+    },
+    "ecuaciones-diferenciales": {
+      "name": "Differential Equations",
+      "description": "Models of systems that change over time: physics, control and simulation."
+    },
+    "ingenieria-de-software": {
+      "name": "Software Engineering",
+      "description": "Requirements, design, quality and process for building software that teams can maintain and deliver."
+    },
+    "procesamiento-de-imagenes": {
+      "name": "Image Processing",
+      "description": "Filters, transformation and analysis of digital images. Bridge between graphics and computer vision."
+    },
+    "metodos-numericos": {
+      "name": "Numerical Methods",
+      "description": "Approximate solutions on a computer: roots, linear systems, interpolation and numerical integration."
+    },
+    "desarrollo-de-videojuegos": {
+      "name": "Video Game Development",
+      "description": "Gameplay, engines and game production: integrating graphics, input and logic into a playable product."
+    },
+    "antropologia-teologica-ii": {
+      "name": "Theological Anthropology II",
+      "description": "Continues the theological and anthropological formation of the UP common core."
+    },
+    "algebra-geometrica-conformal": {
+      "name": "Conformal Geometric Algebra",
+      "description": "Geometric algebra to represent transformations, spheres and 3D geometry in a unified way. Distinctive of the graphics plan."
+    },
+    "soluciones-graficas-para-moviles": {
+      "name": "Mobile Graphics Solutions",
+      "description": "Graphics and interfaces on phones and tablets: performance, mobile GPU and visual experiences in apps."
+    },
+    "geometria-computacional": {
+      "name": "Computational Geometry",
+      "description": "Algorithms on points, polygons and space: hulls, intersections, triangulation and spatial queries."
+    },
+    "computo-distribuido": {
+      "name": "Distributed Computing",
+      "description": "Systems across multiple machines: networking, consistency, failures and cloud computing."
+    },
+    "seminario-de-aplicaciones-alternativas": {
+      "name": "Seminar on Alternative Applications",
+      "description": "Projects and unconventional uses of computing and graphics: exploring industry, art, health and other domains."
+    },
+    "realidad-aumentada": {
+      "name": "Augmented Reality",
+      "description": "Overlay graphics on the real world: tracking, camera registration and interaction in AR."
+    },
+    "filosofia-social": {
+      "name": "Social Philosophy",
+      "description": "Society, common good and critique of institutions; framework for technology's impact."
+    },
+    "inteligencia-artificial-en-videojuegos": {
+      "name": "Artificial Intelligence in Video Games",
+      "description": "Agents, pathfinding, decision-making and behaviour for NPCs and game systems."
+    },
+    "fundamentos-de-programacion-en-paralelo": {
+      "name": "Fundamentals of Parallel Programming",
+      "description": "Split work across threads and cores: synchronization, GPU/CPU and the mental model of parallelism."
+    },
+    "diseno-de-interfaces": {
+      "name": "Interface Design",
+      "description": "Design human-computer interaction: usability, prototypes and interfaces for software and immersive experiences."
+    },
+    "graficacion-avanzada-por-computadora": {
+      "name": "Advanced Computer Graphics",
+      "description": "Advanced rendering pipeline: lighting, shaders, GPU and high-quality image techniques."
+    },
+    "tecnicas-de-interpretacion-avanzadas": {
+      "name": "Advanced Interpretation Techniques",
+      "description": "Advanced interpretation techniques (visual or computational) applied to the programme's graphics-technical track. The PDF does not detail the syllabus."
+    },
+    "hombre-y-mundo-contemporaneo": {
+      "name": "Humanity and the Contemporary World",
+      "description": "Reading the present world: culture, technology and person in the UP humanistic core."
+    },
+    "optativa-i": {
+      "name": "Elective I",
+      "description": "Choose a module from the Electives I · II block (all six credits in the published plan)."
+    },
+    "compiladores": {
+      "name": "Compilers",
+      "description": "How a language becomes executable code: lexical/syntactic analysis, semantics and code generation."
+    },
+    "programacion-avanzada-en-paralelo": {
+      "name": "Advanced Parallel Programming",
+      "description": "Parallelism at larger scale: performance, advanced patterns and use of parallel hardware."
+    },
+    "emprendedores": {
+      "name": "Entrepreneurship",
+      "description": "From idea to venture: validate, prototype and shape a technology-based business."
+    },
+    "simulacion-grafica": {
+      "name": "Graphical Simulation",
+      "description": "Simulate phenomena and environments on screen: visual physics, real time and graphical representation of systems."
+    },
+    "direccion-de-empresas": {
+      "name": "Business Management",
+      "description": "How an organisation is led: strategy, people and operations beyond the code."
+    },
+    "etica-profesional": {
+      "name": "Professional Ethics",
+      "description": "Engineering ethics: confidentiality, quality, conflicts of interest and responsibility to the user."
+    },
+    "optativa-ii": {
+      "name": "Elective II",
+      "description": "Second elective from the same catalogue of six modules."
+    },
+    "especialidad-9": {
+      "name": "Specialization",
+      "description": "Year 4+1: one year of specialization (two semesters) to graduate with a second degree. The plan does not publish credits for this block."
+    },
+    "especialidad-10": {
+      "name": "Specialization",
+      "description": "Continues the chosen specialization. Options listed under specialties."
+    }
   }
 }
