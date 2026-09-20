@@ -169,10 +169,7 @@ const CarreraPage = async ({ params }: LocaleParams) => {
       </PageSection>
       <section className="graph-surface w-full py-16 sm:py-20" id="mapa">
         <div className="mx-auto max-w-300 px-5 lg:px-6">
-          <p className="text-dorado text-xs font-bold tracking-[0.18em] uppercase">
-            {copy.mapEyebrow}
-          </p>
-          <h2 className="text-foreground mt-4 max-w-3xl font-serif text-4xl leading-[1.05] sm:text-6xl">
+          <h2 className="text-foreground max-w-3xl font-serif text-4xl leading-[1.05] sm:text-6xl">
             {copy.mapTitleBefore}
             <em className="text-dorado not-italic">{copy.mapTitleEmphasis}</em>.
           </h2>

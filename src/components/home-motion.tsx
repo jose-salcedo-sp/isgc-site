@@ -76,11 +76,6 @@ const assembleStory = (): (() => void)[] => {
         { at: 0, duration: 2 },
       ],
       [
-        ".story-node",
-        { opacity: [0, 1], scale: [0, 1] },
-        { at: 0.5, delay: stagger(0.12), duration: 0.5 },
-      ],
-      [
         ".story-connection",
         { scaleX: [0, 1] },
         { at: 0.8, delay: stagger(0.1), duration: 0.5 },
@@ -93,12 +88,10 @@ const assembleStory = (): (() => void)[] => {
   ];
 };
 
-/** Each step's number, heading, and copy arrive together as it comes up. */
+/** Each step heading and copy arrive together as it comes up. */
 const revealSteps = (): (() => void)[] =>
   [...document.querySelectorAll<HTMLElement>(".story-step")].map((step) => {
-    const parts = [
-      ...step.querySelectorAll<HTMLElement>(".story-number, h3, p"),
-    ];
+    const parts = [...step.querySelectorAll<HTMLElement>("h3, p")];
     for (const part of parts) {
       prime(part);
     }
