@@ -10,11 +10,7 @@ import {
   PageSection,
   SectionHeading,
 } from "@/components/page-frame";
-import {
-  externalLinks,
-  getCurrentHomepageEvents,
-  quickAccess,
-} from "@/content/site-content";
+import { externalLinks } from "@/content/site-content";
 import type { Dictionary } from "@/lib/dictionary";
 import { getDictionary } from "@/lib/dictionary";
 import type { Locale, LocaleParams } from "@/lib/i18n";
@@ -69,69 +65,6 @@ const HeroSection = ({ dict, locale }: HomeCopy) => {
         <LabVisual dict={dict} locale={locale} />
       </div>
     </section>
-  );
-};
-
-const CurrentNewsSection = ({ dict, locale }: HomeCopy) => {
-  const copy = dict.pages.home.news;
-  const currentEvents = getCurrentHomepageEvents();
-  const quickLabels = Object.fromEntries(
-    dict.quickAccess.map((item) => [item.id, item.label])
-  );
-
-  return (
-    <PageSection tone="marfil" id="actualidad">
-      <SectionHeading title={copy.title} description={copy.description} />
-      <div className="grid gap-4 md:grid-cols-3">
-        {currentEvents.length === 0 && (
-          <article className="rounded-card bg-white p-6 md:col-span-2">
-            <h3 className="font-serif text-2xl">{copy.emptyTitle}</h3>
-            <p className="text-piedra mt-3">{copy.emptyText}</p>
-            <Link
-              href={localizedPath(locale, "/comunidad")}
-              className="text-tinto mt-5 inline-flex font-semibold underline underline-offset-4"
-            >
-              {copy.contact} →
-            </Link>
-          </article>
-        )}
-        {currentEvents.map((event) => {
-          const item = dict.events[event.id];
-          return (
-            <article
-              key={event.id}
-              className="rounded-card shadow-soft/50 bg-white p-6"
-            >
-              <h3 className="text-grafito font-serif text-2xl">{item.title}</h3>
-              <p className="text-tinto mt-3 font-semibold">{item.date}</p>
-              <p className="text-piedra mt-3">{item.text}</p>
-              <Link
-                href={`${localizedPath(locale, "/comunidad")}#${event.id}`}
-                className="text-tinto decoration-dorado mt-5 inline-flex font-semibold underline decoration-2 underline-offset-4"
-              >
-                {copy.details} ↗
-              </Link>
-            </article>
-          );
-        })}
-        <article className="rounded-card bg-tinto shadow-soft/50 p-6 text-white">
-          <h3 className="font-serif text-2xl">{copy.quickTitle}</h3>
-          <div className="mt-4 grid gap-2">
-            {quickAccess.map((item) => (
-              <a
-                key={item.id}
-                href={item.href}
-                target={item.external ? "_blank" : undefined}
-                rel={item.external ? "noreferrer" : undefined}
-                className="rounded-full px-4 py-2 font-semibold transition hover:bg-white/10"
-              >
-                {quickLabels[item.id]} <span aria-hidden="true">↗</span>
-              </a>
-            ))}
-          </div>
-        </article>
-      </div>
-    </PageSection>
   );
 };
 
@@ -376,7 +309,6 @@ const Home = async ({ params }: LocaleParams) => {
     <PageFrame dict={dict} locale={lang}>
       <HomeMotion />
       <HeroSection {...home} />
-      <CurrentNewsSection {...home} />
       <LearningStory dict={dict} locale={lang} />
       <CareerSection {...home} />
       <ProjectsSection {...home} />

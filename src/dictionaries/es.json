@@ -26,6 +26,10 @@
     "openMenu": "Abrir menú",
     "items": [
       {
+        "href": "/avisos",
+        "label": "Avisos"
+      },
+      {
         "href": "/carrera",
         "label": "Carrera"
       },
@@ -292,6 +296,7 @@
   "chapters": {
     "alumnos": ["Explora", "Resuelve", "Avanza"],
     "aspirantes": ["Imagina", "Da el paso", "Empieza"],
+    "avisos": ["Infórmate", "Participa", "Avanza"],
     "carrera": ["Entiende", "Construye", "Comparte"],
     "comunidad": ["Conecta", "Colabora", "Crea"],
     "oportunidades": ["Construye", "Muéstralo", "Trasciende"],
@@ -325,11 +330,9 @@
         "quickTitle": "Accesos frecuentes"
       },
       "story": {
-        "eyebrow": "De la curiosidad al impacto",
         "line1": "Una idea.",
         "line2Before": "Todo lo que ",
         "line2Emphasis": "puede ser.",
-        "caption": "IMAGINA · CONSTRUYE · TRANSFORMA",
         "cta": "Descubre lo que ya estamos creando",
         "steps": [
           {
@@ -466,7 +469,6 @@
       "rutaCta": "Abrir Tu Ruta Ideal",
       "planCta": "Solicitar el plan oficial",
       "planSubject": "Plan de estudios ISGC",
-      "mapEyebrow": "Plan 2015",
       "mapTitleBefore": "Tu carrera ",
       "mapTitleEmphasis": "de un vistazo",
       "mapText": "Diez semestres y 57 materias que se encadenan hacia lo que vas a construir. {campus}. RVOE {rvoe}. Elige un semestre o una materia para ver qué la sostiene y hacia dónde te lleva.",
@@ -538,6 +540,20 @@
       "mapCta": "Abrir mapa del campus",
       "contactTitle": "Contacta a Coordinación",
       "coordLocation": "Edificio C · 3.º piso"
+    },
+    "avisos": {
+      "meta": {
+        "title": "Avisos y eventos",
+        "description": "Consulta avisos y próximos eventos de ISGC en la Universidad Panamericana Guadalajara: fechas, detalles y convocatorias vigentes."
+      },
+      "crumb": "Avisos y eventos",
+      "title": "Avisos y eventos de ISGC",
+      "lede": "Lo importante, en un solo lugar.",
+      "description": "Consulta las actividades y convocatorias vigentes de la comunidad de Ingeniería en Sistemas y Gráficas Computacionales.",
+      "eventsTitle": "Próximas actividades",
+      "emptyTitle": "Mantente al día",
+      "emptyText": "Consulta con Coordinación las próximas actividades y convocatorias vigentes.",
+      "details": "Ver más información"
     },
     "alumnos": {
       "meta": {
