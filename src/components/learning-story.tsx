@@ -21,7 +21,6 @@ export const LearningStory = ({
     >
       <div className="story-layout">
         <div className="story-stage">
-          <span className="story-eyebrow">{story.eyebrow}</span>
           <h2 id="story-title">
             {story.line1}
             <br />
@@ -39,10 +38,6 @@ export const LearningStory = ({
             <div className="story-core">
               <span>{"{ }"}</span>
             </div>
-            <div className="story-node node-one">01</div>
-            <div className="story-node node-two">02</div>
-            <div className="story-node node-three">03</div>
-            <span className="story-art-caption">{story.caption}</span>
           </div>
         </div>
         <div className="story-steps">
@@ -51,7 +46,6 @@ export const LearningStory = ({
           </div>
           {story.steps.map((step) => (
             <article key={step.number} className="story-step">
-              <span className="story-number">{step.number}</span>
               <h3>{step.title}</h3>
               <p>{step.text}</p>
             </article>

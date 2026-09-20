@@ -18,6 +18,7 @@ const pageKey = {
   "/": "home",
   "/alumnos": "alumnos",
   "/aspirantes": "aspirantes",
+  "/avisos": "avisos",
   "/carrera": "carrera",
   "/comunidad": "comunidad",
   "/oportunidades": "oportunidades",
