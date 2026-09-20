@@ -140,9 +140,7 @@ export const StudentResourceSearch = ({
         })}
       </div>
       {visibleResources.length === 0 && (
-        <p className="rounded-card border-piedra text-piedra border border-dashed p-5">
-          {dict.resources.empty}
-        </p>
+        <p className="rounded-card text-piedra p-5">{dict.resources.empty}</p>
       )}
     </div>
   );
