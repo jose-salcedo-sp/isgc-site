@@ -1,6 +1,6 @@
 "use client";
 
-import { gsap } from "gsap";
+import { AnimatePresence, domAnimation, LazyMotion, m } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -110,37 +110,6 @@ const LanguageSwitcher = ({
     };
   }, []);
 
-  useEffect(() => {
-    const menu = menuRef.current;
-    if (!menu) {
-      return;
-    }
-
-    if (open) {
-      gsap.fromTo(
-        menu,
-        { autoAlpha: 0, scale: 0.96, y: -8 },
-        {
-          autoAlpha: 1,
-          duration: 0.28,
-          ease: "power3.out",
-          overwrite: true,
-          scale: 1,
-          y: 0,
-        }
-      );
-    } else {
-      gsap.to(menu, {
-        autoAlpha: 0,
-        duration: 0.2,
-        ease: "power2.in",
-        overwrite: true,
-        scale: 0.98,
-        y: -6,
-      });
-    }
-  }, [open]);
-
   return (
     <div ref={containerRef} className="relative">
       <button
@@ -161,32 +130,42 @@ const LanguageSwitcher = ({
           ▾
         </span>
       </button>
-      <div
-        ref={menuRef}
-        role="menu"
-        aria-label={dict.common.language}
-        className="invisible absolute top-[calc(100%+10px)] right-0 z-20 min-w-48 origin-top-right rounded-2xl bg-[#30272a] p-2 opacity-0 shadow-2xl"
-      >
-        {locales.map((item) => (
-          <Link
-            key={item}
-            href={localizedPath(item, path)}
-            hrefLang={item}
-            role="menuitem"
-            aria-current={item === locale ? "true" : undefined}
-            onClick={() => setOpen(false)}
-            className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition ${item === locale ? "bg-white/15 text-white" : "text-white/75 hover:bg-white/10 hover:text-white"}`}
-          >
-            <FlagIcon locale={item} />
-            <span>{dict.locales[item]}</span>
-            {item === locale && (
-              <span className="ml-auto text-[#e2c58f]" aria-hidden="true">
-                ✓
-              </span>
-            )}
-          </Link>
-        ))}
-      </div>
+      <LazyMotion features={domAnimation}>
+        <AnimatePresence>
+          {open && (
+            <m.div
+              ref={menuRef}
+              role="menu"
+              aria-label={dict.common.language}
+              initial={{ opacity: 0, scale: 0.96, y: -8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.98, y: -6 }}
+              transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute top-[calc(100%+10px)] right-0 z-20 min-w-48 origin-top-right rounded-2xl bg-[#30272a] p-2 shadow-2xl"
+            >
+              {locales.map((item) => (
+                <Link
+                  key={item}
+                  href={localizedPath(item, path)}
+                  hrefLang={item}
+                  role="menuitem"
+                  aria-current={item === locale ? "true" : undefined}
+                  onClick={() => setOpen(false)}
+                  className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition ${item === locale ? "bg-white/15 text-white" : "text-white/75 hover:bg-white/10 hover:text-white"}`}
+                >
+                  <FlagIcon locale={item} />
+                  <span>{dict.locales[item]}</span>
+                  {item === locale && (
+                    <span className="ml-auto text-[#e2c58f]" aria-hidden="true">
+                      ✓
+                    </span>
+                  )}
+                </Link>
+              ))}
+            </m.div>
+          )}
+        </AnimatePresence>
+      </LazyMotion>
     </div>
   );
 };
