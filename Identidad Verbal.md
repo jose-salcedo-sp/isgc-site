@@ -119,7 +119,7 @@ ISGC puede ser inspiradora, pero debe aterrizar cada idea:
 La voz no cambia; el tono sí se ajusta.
 
 | Contexto | Prioridad | Tono | Qué debe incluir |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Aspirantes | Comprender y decidir | Acogedor, explicativo, alentador | Qué aprenderán, cómo se vive, siguiente paso y fuente oficial |
 | Alumnos | Resolver una tarea | Directo, breve, operativo | Acción, destino, fecha, requisito y responsable cuando aplique |
 | Padres o público general | Entender la propuesta | Claro, sobrio, sin tecnicismos innecesarios | Propósito, método y evidencia |
@@ -291,7 +291,7 @@ Usar lenguaje neutral. Nunca culpar a la persona ni presentar un callejón sin s
 ## 10. Ejemplos de edición
 
 | Evitar | Preferir | Motivo |
-|---|---|---|
+| --- | --- | --- |
 | “Se ofrece una formación integral en diversas tecnologías.” | “Combina fundamentos técnicos con proyectos que puedes probar y mejorar.” | Activa y concreta |
 | “Haz clic aquí para más información.” | “Consulta los requisitos de admisión.” | Nombra acción y destino |
 | “Nuestros innovadores alumnos revolucionan el futuro.” | “Los equipos convierten problemas reales en software, datos y experiencias digitales.” | Elimina exageración |
