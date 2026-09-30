@@ -16,7 +16,7 @@ La intención general es una identidad **académica, contemporánea, cálida y r
 ## 2. Paleta
 
 | Token | Valor | Uso principal |
-|---|---:|---|
+| --- | --: | --- |
 | Tinto | `#8A1538` | Marca, encabezados de página, CTA, enlaces y datos destacados |
 | Dorado | `#B08D4F` | Subrayados, acentos, detalles gráficos y estados puntuales |
 | Marfil | `#F7F4EE` | Fondo cálido principal y alternancia de secciones |
@@ -46,7 +46,7 @@ Colores auxiliares ya presentes:
 La familia única es **Satoshi**, cargada desde Fontshare en pesos `400`, `500` y `700`, con `Arial, sans-serif` como respaldo. Las utilidades `font-sans` y `font-serif` apuntan deliberadamente a Satoshi: los títulos no usan una serif real.
 
 | Nivel | Tamaño de referencia | Peso / interlineado | Uso |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Hero principal | `clamp(1.9rem, 4vw, 3.25rem)` | 700 / 1.08 | Portada |
 | H1 interior | 30–48 px | 700 / cerrado | Introducción de cada ruta |
 | H2 | 36–48 px | 700 / cerrado | Inicio de sección |

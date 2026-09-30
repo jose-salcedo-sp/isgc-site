@@ -12,8 +12,20 @@ if [ -z "$staged" ]; then
   exit 0
 fi
 
-echo "$staged" | tr '\n' '\0' |
-  xargs -0 npm exec -- ultracite fix --
+# oxlint exits 1 when the batch has no lintable files. Markdown, JSON, and CSS
+# still need formatting, which is the oxfmt half of `ultracite fix`.
+lintable=$(printf '%s\n' "$staged" | grep -E '\.(cjs|js|jsx|mjs|ts|tsx)$' || true)
+format_only=$(printf '%s\n' "$staged" | grep -E '\.(css|json|md)$' || true)
 
-echo "$staged" | tr '\n' '\0' |
+if [ -n "$lintable" ]; then
+  printf '%s\n' "$lintable" | tr '\n' '\0' |
+    xargs -0 npm exec -- ultracite fix --
+fi
+
+if [ -n "$format_only" ]; then
+  printf '%s\n' "$format_only" | tr '\n' '\0' |
+    xargs -0 npm exec -- oxfmt --
+fi
+
+printf '%s\n' "$staged" | tr '\n' '\0' |
   xargs -0 git add --
