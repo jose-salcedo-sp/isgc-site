@@ -84,7 +84,7 @@ export const GraphInspector = ({
   return (
     <aside
       aria-labelledby="graph-node-title"
-      className="border-border bg-background/80 [@media(prefers-reduced-transparency:reduce)]:bg-background mt-4 flex max-h-[min(28rem,55vh)] flex-col overflow-hidden border-y p-6 shadow-lg backdrop-blur-xl outline-none md:absolute md:top-8 md:bottom-8 md:left-6 md:z-20 md:mt-0 md:max-h-none md:w-[min(28rem,calc(100%-3rem))] md:rounded-2xl md:border md:p-7"
+      className="bg-background/80 [@media(prefers-reduced-transparency:reduce)]:bg-background mt-4 flex max-h-[min(28rem,55vh)] flex-col overflow-hidden p-6 shadow-lg backdrop-blur-xl outline-none md:absolute md:top-8 md:bottom-8 md:left-6 md:z-20 md:mt-0 md:max-h-none md:w-[min(28rem,calc(100%-3rem))] md:rounded-2xl md:p-7"
       ref={panelRef}
       tabIndex={-1}
     >

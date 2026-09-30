@@ -8,7 +8,7 @@ export const GraphTip = ({
   tipRef: RefObject<HTMLDivElement | null>;
 }) => (
   <div
-    className="border-border bg-background/80 pointer-events-none fixed z-20 max-w-64 rounded-md border px-2.5 py-1.5 shadow-lg backdrop-blur-md"
+    className="bg-background/80 pointer-events-none fixed z-20 max-w-64 rounded-md px-2.5 py-1.5 shadow-lg backdrop-blur-md"
     hidden
     ref={tipRef}
   >

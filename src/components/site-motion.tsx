@@ -21,11 +21,8 @@ export const ChapterVisual = ({ words }: { words: readonly string[] }) => (
       <i />
     </div>
     <div className="chapter-words">
-      {words.map((word, i) => (
-        <span key={word}>
-          <small>0{i + 1}</small>
-          {word}
-        </span>
+      {words.map((word) => (
+        <span key={word}>{word}</span>
       ))}
     </div>
     <div className="chapter-track">
