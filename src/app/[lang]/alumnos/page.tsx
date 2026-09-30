@@ -14,7 +14,6 @@ import {
 import { FaqJsonLd } from "@/components/seo/faq-json-ld";
 import {
   externalLinks,
-  getCurrentHomepageEvents,
   quickAccess,
   studentResources,
 } from "@/content/site-content";
@@ -43,7 +42,6 @@ const AlumnosPage = async ({ params }: LocaleParams) => {
   }
   const dict = getDictionary(lang);
   const copy = dict.pages.alumnos;
-  const events = getCurrentHomepageEvents();
   const quickLabels = Object.fromEntries(
     dict.quickAccess.map((item) => [item.id, item.label])
   );
@@ -60,30 +58,6 @@ const AlumnosPage = async ({ params }: LocaleParams) => {
         locale={lang}
         title={copy.title}
       />
-      <PageSection>
-        <SectionHeading title={copy.eventsTitle} />
-        {events.length === 0 && (
-          <p className="text-piedra">{copy.eventsEmpty}</p>
-        )}
-        <div className="grid gap-4 md:grid-cols-2">
-          {events.map((event) => {
-            const item = dict.events[event.id];
-            return (
-              <article
-                id={event.id}
-                key={event.id}
-                className="rounded-card bg-marfil p-6"
-              >
-                <h3 className="text-grafito font-serif text-2xl">
-                  {item.title}
-                </h3>
-                <p className="text-tinto mt-3 font-semibold">{item.date}</p>
-                <p className="text-piedra mt-3">{item.text}</p>
-              </article>
-            );
-          })}
-        </div>
-      </PageSection>
       <PageSection tone="marfil">
         <SectionHeading title={copy.quickTitle} />
         <div className="grid gap-4 md:grid-cols-3">

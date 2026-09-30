@@ -13,6 +13,7 @@ const routeConfig: Record<
   "/": { changeFrequency: "weekly", priority: 1 },
   "/alumnos": { changeFrequency: "weekly", priority: 0.7 },
   "/aspirantes": { changeFrequency: "monthly", priority: 0.9 },
+  "/avisos": { changeFrequency: "weekly", priority: 0.8 },
   "/carrera": { changeFrequency: "monthly", priority: 0.9 },
   "/comunidad": { changeFrequency: "weekly", priority: 0.7 },
   "/oportunidades": { changeFrequency: "monthly", priority: 0.8 },

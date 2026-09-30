@@ -2,7 +2,7 @@
   "htmlLang": "en-GB",
   "ogLocale": "en_GB",
   "meta": {
-    "titleDefault": "ISGC | Computer Systems and Graphics Engineering",
+    "titleDefault": "ISGC | Computer Science and Graphics Engineering",
     "titleTemplate": "%s | ISGC"
   },
   "seo": {
@@ -25,6 +25,10 @@
     "mobileAria": "Mobile navigation",
     "openMenu": "Open menu",
     "items": [
+      {
+        "href": "/avisos",
+        "label": "Notices"
+      },
       {
         "href": "/carrera",
         "label": "Programme"
@@ -50,7 +54,7 @@
   },
   "brand": {
     "campusShort": "UP · Guadalajara",
-    "footerBlurb": "Computer Systems and Graphics Engineering · Universidad Panamericana Guadalajara."
+    "footerBlurb": "Computer Science and Graphics Engineering · Universidad Panamericana Guadalajara."
   },
   "graph": {
     "close": "Close",
@@ -288,6 +292,7 @@
   "chapters": {
     "alumnos": ["Explore", "Solve", "Advance"],
     "aspirantes": ["Imagine", "Take the step", "Begin"],
+    "avisos": ["Stay informed", "Take part", "Move forward"],
     "carrera": ["Understand", "Build", "Share"],
     "comunidad": ["Connect", "Collaborate", "Create"],
     "oportunidades": ["Build", "Show it", "Go further"],
@@ -296,11 +301,11 @@
   "pages": {
     "home": {
       "meta": {
-        "title": "ISGC | Computer Systems and Graphics Engineering",
-        "description": "Discover Computer Systems and Graphics Engineering at Universidad Panamericana Guadalajara: software, data, graphics and applied projects on campus."
+        "title": "ISGC | Computer Science and Graphics Engineering",
+        "description": "Discover Computer Science and Graphics Engineering at Universidad Panamericana Guadalajara: software, data, graphics and applied projects on campus."
       },
       "hero": {
-        "title": "Computer Systems and Graphics Engineering.",
+        "title": "Computer Science and Graphics Engineering.",
         "lede": "Build what comes next.",
         "text": "Learn to create software, data and digital experiences with technical rigour and responsibility towards people.",
         "careerCta": "Explore the programme",
@@ -321,11 +326,9 @@
         "quickTitle": "Frequent access"
       },
       "story": {
-        "eyebrow": "From curiosity to impact",
         "line1": "One idea.",
         "line2Before": "Everything it ",
         "line2Emphasis": "can become.",
-        "caption": "IMAGINE · BUILD · TRANSFORM",
         "cta": "See what we are already creating",
         "steps": [
           {
@@ -420,12 +423,12 @@
     "carrera": {
       "meta": {
         "title": "Study plan UP Guadalajara",
-        "description": "Explore Computer Systems and Graphics Engineering at Universidad Panamericana Guadalajara: study plan, curriculum map and specialisation paths."
+        "description": "Explore Computer Science and Graphics Engineering at Universidad Panamericana Guadalajara: study plan, curriculum map and specialisation paths."
       },
       "crumb": "Programme",
-      "title": "Study plan for Computer Systems and Graphics Engineering",
+      "title": "Study plan for Computer Science and Graphics Engineering",
       "lede": "Learn to build systems, experiences and tools that make a difference.",
-      "description": "Computer Systems and Graphics Engineering combines programming, data, graphics and projects so you learn by doing.",
+      "description": "Computer Science and Graphics Engineering combines programming, data, graphics and projects so you learn by doing.",
       "wideTitle": "A broad formation for problems that do not yet have a name.",
       "wideText": "You will programme, model, analyse and present ideas. The degree moves between technical foundations and projects where you have to make decisions.",
       "learnTitle": "How learning happens",
@@ -462,7 +465,6 @@
       "rutaCta": "Open Tu Ruta Ideal",
       "planCta": "Request the official plan",
       "planSubject": "ISGC study plan",
-      "mapEyebrow": "2015 plan",
       "mapTitleBefore": "Your programme ",
       "mapTitleEmphasis": "at a glance",
       "mapText": "Ten semesters and 57 modules that chain towards what you will build. {campus}. RVOE {rvoe}. Choose a semester or a module to see what supports it and where it leads.",
@@ -500,10 +502,10 @@
     "proyectos": {
       "meta": {
         "title": "Projects and Media Lab",
-        "description": "Projects from Computer Systems and Graphics Engineering at Universidad Panamericana Guadalajara: Media Lab, code, data and digital experiences."
+        "description": "Projects from Computer Science and Graphics Engineering at Universidad Panamericana Guadalajara: Media Lab, code, data and digital experiences."
       },
       "crumb": "Projects",
-      "title": "Projects in Computer Systems and Graphics Engineering",
+      "title": "Projects in Computer Science and Graphics Engineering",
       "lede": "What you learn takes shape in projects.",
       "description": "Explore problems, processes and results from teams working with code, data, visualisation and digital experiences.",
       "exploreTitle": "Explore what you can build",
@@ -523,7 +525,7 @@
         "description": "ISGC community at Universidad Panamericana Guadalajara: academic team, campus spaces, coordination, news and events in systems engineering."
       },
       "crumb": "Community",
-      "title": "Community of Computer Systems and Graphics Engineering",
+      "title": "Community of Computer Science and Graphics Engineering",
       "lede": "The programme is also built with other people.",
       "description": "Meet the academic team, the campus spaces and the news that connect the ISGC community.",
       "facultyTitle": "Academic team",
@@ -535,13 +537,27 @@
       "contactTitle": "Contact Coordination",
       "coordLocation": "Building C · 3rd floor"
     },
+    "avisos": {
+      "meta": {
+        "title": "Notices and events",
+        "description": "Find ISGC notices and upcoming events at Universidad Panamericana Guadalajara: dates, details, current calls and useful information."
+      },
+      "crumb": "Notices and events",
+      "title": "ISGC notices and events",
+      "lede": "What matters, in one place.",
+      "description": "Find current activities and calls for the Computer Science and Graphics Engineering community.",
+      "eventsTitle": "Upcoming activities",
+      "emptyTitle": "Stay up to date",
+      "emptyText": "Ask Coordination about upcoming activities and current calls.",
+      "details": "View more information"
+    },
     "alumnos": {
       "meta": {
         "title": "Student hub UP Guadalajara",
         "description": "ISGC student hub at Universidad Panamericana Guadalajara: frequent access, procedures, study resources, notices and tools for your formation."
       },
       "crumb": "Students",
-      "title": "Student hub for Computer Systems and Graphics Engineering",
+      "title": "Student hub for Computer Science and Graphics Engineering",
       "lede": "Everything you need to keep moving.",
       "description": "Notices, frequent access, procedures, study and professional development in one place.",
       "eventsTitle": "Notices and upcoming events",
@@ -560,10 +576,10 @@
     "aspirantes": {
       "meta": {
         "title": "Admissions UP Guadalajara",
-        "description": "Information for applicants to Computer Systems and Graphics Engineering at Universidad Panamericana Guadalajara: admissions, scholarships and campus visits."
+        "description": "Information for applicants to Computer Science and Graphics Engineering at Universidad Panamericana Guadalajara: admissions, scholarships and campus visits."
       },
       "crumb": "Applicants",
-      "title": "Admission to Computer Systems and Graphics Engineering",
+      "title": "Admission to Computer Science and Graphics Engineering",
       "lede": "Start by learning how you can join and what you will build here.",
       "description": "Find the official admissions process, financial support options, a campus visit and a direct contact.",
       "processTitle": "Your entry process",
@@ -603,10 +619,10 @@
     "oportunidades": {
       "meta": {
         "title": "Internships and jobs UP Guadalajara",
-        "description": "Opportunities for Computer Systems and Graphics Engineering students at Universidad Panamericana Guadalajara: internships, jobs and your professional profile."
+        "description": "Opportunities for Computer Science and Graphics Engineering students at Universidad Panamericana Guadalajara: internships, jobs and your professional profile."
       },
       "crumb": "Opportunities",
-      "title": "Internships and jobs in Computer Systems and Graphics Engineering",
+      "title": "Internships and jobs in Computer Science and Graphics Engineering",
       "lede": "Start building experience before you graduate.",
       "description": "Find internships, jobs and tools to present what you know how to do.",
       "profileTitle": "Your profile in three steps",

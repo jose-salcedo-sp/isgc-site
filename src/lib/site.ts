@@ -6,7 +6,7 @@ export const siteUrl =
 
 export const universityUrl = "https://www.up.edu.mx/";
 
-export const siteLastModified = new Date("2026-09-18T00:00:00.000Z");
+export const siteLastModified = new Date("2026-09-20T00:00:00.000Z");
 
 const { program } = curriculum;
 
