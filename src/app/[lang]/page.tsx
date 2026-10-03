@@ -55,7 +55,7 @@ const HeroSection = ({ dict, locale }: HomeCopy) => {
               {copy.careerCta} <span aria-hidden="true">→</span>
             </Link>
             <Link
-              href={localizedPath(locale, "/alumnos")}
+              href={localizedPath(locale, "/recursos")}
               className="hero-action"
             >
               {copy.studentCta} <span aria-hidden="true">→</span>
@@ -254,7 +254,7 @@ const NextStepSection = ({ dict, locale }: HomeCopy) => {
             </span>
           </Link>
           <Link
-            href={localizedPath(locale, "/alumnos")}
+            href={localizedPath(locale, "/recursos")}
             className="group rounded-card text-grafito hover:shadow-soft bg-white p-7 transition sm:p-9"
           >
             <h3 className="font-serif text-3xl">{copy.next.studentsTitle}</h3>
@@ -283,7 +283,7 @@ const NextStepSection = ({ dict, locale }: HomeCopy) => {
             <p className="text-piedra mt-3">{copy.faq.applicantsText}</p>
           </Link>
           <Link
-            href={`${localizedPath(locale, "/alumnos")}#faq`}
+            href={`${localizedPath(locale, "/recursos")}#faq`}
             className="rounded-card hover:shadow-soft bg-white p-7 transition"
           >
             <h3 className="text-grafito font-serif text-2xl">

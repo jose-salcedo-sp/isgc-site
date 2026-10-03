@@ -16,7 +16,7 @@
     "privacy": "Privacidad",
     "regulations": "Reglamentos",
     "admissions": "Admisiones",
-    "students": "Alumnos",
+    "students": "Recursos",
     "language": "Idioma",
     "homeAria": "ISGC, inicio"
   },
@@ -42,8 +42,8 @@
         "label": "Comunidad"
       },
       {
-        "href": "/alumnos",
-        "label": "Alumnos"
+        "href": "/recursos",
+        "label": "Recursos"
       }
     ]
   },

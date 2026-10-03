@@ -32,10 +32,10 @@ export const generateMetadata = async ({
   if (!hasLocale(lang)) {
     return {};
   }
-  return pageMetadata(lang, "/alumnos", getDictionary(lang));
+  return pageMetadata(lang, "/recursos", getDictionary(lang));
 };
 
-const AlumnosPage = async ({ params }: LocaleParams) => {
+const RecursosPage = async ({ params }: LocaleParams) => {
   const { lang } = await params;
   if (!hasLocale(lang)) {
     notFound();
@@ -51,7 +51,7 @@ const AlumnosPage = async ({ params }: LocaleParams) => {
       <FaqJsonLd items={dict.faqs.alumnos} />
       <PageIntro
         chapters={dict.chapters.alumnos}
-        crumb={{ name: copy.crumb, path: "/alumnos" }}
+        crumb={{ name: copy.crumb, path: "/recursos" }}
         description={copy.description}
         dict={dict}
         lede={copy.lede}
@@ -129,4 +129,4 @@ const AlumnosPage = async ({ params }: LocaleParams) => {
   );
 };
 
-export default AlumnosPage;
+export default RecursosPage;

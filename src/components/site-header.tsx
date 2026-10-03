@@ -231,7 +231,7 @@ export const SiteHeader = ({
             {dict.common.admissions} <span aria-hidden="true">↗</span>
           </Link>
           <Link
-            href={localizedPath(locale, "/alumnos")}
+            href={localizedPath(locale, "/recursos")}
             className="rounded px-2 py-2 text-sm font-semibold text-white lg:hidden"
           >
             {dict.common.students}
