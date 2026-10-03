@@ -15,6 +15,19 @@ const nextConfig: NextConfig = {
       },
     ]),
   reactCompiler: process.env.NODE_ENV === "production",
+  redirects: () =>
+    Promise.resolve([
+      {
+        destination: "/recursos/:path*",
+        permanent: true,
+        source: "/alumnos/:path*",
+      },
+      {
+        destination: "/:lang/recursos/:path*",
+        permanent: true,
+        source: "/:lang/alumnos/:path*",
+      },
+    ]),
 };
 
 export default nextConfig;

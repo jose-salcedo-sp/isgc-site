@@ -7,13 +7,13 @@ import { siteUrl } from "@/lib/site";
 
 const pageKey = {
   "/": "home",
-  "/alumnos": "alumnos",
   "/aspirantes": "aspirantes",
   "/avisos": "avisos",
   "/carrera": "carrera",
   "/comunidad": "comunidad",
   "/oportunidades": "oportunidades",
   "/proyectos": "proyectos",
+  "/recursos": "alumnos",
 } as const;
 
 export const pageMetadata = (

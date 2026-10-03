@@ -33,6 +33,6 @@ describe("i18n", () => {
   it("strips the locale prefix from a pathname", () => {
     expect(stripLocale("/es")).toBe("/");
     expect(stripLocale("/en-GB/carrera")).toBe("/carrera");
-    expect(stripLocale("/en-US/alumnos")).toBe("/alumnos");
+    expect(stripLocale("/en-US/recursos")).toBe("/recursos");
   });
 });
