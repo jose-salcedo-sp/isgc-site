@@ -94,8 +94,8 @@
       {
         "id": "gpa",
         "group": "study",
-        "label": "GPA Calculator",
-        "description": "Convierte tu promedio al estándar GPA."
+        "label": "Calculadora de GPA",
+        "description": "Calcula tu GPA con las materias de tu plan."
       },
       {
         "id": "leetcode",
@@ -483,6 +483,18 @@
       "doubleText": "Consulta con Coordinación la disponibilidad, el semestre de incorporación, las equivalencias y los costos de una doble carrera.",
       "fieldTitle": "Campo profesional",
       "fieldText": "Software, datos, visualización, producto digital, automatización, investigación y emprendimiento.",
+      "gpa": {
+        "title": "Calcula tu GPA",
+        "description": "Escribe tus calificaciones del plan y obtén tu promedio y su equivalente en GPA, ponderados por créditos.",
+        "semester": "Semestre",
+        "credits": "{n} créditos",
+        "result": "GPA estimado",
+        "average": "Promedio UP: {average}",
+        "summary": "{courses} materias · {credits} créditos",
+        "empty": "Escribe al menos una calificación para ver tu resultado.",
+        "note": "Estimación con la escala de Scholaro para México: de 9 a 10 equivale a 4.0, 8 a 3.0, 7 a 2.0, 6 a 1.0 y menos de 6 a 0. Cada universidad puede convertirla distinto.",
+        "reset": "Borrar calificaciones"
+      },
       "areas": {
         "software": {
           "name": "Desarrollo de software",

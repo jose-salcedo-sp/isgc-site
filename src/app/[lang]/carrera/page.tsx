@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { GpaCalculator } from "@/components/gpa-calculator";
 import { GraphView } from "@/components/graph/graph-view";
 import {
   ExternalLink,
@@ -166,6 +167,28 @@ const CarreraPage = async ({ params }: LocaleParams) => {
             {copy.planCta} ↗
           </a>
         </div>
+      </PageSection>
+      <PageSection tone="marfil" id="gpa">
+        <SectionHeading
+          title={copy.gpa.title}
+          description={copy.gpa.description}
+        />
+        <GpaCalculator
+          courses={curriculum.courses.flatMap((course) =>
+            course.credits === null
+              ? []
+              : [
+                  {
+                    credits: course.credits,
+                    id: course.id,
+                    name: localizedCourseName(dict, course.id, course.name),
+                    semester: course.semester,
+                  },
+                ]
+          )}
+          semesterLabels={copy.semesterLabels}
+          text={copy.gpa}
+        />
       </PageSection>
       <section className="graph-surface w-full py-16 sm:py-20" id="mapa">
         <div className="mx-auto max-w-300 px-5 lg:px-6">
