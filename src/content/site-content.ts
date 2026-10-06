@@ -1,10 +1,3 @@
-export interface LinkItem {
-  label?: string;
-  href: string;
-  external?: boolean;
-  id: string;
-}
-
 export const externalLinks = {
   admissions: "https://www.up.edu.mx/",
   campusMap:
@@ -23,22 +16,13 @@ export const externalLinks = {
   up4u: "https://up4u.up.edu.mx/p/home",
 };
 
-export const quickAccess: LinkItem[] = [
-  { external: true, href: externalLinks.up4u, id: "up4u" },
-  { external: true, href: externalLinks.tuRutaIdeal, id: "ruta" },
-  {
-    external: true,
-    href: "https://www.up.edu.mx/directorio/",
-    id: "directory",
-  },
-];
-
 export const studentResources = [
   {
     external: true,
     href: "https://portal.office.com/",
     id: "office365",
   },
+  { external: true, href: externalLinks.tuRutaIdeal, id: "ruta" },
   {
     external: true,
     href: "https://www.scholaro.com/gpa-calculator/Mexico",
@@ -49,6 +33,7 @@ export const studentResources = [
     href: "https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions",
     id: "leetcode",
   },
+  { external: true, href: externalLinks.up4u, id: "up4u" },
   {
     external: true,
     href: "https://portaldepagos.up.edu.mx/",
@@ -73,6 +58,11 @@ export const studentResources = [
     external: true,
     href: externalLinks.generalRegulations,
     id: "regulations",
+  },
+  {
+    external: true,
+    href: "https://www.up.edu.mx/directorio/",
+    id: "directory",
   },
   {
     external: true,

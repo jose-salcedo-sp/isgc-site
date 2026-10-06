@@ -1,22 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import {
-  FaqAccordion,
-  StudentResourceSearch,
-} from "@/components/home-interactions";
+import { StudentResourceSearch } from "@/components/home-interactions";
 import {
   PageFrame,
   PageIntro,
   PageSection,
   SectionHeading,
 } from "@/components/page-frame";
-import { FaqJsonLd } from "@/components/seo/faq-json-ld";
-import {
-  externalLinks,
-  quickAccess,
-  studentResources,
-} from "@/content/site-content";
+import { studentResources } from "@/content/site-content";
 import { getDictionary } from "@/lib/dictionary";
 import { hasLocale } from "@/lib/i18n";
 import type { LocaleParams } from "@/lib/i18n";
@@ -24,6 +16,14 @@ import { pageMetadata } from "@/lib/page-metadata";
 import { org } from "@/lib/site";
 
 export const revalidate = 3600;
+
+const featuredIds = new Set(["treasury", "kardex", "school-services"]);
+const featuredResources = studentResources.filter((resource) =>
+  featuredIds.has(resource.id)
+);
+const hubResources = studentResources.filter(
+  (resource) => !featuredIds.has(resource.id)
+);
 
 export const generateMetadata = async ({
   params,
@@ -42,13 +42,12 @@ const RecursosPage = async ({ params }: LocaleParams) => {
   }
   const dict = getDictionary(lang);
   const copy = dict.pages.alumnos;
-  const quickLabels = Object.fromEntries(
-    dict.quickAccess.map((item) => [item.id, item.label])
+  const resourceCopy = Object.fromEntries(
+    dict.resources.items.map((item) => [item.id, item])
   );
 
   return (
     <PageFrame dict={dict} locale={lang}>
-      <FaqJsonLd items={dict.faqs.alumnos} />
       <PageIntro
         chapters={dict.chapters.alumnos}
         crumb={{ name: copy.crumb, path: "/recursos" }}
@@ -61,18 +60,20 @@ const RecursosPage = async ({ params }: LocaleParams) => {
       <PageSection tone="marfil">
         <SectionHeading title={copy.quickTitle} />
         <div className="grid gap-4 md:grid-cols-3">
-          {quickAccess.map((item) => (
+          {featuredResources.map((resource) => (
             <a
-              key={item.id}
-              href={item.href}
+              key={resource.id}
+              href={resource.href}
               target="_blank"
               rel="noreferrer"
               className="rounded-card shadow-soft/50 bg-white p-6 transition hover:-translate-y-1"
             >
               <h3 className="text-grafito font-serif text-2xl">
-                {quickLabels[item.id]}
+                {resourceCopy[resource.id]?.label}
               </h3>
-              <p className="text-piedra mt-3">{dict.resources.direct}</p>
+              <p className="text-piedra mt-3">
+                {resourceCopy[resource.id]?.description}
+              </p>
               <span className="text-tinto mt-5 inline-flex font-semibold">
                 {dict.resources.open} ↗
               </span>
@@ -88,42 +89,22 @@ const RecursosPage = async ({ params }: LocaleParams) => {
         <StudentResourceSearch
           dict={dict}
           locale={lang}
-          resources={studentResources}
+          resources={hubResources}
         />
       </PageSection>
       <PageSection tone="marfil">
-        <div className="grid gap-5 md:grid-cols-2">
-          <article className="rounded-card bg-tinto p-7 text-white sm:p-9">
+        <article className="rounded-card bg-tinto p-7 text-white sm:p-9 md:flex md:items-end md:justify-between md:gap-10">
+          <div className="max-w-2xl">
             <h2 className="font-serif text-3xl">{copy.coordTitle}</h2>
             <p className="mt-4 text-white/80">{copy.coordText}</p>
-            <a
-              href={`mailto:${org.coordinationEmail}`}
-              className="text-dorado mt-6 inline-flex font-bold underline underline-offset-4"
-            >
-              {org.coordinationEmail} ↗
-            </a>
-          </article>
-          <article className="rounded-card bg-white p-7 sm:p-9">
-            <h2 className="text-grafito font-serif text-3xl">
-              {copy.regsTitle}
-            </h2>
-            <p className="text-piedra mt-4">{copy.regsText}</p>
-            <a
-              href={externalLinks.schoolServices}
-              target="_blank"
-              rel="noreferrer"
-              className="text-tinto decoration-dorado mt-6 inline-flex font-semibold underline decoration-2 underline-offset-4"
-            >
-              {copy.regsCta} ↗
-            </a>
-          </article>
-        </div>
-      </PageSection>
-      <PageSection id="faq">
-        <SectionHeading title={copy.faqTitle} />
-        <FaqAccordion
-          groups={[{ items: dict.faqs.alumnos, title: copy.faqGroup }]}
-        />
+          </div>
+          <a
+            href={`mailto:${org.coordinationEmail}`}
+            className="text-dorado mt-6 inline-flex shrink-0 font-bold underline underline-offset-4 md:mt-0"
+          >
+            {org.coordinationEmail} ↗
+          </a>
+        </article>
       </PageSection>
     </PageFrame>
   );

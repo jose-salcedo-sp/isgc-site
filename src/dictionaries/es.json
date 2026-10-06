@@ -74,26 +74,11 @@
     "thisSemester": "En este semestre",
     "title": "La carrera de un vistazo"
   },
-  "quickAccess": [
-    {
-      "id": "up4u",
-      "label": "UP4U"
-    },
-    {
-      "id": "ruta",
-      "label": "Tu Ruta Ideal"
-    },
-    {
-      "id": "directory",
-      "label": "Directorio institucional"
-    }
-  ],
   "resources": {
     "searchLabel": "Buscar recursos",
     "placeholder": "Buscar un recurso",
     "empty": "No encontramos ese recurso.",
     "open": "Ingresar",
-    "direct": "Abre este recurso directamente.",
     "groups": {
       "study": "Estudio",
       "procedures": "Trámites",
@@ -165,6 +150,24 @@
         "group": "career",
         "label": "GitHub",
         "description": "Organiza y comparte tu trabajo."
+      },
+      {
+        "id": "up4u",
+        "group": "procedures",
+        "label": "UP4U",
+        "description": "Portal de alumnos de la Universidad Panamericana."
+      },
+      {
+        "id": "ruta",
+        "group": "study",
+        "label": "Tu Ruta Ideal",
+        "description": "Planea tu ruta por el plan de estudios."
+      },
+      {
+        "id": "directory",
+        "group": "procedures",
+        "label": "Directorio institucional",
+        "description": "Contactos de áreas y oficinas de la UP."
       }
     ]
   },
@@ -558,24 +561,19 @@
     "alumnos": {
       "meta": {
         "title": "Centro de alumnos UP Guadalajara",
-        "description": "Centro de alumnos ISGC en la Universidad Panamericana Guadalajara: accesos frecuentes, trámites, recursos de estudio, avisos y herramientas para tu formación."
+        "description": "Centro de alumnos ISGC en la Universidad Panamericana Guadalajara: trámites, accesos frecuentes, recursos de estudio y herramientas para tu formación."
       },
       "crumb": "Alumnos",
       "title": "Centro de alumnos de Ingeniería en Sistemas y Gráficas Computacionales",
       "lede": "Todo lo que necesitas para seguir avanzando.",
-      "description": "Avisos, accesos frecuentes, trámites, estudio y desarrollo profesional en un solo lugar.",
+      "description": "Trámites, accesos frecuentes, estudio y desarrollo profesional en un solo lugar.",
       "eventsTitle": "Avisos y próximos eventos",
       "eventsEmpty": "Consulta con Coordinación las próximas actividades y convocatorias vigentes.",
       "quickTitle": "Accesos frecuentes",
       "resourcesTitle": "Recursos para tu día a día",
       "resourcesDescription": "Busca por nombre y abre cada herramienta en su destino correspondiente.",
       "coordTitle": "Coordinación",
-      "coordText": "Edificio C · 3.º piso. Para dudas sobre materias, profesores y procesos académicos.",
-      "regsTitle": "Reglamentos y servicios",
-      "regsText": "Consulta los documentos y procedimientos institucionales.",
-      "regsCta": "Abrir Servicios Escolares",
-      "faqTitle": "Preguntas de alumnos",
-      "faqGroup": "Alumnos"
+      "coordText": "Edificio C · 3.º piso. Para dudas sobre materias, profesores y procesos académicos."
     },
     "aspirantes": {
       "meta": {
