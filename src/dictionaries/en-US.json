@@ -95,7 +95,7 @@
         "id": "gpa",
         "group": "study",
         "label": "GPA Calculator",
-        "description": "Convert your average to the GPA standard."
+        "description": "Calculate your GPA from your curriculum courses."
       },
       {
         "id": "leetcode",
@@ -479,6 +479,18 @@
       "doubleText": "Ask Coordination about availability, the semester of entry, equivalences and the costs of a double degree.",
       "fieldTitle": "Professional field",
       "fieldText": "Software, data, visualization, digital product, automation, research and entrepreneurship.",
+      "gpa": {
+        "title": "Calculate your GPA",
+        "description": "Enter your grades from the curriculum to get your average and its GPA equivalent, weighted by credits.",
+        "semester": "Semester",
+        "credits": "{n} credits",
+        "result": "Estimated GPA",
+        "average": "UP average: {average}",
+        "summary": "{courses} courses · {credits} credits",
+        "empty": "Enter at least one grade to see your result.",
+        "note": "Estimate based on Scholaro's scale for Mexico: 9 to 10 equals 4.0, 8 equals 3.0, 7 equals 2.0, 6 equals 1.0 and below 6 equals 0. Each university may convert it differently.",
+        "reset": "Clear grades"
+      },
       "areas": {
         "software": {
           "name": "Software development",

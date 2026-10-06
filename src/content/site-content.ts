@@ -23,11 +23,7 @@ export const studentResources = [
     id: "office365",
   },
   { external: true, href: externalLinks.tuRutaIdeal, id: "ruta" },
-  {
-    external: true,
-    href: "https://www.scholaro.com/gpa-calculator/Mexico",
-    id: "gpa",
-  },
+  { href: "/carrera#gpa", id: "gpa" },
   {
     external: true,
     href: "https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions",
