@@ -74,26 +74,11 @@
     "thisSemester": "In this semester",
     "title": "The program at a glance"
   },
-  "quickAccess": [
-    {
-      "id": "up4u",
-      "label": "UP4U"
-    },
-    {
-      "id": "ruta",
-      "label": "Tu Ruta Ideal"
-    },
-    {
-      "id": "directory",
-      "label": "University directory"
-    }
-  ],
   "resources": {
     "searchLabel": "Search resources",
     "placeholder": "Search for a resource",
     "empty": "We could not find that resource.",
     "open": "Open",
-    "direct": "Open this resource directly.",
     "groups": {
       "study": "Study",
       "procedures": "Admin",
@@ -165,6 +150,24 @@
         "group": "career",
         "label": "GitHub",
         "description": "Organize and share your work."
+      },
+      {
+        "id": "up4u",
+        "group": "procedures",
+        "label": "UP4U",
+        "description": "Universidad Panamericana student portal."
+      },
+      {
+        "id": "ruta",
+        "group": "study",
+        "label": "Tu Ruta Ideal",
+        "description": "Plan your path through the program."
+      },
+      {
+        "id": "directory",
+        "group": "procedures",
+        "label": "University directory",
+        "description": "Contacts for UP offices and departments."
       }
     ]
   },
@@ -554,24 +557,19 @@
     "alumnos": {
       "meta": {
         "title": "Student hub UP Guadalajara",
-        "description": "ISGC student hub at Universidad Panamericana Guadalajara: frequent access, procedures, study resources, notices and tools for your formation."
+        "description": "ISGC student hub at Universidad Panamericana Guadalajara: procedures, frequent access, study resources and tools for your formation."
       },
       "crumb": "Students",
       "title": "Student hub for Computer Science and Graphics Engineering",
       "lede": "Everything you need to keep moving.",
-      "description": "Notices, frequent access, procedures, study and professional development in one place.",
+      "description": "Procedures, frequent access, study and professional development in one place.",
       "eventsTitle": "Notices and upcoming events",
       "eventsEmpty": "Ask Coordination about upcoming activities and current calls.",
       "quickTitle": "Frequent access",
       "resourcesTitle": "Resources for day to day",
       "resourcesDescription": "Search by name and open each tool at its destination.",
       "coordTitle": "Coordination",
-      "coordText": "Building C · 3rd floor. For questions about courses, professors and academic processes.",
-      "regsTitle": "Regulations and services",
-      "regsText": "Check the institutional documents and procedures.",
-      "regsCta": "Open School Services",
-      "faqTitle": "Questions from students",
-      "faqGroup": "Students"
+      "coordText": "Building C · 3rd floor. For questions about courses, professors and academic processes."
     },
     "aspirantes": {
       "meta": {
