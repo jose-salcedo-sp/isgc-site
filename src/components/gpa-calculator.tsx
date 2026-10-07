@@ -36,13 +36,13 @@ export const GpaCalculator = ({
 
   return (
     <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
-      <div className="rounded-card shadow-soft/50 bg-white p-6">
+      <div className="rounded-card shadow-soft/50 bg-marfil p-6">
         <label className="text-grafito flex flex-wrap items-center gap-3 font-semibold">
           {text.semester}
           <select
             value={semester}
             onChange={(event) => setSemester(Number(event.target.value))}
-            className="bg-marfil text-grafito rounded-full px-4 py-2 font-normal"
+            className="text-grafito rounded-full bg-white px-4 py-2 font-normal"
           >
             {semesterLabels.map((label, index) =>
               courses.some((course) => course.semester === index + 1) ? (
@@ -77,7 +77,7 @@ export const GpaCalculator = ({
                 onChange={(event) =>
                   setGrades({ ...grades, [course.id]: event.target.value })
                 }
-                className="bg-marfil text-grafito w-24 shrink-0 rounded-full px-4 py-2 text-right"
+                className="text-grafito w-24 shrink-0 rounded-full bg-white px-4 py-2 text-right"
               />
             </li>
           ))}
@@ -85,7 +85,7 @@ export const GpaCalculator = ({
       </div>
       <div
         aria-live="polite"
-        className="rounded-card shadow-soft/50 self-start bg-white p-6 lg:sticky lg:top-24"
+        className="rounded-card shadow-soft/50 bg-marfil self-start p-6 lg:sticky lg:top-24"
       >
         <h3 className="text-grafito font-serif text-2xl">{text.result}</h3>
         {result ? (

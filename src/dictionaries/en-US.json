@@ -38,10 +38,6 @@
         "label": "Projects"
       },
       {
-        "href": "/comunidad",
-        "label": "Community"
-      },
-      {
         "href": "/recursos",
         "label": "Resources"
       }
@@ -193,23 +189,6 @@
       "role": "Computing faculty"
     }
   },
-  "spaces": [
-    {
-      "location": "Building A · Engineering · 2nd floor",
-      "text": "Space for computing labs and projects.",
-      "title": "CIAC laboratories"
-    },
-    {
-      "location": "Building C · 3rd floor",
-      "text": "Get answers about the program, courses and projects.",
-      "title": "Director’s office"
-    },
-    {
-      "location": "Building C · 3rd floor",
-      "text": "Find guidance on courses, professors and academic processes.",
-      "title": "Coordination"
-    }
-  ],
   "specialties": [
     {
       "subjects": ["Programming", "Probability and statistics", "Databases"],
@@ -297,7 +276,6 @@
     "aspirantes": ["Imagine", "Take the step", "Begin"],
     "avisos": ["Stay informed", "Take part", "Move forward"],
     "carrera": ["Understand", "Build", "Share"],
-    "comunidad": ["Connect", "Collaborate", "Create"],
     "oportunidades": ["Build", "Show it", "Go further"],
     "proyectos": ["Code", "Experience", "Impact"]
   },
@@ -318,15 +296,6 @@
         "aria": "Geometric illustration of a three-dimensional object on a coordinate grid",
         "text": "From code to what you imagine.",
         "cta": "Explore the projects"
-      },
-      "news": {
-        "title": "What you need now",
-        "description": "Notices, upcoming events and shortcuts so you can move without detours.",
-        "emptyTitle": "Stay up to date",
-        "emptyText": "Ask Coordination about upcoming activities and current calls.",
-        "contact": "Contact Coordination",
-        "details": "View details",
-        "quickTitle": "Frequent access"
       },
       "story": {
         "line1": "One idea.",
@@ -381,31 +350,6 @@
         "text": "Explore the academic progression, the courses and the options to go deeper into what interests you.",
         "cta": "Open Tu Ruta Ideal"
       },
-      "community": {
-        "title": "Meet the people behind the projects.",
-        "text": "Direction, faculty and the campus spaces where questions are resolved and work happens as a team.",
-        "cta": "View community",
-        "internships": "Find internships and first projects."
-      },
-      "campus": {
-        "title": "What happens on and off campus.",
-        "text": "Find news, events and spaces to connect with the community.",
-        "cta": "View community",
-        "items": [
-          {
-            "title": "Projects that leave the classroom",
-            "text": "See the experiences, teams and results that are part of life in ISGC."
-          },
-          {
-            "title": "Spaces to learn and collaborate",
-            "text": "Find laboratories, coordination and the places where daily work happens."
-          },
-          {
-            "title": "Internships and first projects",
-            "text": "Find routes to start building professional experience while you study."
-          }
-        ]
-      },
       "next": {
         "title": "What do you need today?",
         "admissionsTitle": "Learn about admissions and scholarships.",
@@ -436,6 +380,7 @@
       "wideText": "You will program, model, analyse and present ideas. The degree moves between technical foundations and projects where you have to make decisions.",
       "learnTitle": "How learning happens",
       "learnDescription": "Theory takes shape when you turn it into something that can be tested, explained and improved.",
+      "facultyTitle": "Academic team",
       "learn": [
         {
           "title": "Understand",
@@ -534,24 +479,6 @@
       "shareCta": "Contact Coordination",
       "shareSubject": "ISGC project"
     },
-    "comunidad": {
-      "meta": {
-        "title": "Community UP Guadalajara",
-        "description": "ISGC community at Universidad Panamericana Guadalajara: academic team, campus spaces, coordination, news and events in systems engineering."
-      },
-      "crumb": "Community",
-      "title": "Community of Computer Science and Graphics Engineering",
-      "lede": "The program is also built with other people.",
-      "description": "Meet the academic team, the campus spaces and the news that connect the ISGC community.",
-      "facultyTitle": "Academic team",
-      "newsTitle": "News and events",
-      "newsEmpty": "Ask Coordination about upcoming activities. Published news and the archive will appear here.",
-      "spacesTitle": "Places to meet",
-      "spacesDescription": "Find the spots where you can study, resolve questions or work with other people.",
-      "mapCta": "Open campus map",
-      "contactTitle": "Contact Coordination",
-      "coordLocation": "Building C · 3rd floor"
-    },
     "avisos": {
       "meta": {
         "title": "Notices and events",
@@ -561,10 +488,9 @@
       "title": "ISGC notices and events",
       "lede": "What matters, in one place.",
       "description": "Find current activities and calls for the Computer Science and Graphics Engineering community.",
-      "eventsTitle": "Upcoming activities",
+      "newsTitle": "News and events",
       "emptyTitle": "Stay up to date",
-      "emptyText": "Ask Coordination about upcoming activities and current calls.",
-      "details": "View more information"
+      "emptyText": "Ask Coordination about upcoming activities and current calls."
     },
     "alumnos": {
       "meta": {
@@ -575,8 +501,6 @@
       "title": "Student hub for Computer Science and Graphics Engineering",
       "lede": "Everything you need to keep moving.",
       "description": "Procedures, frequent access, study and professional development in one place.",
-      "eventsTitle": "Notices and upcoming events",
-      "eventsEmpty": "Ask Coordination about upcoming activities and current calls.",
       "quickTitle": "Frequent access",
       "resourcesTitle": "Resources for day to day",
       "resourcesDescription": "Search by name and open each tool at its destination.",
