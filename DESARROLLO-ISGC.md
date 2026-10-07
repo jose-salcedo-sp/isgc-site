@@ -94,3 +94,26 @@ La dirección vigente conserva una base institucional y profesional, con acentos
 ### Ajuste visual vigente · tarjetas flotantes
 
 Las zonas que agrupan contenido en cards se presentan como tarjetas separadas sobre el fondo común, con sombras suaves. Las secciones estructurales conservan su ancho completo. Las superficies rellenas no llevan trazos de borde; los contornos se reservan para controles huecos. Se eliminan eyebrows, microetiquetas, chips y numeraciones decorativas. Fechas, autoría y contexto histórico permanecen como texto normal. Esta dirección sustituye las etiquetas técnicas y esquinas marcadas de la iteración anterior.
+
+## 7. Rama `fix/arreglos-visuales` · octubre 2026
+
+Esta dirección sustituye al ajuste de tarjetas flotantes: menos cards, más tipografía, reglas y bandas de color. Cada página tiene una apertura y una animación propias.
+
+**Cambios mayores**
+
+- La carrera se presenta como **Computer Science and Engineering (CSE)** en textos, metadatos, JSON-LD e imagen OG. Siguen diciendo ISGC el dominio, el archivo del logo y las cuentas de redes sociales.
+- **Se eliminó `/comunidad`.** El equipo académico vive en la sección Comunidad de la home y `/comunidad` redirige de forma permanente a `/#comunidad` (`next.config.ts`).
+- **Contacto de Coordinación:** `malvarezg@up.edu.mx`, con agenda de citas y formulario de justificación de faltas en Recursos.
+- **Media Lab** pasa a ser «Archivo histórico» y se quitó «Campo profesional» de Carrera.
+- **Links:** el reset de `a`, `button` e `input` vive ahora en `@layer base`, así que las clases de Tailwind de color y peso sí aplican.
+- **Navbar:** es flotante, con paneles por sección y fondo tinto oscuro (`#5D1028`).
+- **Home:** tetera de Utah en 3D, historia en scroll y las 57 materias en movimiento.
+
+**Dependencias nuevas**
+
+- `three` y `@types/three`: solo para la tetera del hero. Pesa unos 150 KB comprimido y se descarga aparte, después de que la página es interactiva.
+- `lenis`: smooth scroll en escritorio. En móvil el scroll táctil sigue siendo nativo.
+
+**Nota para los PRs**
+
+Los commits de la rama están separados por sección, pero no compilan por separado: `globals.css` y los diccionarios mezclan cambios de todas las secciones. El sitio compila y pasa `verify` en el último commit. Lo más sencillo es abrir un solo PR con toda la rama; si se quieren PRs por sección, primero hay que partir esos dos archivos.
