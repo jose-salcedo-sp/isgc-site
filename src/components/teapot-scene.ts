@@ -1,15 +1,25 @@
 /*
  * The hero's 3D scene: the Utah teapot, the classic test model of computer
  * graphics, rendered with three.js in three stages, like a render pipeline:
- *   1. vertices (points), 2. edges (wireframe), 3. smooth-shaded surface.
- * On load the vertices assemble from the bottom up. `getStage` (scroll
- * progress, 0 → 1) moves the drawing through the stages; the mouse orbits it.
+ *   1. vertices (points), 2. edges (wireframe), 3. flat-shaded surface.
+ * On load the vertices assemble from the bottom up. Scroll progress (0 → 1)
+ * moves the drawing through the stages; the mouse turns it a little.
  *
- * Lighting runs on the GPU; JavaScript only turns the model and, during the
- * two-second intro, moves the points.
+ * Kept light on purpose, so scrolling never stutters:
+ * - While only the slow idle turn is moving, it draws at 30 fps; intro,
+ *   scroll and mouse get 60 fps. Off screen it draws nothing. Call `wake()`
+ *   when the scroll stage changes.
+ * - The canvas covers only the teapot's area, at most 1.5x pixel density.
+ * - Phong shading (cheap per pixel) instead of physically based shading.
+ * - Shaders compile in the background before the intro starts, and no
+ *   material setting changes mid-animation, so nothing recompiles later.
  */
 
-const INTRO_SECONDS = 2;
+const INTRO_SECONDS = 1.8;
+// Idle turn, in radians per second.
+const SPIN_SPEED = 0.18;
+// While only the idle turn moves, 30 fps looks the same and costs half.
+const CALM_FRAME_MS = 1000 / 30;
 const GOLD = 0xe2_c5_8f;
 const SHADOW = 0x3d_0a_1a;
 
@@ -21,24 +31,30 @@ const stageBetween = (value: number, start: number, end: number): number => {
 
 interface TeapotSceneOptions {
   canvas: HTMLCanvasElement;
-  /** Fewer polygons, no antialiasing and 1x pixels. */
+  /** Fewer polygons and no antialiasing. */
   lowPower: boolean;
   /** Draws one still frame of the finished teapot. */
   still: boolean;
   getStage: () => number;
 }
 
+export interface TeapotScene {
+  /** Draws again after the scroll stage changed. */
+  wake: () => void;
+  /** Stops everything and frees GPU memory. */
+  dispose: () => void;
+}
+
 /**
- * Loads three.js, builds the scene and starts animating while the canvas is
- * on screen. Resolves to a function that stops everything and frees GPU
- * memory, or to null when WebGL is not available.
+ * Loads three.js, builds the scene and plays the intro. Resolves to null
+ * when WebGL is not available (the hero then simply shows its text).
  */
 export const createTeapotScene = async ({
   canvas,
   lowPower,
   still,
   getStage,
-}: TeapotSceneOptions): Promise<(() => void) | null> => {
+}: TeapotSceneOptions): Promise<TeapotScene | null> => {
   const [THREE, { TeapotGeometry }] = await Promise.all([
     import("three"),
     import("three/examples/jsm/geometries/TeapotGeometry.js"),
@@ -50,14 +66,13 @@ export const createTeapotScene = async ({
       alpha: true,
       antialias: !lowPower,
       canvas,
+      powerPreference: "low-power",
     });
   } catch {
-    // No WebGL: the hero simply shows its text.
     return null;
   }
-  renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio || 1, lowPower ? 1 : 2)
-  );
+  // The canvas only covers the teapot, so 1.5x stays cheap even on phones.
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
@@ -65,57 +80,60 @@ export const createTeapotScene = async ({
 
   // Warm light from above, tinto bounce from below: the shadows take the
   // color of the page instead of going grey.
-  scene.add(new THREE.HemisphereLight(0xff_f3_dc, SHADOW, 0.7));
-  const sun = new THREE.DirectionalLight(0xff_ff_ff, 3.2);
+  scene.add(new THREE.HemisphereLight(0xff_f3_dc, SHADOW, 0.9));
+  const sun = new THREE.DirectionalLight(0xff_ff_ff, 2.4);
   sun.position.set(-4, 5, 6);
   scene.add(sun);
 
-  // `pivot` turns with scroll and the mouse; `model` holds the teapot,
-  // centered on the pivot.
-  const pivot = new THREE.Group();
   const model = new THREE.Group();
-  pivot.add(model);
-  scene.add(pivot);
+  scene.add(model);
 
   // Fewer subdivisions for points and wireframe keep them readable; the
-  // surface gets more so it looks smooth. The last `true` (fitLid) closes
-  // the gap around the lid.
+  // surface gets a few more. The last `true` (fitLid) closes the gap around
+  // the lid.
   const coarse = new TeapotGeometry(
     1,
-    lowPower ? 4 : 6,
+    lowPower ? 4 : 5,
     true,
     true,
     true,
     true
   );
-  const smooth = new TeapotGeometry(
+  // Medium detail with flat shading: visible facets, but not blocky.
+  const faceted = new TeapotGeometry(
     1,
-    lowPower ? 8 : 14,
+    lowPower ? 5 : 7,
     true,
     true,
     true,
     true
   );
   coarse.center();
-  smooth.center();
-  smooth.computeBoundingBox();
-  const teapotWidth = smooth.boundingBox
-    ? smooth.boundingBox.max.x - smooth.boundingBox.min.x
+  faceted.center();
+  faceted.computeBoundingBox();
+  const teapotWidth = faceted.boundingBox
+    ? faceted.boundingBox.max.x - faceted.boundingBox.min.x
     : 5.4;
 
-  const surfaceMaterial = new THREE.MeshStandardMaterial({
+  // Every material stays transparent the whole time: switching it on and
+  // off would make three.js rebuild the shader in the middle of a scroll.
+  const surfaceMaterial = new THREE.MeshPhongMaterial({
     color: GOLD,
-    metalness: 0.1,
+    flatShading: true,
     opacity: 0,
-    roughness: 0.35,
+    shininess: 40,
+    specular: 0x55_44_33,
     transparent: true,
   });
-  const surface = new THREE.Mesh(smooth, surfaceMaterial);
+  const surface = new THREE.Mesh(faceted, surfaceMaterial);
   model.add(surface);
 
   const wireGeometry = new THREE.WireframeGeometry(coarse);
+  // Points and lines never write depth: fading out, they would otherwise
+  // punch invisible holes in the surface behind them.
   const wireMaterial = new THREE.LineBasicMaterial({
     color: GOLD,
+    depthWrite: false,
     opacity: 0,
     transparent: true,
   });
@@ -136,7 +154,7 @@ export const createTeapotScene = async ({
     highest = Math.max(highest, home[index * 3 + 1]);
   }
   for (let index = 0; index < count; index += 1) {
-    const spread = 4 + Math.random() * 3;
+    const spread = 3 + Math.random() * 2.5;
     const theta = Math.random() * Math.PI * 2;
     const phi = Math.acos(Math.random() * 2 - 1);
     scattered[index * 3] = spread * Math.sin(phi) * Math.cos(theta);
@@ -152,11 +170,13 @@ export const createTeapotScene = async ({
   );
   const pointMaterial = new THREE.PointsMaterial({
     color: GOLD,
+    depthWrite: false,
     size: lowPower ? 2 : 2.5,
     sizeAttenuation: false,
     transparent: true,
   });
-  model.add(new THREE.Points(pointGeometry, pointMaterial));
+  const points = new THREE.Points(pointGeometry, pointMaterial);
+  model.add(points);
 
   const placePoints = (intro: number) => {
     for (let index = 0; index < count; index += 1) {
@@ -179,17 +199,14 @@ export const createTeapotScene = async ({
     // Edges fade out as the surface covers them.
     const edges = stageBetween(stage, 0.12, 0.42) * (1 - faces);
     surfaceMaterial.opacity = faces;
-    // Fully opaque surfaces sort and blend correctly.
-    surfaceMaterial.transparent = faces < 1;
-    surfaceMaterial.depthWrite = faces > 0.5;
     surface.visible = faces > 0.01;
     wireMaterial.opacity = edges * 0.55;
     wireframe.visible = edges > 0.01;
     pointMaterial.opacity = 1 - faces;
+    points.visible = faces < 0.99;
   };
 
-  /** Places and sizes the teapot for the canvas shape (right side on wide
-   * screens, top center on narrow ones). */
+  /** Fits the teapot to the canvas, which CSS sizes to the teapot's area. */
   const resize = () => {
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
@@ -199,37 +216,96 @@ export const createTeapotScene = async ({
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
-    const wide = width >= 1024;
     const visibleHeight =
       2 *
       Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) *
       camera.position.z;
     const visibleWidth = visibleHeight * camera.aspect;
-    const centerX = wide ? 0.72 : 0.5;
-    const centerY = wide ? 0.52 : 0.24;
-    pivot.position.set(
-      (centerX - 0.5) * visibleWidth,
-      (0.5 - centerY) * visibleHeight,
-      0
-    );
-    const targetWidth = wide
-      ? Math.min(visibleWidth * 0.42, visibleHeight * 0.85)
-      : Math.min(visibleWidth * 0.8, visibleHeight * 0.42);
+    const targetWidth = Math.min(visibleWidth * 0.82, visibleHeight * 1.5);
     model.scale.setScalar(targetWidth / teapotWidth);
   };
 
-  const render = () => renderer.render(scene, camera);
+  // Compile every shader before anything moves (in parallel where the GPU
+  // driver allows), so the first scroll into the surface stage does not
+  // freeze.
   resize();
+  await renderer.compileAsync(scene, camera);
+
+  const render = () => renderer.render(scene, camera);
+
+  // The turn: a little rotation during the intro and with scroll; the
+  // mouse adds an eased offset.
+  const pointer = { x: 0, y: 0 };
+  const orbit = { x: 0, y: 0 };
+  let intro = still ? 1 : 0;
+  let spin = 0;
+  const setPose = (stage: number) => {
+    const settle = 1 - (1 - intro) ** 3;
+    model.rotation.set(
+      0.35 + stage * 0.2 + orbit.y * 0.4,
+      -1.4 + settle * 0.8 + spin + stage * 1.2 + orbit.x * 0.7,
+      0
+    );
+  };
+
+  let running = false;
+  let visible = true;
+  let animationFrame = 0;
+  let lastTime = 0;
+  let lastStage = -1;
+
+  // Draws one frame, then asks for another only while something is still
+  // moving: the intro, the mouse easing, or a scroll stage change.
+  // Draws a frame and asks for the next one. When only the idle turn is
+  // moving, frames are spaced to 30 fps.
+  let calm = false;
+  const tick = (time: number) => {
+    animationFrame = requestAnimationFrame(tick);
+    if (calm && lastTime && time - lastTime < CALM_FRAME_MS) {
+      return;
+    }
+    const delta = lastTime ? Math.min(0.05, (time - lastTime) / 1000) : 0;
+    lastTime = time;
+    if (intro < 1) {
+      intro = Math.min(1, intro + delta / INTRO_SECONDS);
+      placePoints(intro);
+    }
+    spin += delta * SPIN_SPEED;
+    orbit.x += (pointer.x - orbit.x) * 0.08;
+    orbit.y += (pointer.y - orbit.y) * 0.08;
+    const stage = getStage();
+    setPose(stage);
+    applyStage(stage);
+    render();
+    calm =
+      intro >= 1 &&
+      stage === lastStage &&
+      Math.abs(pointer.x - orbit.x) < 0.001 &&
+      Math.abs(pointer.y - orbit.y) < 0.001;
+    lastStage = stage;
+  };
+  const wake = () => {
+    // Scroll or mouse: back to full frame rate right away.
+    calm = false;
+    if (running || !visible) {
+      return;
+    }
+    running = true;
+    animationFrame = requestAnimationFrame(tick);
+  };
+
   const resizeObserver = new ResizeObserver(() => {
     resize();
+    setPose(getStage());
     render();
   });
   resizeObserver.observe(canvas);
 
   const disposeGpu = () => {
+    cancelAnimationFrame(animationFrame);
     resizeObserver.disconnect();
     coarse.dispose();
-    smooth.dispose();
+    faceted.dispose();
     wireGeometry.dispose();
     pointGeometry.dispose();
     surfaceMaterial.dispose();
@@ -239,70 +315,42 @@ export const createTeapotScene = async ({
   };
 
   if (still) {
-    pivot.rotation.set(0.35, -0.6, 0);
+    setPose(getStage());
     applyStage(getStage());
     render();
-    return disposeGpu;
+    return { dispose: disposeGpu, wake: () => render() };
   }
 
-  // Where the mouse wants the model to be; the model eases toward it.
-  const pointer = { x: 0, y: 0 };
-  const orbit = { x: 0, y: 0 };
   const onPointerMove = (event: PointerEvent) => {
     if (event.pointerType !== "mouse") {
       return;
     }
     pointer.x = event.clientX / window.innerWidth - 0.5;
     pointer.y = event.clientY / window.innerHeight - 0.5;
+    wake();
   };
   window.addEventListener("pointermove", onPointerMove, { passive: true });
 
-  // Only animate while the canvas is on screen.
-  let running = false;
-  let animationFrame = 0;
-  let lastTime = 0;
-  let elapsed = 0;
-  let spin = 0;
-  let introDone = false;
-  const tick = (time: number) => {
-    animationFrame = requestAnimationFrame(tick);
-    const delta = lastTime ? Math.min(0.05, (time - lastTime) / 1000) : 0;
-    lastTime = time;
-    elapsed += delta;
-    spin += delta * 0.25;
-    orbit.x += (pointer.x - orbit.x) * 0.06;
-    orbit.y += (pointer.y - orbit.y) * 0.06;
-    if (!introDone) {
-      const intro = Math.min(1, elapsed / INTRO_SECONDS);
-      placePoints(intro);
-      introDone = intro === 1;
-    }
-    const stage = getStage();
-    pivot.rotation.set(
-      0.35 + stage * 0.2 + orbit.y * 0.5,
-      -0.6 + spin + stage * 1.2 + orbit.x * 0.9,
-      0
-    );
-    applyStage(stage);
-    render();
-  };
+  // Off screen, nothing draws; coming back draws the current state once.
   const visibility = new IntersectionObserver(([entry]) => {
-    if (entry.isIntersecting && !running) {
-      running = true;
-      lastTime = 0;
-      animationFrame = requestAnimationFrame(tick);
-    }
-    if (!entry.isIntersecting && running) {
-      running = false;
+    visible = entry.isIntersecting;
+    if (visible) {
+      wake();
+    } else {
       cancelAnimationFrame(animationFrame);
+      running = false;
+      lastTime = 0;
     }
   });
   visibility.observe(canvas);
+  wake();
 
-  return () => {
-    cancelAnimationFrame(animationFrame);
-    visibility.disconnect();
-    window.removeEventListener("pointermove", onPointerMove);
-    disposeGpu();
+  return {
+    dispose: () => {
+      visibility.disconnect();
+      window.removeEventListener("pointermove", onPointerMove);
+      disposeGpu();
+    },
+    wake,
   };
 };

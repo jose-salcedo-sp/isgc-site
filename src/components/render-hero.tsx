@@ -4,6 +4,7 @@ import { scroll } from "motion";
 import { useEffect, useRef } from "react";
 
 import { createTeapotScene } from "@/components/teapot-scene";
+import type { TeapotScene } from "@/components/teapot-scene";
 
 /*
  * Hero canvas: the Utah teapot going from vertices to wireframe to a
@@ -37,6 +38,7 @@ export const RenderHeroCanvas = ({ label }: { label: string }) => {
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     let stage = still ? 1 : 0;
+    let teapot: TeapotScene | null = null;
     let stopScroll: (() => void) | undefined;
     if (!still) {
       // Makes the hero taller (CSS) so there is room to scroll through stages.
@@ -44,15 +46,16 @@ export const RenderHeroCanvas = ({ label }: { label: string }) => {
       stopScroll = scroll(
         (progress: number) => {
           stage = progress;
+          // The scene only draws when something changes.
+          teapot?.wake();
         },
         { offset: ["start start", "end end"], target: section }
       );
     }
 
     let unmounted = false;
-    let disposeScene: (() => void) | null = null;
     const startScene = async () => {
-      const dispose = await createTeapotScene({
+      const scene = await createTeapotScene({
         canvas,
         getStage: () => stage,
         lowPower: isLowPowerDevice(),
@@ -60,16 +63,19 @@ export const RenderHeroCanvas = ({ label }: { label: string }) => {
       });
       // The page may have changed while three.js was loading.
       if (unmounted) {
-        dispose?.();
+        scene?.dispose();
       } else {
-        disposeScene = dispose;
+        teapot = scene;
       }
     };
-    void startScene();
+    // three.js loads a moment after the page appears, so it never competes
+    // with the first paint and the first interactions.
+    const delay = setTimeout(startScene, 300);
 
     return () => {
       unmounted = true;
-      disposeScene?.();
+      clearTimeout(delay);
+      teapot?.dispose();
       stopScroll?.();
       delete section.dataset.scrub;
     };
