@@ -13,11 +13,14 @@ export const SiteFooter = ({
   dict: Dictionary;
   locale: Locale;
 }) => (
-  <footer className="bg-grafito py-10 text-white">
+  <footer className="bg-grafito sticky bottom-0 z-0 py-10 text-white">
     <div className="mx-auto flex max-w-300 flex-col gap-8 px-5 lg:flex-row lg:items-end lg:justify-between lg:px-6">
       <div>
-        <Link href={localizedPath(locale, "/")} className="font-serif text-3xl">
-          ISGC
+        <Link
+          href={localizedPath(locale, "/")}
+          className="text-3xl font-bold tracking-[-0.025em]"
+        >
+          CSE
         </Link>
         <p className="mt-2 max-w-sm text-sm text-white/65">
           {dict.brand.footerBlurb}

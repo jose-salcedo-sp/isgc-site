@@ -6,6 +6,7 @@ import {
   StudentResourceSearch,
 } from "@/components/home-interactions";
 import {
+  ExternalLink,
   PageFrame,
   PageIntro,
   PageSection,
@@ -50,36 +51,36 @@ const RecursosPage = async ({ params }: LocaleParams) => {
     <PageFrame dict={dict} locale={lang}>
       <FaqJsonLd items={dict.faqs.alumnos} />
       <PageIntro
-        chapters={dict.chapters.alumnos}
+        aside={
+          <div
+            id="accesos"
+            className="w-full shrink-0 lg:w-[26rem]"
+            data-intro="2"
+          >
+            <h2 className="text-2xl">{copy.quickTitle}</h2>
+            <ul className="mt-5 border-t border-white/25">
+              {quickAccess.map((item) => (
+                <li key={item.id} className="border-b border-white/25">
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex w-full items-center justify-between gap-4 py-4 text-xl font-bold hover:text-[#e2c58f] sm:text-2xl"
+                  >
+                    {quickLabels[item.id]}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        }
         crumb={{ name: copy.crumb, path: "/recursos" }}
         description={copy.description}
         dict={dict}
-        lede={copy.lede}
         locale={lang}
         title={copy.title}
       />
-      <PageSection tone="marfil">
-        <SectionHeading title={copy.quickTitle} />
-        <div className="grid gap-4 md:grid-cols-3">
-          {quickAccess.map((item) => (
-            <a
-              key={item.id}
-              href={item.href}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-card shadow-soft/50 bg-white p-6 transition hover:-translate-y-1"
-            >
-              <h3 className="text-grafito font-serif text-2xl">
-                {quickLabels[item.id]}
-              </h3>
-              <p className="text-piedra mt-3">{dict.resources.direct}</p>
-              <span className="text-tinto mt-5 inline-flex font-semibold">
-                {dict.resources.open} ↗
-              </span>
-            </a>
-          ))}
-        </div>
-      </PageSection>
       <PageSection id="recursos">
         <SectionHeading
           title={copy.resourcesTitle}
@@ -91,32 +92,44 @@ const RecursosPage = async ({ params }: LocaleParams) => {
           resources={studentResources}
         />
       </PageSection>
-      <PageSection tone="marfil">
-        <div className="grid gap-5 md:grid-cols-2">
-          <article className="rounded-card bg-tinto p-7 text-white sm:p-9">
-            <h2 className="font-serif text-3xl">{copy.coordTitle}</h2>
-            <p className="mt-4 text-white/80">{copy.coordText}</p>
+      <PageSection tone="marfil" id="coordinacion">
+        <div className="divide-grafito/15 grid gap-12 md:grid-cols-2 md:gap-0 md:divide-x">
+          <div className="md:pr-12">
+            <h2 className="text-grafito text-4xl sm:text-5xl">
+              {copy.coordTitle}
+            </h2>
+            <p className="text-piedra mt-4 max-w-md text-lg">
+              {copy.coordText}
+            </p>
             <a
               href={`mailto:${org.coordinationEmail}`}
-              className="text-dorado mt-6 inline-flex font-bold underline underline-offset-4"
+              className="text-tinto decoration-dorado mt-6 text-xl font-bold underline decoration-2 underline-offset-4"
             >
-              {org.coordinationEmail} ↗
+              {org.coordinationEmail}
             </a>
-          </article>
-          <article className="rounded-card bg-white p-7 sm:p-9">
-            <h2 className="text-grafito font-serif text-3xl">
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+              <ExternalLink href={externalLinks.coordinationAppointments}>
+                {copy.appointmentCta}
+              </ExternalLink>
+              <ExternalLink href={externalLinks.absenceForm}>
+                {copy.absenceCta}
+              </ExternalLink>
+            </div>
+          </div>
+          <div className="md:pl-12">
+            <h2 className="text-grafito text-4xl sm:text-5xl">
               {copy.regsTitle}
             </h2>
-            <p className="text-piedra mt-4">{copy.regsText}</p>
+            <p className="text-piedra mt-4 max-w-md text-lg">{copy.regsText}</p>
             <a
               href={externalLinks.schoolServices}
               target="_blank"
               rel="noreferrer"
-              className="text-tinto decoration-dorado mt-6 inline-flex font-semibold underline decoration-2 underline-offset-4"
+              className="text-tinto decoration-dorado mt-6 text-xl font-bold underline decoration-2 underline-offset-4"
             >
-              {copy.regsCta} ↗
+              {copy.regsCta} <span aria-hidden="true">↗</span>
             </a>
-          </article>
+          </div>
         </div>
       </PageSection>
       <PageSection id="faq">

@@ -39,78 +39,108 @@ const AspirantesPage = async ({ params }: LocaleParams) => {
     <PageFrame dict={dict} locale={lang}>
       <FaqJsonLd items={dict.faqs.aspirantes} />
       <PageIntro
-        chapters={dict.chapters.aspirantes}
         crumb={{ name: copy.crumb, path: "/aspirantes" }}
         description={copy.description}
         dict={dict}
-        lede={copy.lede}
         locale={lang}
         title={copy.title}
-      />
-      <PageSection>
-        <SectionHeading
-          title={copy.processTitle}
-          description={copy.processDescription}
-        />
-        <div className="grid gap-4 md:grid-cols-4">
-          {copy.steps.map((step) => (
-            <article key={step.title} className="rounded-card bg-marfil p-6">
-              <h3 className="text-grafito mt-4 font-serif text-2xl">
-                {step.title}
-              </h3>
-              <p className="text-piedra mt-3">{step.text}</p>
-            </article>
-          ))}
+      >
+        {/* The opening is the path itself: on load each number rises and
+            its stretch of path draws, one step after another (CSS). */}
+        <div className="mt-16 border-t border-white/20 pt-12 sm:mt-20">
+          <h2 className="text-3xl sm:text-4xl">{copy.processTitle}</h2>
+          <p className="mt-3 max-w-2xl text-white/80">
+            {copy.processDescription}
+          </p>
+          <ol
+            className="mt-12 grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0"
+            data-reveal="off"
+          >
+            {copy.steps.map((step, index) => (
+              <li key={step.title} className="lg:pr-8">
+                <span
+                  className="path-number block text-7xl leading-none font-bold tracking-[-0.06em] text-[#e2c58f] tabular-nums sm:text-8xl"
+                  style={{ animationDelay: `${0.5 + index * 0.25}s` }}
+                  aria-hidden="true"
+                >
+                  {index + 1}
+                </span>
+                <span
+                  className="path-line relative mt-6 block h-px bg-white/30"
+                  style={{ animationDelay: `${0.75 + index * 0.25}s` }}
+                  aria-hidden="true"
+                >
+                  <span className="absolute -top-[4px] left-0 size-[9px] rounded-full bg-[#e2c58f]" />
+                </span>
+                <div
+                  className="path-text"
+                  style={{ animationDelay: `${0.85 + index * 0.25}s` }}
+                >
+                  <h3 className="mt-6 text-2xl">{step.title}</h3>
+                  <p className="mt-2 text-lg text-white/80">{step.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <a
+            href={externalLinks.admissions}
+            target="_blank"
+            rel="noreferrer"
+            className="text-tinto hover:bg-marfil mt-14 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 font-bold"
+            data-magnetic
+          >
+            {copy.admissionsCta} <span aria-hidden="true">↗</span>
+          </a>
         </div>
-        <a
-          href={externalLinks.admissions}
-          target="_blank"
-          rel="noreferrer"
-          className="bg-tinto mt-8 inline-flex rounded-full px-5 py-3 font-bold text-white transition hover:bg-[#70112e]"
-        >
-          {copy.admissionsCta} ↗
-        </a>
-      </PageSection>
-      <PageSection tone="marfil">
-        <SectionHeading
-          title={copy.aidTitle}
-          description={copy.aidDescription}
-        />
-        <div className="grid gap-4 md:grid-cols-2">
-          <article className="rounded-card shadow-soft/50 bg-white p-7">
-            <h3 className="text-grafito font-serif text-3xl">
+      </PageIntro>
+      <section className="bg-grafito py-16 text-white sm:py-24">
+        <div className="mx-auto grid max-w-300 gap-8 px-5 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:gap-16 lg:px-6">
+          <h2 className="text-5xl leading-[1.02] tracking-[-0.045em] sm:text-7xl">
+            {copy.askTitle}
+          </h2>
+          <div>
+            <p className="text-lg text-white/75">{copy.askText}</p>
+            <a
+              href={`mailto:${org.coordinationEmail}`}
+              className="mt-5 text-2xl font-bold break-all text-[#e2c58f] sm:text-3xl"
+            >
+              <span className="underline decoration-2 underline-offset-8">
+                {org.coordinationEmail}
+              </span>{" "}
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+      <PageSection>
+        <SectionHeading title={copy.aidTitle} />
+        <div className="divide-grafito/15 grid gap-12 md:grid-cols-2 md:gap-0 md:divide-x">
+          <article className="md:pr-12">
+            <h3 className="text-grafito text-3xl sm:text-4xl">
               {copy.aidCardTitle}
             </h3>
-            <p className="text-piedra mt-4">{copy.aidCardText}</p>
+            <p className="text-piedra mt-4 max-w-md text-lg">
+              {copy.aidCardText}
+            </p>
             <div className="mt-6">
               <ExternalLink href={externalLinks.scholarships}>
                 {copy.aidCta}
               </ExternalLink>
             </div>
           </article>
-          <article className="rounded-card shadow-soft/50 bg-white p-7">
-            <h3 className="text-grafito font-serif text-3xl">
+          <article className="md:pl-12">
+            <h3 className="text-grafito text-3xl sm:text-4xl">
               {copy.visitTitle}
             </h3>
-            <p className="text-piedra mt-4">{copy.visitText}</p>
+            <p className="text-piedra mt-4 max-w-md text-lg">
+              {copy.visitText}
+            </p>
             <div className="mt-6">
               <ExternalLink href={externalLinks.campusMap}>
                 {copy.visitCta}
               </ExternalLink>
             </div>
           </article>
-        </div>
-      </PageSection>
-      <PageSection>
-        <div className="rounded-card bg-tinto p-8 text-white sm:p-10">
-          <h2 className="font-serif text-4xl">{copy.askTitle}</h2>
-          <p className="mt-4 max-w-2xl text-white/80">{copy.askText}</p>
-          <a
-            href={`mailto:${org.coordinationEmail}`}
-            className="text-dorado mt-6 inline-flex font-bold underline underline-offset-4"
-          >
-            {org.coordinationEmail} ↗
-          </a>
         </div>
       </PageSection>
       <PageSection id="faq" tone="marfil">

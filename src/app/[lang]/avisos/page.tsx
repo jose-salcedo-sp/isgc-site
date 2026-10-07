@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import {
-  PageFrame,
-  PageIntro,
-  PageSection,
-  SectionHeading,
-} from "@/components/page-frame";
+import { PageFrame, PageIntro } from "@/components/page-frame";
 import { getCurrentHomepageEvents } from "@/content/site-content";
 import { getDictionary } from "@/lib/dictionary";
-import { hasLocale, localizedPath } from "@/lib/i18n";
+import { hasLocale } from "@/lib/i18n";
 import type { LocaleParams } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/page-metadata";
+import { org } from "@/lib/site";
 
 export const revalidate = 3600;
 
@@ -37,50 +33,74 @@ const AvisosPage = async ({ params }: LocaleParams) => {
   return (
     <PageFrame dict={dict} locale={lang}>
       <PageIntro
-        chapters={dict.chapters.avisos}
         crumb={{ name: copy.crumb, path: "/avisos" }}
         description={copy.description}
         dict={dict}
-        lede={copy.lede}
+        display
         locale={lang}
         title={copy.title}
-      />
-      <PageSection tone="marfil">
-        <SectionHeading title={copy.eventsTitle} />
-        {events.length === 0 ? (
-          <article className="rounded-card bg-white p-7 sm:p-9">
-            <h2 className="text-grafito font-serif text-3xl">
-              {copy.emptyTitle}
-            </h2>
-            <p className="text-piedra mt-4 max-w-2xl">{copy.emptyText}</p>
-          </article>
-        ) : (
-          <div className="grid gap-5 md:grid-cols-2">
-            {events.map((event) => {
-              const item = dict.events[event.id];
-              return (
-                <article
-                  id={event.id}
-                  key={event.id}
-                  className="rounded-card shadow-soft/50 bg-white p-7 sm:p-8"
-                >
-                  <h2 className="text-grafito font-serif text-3xl">
-                    {item.title}
-                  </h2>
-                  <p className="text-tinto mt-4 font-semibold">{item.date}</p>
-                  <p className="text-piedra mt-4">{item.text}</p>
+        tone="white"
+      >
+        {/* The page opens straight into the feed: a rail that draws down on
+            load, with a dot for each notice. */}
+        <div
+          id="actividades"
+          className="mt-16 grid gap-10 sm:mt-24 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16"
+        >
+          <h2 className="text-grafito text-3xl leading-tight sm:text-4xl lg:sticky lg:top-28 lg:self-start">
+            {copy.eventsTitle}
+          </h2>
+          <div className="relative pl-8 sm:pl-12">
+            <span
+              className="rail-y bg-grafito/20 absolute top-0 bottom-0 left-0 w-px"
+              aria-hidden="true"
+            />
+            <ol className="grid gap-14">
+              {events.length === 0 ? (
+                <li className="relative">
+                  <span
+                    className="rail-dot border-tinto absolute top-3 -left-[39px] size-[13px] rounded-full border-2 bg-white sm:-left-[55px]"
+                    aria-hidden="true"
+                  />
+                  <h3 className="text-grafito text-3xl leading-tight sm:text-4xl">
+                    {copy.emptyTitle}
+                  </h3>
+                  <p className="text-piedra mt-4 max-w-lg text-lg">
+                    {copy.emptyText}
+                  </p>
                   <a
-                    href={`${localizedPath(lang, "/comunidad")}#${event.id}`}
-                    className="text-tinto decoration-dorado mt-6 inline-flex font-semibold underline decoration-2 underline-offset-4"
+                    href={`mailto:${org.coordinationEmail}`}
+                    className="text-tinto decoration-dorado mt-6 text-xl font-bold underline decoration-2 underline-offset-4"
                   >
-                    {copy.details} ↗
+                    {org.coordinationEmail}
                   </a>
-                </article>
-              );
-            })}
+                </li>
+              ) : (
+                events.map((event) => {
+                  const item = dict.events[event.id];
+                  return (
+                    <li id={event.id} key={event.id} className="relative">
+                      <span
+                        className="rail-dot bg-tinto absolute top-2 -left-[39px] size-[13px] rounded-full sm:-left-[55px]"
+                        aria-hidden="true"
+                      />
+                      <p className="text-tinto text-lg font-bold">
+                        {item.date}
+                      </p>
+                      <h3 className="text-grafito mt-2 text-3xl leading-tight sm:text-4xl">
+                        {item.title}
+                      </h3>
+                      <p className="text-piedra mt-4 max-w-lg text-lg">
+                        {item.text}
+                      </p>
+                    </li>
+                  );
+                })
+              )}
+            </ol>
           </div>
-        )}
-      </PageSection>
+        </div>
+      </PageIntro>
     </PageFrame>
   );
 };
