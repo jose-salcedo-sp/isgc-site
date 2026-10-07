@@ -1,136 +1,122 @@
 "use client";
 
-import { animate, inView, scroll, stagger } from "motion";
+import { scroll } from "motion";
 import { useEffect } from "react";
 
-const EASE_OUT = [0.16, 1, 0.3, 1] as const;
+/*
+ * Home-only scrollytelling for the "build story" (learning-story.tsx). The
+ * hero canvas animates itself (render-hero.tsx) and the curriculum rows move
+ * themselves (curriculum-stream.tsx).
+ *
+ * The story section is three screens tall and its content is sticky. Scroll
+ * progress through it (0 → 1) is split into the three steps:
+ *   0.00–0.33  code is typed on the phone
+ *   0.33–0.66  the code clears and the app's wireframe is drawn
+ *   0.66–1.00  the wireframe fills in and someone taps the button
+ */
 
-/** Hide what is still below the fold so it fades in rather than blinking out. */
-const prime = (element: HTMLElement): void => {
-  if (element.getBoundingClientRect().top > window.innerHeight * 0.9) {
-    element.style.opacity = "0";
+/** 0 before `start`, 1 after `end`, linear in between. */
+const between = (value: number, start: number, end: number): number =>
+  Math.min(1, Math.max(0, (value - start) / (end - start)));
+
+const scrubBuildStory = (): (() => void) | null => {
+  const story = document.querySelector<HTMLElement>(".build-story");
+  if (!story) {
+    return null;
   }
-};
-
-const revealOnScroll = (selector: string, amount = 0.15): (() => void)[] =>
-  [...document.querySelectorAll<HTMLElement>(selector)].map((element) => {
-    prime(element);
-    return inView(
-      element,
-      () => {
-        animate(
-          element,
-          { opacity: [0, 1], y: [28, 0] },
-          { duration: 0.75, ease: EASE_OUT }
-        );
-      },
-      { amount }
-    );
-  });
-
-const playIntro = (): void => {
-  animate(
-    "#inicio .hero-title",
-    { opacity: [0, 1], y: [35, 0] },
-    { duration: 0.9, ease: EASE_OUT }
-  );
-  animate(
-    "#inicio .hero-title ~ p, #inicio .hero-title ~ div",
-    { opacity: [0, 1], y: [20, 0] },
-    { delay: stagger(0.12, { startDelay: 0.3 }), duration: 0.9, ease: EASE_OUT }
-  );
-  animate(
-    "#inicio .lab-panel",
-    { opacity: [0, 1], rotate: [3, 0], y: [35, 0] },
-    { delay: 0.2, duration: 0.9, ease: EASE_OUT }
-  );
-  for (const path of document.querySelectorAll<SVGPathElement>(
-    "#inicio .lab-object path"
-  )) {
-    const length = path.getTotalLength();
-    path.style.strokeDasharray = `${length}`;
-    animate(
-      path,
-      { strokeDashoffset: [length, 0] },
-      { delay: 0.5, duration: 1.4, ease: EASE_OUT }
-    );
-  }
-};
-
-/** The story illustration assembles as you scroll, wide screens only. */
-const assembleStory = (): (() => void)[] => {
-  const steps = document.querySelector<HTMLElement>(".story-steps");
-  if (!(steps && window.matchMedia("(min-width: 900px)").matches)) {
-    return [];
-  }
-  const sequence = animate(
-    [
-      [
-        ".story-orbit",
-        { rotate: [-45, 90], scale: [0.65, 1] },
-        { at: 0, duration: 2 },
-      ],
-      [
-        ".story-core",
-        { borderRadius: ["50%", "18%"], rotate: [0, 180] },
-        { at: 0, duration: 2 },
-      ],
-      [
-        ".story-connection",
-        { scaleX: [0, 1] },
-        { at: 0.8, delay: stagger(0.1), duration: 0.5 },
-      ],
-    ],
-    { defaultTransition: { ease: "linear" } }
-  );
-  return [
-    scroll(sequence, { offset: ["start 0.65", "end 0.65"], target: steps }),
+  const steps = [...story.querySelectorAll<HTMLElement>(".build-story-step")];
+  const bars = [
+    ...story.querySelectorAll<HTMLElement>(".build-story-progress b"),
   ];
-};
+  const code = story.querySelector<SVGGElement>(".build-code");
+  const caret = story.querySelector<SVGRectElement>(".build-caret");
+  const lines = [...story.querySelectorAll<SVGTextElement>(".build-code text")];
+  const wires = [
+    ...story.querySelectorAll<SVGGeometryElement>(".build-wire > *"),
+  ];
+  const fill = story.querySelector<SVGGElement>(".build-fill");
+  const tap = story.querySelector<SVGCircleElement>(".build-tap");
+  if (!(code && caret && fill && tap)) {
+    return null;
+  }
 
-/** Each step heading and copy arrive together as it comes up. */
-const revealSteps = (): (() => void)[] =>
-  [...document.querySelectorAll<HTMLElement>(".story-step")].map((step) => {
-    const parts = [...step.querySelectorAll<HTMLElement>("h3, p")];
-    for (const part of parts) {
-      prime(part);
+  const fullText = lines.map((line) => line.dataset.line ?? "");
+  const totalCharacters = fullText.reduce((sum, line) => sum + line.length, 0);
+
+  const render = (progress: number) => {
+    // Step 1: type the code, character by character.
+    let typed = Math.round(totalCharacters * between(progress, 0.03, 0.28));
+    let caretLine = 0;
+    let caretColumn = 0;
+    for (const [index, line] of lines.entries()) {
+      const shown = Math.min(typed, fullText[index].length);
+      line.textContent = fullText[index].slice(0, shown);
+      if (typed > 0 || index === 0) {
+        caretLine = index;
+        caretColumn = shown;
+      }
+      typed -= shown;
     }
-    return inView(
-      step,
-      () => {
-        animate(
-          parts,
-          { opacity: [0, 1], y: [24, 0] },
-          { delay: stagger(0.12), duration: 0.7, ease: EASE_OUT }
-        );
-      },
-      { amount: 0.15 }
-    );
+    caret.setAttribute("x", String(34 + caretColumn * 8.4));
+    caret.setAttribute("y", String(104 + caretLine * 40));
+
+    // Step 2: the code clears and the wireframe draws itself.
+    const clear = between(progress, 0.33, 0.43);
+    code.style.opacity = String(1 - clear);
+    code.style.transform = `translateY(${-24 * clear}px)`;
+    const draw = between(progress, 0.36, 0.62);
+    for (const [index, wire] of wires.entries()) {
+      const own = between(draw, index * 0.12, index * 0.12 + 0.52);
+      wire.style.strokeDashoffset = String(1 - own);
+    }
+
+    // Step 3: the shapes fill in, then a tap ripples on the button.
+    const filled = between(progress, 0.68, 0.84);
+    fill.style.opacity = String(filled);
+    // Once the app is filled in, the wireframe steps back.
+    for (const wire of wires) {
+      wire.style.opacity = String(1 - filled * 0.75);
+    }
+    const ripple = between(progress, 0.86, 0.98);
+    tap.style.opacity = String(ripple > 0 ? 1 - ripple : 0);
+    tap.style.transform = `scale(${0.4 + ripple * 2.2})`;
+
+    // Text: one step at a time, plus three progress bars.
+    let active = 2;
+    if (progress < 0.33) {
+      active = 0;
+    } else if (progress < 0.66) {
+      active = 1;
+    }
+    for (const [index, step] of steps.entries()) {
+      step.toggleAttribute("data-active", index === active);
+    }
+    for (const [index, bar] of bars.entries()) {
+      bar.style.transform = `scaleX(${between(progress, index / 3, (index + 1) / 3)})`;
+    }
+  };
+
+  story.dataset.scrub = "";
+  render(0);
+  const stop = scroll(render, {
+    offset: ["start start", "end end"],
+    target: story,
   });
 
-const linkToScroll = (): (() => void)[] => {
-  const stops: (() => void)[] = [];
-  const lab = document.querySelector<SVGElement>("#inicio .lab-object");
-  const hero = document.querySelector<HTMLElement>("#inicio");
-  if (lab && hero) {
-    stops.push(
-      scroll(animate(lab, { rotate: [0, 8], y: [0, -16] }), {
-        offset: ["start start", "end start"],
-        target: hero,
-      })
-    );
-  }
-  const fill = document.querySelector<HTMLElement>(".story-progress-fill");
-  const steps = document.querySelector<HTMLElement>(".story-steps");
-  if (fill && steps) {
-    stops.push(
-      scroll(animate(fill, { scaleY: [0, 1] }), {
-        offset: ["start center", "end center"],
-        target: steps,
-      })
-    );
-  }
-  return stops;
+  return () => {
+    stop();
+    delete story.dataset.scrub;
+    // Leave the finished state (the no-JS view) in place.
+    for (const [index, line] of lines.entries()) {
+      line.textContent = fullText[index];
+    }
+    for (const step of steps) {
+      delete step.dataset.active;
+    }
+    for (const element of [code, fill, tap, ...wires, ...bars]) {
+      element.removeAttribute("style");
+    }
+  };
 };
 
 export const HomeMotion = () => {
@@ -138,19 +124,9 @@ export const HomeMotion = () => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
-    playIntro();
-    const stops = [
-      ...linkToScroll(),
-      ...assembleStory(),
-      ...revealSteps(),
-      ...revealOnScroll(
-        "#contenido > section:not(#inicio):not(#historia) :is(h2, article, .grid > a)"
-      ),
-    ];
+    const stop = scrubBuildStory();
     return () => {
-      for (const stop of stops) {
-        stop();
-      }
+      stop?.();
     };
   }, []);
   return null;
