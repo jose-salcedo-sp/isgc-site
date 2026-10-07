@@ -286,7 +286,7 @@ const GraphCanvas = ({
   };
 
   return (
-    <div className="h-full w-full" ref={wrapRef}>
+    <div className="h-full w-full" ref={wrapRef} data-lenis-prevent>
       <canvas
         aria-hidden="true"
         className="block h-full w-full cursor-grab touch-none active:cursor-grabbing"
