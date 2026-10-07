@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 import { getDictionary } from "@/lib/dictionary";
 import { defaultLocale, hasLocale } from "@/lib/i18n";
 
-export const alt = "ISGC";
+export const alt = "CSE · Computer Science and Engineering";
 export const size = { height: 630, width: 1200 };
 export const contentType = "image/png";
 
@@ -38,7 +38,7 @@ const OpenGraphImage = async ({
           textTransform: "uppercase",
         }}
       >
-        ISGC
+        CSE
       </p>
       <p
         style={{

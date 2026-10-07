@@ -9,7 +9,7 @@ import { locales, sitePaths } from "@/lib/i18n";
 import { siteLastModified, siteRoutes } from "@/lib/site";
 
 const appDir = path.join(process.cwd(), "src/app");
-const titleSuffix = " | ISGC";
+const titleSuffix = " | CSE";
 const maxTitleLength = 60;
 const maxDescriptionLength = 160;
 const minDescriptionLength = 120;
@@ -19,7 +19,6 @@ const pageKey = {
   "/aspirantes": "aspirantes",
   "/avisos": "avisos",
   "/carrera": "carrera",
-  "/comunidad": "comunidad",
   "/oportunidades": "oportunidades",
   "/proyectos": "proyectos",
   "/recursos": "alumnos",

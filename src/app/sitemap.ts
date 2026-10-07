@@ -14,7 +14,6 @@ const routeConfig: Record<
   "/aspirantes": { changeFrequency: "monthly", priority: 0.9 },
   "/avisos": { changeFrequency: "weekly", priority: 0.8 },
   "/carrera": { changeFrequency: "monthly", priority: 0.9 },
-  "/comunidad": { changeFrequency: "weekly", priority: 0.7 },
   "/oportunidades": { changeFrequency: "monthly", priority: 0.8 },
   "/proyectos": { changeFrequency: "monthly", priority: 0.8 },
   "/recursos": { changeFrequency: "weekly", priority: 0.7 },

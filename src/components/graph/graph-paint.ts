@@ -358,7 +358,7 @@ const paintCenter = (ctx: CanvasRenderingContext2D, palette: Palette): void => {
   ctx.textBaseline = "middle";
   ctx.fillStyle = withAlpha(palette.ink, 0.92);
   ctx.font = "700 64px Satoshi, ui-sans-serif, system-ui, sans-serif";
-  ctx.fillText("ISGC", 0, 0);
+  ctx.fillText("CSE", 0, 0);
   ctx.textAlign = "left";
 };
 

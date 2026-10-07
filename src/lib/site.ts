@@ -6,15 +6,15 @@ export const siteUrl =
 
 export const universityUrl = "https://www.up.edu.mx/";
 
-export const siteLastModified = new Date("2026-10-03T00:00:00.000Z");
+export const siteLastModified = new Date("2026-10-07T00:00:00.000Z");
 
 const { program } = curriculum;
 
 export const org = {
   address: program.address,
   campus: program.campus,
-  coordinationEmail: "arodrig@up.edu.mx",
-  name: program.name,
+  coordinationEmail: "malvarezg@up.edu.mx",
+  name: program.nameEn,
   plan: program.plan,
   rvoe: program.rvoe,
 } as const;

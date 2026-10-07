@@ -90,14 +90,8 @@ export const GraphInspector = ({
     >
       <div className="mb-5 flex items-start gap-4">
         <div className="min-w-0 flex-1">
-          <p className="text-dorado text-xs font-semibold tracking-[0.16em] uppercase">
-            {text.kinds[selected.kind]}
-            {selected.credits === undefined
-              ? ""
-              : ` · ${selected.credits} ${text.credits}`}
-          </p>
           <h2
-            className="text-foreground mt-2 font-serif text-3xl leading-tight"
+            className="text-foreground font-serif text-3xl leading-tight"
             id="graph-node-title"
           >
             {selected.label}
@@ -112,7 +106,13 @@ export const GraphInspector = ({
           {text.close}
         </button>
       </div>
-      <div className="min-h-0 flex-1 overflow-y-auto">
+      <div className="min-h-0 flex-1 overflow-y-auto" data-lenis-prevent>
+        <p className="text-muted-foreground mb-3 text-sm">
+          {text.kinds[selected.kind]}
+          {selected.credits === undefined
+            ? ""
+            : `, ${selected.credits} ${text.credits}`}
+        </p>
         {selected.description ? (
           <p className="text-foreground text-[0.9375rem] leading-relaxed">
             {selected.description}
