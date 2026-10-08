@@ -11,7 +11,7 @@ import {
   SectionHeading,
 } from "@/components/page-frame";
 import { JsonLd } from "@/components/seo/json-ld";
-import { externalLinks } from "@/content/site-content";
+import { externalLinks, faculty } from "@/content/site-content";
 import curriculum from "@/data/curriculum.json";
 import { localizedCourseName, localizedGraphNodes } from "@/lib/course-copy";
 import { curriculumGraph } from "@/lib/curriculum-graph";
@@ -114,7 +114,40 @@ const CarreraPage = async ({ params }: LocaleParams) => {
           ))}
         </div>
       </PageSection>
-      <PageSection id="semestres">
+      <PageSection>
+        <SectionHeading title={copy.facultyTitle} />
+        <div className="grid gap-4 md:grid-cols-2">
+          {faculty.map((person) => {
+            const item = dict.faculty[person.id];
+            return (
+              <article
+                key={person.name}
+                className="rounded-card bg-marfil shadow-soft/50 p-7"
+              >
+                <div className="bg-tinto flex h-12 w-12 items-center justify-center rounded-full font-serif text-xl text-white">
+                  {person.name
+                    .split(" ")
+                    .map((part) => part[0])
+                    .slice(0, 2)
+                    .join("")}
+                </div>
+                <h3 className="text-grafito mt-4 font-serif text-2xl">
+                  {person.name}
+                </h3>
+                <p className="text-tinto mt-1 font-semibold">{item.role}</p>
+                <p className="text-piedra mt-2">{item.area}</p>
+                <a
+                  href={`mailto:${person.email}`}
+                  className="text-tinto mt-5 inline-flex text-sm font-semibold underline underline-offset-4"
+                >
+                  {person.email}
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      </PageSection>
+      <PageSection tone="marfil" id="semestres">
         <SectionHeading
           title={copy.planTitle}
           description={fill(copy.planMeta, {
@@ -134,7 +167,10 @@ const CarreraPage = async ({ params }: LocaleParams) => {
               { id: "data", ...areas.data },
             ] as const
           ).map((item) => (
-            <li key={item.id} className="rounded-card bg-marfil p-6">
+            <li
+              key={item.id}
+              className="rounded-card shadow-soft/50 bg-white p-6"
+            >
               <h3 className="text-grafito font-serif text-2xl">{item.name}</h3>
               <p className="text-piedra mt-3">{item.description}</p>
             </li>
@@ -142,7 +178,10 @@ const CarreraPage = async ({ params }: LocaleParams) => {
         </ul>
         <ol className="mt-10 grid gap-6 md:grid-cols-2">
           {planSemesters.map((item) => (
-            <li key={item.semester} className="rounded-card bg-marfil p-6">
+            <li
+              key={item.semester}
+              className="rounded-card shadow-soft/50 bg-white p-6"
+            >
               <h3 className="text-grafito font-serif text-2xl">
                 {fill(copy.semester, { n: item.semester })}
               </h3>
@@ -168,7 +207,7 @@ const CarreraPage = async ({ params }: LocaleParams) => {
           </a>
         </div>
       </PageSection>
-      <PageSection tone="marfil" id="gpa">
+      <PageSection id="gpa">
         <SectionHeading
           title={copy.gpa.title}
           description={copy.gpa.description}

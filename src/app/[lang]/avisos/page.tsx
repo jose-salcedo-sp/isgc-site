@@ -9,7 +9,7 @@ import {
 } from "@/components/page-frame";
 import { getCurrentHomepageEvents } from "@/content/site-content";
 import { getDictionary } from "@/lib/dictionary";
-import { hasLocale, localizedPath } from "@/lib/i18n";
+import { hasLocale } from "@/lib/i18n";
 import type { LocaleParams } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/page-metadata";
 
@@ -46,7 +46,7 @@ const AvisosPage = async ({ params }: LocaleParams) => {
         title={copy.title}
       />
       <PageSection tone="marfil">
-        <SectionHeading title={copy.eventsTitle} />
+        <SectionHeading title={copy.newsTitle} />
         {events.length === 0 ? (
           <article className="rounded-card bg-white p-7 sm:p-9">
             <h2 className="text-grafito font-serif text-3xl">
@@ -69,12 +69,6 @@ const AvisosPage = async ({ params }: LocaleParams) => {
                   </h2>
                   <p className="text-tinto mt-4 font-semibold">{item.date}</p>
                   <p className="text-piedra mt-4">{item.text}</p>
-                  <a
-                    href={`${localizedPath(lang, "/comunidad")}#${event.id}`}
-                    className="text-tinto decoration-dorado mt-6 inline-flex font-semibold underline decoration-2 underline-offset-4"
-                  >
-                    {copy.details} ↗
-                  </a>
                 </article>
               );
             })}

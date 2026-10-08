@@ -18,7 +18,6 @@ export const sitePaths = [
   "/",
   "/carrera",
   "/proyectos",
-  "/comunidad",
   "/avisos",
   "/recursos",
   "/aspirantes",

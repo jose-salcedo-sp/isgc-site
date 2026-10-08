@@ -19,7 +19,6 @@ const pageKey = {
   "/aspirantes": "aspirantes",
   "/avisos": "avisos",
   "/carrera": "carrera",
-  "/comunidad": "comunidad",
   "/oportunidades": "oportunidades",
   "/proyectos": "proyectos",
   "/recursos": "alumnos",

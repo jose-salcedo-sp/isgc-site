@@ -164,73 +164,6 @@ const StudyPlanSection = ({ dict }: HomeCopy) => (
   </section>
 );
 
-const CommunitySection = ({ dict, locale }: HomeCopy) => {
-  const copy = dict.pages.home;
-  return (
-    <>
-      <PageSection tone="marfil" id="comunidad">
-        <div className="grid gap-8 lg:grid-cols-2">
-          <div>
-            <h2 className="text-grafito font-serif text-4xl sm:text-5xl">
-              {copy.community.title}
-            </h2>
-            <p className="text-piedra mt-4 max-w-xl text-lg">
-              {copy.community.text}
-            </p>
-            <Link
-              href={localizedPath(locale, "/comunidad")}
-              className="text-tinto decoration-dorado mt-6 inline-flex font-semibold underline decoration-2 underline-offset-4"
-            >
-              {copy.community.cta} ↗
-            </Link>
-          </div>
-          <Link
-            href={localizedPath(locale, "/oportunidades")}
-            className="rounded-card bg-tinto hover:shadow-soft flex items-end p-7 text-white transition sm:p-9"
-          >
-            <span className="font-serif text-3xl leading-tight">
-              {copy.community.internships}
-            </span>
-          </Link>
-        </div>
-      </PageSection>
-      <PageSection id="vida">
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-          <div>
-            <h2 className="text-grafito font-serif text-4xl leading-tight sm:text-5xl">
-              {copy.campus.title}
-            </h2>
-            <p className="text-piedra mt-4 max-w-lg text-lg">
-              {copy.campus.text}
-            </p>
-            <Link
-              href={localizedPath(locale, "/comunidad")}
-              className="text-tinto decoration-dorado mt-6 inline-flex font-semibold underline decoration-2 underline-offset-4"
-            >
-              {copy.campus.cta} ↗
-            </Link>
-          </div>
-          <div>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {copy.campus.items.map((item) => (
-                <article
-                  key={item.title}
-                  className="rounded-card bg-marfil shadow-soft/50 p-5"
-                >
-                  <h3 className="text-grafito font-serif text-2xl leading-tight">
-                    {item.title}
-                  </h3>
-                  <p className="text-piedra mt-3">{item.text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </div>
-      </PageSection>
-    </>
-  );
-};
-
 const NextStepSection = ({ dict, locale }: HomeCopy) => {
   const copy = dict.pages.home;
   return (
@@ -313,7 +246,6 @@ const Home = async ({ params }: LocaleParams) => {
       <CareerSection {...home} />
       <ProjectsSection {...home} />
       <StudyPlanSection {...home} />
-      <CommunitySection {...home} />
       <NextStepSection {...home} />
     </PageFrame>
   );

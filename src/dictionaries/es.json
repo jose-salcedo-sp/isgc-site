@@ -38,10 +38,6 @@
         "label": "Proyectos"
       },
       {
-        "href": "/comunidad",
-        "label": "Comunidad"
-      },
-      {
         "href": "/recursos",
         "label": "Recursos"
       }
@@ -193,23 +189,6 @@
       "role": "Academia de Cómputo"
     }
   },
-  "spaces": [
-    {
-      "location": "Edificio A · Ingenierías · 2.º piso",
-      "text": "Espacio para prácticas y proyectos de computación.",
-      "title": "Laboratorios CIAC"
-    },
-    {
-      "location": "Edificio C · 3.º piso",
-      "text": "Resuelve dudas sobre la carrera, materias y proyectos.",
-      "title": "Oficina de Dirección"
-    },
-    {
-      "location": "Edificio C · 3.º piso",
-      "text": "Encuentra orientación sobre materias, profesores y procesos académicos.",
-      "title": "Coordinación"
-    }
-  ],
   "specialties": [
     {
       "subjects": [
@@ -301,7 +280,6 @@
     "aspirantes": ["Imagina", "Da el paso", "Empieza"],
     "avisos": ["Infórmate", "Participa", "Avanza"],
     "carrera": ["Entiende", "Construye", "Comparte"],
-    "comunidad": ["Conecta", "Colabora", "Crea"],
     "oportunidades": ["Construye", "Muéstralo", "Trasciende"],
     "proyectos": ["Código", "Experiencia", "Impacto"]
   },
@@ -322,15 +300,6 @@
         "aria": "Ilustración geométrica de un objeto tridimensional sobre una retícula de coordenadas",
         "text": "Del código a lo que imaginas.",
         "cta": "Explora los proyectos"
-      },
-      "news": {
-        "title": "Lo que necesitas ahora",
-        "description": "Avisos, próximos eventos y accesos directos para avanzar sin rodeos.",
-        "emptyTitle": "Mantente al día",
-        "emptyText": "Consulta con Coordinación las próximas actividades y las convocatorias vigentes.",
-        "contact": "Contacta a Coordinación",
-        "details": "Ver detalles",
-        "quickTitle": "Accesos frecuentes"
       },
       "story": {
         "line1": "Una idea.",
@@ -385,31 +354,6 @@
         "text": "Explora la progresión académica, las materias y las opciones para profundizar en lo que te interesa.",
         "cta": "Abrir Tu Ruta Ideal"
       },
-      "community": {
-        "title": "Conoce a las personas detrás de los proyectos.",
-        "text": "Dirección, academia y los espacios del campus donde se resuelven dudas y se construye en equipo.",
-        "cta": "Ver comunidad",
-        "internships": "Encuentra prácticas y primeros proyectos."
-      },
-      "campus": {
-        "title": "Qué pasa dentro y fuera del campus.",
-        "text": "Encuentra noticias, eventos y espacios para conectar con la comunidad.",
-        "cta": "Ver comunidad",
-        "items": [
-          {
-            "title": "Proyectos que salen del salón",
-            "text": "Conoce las experiencias, equipos y resultados que forman parte de la vida de ISGC."
-          },
-          {
-            "title": "Espacios para aprender y colaborar",
-            "text": "Ubica laboratorios, coordinación y los espacios donde sucede el trabajo diario."
-          },
-          {
-            "title": "Prácticas y primeros proyectos",
-            "text": "Encuentra rutas para empezar a construir experiencia profesional mientras estudias."
-          }
-        ]
-      },
       "next": {
         "title": "¿Qué necesitas hoy?",
         "admissionsTitle": "Conoce admisiones y becas.",
@@ -440,6 +384,7 @@
       "wideText": "Vas a programar, modelar, analizar y presentar ideas. La carrera se mueve entre fundamentos técnicos y proyectos donde tienes que tomar decisiones.",
       "learnTitle": "Cómo se aprende",
       "learnDescription": "La teoría toma forma cuando la conviertes en algo que puede probarse, explicarse y mejorar.",
+      "facultyTitle": "Equipo académico",
       "learn": [
         {
           "title": "Entender",
@@ -538,24 +483,6 @@
       "shareCta": "Contactar a Coordinación",
       "shareSubject": "Proyecto ISGC"
     },
-    "comunidad": {
-      "meta": {
-        "title": "Comunidad UP Guadalajara",
-        "description": "Comunidad ISGC en la Universidad Panamericana Guadalajara: equipo académico, espacios del campus, coordinación, noticias y eventos de Ingeniería en Sistemas."
-      },
-      "crumb": "Comunidad",
-      "title": "Comunidad de Ingeniería en Sistemas y Gráficas Computacionales",
-      "lede": "La carrera también se construye con otras personas.",
-      "description": "Conoce al equipo académico, los espacios del campus y las noticias que conectan a la comunidad ISGC.",
-      "facultyTitle": "Equipo académico",
-      "newsTitle": "Noticias y eventos",
-      "newsEmpty": "Consulta con Coordinación las próximas actividades. Aquí podrás consultar las noticias publicadas y su archivo.",
-      "spacesTitle": "Espacios para encontrarnos",
-      "spacesDescription": "Ubica los puntos donde puedes estudiar, resolver dudas o trabajar con otras personas.",
-      "mapCta": "Abrir mapa del campus",
-      "contactTitle": "Contacta a Coordinación",
-      "coordLocation": "Edificio C · 3.º piso"
-    },
     "avisos": {
       "meta": {
         "title": "Avisos y eventos",
@@ -565,10 +492,9 @@
       "title": "Avisos y eventos de ISGC",
       "lede": "Lo importante, en un solo lugar.",
       "description": "Consulta las actividades y convocatorias vigentes de la comunidad de Ingeniería en Sistemas y Gráficas Computacionales.",
-      "eventsTitle": "Próximas actividades",
+      "newsTitle": "Noticias y eventos",
       "emptyTitle": "Mantente al día",
-      "emptyText": "Consulta con Coordinación las próximas actividades y convocatorias vigentes.",
-      "details": "Ver más información"
+      "emptyText": "Consulta con Coordinación las próximas actividades y convocatorias vigentes."
     },
     "alumnos": {
       "meta": {
@@ -579,8 +505,6 @@
       "title": "Centro de alumnos de Ingeniería en Sistemas y Gráficas Computacionales",
       "lede": "Todo lo que necesitas para seguir avanzando.",
       "description": "Trámites, accesos frecuentes, estudio y desarrollo profesional en un solo lugar.",
-      "eventsTitle": "Avisos y próximos eventos",
-      "eventsEmpty": "Consulta con Coordinación las próximas actividades y convocatorias vigentes.",
       "quickTitle": "Accesos frecuentes",
       "resourcesTitle": "Recursos para tu día a día",
       "resourcesDescription": "Busca por nombre y abre cada herramienta en su destino correspondiente.",

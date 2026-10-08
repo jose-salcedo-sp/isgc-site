@@ -46,18 +46,18 @@ Tipografía propuesta: Source Sans 3 para navegación y lectura; Source Serif 4 
 3. **Qué aprenderás y construirás.** Tres capacidades respaldadas por el plan y dos proyectos destacados: problema, solución, autores y aprendizaje. Enlaces al plan y Media Lab.
 4. **Tu formación.** Resumen de progresión académica, plan oficial descargable y especialidades vigentes; CTA «Explora el plan de estudios». Requisitos y semestres completos en la página de carrera.
 5. **Personas y oportunidades.** Dos docentes con áreas de trabajo, una experiencia de egresado y enlace a prácticas. Testimonios identificados y autorizados; empresas solo con relación comprobada.
-6. **Vida ISGC.** Tres noticias/eventos recientes y una imagen de campus; acceso al archivo y ubicación de espacios. Evitar repetir el aviso prioritario.
+6. **Vida ISGC.** Tres noticias o eventos recientes y una imagen de campus. Evitar repetir el aviso prioritario.
 7. **Siguiente paso.** Dos bloques equivalentes: aspirantes → admisiones, becas y contacto; alumnos → coordinación, trámites y recursos. FAQ breve por audiencia. Pie con reglamentos, privacidad, redes y datos institucionales.
 
 **Mapa de páginas y contenido:**
 
 | Ruta | Contenido y prioridad |
 | --- | --- |
-| `/carrera` | Perfil, cómo se aprende, plan por semestre, especialidades, doble carrera, campo profesional y FAQ de ingreso |
+| `/carrera` | Perfil, cómo se aprende, equipo académico, plan por semestre, especialidades, doble carrera, campo profesional y FAQ de ingreso |
 | `/aspirantes` | Proceso oficial de admisión, becas/financiamiento, visita y contacto de Admisiones |
 | `/alumnos` | Avisos → accesos frecuentes → recursos agrupados en estudio, trámites y desarrollo profesional; filtro local por nombre |
 | `/proyectos` | Proyectos actuales y Media Lab; ficha con problema, proceso, resultado, fecha y equipo; historia en archivo |
-| `/comunidad` | Noticias, eventos y sus detalles; directorio docente, campus y contactos de coordinación |
+| `/avisos` | Noticias, eventos y convocatorias vigentes |
 | `/oportunidades` | Prácticas y empleo, orientación CV/LinkedIn/GitHub, portales; vacantes propias solo si existe responsable |
 
 En Alumnos se conservan Office 365, GPA Calculator, pagos, Tesorería, LeetCode, reglamentos, kardex y servicios escolares. En móvil: texto antes de imagen, listas verticales y acordeones solo para contenido secundario; sin navegación horizontal obligatoria ni plan oculto en pestañas.
