@@ -38,6 +38,10 @@
         "label": "Projects"
       },
       {
+        "href": "/hall-of-fame",
+        "label": "Alumni"
+      },
+      {
         "href": "/recursos",
         "label": "Resources"
       }
@@ -189,6 +193,26 @@
       "role": "Computing faculty"
     }
   },
+  "alumni": [
+    {
+      "imageAlt": "Space reserved for Lorem Ipsum’s photograph.",
+      "name": "Lorem Ipsum",
+      "role": "ISGC alumna · sample profile",
+      "testimony": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+      "imageAlt": "Space reserved for Dolor Sit’s photograph.",
+      "name": "Dolor Sit",
+      "role": "ISGC alumnus · sample profile",
+      "testimony": "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt."
+    },
+    {
+      "imageAlt": "Space reserved for Amet Consectetur’s photograph.",
+      "name": "Amet Consectetur",
+      "role": "ISGC alumna · sample profile",
+      "testimony": "Lorem ipsum dolor sit amet, ut labore et dolore magna aliqua."
+    }
+  ],
   "specialties": [
     {
       "subjects": ["Programming", "Probability and statistics", "Databases"],
@@ -276,6 +300,7 @@
     "aspirantes": ["Imagine", "Take the step", "Begin"],
     "avisos": ["Stay informed", "Take part", "Move forward"],
     "carrera": ["Understand", "Build", "Share"],
+    "hallOfFame": ["Learn", "Build", "Share"],
     "oportunidades": ["Build", "Show it", "Go further"],
     "proyectos": ["Code", "Experience", "Impact"]
   },
@@ -458,6 +483,16 @@
           "description": "Statistics, numerical methods, distributed and parallel computing, and the data science specialisation in the 4+1."
         }
       }
+    },
+    "hallOfFame": {
+      "meta": {
+        "title": "Outstanding alumni UP Guadalajara",
+        "description": "Meet outstanding alumni of Computer Science and Graphics Engineering at Universidad Panamericana Guadalajara and read about their professional experiences."
+      },
+      "crumb": "Alumni",
+      "title": "People who keep building.",
+      "lede": "Every path begins with what they learned at ISGC.",
+      "description": "Meet experiences that connect what alumni learned on the programme with projects, teams and professional decisions."
     },
     "proyectos": {
       "meta": {

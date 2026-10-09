@@ -37,7 +37,7 @@ Tipografía propuesta: Source Sans 3 para navegación y lectura; Source Serif 4 
 
 ## 3. Layout final
 
-**Encabezado persistente:** marca UP + ISGC y campus; navegación «Carrera», «Proyectos», «Comunidad», «Alumnos»; acción «Admisiones». En móvil, «Alumnos» permanece visible junto al menú. Sin selector obligatorio de audiencia.
+**Encabezado persistente:** marca UP + ISGC y campus; navegación «Avisos», «Carrera», «Proyectos», «Egresados», «Recursos»; acción «Admisiones». En móvil, «Recursos» permanece visible junto al menú. Sin selector obligatorio de audiencia.
 
 **Portada, en este orden:**
 
@@ -54,6 +54,7 @@ Tipografía propuesta: Source Sans 3 para navegación y lectura; Source Serif 4 
 | Ruta | Contenido y prioridad |
 | --- | --- |
 | `/carrera` | Perfil, cómo se aprende, equipo académico, plan por semestre, especialidades, doble carrera, campo profesional y FAQ de ingreso |
+| `/hall-of-fame` | Egresados destacados y sus testimonios; cada perfil se publica con autorización |
 | `/aspirantes` | Proceso oficial de admisión, becas/financiamiento, visita y contacto de Admisiones |
 | `/alumnos` | Avisos → accesos frecuentes → recursos agrupados en estudio, trámites y desarrollo profesional; filtro local por nombre |
 | `/proyectos` | Proyectos actuales y Media Lab; ficha con problema, proceso, resultado, fecha y equipo; historia en archivo |

@@ -38,6 +38,10 @@
         "label": "Proyectos"
       },
       {
+        "href": "/hall-of-fame",
+        "label": "Egresados"
+      },
+      {
         "href": "/recursos",
         "label": "Recursos"
       }
@@ -189,6 +193,26 @@
       "role": "Academia de Cómputo"
     }
   },
+  "alumni": [
+    {
+      "imageAlt": "Espacio reservado para la fotografía de Lorem Ipsum.",
+      "name": "Lorem Ipsum",
+      "role": "Egresada de ISGC · perfil de ejemplo",
+      "testimony": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+      "imageAlt": "Espacio reservado para la fotografía de Dolor Sit.",
+      "name": "Dolor Sit",
+      "role": "Egresado de ISGC · perfil de ejemplo",
+      "testimony": "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt."
+    },
+    {
+      "imageAlt": "Espacio reservado para la fotografía de Amet Consectetur.",
+      "name": "Amet Consectetur",
+      "role": "Egresada de ISGC · perfil de ejemplo",
+      "testimony": "Lorem ipsum dolor sit amet, ut labore et dolore magna aliqua."
+    }
+  ],
   "specialties": [
     {
       "subjects": [
@@ -280,6 +304,7 @@
     "aspirantes": ["Imagina", "Da el paso", "Empieza"],
     "avisos": ["Infórmate", "Participa", "Avanza"],
     "carrera": ["Entiende", "Construye", "Comparte"],
+    "hallOfFame": ["Aprende", "Construye", "Comparte"],
     "oportunidades": ["Construye", "Muéstralo", "Trasciende"],
     "proyectos": ["Código", "Experiencia", "Impacto"]
   },
@@ -462,6 +487,16 @@
           "description": "Estadística, métodos numéricos, cómputo distribuido y paralelo, y la especialidad de ciencia de datos en el 4+1."
         }
       }
+    },
+    "hallOfFame": {
+      "meta": {
+        "title": "Egresados destacados UP Guadalajara",
+        "description": "Conoce a egresados destacados de Ingeniería en Sistemas y Gráficas Computacionales en la Universidad Panamericana Guadalajara y sus experiencias profesionales."
+      },
+      "crumb": "Egresados",
+      "title": "Personas que siguen construyendo.",
+      "lede": "Cada camino parte de lo aprendido en ISGC.",
+      "description": "Conoce experiencias que conectan lo aprendido en la carrera con proyectos, equipos y decisiones profesionales."
     },
     "proyectos": {
       "meta": {
