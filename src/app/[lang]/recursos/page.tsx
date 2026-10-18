@@ -18,9 +18,9 @@ import { org } from "@/lib/site";
 export const revalidate = 3600;
 
 const featuredIds = new Set(["treasury", "kardex", "school-services"]);
-const featuredResources = studentResources.filter((resource) =>
-  featuredIds.has(resource.id)
-);
+// const featuredResources = studentResources.filter((resource) =>
+//   featuredIds.has(resource.id)
+// );
 const hubResources = studentResources.filter(
   (resource) => !featuredIds.has(resource.id)
 );
@@ -42,9 +42,9 @@ const RecursosPage = async ({ params }: LocaleParams) => {
   }
   const dict = getDictionary(lang);
   const copy = dict.pages.alumnos;
-  const resourceCopy = Object.fromEntries(
-    dict.resources.items.map((item) => [item.id, item])
-  );
+  // const resourceCopy = Object.fromEntries(
+  //   dict.resources.items.map((item) => [item.id, item])
+  // );
 
   return (
     <PageFrame dict={dict} locale={lang}>
@@ -57,7 +57,7 @@ const RecursosPage = async ({ params }: LocaleParams) => {
         locale={lang}
         title={copy.title}
       />
-      <PageSection tone="marfil">
+      {/* <PageSection tone="marfil">
         <SectionHeading title={copy.quickTitle} />
         <div className="grid gap-4 md:grid-cols-3">
           {featuredResources.map((resource) => (
@@ -80,7 +80,7 @@ const RecursosPage = async ({ params }: LocaleParams) => {
             </a>
           ))}
         </div>
-      </PageSection>
+      </PageSection> */}
       <PageSection id="recursos">
         <SectionHeading
           title={copy.resourcesTitle}

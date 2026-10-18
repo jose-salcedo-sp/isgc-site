@@ -97,7 +97,7 @@ const CarreraPage = async ({ params }: LocaleParams) => {
           </div>
         </div>
       </PageSection>
-      <PageSection tone="marfil">
+      {/* <PageSection tone="marfil">
         <SectionHeading
           title={copy.learnTitle}
           description={copy.learnDescription}
@@ -113,7 +113,7 @@ const CarreraPage = async ({ params }: LocaleParams) => {
             </article>
           ))}
         </div>
-      </PageSection>
+      </PageSection> */}
       <PageSection>
         <SectionHeading title={copy.facultyTitle} />
         <div className="grid gap-4 md:grid-cols-2">

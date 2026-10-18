@@ -203,7 +203,7 @@ const NextStepSection = ({ dict, locale }: HomeCopy) => {
           </Link>
         </div>
       </PageSection>
-      <PageSection id="faq">
+      {/* <PageSection id="faq">
         <SectionHeading title={copy.faq.title} />
         <div className="grid gap-4 md:grid-cols-2">
           <Link
@@ -225,7 +225,7 @@ const NextStepSection = ({ dict, locale }: HomeCopy) => {
             <p className="text-piedra mt-3">{copy.faq.studentsText}</p>
           </Link>
         </div>
-      </PageSection>
+      </PageSection> */}
     </>
   );
 };
