@@ -10,12 +10,11 @@ import {
   paintGraph,
   playFocus,
   readPalette,
-  zoomAt,
 } from "./graph-paint";
 import type { Palette, Transform } from "./graph-paint";
 import { pickSlice } from "./graph-radial";
 import type { RadialLayout, RadialNode } from "./graph-radial";
-import { TIP_RADIUS } from "./graph-theme";
+import { ARC_BASE, ARC_SPAN, TIP_RADIUS } from "./graph-theme";
 import { GraphTip } from "./graph-tip";
 import { moveTip } from "./tip-content";
 
@@ -140,9 +139,11 @@ const GraphCanvas = ({
       sizeRef.current = { dpr, h: rect.height, w: rect.width };
       if (!fitted.current && rect.width > 0 && rect.height > 0) {
         fitted.current = true;
+        // Fit the whole wheel, including the arcs that bow past the outer
+        // ring: there is no wheel zoom to back out of a tight fit.
+        const outerReach = (TIP_RADIUS.at(-1) ?? 1) + ARC_BASE + ARC_SPAN;
         transformRef.current.k = clampK(
-          (Math.min(rect.width, rect.height) * 0.96) /
-            ((TIP_RADIUS.at(-1) ?? 1) * 2)
+          (Math.min(rect.width, rect.height) * 0.96) / (outerReach * 2)
         );
       }
       canvas.width = Math.max(1, Math.floor(rect.width * dpr));
@@ -159,24 +160,9 @@ const GraphCanvas = ({
     };
     const media = window.matchMedia("(prefers-color-scheme: dark)");
     media.addEventListener("change", onTheme);
-    const onNativeWheel = (event: WheelEvent) => {
-      event.preventDefault();
-      cancelFocus.current();
-      const rect = canvas.getBoundingClientRect();
-      zoomAt(
-        transformRef.current,
-        event.clientX - rect.left,
-        event.clientY - rect.top,
-        sizeRef.current,
-        event.deltaY
-      );
-      requestDraw();
-    };
-    canvas.addEventListener("wheel", onNativeWheel, { passive: false });
     return () => {
       ro.disconnect();
       media.removeEventListener("change", onTheme);
-      canvas.removeEventListener("wheel", onNativeWheel);
       cancelFocus.current();
       if (rafRef.current) {
         cancelAnimationFrame(rafRef.current);
@@ -286,7 +272,7 @@ const GraphCanvas = ({
   };
 
   return (
-    <div className="h-full w-full" ref={wrapRef} data-lenis-prevent>
+    <div className="h-full w-full" ref={wrapRef}>
       <canvas
         aria-hidden="true"
         className="block h-full w-full cursor-grab touch-none active:cursor-grabbing"

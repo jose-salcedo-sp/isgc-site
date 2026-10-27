@@ -43,7 +43,7 @@ Site metadata, sitemap, robots, and JSON-LD live under `src/app/` with shared co
   - `data-follow`, `data-count`, `data-magnetic`, `data-tilt`.
 - Content is never hidden without JavaScript, and everything respects `prefers-reduced-motion`.
 - **three.js** renders only the home hero teapot (`src/components/teapot-scene.ts`). It is loaded with a dynamic import after the page is interactive and uses lighter settings on low-power devices.
-- **Lenis** smooths wheel and trackpad scrolling (`src/components/smooth-scroll.tsx`). Any element with its own scroll area or wheel handling needs `data-lenis-prevent`, like the curriculum graph and the mobile menu.
+- **Lenis** smooths wheel and trackpad scrolling (`src/components/smooth-scroll.tsx`). Any element with its own scroll area or wheel handling needs `data-lenis-prevent`, like the mobile menu.
 
 ## Agent context
 

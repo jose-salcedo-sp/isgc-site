@@ -99,7 +99,7 @@ export const GraphView = ({
       <nav aria-label={text.title} className="sr-only">
         <Outline layout={layout} nodes={roots} onSelect={setSelected} />
       </nav>
-      <div className="relative h-[min(70vh,52rem)] w-full">
+      <div className="relative h-svh min-h-[36rem] w-full">
         <GraphCanvas
           activeKinds={ALL_KINDS}
           layout={layout}
