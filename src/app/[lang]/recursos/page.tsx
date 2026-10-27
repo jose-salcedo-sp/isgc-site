@@ -3,12 +3,13 @@ import { notFound } from "next/navigation";
 
 import { StudentResourceSearch } from "@/components/home-interactions";
 import {
+  ExternalLink,
   PageFrame,
   PageIntro,
   PageSection,
   SectionHeading,
 } from "@/components/page-frame";
-import { studentResources } from "@/content/site-content";
+import { externalLinks, studentResources } from "@/content/site-content";
 import { getDictionary } from "@/lib/dictionary";
 import { hasLocale } from "@/lib/i18n";
 import type { LocaleParams } from "@/lib/i18n";
@@ -49,38 +50,36 @@ const RecursosPage = async ({ params }: LocaleParams) => {
   return (
     <PageFrame dict={dict} locale={lang}>
       <PageIntro
-        chapters={dict.chapters.alumnos}
+        aside={
+          <div
+            id="accesos"
+            className="w-full shrink-0 lg:w-[26rem]"
+            data-intro="2"
+          >
+            <h2 className="text-2xl">{copy.quickTitle}</h2>
+            <ul className="mt-5 border-t border-white/25">
+              {featuredResources.map((resource) => (
+                <li key={resource.id} className="border-b border-white/25">
+                  <a
+                    href={resource.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex w-full items-center justify-between gap-4 py-4 text-xl font-bold hover:text-[#e2c58f] sm:text-2xl"
+                  >
+                    {resourceCopy[resource.id]?.label}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        }
         crumb={{ name: copy.crumb, path: "/recursos" }}
         description={copy.description}
         dict={dict}
-        lede={copy.lede}
         locale={lang}
         title={copy.title}
       />
-      <PageSection tone="marfil">
-        <SectionHeading title={copy.quickTitle} />
-        <div className="grid gap-4 md:grid-cols-3">
-          {featuredResources.map((resource) => (
-            <a
-              key={resource.id}
-              href={resource.href}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-card shadow-soft/50 bg-white p-6 transition hover:-translate-y-1"
-            >
-              <h3 className="text-grafito font-serif text-2xl">
-                {resourceCopy[resource.id]?.label}
-              </h3>
-              <p className="text-piedra mt-3">
-                {resourceCopy[resource.id]?.description}
-              </p>
-              <span className="text-tinto mt-5 inline-flex font-semibold">
-                {dict.resources.open} ↗
-              </span>
-            </a>
-          ))}
-        </div>
-      </PageSection>
       <PageSection id="recursos">
         <SectionHeading
           title={copy.resourcesTitle}
@@ -92,19 +91,23 @@ const RecursosPage = async ({ params }: LocaleParams) => {
           resources={hubResources}
         />
       </PageSection>
-      <PageSection tone="marfil">
-        <article className="rounded-card bg-tinto p-7 text-white sm:p-9 md:flex md:items-end md:justify-between md:gap-10">
-          <div className="max-w-2xl">
-            <h2 className="font-serif text-3xl">{copy.coordTitle}</h2>
-            <p className="mt-4 text-white/80">{copy.coordText}</p>
-          </div>
-          <a
-            href={`mailto:${org.coordinationEmail}`}
-            className="text-dorado mt-6 inline-flex shrink-0 font-bold underline underline-offset-4 md:mt-0"
-          >
-            {org.coordinationEmail} ↗
-          </a>
-        </article>
+      <PageSection tone="marfil" id="coordinacion">
+        <h2 className="text-grafito text-4xl sm:text-5xl">{copy.coordTitle}</h2>
+        <p className="text-piedra mt-4 max-w-md text-lg">{copy.coordText}</p>
+        <a
+          href={`mailto:${org.coordinationEmail}`}
+          className="text-tinto decoration-dorado mt-6 text-xl font-bold underline decoration-2 underline-offset-4"
+        >
+          {org.coordinationEmail}
+        </a>
+        <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+          <ExternalLink href={externalLinks.coordinationAppointments}>
+            {copy.appointmentCta}
+          </ExternalLink>
+          <ExternalLink href={externalLinks.absenceForm}>
+            {copy.absenceCta}
+          </ExternalLink>
+        </div>
       </PageSection>
     </PageFrame>
   );

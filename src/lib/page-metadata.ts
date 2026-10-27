@@ -24,7 +24,7 @@ export const pageMetadata = (
   const { description, title } = dict.pages[pageKey[path]].meta;
   const url = `${siteUrl}${localizedPath(locale, path)}`;
   const isHome = path === "/";
-  const ogTitle = isHome ? title : `${title} | ISGC`;
+  const ogTitle = isHome ? title : `${title} | CSE`;
 
   return {
     alternates: {

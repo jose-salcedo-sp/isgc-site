@@ -27,6 +27,16 @@ const nextConfig: NextConfig = {
         permanent: true,
         source: "/:lang/alumnos/:path*",
       },
+      {
+        destination: "/#comunidad",
+        permanent: true,
+        source: "/comunidad",
+      },
+      {
+        destination: "/:lang#comunidad",
+        permanent: true,
+        source: "/:lang/comunidad",
+      },
     ]),
 };
 

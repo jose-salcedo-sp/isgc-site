@@ -59,18 +59,17 @@ export const StudentResourceSearch = ({
   }, [dict, locale, normalizedQuery, resources]);
   return (
     <div>
-      <div className={`mb-7 ${compact ? "max-w-sm" : "max-w-xl"}`}>
-        <label className="block">
-          <span className="sr-only">{dict.resources.searchLabel}</span>
-          <input
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder={dict.resources.placeholder}
-            className="placeholder:text-piedra/70 focus:border-tinto w-full rounded-full bg-white px-4 py-3 text-base focus:ring-2 focus:ring-[#5d1028] focus:outline-none"
-          />
-        </label>
-      </div>
-      <div className="grid gap-4 md:grid-cols-3">
+      <label className={`mb-12 block ${compact ? "max-w-sm" : "max-w-2xl"}`}>
+        <span className="sr-only">{dict.resources.searchLabel}</span>
+        <input
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder={dict.resources.placeholder}
+          className="border-grafito/25 text-grafito placeholder:text-piedra/70 focus:border-tinto w-full border-b-2 bg-transparent py-3 text-2xl font-medium outline-none sm:text-3xl"
+        />
+      </label>
+      <div className="grid gap-12">
         {groupOrder.map((group) => {
           const grouped = visibleResources.filter(
             (resource) => resource.group === group
@@ -81,53 +80,45 @@ export const StudentResourceSearch = ({
           return (
             <div
               key={group}
-              className="rounded-card shadow-soft/50 bg-white p-6"
+              className="grid gap-4 md:grid-cols-[minmax(0,3fr)_minmax(0,9fr)] md:gap-10"
             >
-              <h3 className="text-grafito font-serif text-2xl">
+              <h3 className="text-grafito text-2xl md:pt-4">
                 {dict.resources.groups[group]}
               </h3>
-              <ul className="mt-5 space-y-2">
-                {grouped.map((resource) => (
-                  <li key={resource.label}>
+              <ul className="border-grafito/15 border-t">
+                {grouped.map((resource, index) => (
+                  <li
+                    key={resource.label}
+                    className="border-grafito/15 border-b"
+                    data-reveal="sweep"
+                    data-delay={index * 0.06}
+                  >
                     {resource.external ? (
                       <a
                         href={resource.href}
                         target="_blank"
                         rel="noreferrer"
-                        className="resource-card text-tinto flex items-center justify-between gap-3 py-3"
+                        className="resource-row"
                       >
-                        <span>
-                          <strong className="block font-semibold">
-                            {resource.label}
-                          </strong>
-                          <span className="text-piedra block text-sm">
-                            {resource.description}
-                          </span>
+                        <strong className="text-grafito text-lg font-semibold">
+                          {resource.label}
+                        </strong>
+                        <span className="text-piedra">
+                          {resource.description}
                         </span>
-                        <span
-                          className="resource-arrow text-dorado shrink-0"
-                          aria-hidden="true"
-                        >
+                        <span className="resource-arrow" aria-hidden="true">
                           ↗
                         </span>
                       </a>
                     ) : (
-                      <Link
-                        href={resource.href}
-                        className="resource-card text-tinto flex items-center justify-between gap-3 py-3"
-                      >
-                        <span>
-                          <strong className="block font-semibold">
-                            {resource.label}
-                          </strong>
-                          <span className="text-piedra block text-sm">
-                            {resource.description}
-                          </span>
+                      <Link href={resource.href} className="resource-row">
+                        <strong className="text-grafito text-lg font-semibold">
+                          {resource.label}
+                        </strong>
+                        <span className="text-piedra">
+                          {resource.description}
                         </span>
-                        <span
-                          className="resource-arrow text-dorado shrink-0"
-                          aria-hidden="true"
-                        >
+                        <span className="resource-arrow" aria-hidden="true">
                           →
                         </span>
                       </Link>
@@ -140,7 +131,7 @@ export const StudentResourceSearch = ({
         })}
       </div>
       {visibleResources.length === 0 && (
-        <p className="rounded-card text-piedra p-5">{dict.resources.empty}</p>
+        <p className="text-piedra text-lg">{dict.resources.empty}</p>
       )}
     </div>
   );
@@ -157,43 +148,46 @@ export const FaqAccordion = ({
   const [open, setOpen] = useState<string | null>(null);
 
   return (
-    <div className="grid gap-8 lg:grid-cols-2">
+    <div className="grid gap-12">
       {groups.map((group) => (
-        <div key={group.title} className="rounded-card bg-white p-6">
-          <h3 className="text-grafito py-4 font-serif text-2xl">
-            {group.title}
-          </h3>
-          {group.items.map((item, index) => {
-            const key = `${group.title}-${item.question}`;
-            const panelId = `faq-${group.title}-${index}`;
-            const isOpen = open === key;
-            return (
-              <div key={key}>
-                <button
-                  type="button"
-                  aria-controls={panelId}
-                  aria-expanded={isOpen}
-                  onClick={() => setOpen(isOpen ? null : key)}
-                  className="text-grafito flex w-full items-center justify-between gap-6 py-5 text-left font-semibold"
-                >
-                  {item.question}
-                  <span
-                    className="text-tinto text-2xl font-normal"
-                    aria-hidden="true"
+        <div
+          key={group.title}
+          className="grid gap-4 md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] md:gap-16"
+        >
+          <h3 className="text-grafito text-2xl md:pt-5">{group.title}</h3>
+          <div className="border-grafito/15 border-t">
+            {group.items.map((item, index) => {
+              const key = `${group.title}-${item.question}`;
+              const panelId = `faq-${group.title}-${index}`;
+              const isOpen = open === key;
+              return (
+                <div key={key} className="border-grafito/15 border-b">
+                  <button
+                    type="button"
+                    aria-controls={panelId}
+                    aria-expanded={isOpen}
+                    onClick={() => setOpen(isOpen ? null : key)}
+                    className="text-grafito hover:text-tinto flex w-full items-center justify-between gap-6 py-6 text-left text-lg font-semibold sm:text-xl"
                   >
-                    {isOpen ? "−" : "+"}
-                  </span>
-                </button>
-                <p
-                  className="text-piedra max-w-2xl pr-8 pb-5"
-                  hidden={!isOpen}
-                  id={panelId}
-                >
-                  {item.answer}
-                </p>
-              </div>
-            );
-          })}
+                    {item.question}
+                    <span
+                      className="text-tinto text-3xl leading-none font-normal"
+                      aria-hidden="true"
+                    >
+                      {isOpen ? "−" : "+"}
+                    </span>
+                  </button>
+                  <p
+                    className="text-piedra max-w-2xl pr-10 pb-6 text-lg"
+                    hidden={!isOpen}
+                    id={panelId}
+                  >
+                    {item.answer}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
         </div>
       ))}
     </div>

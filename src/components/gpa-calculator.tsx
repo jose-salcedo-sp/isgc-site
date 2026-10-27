@@ -6,6 +6,11 @@ import type { Dictionary } from "@/lib/dictionary";
 import { computeGpa } from "@/lib/gpa";
 import { fill } from "@/lib/i18n";
 
+const isValidGrade = (value: string) => {
+  const grade = Number(value);
+  return !Number.isNaN(grade) && grade >= 0 && grade <= 10;
+};
+
 export const GpaCalculator = ({
   courses,
   semesterLabels,
@@ -20,14 +25,10 @@ export const GpaCalculator = ({
 
   const gradedCourses = courses.flatMap((course) => {
     const value = grades[course.id];
-    if (!value) {
+    if (!value || !isValidGrade(value)) {
       return [];
     }
-    const grade = Number(value);
-    if (Number.isNaN(grade) || grade < 0 || grade > 10) {
-      return [];
-    }
-    return [{ credits: course.credits, grade }];
+    return [{ credits: course.credits, grade: Number(value) }];
   });
   const result = computeGpa(gradedCourses);
   const semesterCourses = courses.filter(
@@ -35,14 +36,14 @@ export const GpaCalculator = ({
   );
 
   return (
-    <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
-      <div className="rounded-card shadow-soft/50 bg-marfil p-6">
-        <label className="text-grafito flex flex-wrap items-center gap-3 font-semibold">
+    <div className="grid gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
+      <div>
+        <label className="text-grafito flex flex-wrap items-center gap-4 text-lg font-semibold">
           {text.semester}
           <select
             value={semester}
             onChange={(event) => setSemester(Number(event.target.value))}
-            className="text-grafito rounded-full bg-white px-4 py-2 font-normal"
+            className="border-grafito/25 text-grafito rounded-md border bg-white px-3 py-2 font-normal"
           >
             {semesterLabels.map((label, index) =>
               courses.some((course) => course.semester === index + 1) ? (
@@ -53,50 +54,51 @@ export const GpaCalculator = ({
             )}
           </select>
         </label>
-        <ul className="divide-marfil-2 mt-4 divide-y">
-          {semesterCourses.map((course) => (
-            <li
-              key={course.id}
-              className="flex items-center justify-between gap-4 py-3"
-            >
-              <label htmlFor={`gpa-${course.id}`} className="text-grafito">
-                {course.name}
-                <span className="text-piedra block text-sm">
-                  {fill(text.credits, { n: course.credits })}
-                </span>
-              </label>
-              <input
-                id={`gpa-${course.id}`}
-                type="number"
-                inputMode="decimal"
-                min={0}
-                max={10}
-                step={0.1}
-                placeholder="—"
-                value={grades[course.id] ?? ""}
-                onChange={(event) =>
-                  setGrades({ ...grades, [course.id]: event.target.value })
-                }
-                className="text-grafito w-24 shrink-0 rounded-full bg-white px-4 py-2 text-right"
-              />
-            </li>
-          ))}
+        <ul className="border-grafito/15 mt-6 border-t">
+          {semesterCourses.map((course) => {
+            const value = grades[course.id] ?? "";
+            return (
+              <li
+                key={course.id}
+                className="border-grafito/15 flex items-center justify-between gap-4 border-b py-4"
+              >
+                <label htmlFor={`gpa-${course.id}`} className="text-grafito">
+                  {course.name}
+                  <span className="text-piedra block text-sm">
+                    {fill(text.credits, { n: course.credits })}
+                  </span>
+                </label>
+                <input
+                  id={`gpa-${course.id}`}
+                  type="number"
+                  inputMode="decimal"
+                  min={0}
+                  max={10}
+                  step={0.1}
+                  placeholder="0–10"
+                  value={value}
+                  aria-invalid={value !== "" && !isValidGrade(value)}
+                  onChange={(event) =>
+                    setGrades({ ...grades, [course.id]: event.target.value })
+                  }
+                  className="border-grafito/25 text-grafito aria-invalid:border-tinto w-24 shrink-0 rounded-md border bg-white px-3 py-2 text-right tabular-nums"
+                />
+              </li>
+            );
+          })}
         </ul>
       </div>
-      <div
-        aria-live="polite"
-        className="rounded-card shadow-soft/50 bg-marfil self-start p-6 lg:sticky lg:top-24"
-      >
-        <h3 className="text-grafito font-serif text-2xl">{text.result}</h3>
+      <div aria-live="polite" className="lg:sticky lg:top-28 lg:self-start">
+        <h3 className="text-grafito text-2xl sm:text-3xl">{text.result}</h3>
         {result ? (
           <>
-            <p className="text-tinto mt-3 font-serif text-6xl">
+            <p className="text-tinto mt-4 text-7xl leading-none font-bold tracking-[-0.05em] tabular-nums sm:text-8xl">
               {result.gpa.toFixed(2)}
             </p>
-            <p className="text-grafito mt-4 font-semibold">
+            <p className="text-grafito mt-6 text-lg font-semibold">
               {fill(text.average, { average: result.average.toFixed(2) })}
             </p>
-            <p className="text-piedra mt-1 text-sm">
+            <p className="text-piedra mt-1">
               {fill(text.summary, {
                 courses: gradedCourses.length,
                 credits: result.credits,
@@ -105,15 +107,17 @@ export const GpaCalculator = ({
             <button
               type="button"
               onClick={() => setGrades({})}
-              className="text-tinto decoration-dorado mt-5 font-semibold underline decoration-2 underline-offset-4"
+              className="text-tinto decoration-dorado mt-6 font-semibold underline decoration-2 underline-offset-4"
             >
               {text.reset}
             </button>
           </>
         ) : (
-          <p className="text-piedra mt-3">{text.empty}</p>
+          <p className="text-piedra mt-4 text-lg">{text.empty}</p>
         )}
-        <p className="text-piedra mt-6 text-sm">{text.note}</p>
+        <p className="text-piedra border-grafito/15 mt-8 border-t pt-6 text-sm">
+          {text.note}
+        </p>
       </div>
     </div>
   );

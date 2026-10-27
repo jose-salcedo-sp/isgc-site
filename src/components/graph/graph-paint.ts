@@ -358,7 +358,7 @@ const paintCenter = (ctx: CanvasRenderingContext2D, palette: Palette): void => {
   ctx.textBaseline = "middle";
   ctx.fillStyle = withAlpha(palette.ink, 0.92);
   ctx.font = "700 64px Satoshi, ui-sans-serif, system-ui, sans-serif";
-  ctx.fillText("ISGC", 0, 0);
+  ctx.fillText("CSE", 0, 0);
   ctx.textAlign = "left";
 };
 
@@ -471,21 +471,6 @@ export const paintGraph = (input: {
     box
   );
   ctx.restore();
-};
-
-export const zoomAt = (
-  transform: Transform,
-  mx: number,
-  my: number,
-  size: { h: number; w: number },
-  deltaY: number
-): void => {
-  const wx = (mx - size.w / 2 - transform.x) / transform.k;
-  const wy = (my - size.h / 2 - transform.y) / transform.k;
-  const nextK = clampK(transform.k * 2 ** (-deltaY / 240));
-  transform.k = nextK;
-  transform.x = mx - size.w / 2 - wx * nextK;
-  transform.y = my - size.h / 2 - wy * nextK;
 };
 
 const INSPECTOR_RESERVE_X = 472;

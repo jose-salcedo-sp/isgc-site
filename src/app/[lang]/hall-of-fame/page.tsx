@@ -28,11 +28,9 @@ const HallOfFamePage = async ({ params }: LocaleParams) => {
   return (
     <PageFrame dict={dict} locale={lang}>
       <PageIntro
-        chapters={dict.chapters.hallOfFame}
         crumb={{ name: copy.crumb, path: "/hall-of-fame" }}
         description={copy.description}
         dict={dict}
-        lede={copy.lede}
         locale={lang}
         title={copy.title}
       />

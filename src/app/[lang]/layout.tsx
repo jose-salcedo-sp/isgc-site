@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 
 import { JsonLd } from "@/components/seo/json-ld";
 import { SiteMotion } from "@/components/site-motion";
+import { SmoothScroll } from "@/components/smooth-scroll";
 import { externalLinks } from "@/content/site-content";
 import { getDictionary } from "@/lib/dictionary";
 import { hasLocale, locales } from "@/lib/i18n";
@@ -40,7 +41,7 @@ export const generateMetadata = async ({
     description: dict.pages.home.meta.description,
     openGraph: {
       locale: dict.ogLocale,
-      siteName: "ISGC",
+      siteName: "CSE",
       type: "website",
     },
     robots: {
@@ -112,6 +113,7 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
         />
         {children}
         <SiteMotion />
+        <SmoothScroll />
         <Analytics />
         <SpeedInsights />
       </body>

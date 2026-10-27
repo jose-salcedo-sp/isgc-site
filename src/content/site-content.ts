@@ -1,7 +1,10 @@
 export const externalLinks = {
+  absenceForm:
+    "https://docs.google.com/forms/d/179G__cx4hu5BhpMQG-Tr7bviZyBi0Sp86mQYMDbshbM/viewform",
   admissions: "https://www.up.edu.mx/",
   campusMap:
     "https://www.up.edu.mx/sites/default/files/mapa_gdl_compressed.pdf",
+  coordinationAppointments: "https://calendar.app.google/tXpr8jedMtw7C7jw9",
   engineeringRegulations:
     "https://www.up.edu.mx/sites/default/files/ri_ingenieria_2017.pdf",
   facebook: "https://www.facebook.com/isgc.upgdl/",
@@ -60,6 +63,7 @@ export const studentResources = [
     href: "https://www.up.edu.mx/directorio/",
     id: "directory",
   },
+  { external: true, href: externalLinks.campusMap, id: "map" },
   {
     external: true,
     href: "https://mx.linkedin.com/",
@@ -110,8 +114,3 @@ export const faculty = [
     name: "Carolina del Valle",
   },
 ] as const;
-
-export const coordination = {
-  email: "arodrig@up.edu.mx",
-  name: "Arturo Jafet Rodríguez",
-};
