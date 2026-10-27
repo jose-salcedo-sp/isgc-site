@@ -83,24 +83,38 @@ export const studentResources = [
 export const homepageEvents = [
   {
     expiresAt: "2026-10-01",
+    href: externalLinks.scholarships,
     id: "becas",
+    pinned: false,
     published: false,
     reviewDate: "2026-09-01",
+    startsAt: "2026-09-24",
   },
   {
     expiresAt: "2026-10-11",
+    href: null,
     id: "egresados",
+    pinned: false,
     published: false,
     reviewDate: "2026-09-01",
+    startsAt: "2026-10-10",
   },
 ] as const;
 
 export const getCurrentHomepageEvents = () =>
-  homepageEvents.filter(
-    (event) =>
-      event.published &&
-      new Date(`${event.expiresAt}T23:59:59-06:00`).getTime() >= Date.now()
-  );
+  homepageEvents
+    .filter(
+      (event) =>
+        event.published &&
+        new Date(`${event.expiresAt}T23:59:59-06:00`).getTime() >= Date.now()
+    )
+    .toSorted((a, b) => Number(b.pinned) - Number(a.pinned));
+
+/** Whole days from `now` until the start of `date` in Guadalajara; 0 on the day itself. */
+export const daysUntil = (date: string, now = Date.now()) =>
+  Math.ceil(
+    (new Date(`${date}T00:00:00-06:00`).getTime() - now) / 86_400_000
+  ) || 0;
 
 export const faculty = [
   {

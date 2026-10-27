@@ -153,6 +153,15 @@ const CarreraPage = async ({ params }: LocaleParams) => {
         title={copy.title}
         tone="grafito"
       />
+      <PageSection id="sobre-la-carrera">
+        <SectionHeading
+          title={copy.videoTitle}
+          description={copy.videoDescription}
+        />
+        <div className="bg-marfil text-piedra flex aspect-video w-full items-center justify-center text-lg font-semibold">
+          {copy.videoPlaceholder}
+        </div>
+      </PageSection>
       <PageSection id="semestres">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:self-start">
@@ -322,10 +331,23 @@ const CarreraPage = async ({ params }: LocaleParams) => {
         <ul className="border-grafito/15 grid border-t md:grid-cols-2 md:gap-x-16">
           {copy.specialtyList.map((specialty) => (
             <li
-              key={specialty}
-              className="border-grafito/15 text-grafito border-b py-5 text-2xl leading-tight font-medium sm:text-3xl"
+              key={specialty.name}
+              className="border-grafito/15 border-b py-8"
             >
-              {specialty}
+              <h3 className="text-grafito text-2xl leading-tight font-medium sm:text-3xl">
+                {specialty.name}
+              </h3>
+              <p className="text-piedra mt-3 max-w-md text-lg">
+                {specialty.description}
+              </p>
+              <figure className="border-dorado mt-5 border-l-2 pl-4">
+                <blockquote className="text-grafito">
+                  “{specialty.testimony}”
+                </blockquote>
+                <figcaption className="text-piedra mt-2 text-sm font-semibold">
+                  {specialty.student}
+                </figcaption>
+              </figure>
             </li>
           ))}
         </ul>
@@ -340,6 +362,14 @@ const CarreraPage = async ({ params }: LocaleParams) => {
           <p className="mt-5 max-w-md text-lg text-white/80">
             {copy.doubleText}
           </p>
+          <dl className="mt-10 grid gap-8 md:grid-cols-3">
+            {copy.doubleItems.map((item) => (
+              <div key={item.title} className="border-t border-white/25 pt-5">
+                <dt className="text-xl font-bold">{item.title}</dt>
+                <dd className="mt-2 text-white/80">{item.text}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
     </PageFrame>

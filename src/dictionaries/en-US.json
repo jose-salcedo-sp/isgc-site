@@ -92,6 +92,11 @@
             "label": "Coordination"
           }
         ]
+      },
+      {
+        "href": "/oportunidades",
+        "label": "Opportunities",
+        "sections": []
       }
     ]
   },
@@ -354,7 +359,7 @@
       "hero": {
         "title": "Computer Science and Engineering.",
         "lede": "Build what comes next.",
-        "text": "Ten semesters to learn to build software, data and graphics experiences that people use.",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         "careerCta": "Explore the program",
         "studentCta": "I study here",
         "canvasAria": "The Utah teapot, the classic computer graphics model, drawn in real time: it goes from vertices to mesh to shaded surface as you scroll."
@@ -407,21 +412,6 @@
         "title": "Projects that show how we learn.",
         "cta": "View projects"
       },
-      "plan": {
-        "title": "Your route, semester by semester.",
-        "text": "Plan your courses in Tu Ruta Ideal and see what comes next.",
-        "cta": "Open Tu Ruta Ideal",
-        "allAreas": "All",
-        "filterLabel": "Highlight the courses on one topic",
-        "topics": {
-          "software": "Programming and software",
-          "web": "Web, mobile and interfaces",
-          "dataAi": "Data and artificial intelligence",
-          "systems": "Systems and parallel computing",
-          "math": "Mathematics and science",
-          "graphics": "Graphics, games and virtual reality"
-        }
-      },
       "community": {
         "title": "The people behind the projects.",
         "text": "Meet the academic team and write to Coordination with any questions.",
@@ -447,6 +437,9 @@
       "crumb": "Program",
       "title": "Computer Science and Engineering",
       "description": "Code, analyze data and create graphics. You learn by doing, through projects and technical foundations.",
+      "videoTitle": "About the program",
+      "videoDescription": "Bernardo explains what you study, what sets the program apart and what you learn.",
+      "videoPlaceholder": "Video coming soon",
       "learnTitle": "How learning happens",
       "learn": [
         {
@@ -488,7 +481,21 @@
       "trackTitle": "Specializations",
       "trackDescription": "Confirm the current offering with Coordination.",
       "doubleTitle": "Double degree",
-      "doubleText": "Ask Coordination about availability, entry semester, equivalences and costs.",
+      "doubleText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+      "doubleItems": [
+        {
+          "title": "Options",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        },
+        {
+          "title": "Requirements",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        },
+        {
+          "title": "Entry semester",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        }
+      ],
       "fieldTitle": "Professional field",
       "fieldText": "Software, data, visualization, digital product, automation, research and entrepreneurship.",
       "areas": {
@@ -514,13 +521,48 @@
         }
       },
       "specialtyList": [
-        "Specialization in Data Science",
-        "Specialization in Operations Management",
-        "Specialization in Project Engineering and Management",
-        "Specialization in Strategic Design Management",
-        "Specialization in Manufacturing and Product Engineering",
-        "Specialization in Autonomous Systems",
-        "Specialization in Visual Effects"
+        {
+          "name": "Specialization in Data Science",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "student": "Student name · class year"
+        },
+        {
+          "name": "Specialization in Operations Management",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "student": "Student name · class year"
+        },
+        {
+          "name": "Specialization in Project Engineering and Management",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "student": "Student name · class year"
+        },
+        {
+          "name": "Specialization in Strategic Design Management",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "student": "Student name · class year"
+        },
+        {
+          "name": "Specialization in Manufacturing and Product Engineering",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "student": "Student name · class year"
+        },
+        {
+          "name": "Specialization in Autonomous Systems",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "student": "Student name · class year"
+        },
+        {
+          "name": "Specialization in Visual Effects",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "student": "Student name · class year"
+        }
       ],
       "gpa": {
         "title": "Calculate your GPA",
@@ -572,7 +614,12 @@
       "description": "Dates, activities and open calls from CSE.",
       "eventsTitle": "Upcoming activities",
       "emptyTitle": "No notices right now",
-      "emptyText": "Write to Coordination to hear about upcoming activities and open calls."
+      "emptyText": "Write to Coordination to hear about upcoming activities and open calls.",
+      "details": "More information",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "daysLeft": "{n} days to go",
+      "pinned": "Pinned"
     },
     "alumnos": {
       "meta": {

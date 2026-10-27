@@ -92,6 +92,11 @@
             "label": "Coordinación"
           }
         ]
+      },
+      {
+        "href": "/oportunidades",
+        "label": "Oportunidades",
+        "sections": []
       }
     ]
   },
@@ -358,7 +363,7 @@
       "hero": {
         "title": "Computer Science and Engineering.",
         "lede": "Construye lo que sigue.",
-        "text": "Diez semestres para aprender a crear software, datos y experiencias gráficas que otras personas usan.",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         "careerCta": "Conoce la carrera",
         "studentCta": "Ya estudio aquí",
         "canvasAria": "La tetera de Utah, el modelo clásico de las gráficas por computadora, dibujada en tiempo real: pasa de vértices a malla y a superficie sombreada mientras haces scroll."
@@ -411,21 +416,6 @@
         "title": "Proyectos que explican cómo aprendemos.",
         "cta": "Ver proyectos"
       },
-      "plan": {
-        "title": "Tu ruta, semestre a semestre.",
-        "text": "Planea tus materias en Tu Ruta Ideal y revisa qué viene después.",
-        "cta": "Abrir Tu Ruta Ideal",
-        "allAreas": "Todas",
-        "filterLabel": "Ilumina las materias de un tema",
-        "topics": {
-          "software": "Programación y software",
-          "web": "Web, móvil e interfaces",
-          "dataAi": "Datos e inteligencia artificial",
-          "systems": "Sistemas y cómputo paralelo",
-          "math": "Matemáticas y ciencias",
-          "graphics": "Gráficas, videojuegos y realidad virtual"
-        }
-      },
       "community": {
         "title": "Las personas detrás de los proyectos.",
         "text": "Conoce al equipo académico y escribe a Coordinación si tienes dudas.",
@@ -451,6 +441,9 @@
       "crumb": "Carrera",
       "title": "Computer Science and Engineering",
       "description": "Programa, analiza datos y crea gráficas. Aprendes haciendo, con proyectos y fundamentos técnicos.",
+      "videoTitle": "Sobre la carrera",
+      "videoDescription": "Bernardo explica qué se estudia, qué distingue a la carrera y qué aprendes.",
+      "videoPlaceholder": "Video próximamente",
       "learnTitle": "Cómo se aprende",
       "learn": [
         {
@@ -492,7 +485,21 @@
       "trackTitle": "Especialidades",
       "trackDescription": "Confirma la oferta vigente con Coordinación.",
       "doubleTitle": "Doble carrera",
-      "doubleText": "Pregunta a Coordinación por disponibilidad, semestre de ingreso, equivalencias y costos.",
+      "doubleText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+      "doubleItems": [
+        {
+          "title": "Opciones",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        },
+        {
+          "title": "Requisitos",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        },
+        {
+          "title": "Semestre de ingreso",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        }
+      ],
       "fieldTitle": "Campo profesional",
       "fieldText": "Software, datos, visualización, producto digital, automatización, investigación y emprendimiento.",
       "areas": {
@@ -518,13 +525,48 @@
         }
       },
       "specialtyList": [
-        "Especialidad en Ciencia de Datos",
-        "Especialidad en Dirección de Operaciones",
-        "Especialidad en Ingeniería y Gestión de Proyectos",
-        "Especialidad en Gestión Estratégica del Diseño",
-        "Especialidad en Manufactura e Ingeniería de Producto",
-        "Especialidad en Sistemas Autónomos",
-        "Especialidad en Efectos Visuales"
+        {
+          "name": "Especialidad en Ciencia de Datos",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "student": "Nombre del alumno · generación"
+        },
+        {
+          "name": "Especialidad en Dirección de Operaciones",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "student": "Nombre del alumno · generación"
+        },
+        {
+          "name": "Especialidad en Ingeniería y Gestión de Proyectos",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "student": "Nombre del alumno · generación"
+        },
+        {
+          "name": "Especialidad en Gestión Estratégica del Diseño",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "student": "Nombre del alumno · generación"
+        },
+        {
+          "name": "Especialidad en Manufactura e Ingeniería de Producto",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "student": "Nombre del alumno · generación"
+        },
+        {
+          "name": "Especialidad en Sistemas Autónomos",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "student": "Nombre del alumno · generación"
+        },
+        {
+          "name": "Especialidad en Efectos Visuales",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "student": "Nombre del alumno · generación"
+        }
       ],
       "gpa": {
         "title": "Calcula tu GPA",
@@ -576,7 +618,12 @@
       "description": "Fechas, actividades y convocatorias vigentes de CSE.",
       "eventsTitle": "Próximas actividades",
       "emptyTitle": "Sin avisos por ahora",
-      "emptyText": "Escribe a Coordinación para conocer las próximas actividades y convocatorias."
+      "emptyText": "Escribe a Coordinación para conocer las próximas actividades y convocatorias.",
+      "details": "Más información",
+      "today": "Hoy",
+      "tomorrow": "Mañana",
+      "daysLeft": "Faltan {n} días",
+      "pinned": "Fijado"
     },
     "alumnos": {
       "meta": {
