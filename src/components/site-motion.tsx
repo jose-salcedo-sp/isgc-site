@@ -98,13 +98,25 @@ const strokesOf = (element: RevealElement) => [
   ...element.querySelectorAll<SVGElement>("path, circle"),
 ];
 
+/*
+ * Mask clips. Tight headings (line-height about 1) have descenders and
+ * accents that hang outside the element's box, so the clip reaches past the
+ * box on every side except the bottom edge it hides behind. The final value
+ * may stay applied after the animation, so it must never cut any text.
+ */
+const MASK_SHOWN = "inset(-25% -10% -35% -10%)";
+const maskHidden = (height: number) => `inset(0 -10% ${height}px -10%)`;
+// Wipe (left to right) clips, with the same room above and below the text.
+const WIPE_HIDDEN = "inset(-25% 100% -35% 0)";
+const WIPE_SHOWN = "inset(-25% -10% -35% 0)";
+
 const hideForReveal = ({ element, kind }: RevealTarget): void => {
   if (kind === "mask" && element instanceof HTMLElement) {
     const height = element.offsetHeight;
-    element.style.clipPath = `inset(0 0 ${height}px 0)`;
+    element.style.clipPath = maskHidden(height);
     element.style.transform = `translateY(${height}px)`;
   } else if (kind === "wipe") {
-    element.style.clipPath = "inset(0 100% 0 0)";
+    element.style.clipPath = WIPE_HIDDEN;
   } else if (kind === "line") {
     element.style.transformOrigin = "left";
     element.style.transform = "scaleX(0)";
@@ -166,15 +178,16 @@ const playReveal = async ({
     await animate(
       element,
       {
-        clipPath: [`inset(0 0 ${height}px 0)`, "inset(0 0 0px 0)"],
+        clipPath: [maskHidden(height), MASK_SHOWN],
         y: [height, 0],
       },
       { delay, duration: 0.9, ease: EASE_OUT }
     );
+    element.style.removeProperty("clip-path");
   } else if (kind === "wipe") {
     await animate(
       element,
-      { clipPath: ["inset(0 100% 0 0)", "inset(0 0% 0 0)"] },
+      { clipPath: [WIPE_HIDDEN, WIPE_SHOWN] },
       { delay, duration: 0.9, ease: EASE_OUT }
     );
   } else if (kind === "line") {
