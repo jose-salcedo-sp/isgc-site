@@ -19,6 +19,7 @@ const pageKey = {
   "/aspirantes": "aspirantes",
   "/avisos": "avisos",
   "/carrera": "carrera",
+  "/hall-of-fame": "hallOfFame",
   "/oportunidades": "oportunidades",
   "/proyectos": "proyectos",
   "/recursos": "alumnos",

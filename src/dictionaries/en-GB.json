@@ -71,6 +71,11 @@
         ]
       },
       {
+        "href": "/hall-of-fame",
+        "label": "Alumni",
+        "sections": []
+      },
+      {
         "href": "/recursos",
         "label": "Resources",
         "sections": [
@@ -85,10 +90,6 @@
           {
             "id": "coordinacion",
             "label": "Coordination"
-          },
-          {
-            "id": "faq",
-            "label": "Questions"
           }
         ]
       }
@@ -120,24 +121,6 @@
     "thisSemester": "In this semester",
     "title": "The programme at a glance"
   },
-  "quickAccess": [
-    {
-      "id": "up4u",
-      "label": "UP4U"
-    },
-    {
-      "id": "ruta",
-      "label": "Tu Ruta Ideal"
-    },
-    {
-      "id": "directory",
-      "label": "University directory"
-    },
-    {
-      "id": "map",
-      "label": "Campus map"
-    }
-  ],
   "resources": {
     "searchLabel": "Search resources",
     "placeholder": "Search for a resource",
@@ -213,6 +196,30 @@
         "group": "career",
         "label": "GitHub",
         "description": "Organise and share your work."
+      },
+      {
+        "id": "up4u",
+        "group": "procedures",
+        "label": "UP4U",
+        "description": "Universidad Panamericana student portal."
+      },
+      {
+        "id": "ruta",
+        "group": "study",
+        "label": "Tu Ruta Ideal",
+        "description": "Plan your path through the programme."
+      },
+      {
+        "id": "directory",
+        "group": "procedures",
+        "label": "University directory",
+        "description": "Contacts for UP offices and departments."
+      },
+      {
+        "id": "map",
+        "group": "procedures",
+        "label": "Campus map",
+        "description": "Find buildings and offices on the Guadalajara campus."
       }
     ]
   },
@@ -238,6 +245,26 @@
       "role": "Computing faculty"
     }
   },
+  "alumni": [
+    {
+      "imageAlt": "Space reserved for Lorem Ipsum’s photograph.",
+      "name": "Lorem Ipsum",
+      "role": "CSE alumna · sample profile",
+      "testimony": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+      "imageAlt": "Space reserved for Dolor Sit’s photograph.",
+      "name": "Dolor Sit",
+      "role": "CSE alumnus · sample profile",
+      "testimony": "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt."
+    },
+    {
+      "imageAlt": "Space reserved for Amet Consectetur’s photograph.",
+      "name": "Amet Consectetur",
+      "role": "CSE alumna · sample profile",
+      "testimony": "Lorem ipsum dolor sit amet, ut labore et dolore magna aliqua."
+    }
+  ],
   "specialties": [
     {
       "subjects": ["Programming", "Probability and statistics", "Databases"],
@@ -506,6 +533,15 @@
         "reset": "Clear grades"
       }
     },
+    "hallOfFame": {
+      "meta": {
+        "title": "Outstanding alumni UP Guadalajara",
+        "description": "Meet outstanding alumni of Computer Science and Engineering at Universidad Panamericana Guadalajara and read about their professional experiences."
+      },
+      "crumb": "Alumni",
+      "title": "People who keep building.",
+      "description": "Meet experiences that connect what alumni learned on the programme with projects, teams and professional decisions."
+    },
     "proyectos": {
       "meta": {
         "title": "Projects and archive",
@@ -549,11 +585,6 @@
       "resourcesDescription": "Search by name or category.",
       "coordTitle": "Coordination",
       "coordText": "Building C · 3rd floor. For questions about modules, lecturers and academic processes.",
-      "regsTitle": "Regulations and services",
-      "regsText": "Check the institutional documents and procedures.",
-      "regsCta": "Open School Services",
-      "faqTitle": "Frequently asked questions",
-      "faqGroup": "Students",
       "appointmentCta": "Book an appointment",
       "absenceCta": "Justify an absence"
     },
