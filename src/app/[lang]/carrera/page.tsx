@@ -330,6 +330,10 @@ const CarreraPage = async ({ params }: LocaleParams) => {
           ))}
         </ul>
       </PageSection>
+      <PageSection id="campo-profesional">
+        <SectionHeading title={copy.fieldTitle} />
+        <p className="text-piedra max-w-2xl text-lg">{copy.fieldText}</p>
+      </PageSection>
       <section id="doble-carrera" className="bg-tinto text-white">
         <div className="mx-auto max-w-300 px-5 py-16 sm:py-20 lg:px-6">
           <h2 className="text-4xl sm:text-5xl">{copy.doubleTitle}</h2>
