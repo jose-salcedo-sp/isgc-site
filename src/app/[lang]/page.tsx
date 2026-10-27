@@ -12,7 +12,9 @@ import {
   SectionHeading,
 } from "@/components/page-frame";
 import { RenderHeroCanvas } from "@/components/render-hero";
+import { ScrollHint } from "@/components/scroll-hint";
 import { externalLinks, faculty } from "@/content/site-content";
+import { studyTopics, topicsOf } from "@/content/study-topics";
 import curriculum from "@/data/curriculum.json";
 import { localizedCourseName } from "@/lib/course-copy";
 import type { Dictionary } from "@/lib/dictionary";
@@ -130,9 +132,6 @@ const CareerSection = ({ dict, locale }: HomeCopy) => {
   );
 };
 
-/* Areas a visitor can light up in the moving study plan. */
-const streamAreaIds = ["software", "ai", "graphics", "vr", "data"] as const;
-
 const streamRows = (dict: Dictionary): StreamRow[] => {
   const rows: StreamRow[] = [];
   for (let semester = 1; semester <= 8; semester += 1) {
@@ -140,7 +139,7 @@ const streamRows = (dict: Dictionary): StreamRow[] => {
     for (const course of curriculum.courses) {
       if (course.semester === semester) {
         items.push({
-          areas: course.areas,
+          areas: topicsOf(course.id),
           name: localizedCourseName(dict, course.id, course.name),
         });
       }
@@ -163,7 +162,7 @@ const StudyPlanSection = ({ dict }: HomeCopy) => {
   return (
     <section
       id="plan"
-      className="bg-tinto overflow-hidden py-20 text-white sm:py-28"
+      className="bg-tinto overflow-x-clip py-20 text-white sm:py-28"
     >
       <div className="mx-auto max-w-300 px-5 lg:px-6">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:gap-16">
@@ -187,9 +186,9 @@ const StudyPlanSection = ({ dict }: HomeCopy) => {
       <div className="mx-auto mt-14 max-w-300 px-5 lg:px-6">
         <CurriculumStream
           rows={streamRows(dict)}
-          areas={streamAreaIds.map((id) => ({
-            id,
-            name: dict.pages.carrera.areas[id].name,
+          areas={studyTopics.map((topic) => ({
+            id: topic.id,
+            name: copy.topics[topic.id],
           }))}
           allLabel={copy.allAreas}
           filterLabel={copy.filterLabel}
@@ -358,6 +357,7 @@ const Home = async ({ params }: LocaleParams) => {
   return (
     <PageFrame dict={dict} locale={lang}>
       <HomeMotion />
+      <ScrollHint label={dict.pages.home.scrollHint} />
       <HeroSection {...home} />
       <LearningStory dict={dict} locale={lang} />
       <CareerSection {...home} />

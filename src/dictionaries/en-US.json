@@ -100,7 +100,6 @@
     "en-US": "English (US)"
   },
   "brand": {
-    "campusShort": "UP · Guadalajara",
     "footerBlurb": "Computer Science and Engineering · Universidad Panamericana Guadalajara."
   },
   "graph": {
@@ -386,7 +385,15 @@
         "text": "Plan your courses in Tu Ruta Ideal and see what comes next.",
         "cta": "Open Tu Ruta Ideal",
         "allAreas": "All",
-        "filterLabel": "Highlight the courses in one area"
+        "filterLabel": "Highlight the courses on one topic",
+        "topics": {
+          "software": "Programming and software",
+          "web": "Web, mobile and interfaces",
+          "dataAi": "Data and artificial intelligence",
+          "systems": "Systems and parallel computing",
+          "math": "Mathematics and science",
+          "graphics": "Graphics, games and virtual reality"
+        }
       },
       "community": {
         "title": "The people behind the projects.",
@@ -402,7 +409,8 @@
         "studentsTitle": "I’m already a CSE student",
         "studentsText": "Quick access, procedures, study resources and internships.",
         "studentsCta": "Go to resources"
-      }
+      },
+      "scrollHint": "Scroll down"
     },
     "carrera": {
       "meta": {
