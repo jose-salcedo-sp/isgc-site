@@ -242,12 +242,10 @@
   },
   "faculty": {
     "bernardo": {
-      "area": "Computing and professional formation",
-      "role": "CSE director"
+      "role": "Program Director"
     },
     "marcelo": {
-      "area": "Area to be confirmed",
-      "role": "Role to be confirmed"
+      "role": "Program Coordinator"
     }
   },
   "alumni": [

@@ -242,12 +242,10 @@
   },
   "faculty": {
     "bernardo": {
-      "area": "Computación y formación profesional",
-      "role": "Dirección de CSE"
+      "role": "Director de la carrera"
     },
     "marcelo": {
-      "area": "Área por confirmar",
-      "role": "Cargo por confirmar"
+      "role": "Coordinador de la carrera"
     }
   },
   "alumni": [
