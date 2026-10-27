@@ -118,9 +118,9 @@ export const daysUntil = (date: string, now = Date.now()) =>
 
 export const faculty = [
   {
-    email: "arodrig@up.edu.mx",
-    id: "arturo",
-    name: "Arturo Jafet Rodríguez",
+    email: "bmoya@up.edu.mx",
+    id: "bernardo",
+    name: "Bernardo Moya de la Mora",
   },
   {
     email: "cvalle@up.edu.mx",
