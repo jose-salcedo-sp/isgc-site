@@ -17,7 +17,6 @@ import { getDictionary } from "@/lib/dictionary";
 import type { Locale, LocaleParams } from "@/lib/i18n";
 import { hasLocale, localizedPath } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/page-metadata";
-import { org } from "@/lib/site";
 
 export const revalidate = 3600;
 
@@ -207,44 +206,17 @@ const ProjectsSection = ({ dict, locale }: HomeCopy) => (
   </PageSection>
 );
 
-const CommunitySection = ({ dict, locale }: HomeCopy) => {
-  const copy = dict.pages.home;
+const CommunitySection = ({ dict }: HomeCopy) => {
+  const copy = dict.pages.home.community;
   return (
     <PageSection id="comunidad">
-      <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <div>
-          <h2 className="text-grafito text-4xl leading-tight sm:text-5xl">
-            {copy.community.title}
-          </h2>
-          <p className="text-piedra mt-4 max-w-xl text-lg">
-            {copy.community.text}
-          </p>
-          <a
-            href={`mailto:${org.coordinationEmail}`}
-            className="text-tinto decoration-dorado mt-6 inline-block text-xl font-bold underline decoration-2 underline-offset-4"
-          >
-            {org.coordinationEmail}
-          </a>
-        </div>
-        <Link
-          href={localizedPath(locale, "/oportunidades")}
-          className="group border-tinto flex items-end justify-between gap-6 border-t-2 pt-6 lg:self-end"
-        >
-          <span className="text-grafito group-hover:text-tinto text-3xl leading-tight font-bold tracking-[-0.025em] transition-colors sm:text-4xl">
-            {copy.community.internships}
-          </span>
-          <span
-            className="text-tinto text-3xl transition-transform group-hover:translate-x-1"
-            aria-hidden="true"
-          >
-            →
-          </span>
-        </Link>
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:gap-16">
+        <h2 className="text-grafito text-4xl leading-tight sm:text-5xl">
+          {copy.title}
+        </h2>
+        <p className="text-piedra max-w-md text-lg">{copy.text}</p>
       </div>
-      <h3 className="text-grafito mt-16 text-2xl sm:text-3xl">
-        {copy.community.facultyTitle}
-      </h3>
-      <ul className="border-grafito/15 mt-6 grid border-t">
+      <ul className="border-grafito/15 mt-12 grid border-t">
         {faculty.map((person) => {
           const item = dict.faculty[person.id];
           return (
@@ -263,11 +235,11 @@ const CommunitySection = ({ dict, locale }: HomeCopy) => {
                     .map((part) => part[0])
                     .join("")}
                 </span>
-                <h4 className="text-grafito text-3xl leading-tight font-bold tracking-[-0.025em] sm:text-4xl">
+                <h3 className="text-grafito text-3xl leading-tight font-bold tracking-[-0.025em] text-balance sm:text-4xl">
                   {person.name}
-                </h4>
+                </h3>
               </div>
-              <p className="text-grafito font-semibold">{item.role}</p>
+              <p className="text-grafito text-lg font-semibold">{item.role}</p>
               <a
                 href={`mailto:${person.email}`}
                 className="text-tinto decoration-dorado justify-self-start font-semibold underline decoration-2 underline-offset-4"

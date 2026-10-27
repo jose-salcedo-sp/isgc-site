@@ -415,10 +415,8 @@
         "cta": "Ver proyectos"
       },
       "community": {
-        "title": "Las personas detrás de los proyectos.",
-        "text": "Conoce al equipo académico y escribe a Coordinación si tienes dudas.",
-        "facultyTitle": "Equipo académico",
-        "internships": "Encuentra prácticas y primeros proyectos."
+        "title": "Quién está al frente de la carrera.",
+        "text": "Para dudas sobre materias, profesores y procesos académicos, escribe a Coordinación."
       },
       "next": {
         "title": "¿Qué necesitas hoy?",
