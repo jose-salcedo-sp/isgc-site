@@ -123,8 +123,8 @@ export const faculty = [
     name: "Bernardo Moya de la Mora",
   },
   {
-    email: "cvalle@up.edu.mx",
-    id: "carolina",
-    name: "Carolina del Valle",
+    email: "malvarezg@up.edu.mx",
+    id: "marcelo",
+    name: "Marcelo Alvarez García",
   },
 ] as const;
