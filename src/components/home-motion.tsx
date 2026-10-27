@@ -5,8 +5,7 @@ import { useEffect } from "react";
 
 /*
  * Home-only scrollytelling for the "build story" (learning-story.tsx). The
- * hero canvas animates itself (render-hero.tsx) and the curriculum rows move
- * themselves (curriculum-stream.tsx).
+ * hero canvas animates itself (render-hero.tsx).
  *
  * The story section is three screens tall and its content is sticky. Scroll
  * progress through it (0 → 1) is split into the three steps:

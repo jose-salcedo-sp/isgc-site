@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { PageFrame, PageIntro } from "@/components/page-frame";
-import { getCurrentHomepageEvents } from "@/content/site-content";
+import { daysUntil, getCurrentHomepageEvents } from "@/content/site-content";
 import { getDictionary } from "@/lib/dictionary";
-import { hasLocale } from "@/lib/i18n";
+import { fill, hasLocale } from "@/lib/i18n";
 import type { LocaleParams } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/page-metadata";
 import { org } from "@/lib/site";
@@ -78,14 +78,33 @@ const AvisosPage = async ({ params }: LocaleParams) => {
               ) : (
                 events.map((event) => {
                   const item = dict.events[event.id];
+                  const days = daysUntil(event.startsAt);
+                  let countdown: string | null = null;
+                  if (days === 0) {
+                    countdown = copy.today;
+                  } else if (days === 1) {
+                    countdown = copy.tomorrow;
+                  } else if (days > 1) {
+                    countdown = fill(copy.daysLeft, { n: days });
+                  }
                   return (
                     <li id={event.id} key={event.id} className="relative">
                       <span
                         className="rail-dot bg-tinto absolute top-2 -left-[39px] size-[13px] rounded-full sm:-left-[55px]"
                         aria-hidden="true"
                       />
-                      <p className="text-tinto text-lg font-bold">
+                      <p className="text-tinto flex flex-wrap items-baseline gap-x-3 text-lg font-bold">
                         {item.date}
+                        {countdown && (
+                          <span className="text-piedra font-semibold">
+                            {countdown}
+                          </span>
+                        )}
+                        {event.pinned && (
+                          <span className="bg-tinto rounded-full px-3 py-0.5 text-sm text-white">
+                            {copy.pinned}
+                          </span>
+                        )}
                       </p>
                       <h3 className="text-grafito mt-2 text-3xl leading-tight sm:text-4xl">
                         {item.title}
@@ -93,6 +112,16 @@ const AvisosPage = async ({ params }: LocaleParams) => {
                       <p className="text-piedra mt-4 max-w-lg text-lg">
                         {item.text}
                       </p>
+                      {event.href && (
+                        <a
+                          href={event.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-tinto decoration-dorado mt-6 inline-block text-lg font-bold underline decoration-2 underline-offset-4"
+                        >
+                          {copy.details} <span aria-hidden="true">↗</span>
+                        </a>
+                      )}
                     </li>
                   );
                 })

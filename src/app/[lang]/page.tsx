@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { CurriculumStream } from "@/components/curriculum-stream";
-import type { StreamRow } from "@/components/curriculum-stream";
 import { HomeMotion } from "@/components/home-motion";
 import { LearningStory } from "@/components/learning-story";
 import {
@@ -13,10 +11,7 @@ import {
 } from "@/components/page-frame";
 import { RenderHeroCanvas } from "@/components/render-hero";
 import { ScrollHint } from "@/components/scroll-hint";
-import { externalLinks, faculty } from "@/content/site-content";
-import { studyTopics, topicsOf } from "@/content/study-topics";
-import curriculum from "@/data/curriculum.json";
-import { localizedCourseName } from "@/lib/course-copy";
+import { faculty } from "@/content/site-content";
 import type { Dictionary } from "@/lib/dictionary";
 import { getDictionary } from "@/lib/dictionary";
 import type { Locale, LocaleParams } from "@/lib/i18n";
@@ -129,72 +124,6 @@ const CareerSection = ({ dict, locale }: HomeCopy) => {
         </Link>
       </div>
     </PageSection>
-  );
-};
-
-const streamRows = (dict: Dictionary): StreamRow[] => {
-  const rows: StreamRow[] = [];
-  for (let semester = 1; semester <= 8; semester += 1) {
-    const items: StreamRow["items"] = [];
-    for (const course of curriculum.courses) {
-      if (course.semester === semester) {
-        items.push({
-          areas: topicsOf(course.id),
-          name: localizedCourseName(dict, course.id, course.name),
-        });
-      }
-    }
-    rows.push({ items, label: String(semester).padStart(2, "0") });
-  }
-  // Semesters 9 and 10 are the specialty.
-  rows.push({
-    items: dict.pages.carrera.specialtyList.map((name) => ({
-      areas: [],
-      name,
-    })),
-    label: "09–10",
-  });
-  return rows;
-};
-
-const StudyPlanSection = ({ dict }: HomeCopy) => {
-  const copy = dict.pages.home.plan;
-  return (
-    <section
-      id="plan"
-      className="bg-tinto overflow-x-clip py-20 text-white sm:py-28"
-    >
-      <div className="mx-auto max-w-300 px-5 lg:px-6">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:gap-16">
-          <h2 className="text-5xl leading-[1.02] tracking-[-0.045em] sm:text-7xl">
-            {copy.title}
-          </h2>
-          <div>
-            <p className="text-lg text-white/80">{copy.text}</p>
-            <a
-              href={externalLinks.tuRutaIdeal}
-              target="_blank"
-              rel="noreferrer"
-              className="text-tinto hover:bg-marfil mt-6 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 font-bold"
-              data-magnetic
-            >
-              {copy.cta} <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div className="mx-auto mt-14 max-w-300 px-5 lg:px-6">
-        <CurriculumStream
-          rows={streamRows(dict)}
-          areas={studyTopics.map((topic) => ({
-            id: topic.id,
-            name: copy.topics[topic.id],
-          }))}
-          allLabel={copy.allAreas}
-          filterLabel={copy.filterLabel}
-        />
-      </div>
-    </section>
   );
 };
 
@@ -361,7 +290,6 @@ const Home = async ({ params }: LocaleParams) => {
       <HeroSection {...home} />
       <LearningStory dict={dict} locale={lang} />
       <CareerSection {...home} />
-      <StudyPlanSection {...home} />
       <NextStepSection {...home} />
       <ProjectsSection {...home} />
       <CommunitySection {...home} />
