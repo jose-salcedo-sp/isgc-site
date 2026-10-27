@@ -242,12 +242,10 @@
   },
   "faculty": {
     "bernardo": {
-      "area": "Computación y formación profesional",
-      "role": "Dirección de CSE"
+      "role": "Director de la carrera"
     },
-    "carolina": {
-      "area": "Programación y proyectos aplicados",
-      "role": "Academia de Cómputo"
+    "marcelo": {
+      "role": "Coordinador de la carrera"
     }
   },
   "alumni": [
