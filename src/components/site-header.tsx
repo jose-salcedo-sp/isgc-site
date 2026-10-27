@@ -16,12 +16,6 @@ import type { Dictionary } from "@/lib/dictionary";
 import { locales, localizedPath, stripLocale } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
 
-const flagLabels: Record<Locale, string> = {
-  "en-GB": "UK",
-  "en-US": "US",
-  es: "ES",
-};
-
 const FlagIcon = ({ locale }: { locale: Locale }) => {
   if (locale === "es") {
     return (
@@ -126,12 +120,12 @@ const LanguageSwitcher = ({
         type="button"
         aria-expanded={open}
         aria-haspopup="menu"
-        aria-label={dict.common.language}
+        aria-label={`${dict.common.language}: ${dict.locales[locale]}`}
+        title={dict.locales[locale]}
         onClick={() => setOpen((value) => !value)}
         className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-xs font-bold text-white transition duration-300 hover:bg-white/20"
       >
         <FlagIcon locale={locale} />
-        <span>{flagLabels[locale]}</span>
         <span
           aria-hidden="true"
           className={`text-[10px] transition-transform duration-300 ${open ? "rotate-180" : ""}`}
@@ -149,7 +143,7 @@ const LanguageSwitcher = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98, y: -6 }}
             transition={{ duration: 0.48, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-[calc(100%+10px)] right-0 z-20 min-w-48 origin-top-right rounded-2xl bg-[#30272a] p-2 shadow-2xl"
+            className="absolute top-[calc(100%+10px)] right-0 z-20 origin-top-right rounded-2xl bg-[#30272a] p-2 shadow-2xl"
           >
             {locales.map((item) => (
               <Link
@@ -158,11 +152,12 @@ const LanguageSwitcher = ({
                 hrefLang={item}
                 role="menuitem"
                 aria-current={item === locale ? "true" : undefined}
+                aria-label={dict.locales[item]}
+                title={dict.locales[item]}
                 onClick={() => setOpen(false)}
                 className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition duration-300 ${item === locale ? "bg-white/15 text-white" : "text-white/75 hover:bg-white/10 hover:text-white"}`}
               >
                 <FlagIcon locale={item} />
-                <span>{dict.locales[item]}</span>
                 {item === locale && (
                   <span className="ml-auto text-[#e2c58f]" aria-hidden="true">
                     ✓
@@ -564,13 +559,8 @@ export const SiteHeader = ({
                   className="h-10 w-auto object-contain"
                   priority
                 />
-                <span className="leading-tight">
-                  <span className="block text-base font-bold tracking-[0.12em]">
-                    CSE
-                  </span>
-                  <span className="text-xs text-white/70">
-                    {dict.brand.campusShort}
-                  </span>
+                <span className="text-base font-bold tracking-[0.12em]">
+                  CSE
                 </span>
               </Link>
 
