@@ -411,10 +411,8 @@
         "cta": "View projects"
       },
       "community": {
-        "title": "The people behind the projects.",
-        "text": "Meet the academic team and write to Coordination with any questions.",
-        "facultyTitle": "Academic team",
-        "internships": "Find internships and first projects."
+        "title": "Who leads the program.",
+        "text": "For questions about courses, professors and academic processes, write to Coordination."
       },
       "next": {
         "title": "What do you need today?",

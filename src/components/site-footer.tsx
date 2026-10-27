@@ -1,10 +1,9 @@
 import Link from "next/link";
 
-import { externalLinks } from "@/content/site-content";
+import { externalLinks, faculty } from "@/content/site-content";
 import type { Dictionary } from "@/lib/dictionary";
 import { localizedPath } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
-import { org } from "@/lib/site";
 
 export const SiteFooter = ({
   dict,
@@ -25,12 +24,21 @@ export const SiteFooter = ({
         <p className="mt-2 max-w-sm text-sm text-white/65">
           {dict.brand.footerBlurb}
         </p>
-        <a
-          href={`mailto:${org.coordinationEmail}`}
-          className="decoration-dorado mt-3 inline-flex text-sm font-semibold text-white underline underline-offset-4"
-        >
-          {org.coordinationEmail}
-        </a>
+        <ul className="mt-3 grid gap-1 text-sm">
+          {faculty.map((person) => (
+            <li key={person.id}>
+              <span className="text-white/65">
+                {dict.faculty[person.id].role}:
+              </span>{" "}
+              <a
+                href={`mailto:${person.email}`}
+                className="decoration-dorado font-semibold text-white underline underline-offset-4"
+              >
+                {person.email}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/75">
         <a
