@@ -493,6 +493,8 @@
       "trackDescription": "Confirma la oferta vigente con Coordinación.",
       "doubleTitle": "Doble carrera",
       "doubleText": "Pregunta a Coordinación por disponibilidad, semestre de ingreso, equivalencias y costos.",
+      "fieldTitle": "Campo profesional",
+      "fieldText": "Software, datos, visualización, producto digital, automatización, investigación y emprendimiento.",
       "areas": {
         "software": {
           "name": "Desarrollo de software",

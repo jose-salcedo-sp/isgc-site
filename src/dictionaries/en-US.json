@@ -489,6 +489,8 @@
       "trackDescription": "Confirm the current offering with Coordination.",
       "doubleTitle": "Double degree",
       "doubleText": "Ask Coordination about availability, entry semester, equivalences and costs.",
+      "fieldTitle": "Professional field",
+      "fieldText": "Software, data, visualization, digital product, automation, research and entrepreneurship.",
       "areas": {
         "software": {
           "name": "Software development",
