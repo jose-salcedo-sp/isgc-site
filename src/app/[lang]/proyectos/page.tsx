@@ -8,6 +8,8 @@ import {
   SectionHeading,
 } from "@/components/page-frame";
 import { ProjectCard } from "@/components/project-card";
+import { ProjectShowcase } from "@/components/project-showcase";
+import { demoProject } from "@/content/project-demo";
 import { getDictionary } from "@/lib/dictionary";
 import { fill, hasLocale } from "@/lib/i18n";
 import type { LocaleParams } from "@/lib/i18n";
@@ -52,6 +54,15 @@ const ProyectosPage = async ({ params }: LocaleParams) => {
           {dict.projects.map((project, index) => (
             <ProjectCard key={project.title} index={index} project={project} />
           ))}
+        </div>
+      </PageSection>
+      <PageSection id="componente-demo" tone="marfil">
+        <SectionHeading
+          title="Componente propuesto"
+          description="Comparación: arriba, las tarjetas actuales; abajo, el componente con equipo, resultado, fotos, video y modelo 3D."
+        />
+        <div className="mt-14">
+          <ProjectShowcase project={demoProject} />
         </div>
       </PageSection>
       <section id="archivo" className="bg-grafito py-16 text-white sm:py-24">
