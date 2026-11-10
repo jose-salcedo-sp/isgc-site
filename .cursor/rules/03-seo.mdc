@@ -9,4 +9,5 @@ alwaysApply: false
 - Every route sets `alternates.canonical` to its path.
 - Structured data uses `next-seo` components or the local `<JsonLd>` server component — no hand-written `<meta>` tags in JSX.
 - New routes must be added to `src/app/sitemap.ts`.
+- Content-generated routes (e.g. `/proyectos/[slug]`) list items in `src/content/`; `sitemap.ts` and `src/lib/seo.test.ts` must include every locale × item URL.
 - JSON-LD claims must match visible page content.

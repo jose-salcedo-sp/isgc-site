@@ -198,8 +198,13 @@ body {
     box-shadow 180ms ease;
 }
 .project-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: 0 20px 40px #26232612;
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-card:hover {
+    transform: none;
+  }
 }
 .bg-tinto :focus-visible,
 .bg-grafito :focus-visible,

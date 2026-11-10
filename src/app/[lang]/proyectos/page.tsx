@@ -7,11 +7,10 @@ import {
   PageSection,
   SectionHeading,
 } from "@/components/page-frame";
-import { ProjectCard } from "@/components/project-card";
-import { ProjectShowcase } from "@/components/project-showcase";
-import { demoProject } from "@/content/project-demo";
+import { ProjectGridCard } from "@/components/project-grid-card";
+import { projectsSortedByYear } from "@/content/projects";
 import { getDictionary } from "@/lib/dictionary";
-import { fill, hasLocale } from "@/lib/i18n";
+import { hasLocale } from "@/lib/i18n";
 import type { LocaleParams } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/page-metadata";
 import { org } from "@/lib/site";
@@ -50,51 +49,19 @@ const ProyectosPage = async ({ params }: LocaleParams) => {
           title={copy.exploreTitle}
           description={copy.exploreDescription}
         />
-        <div className="mt-14 space-y-20 sm:space-y-28">
-          {dict.projects.map((project, index) => (
-            <ProjectCard key={project.title} index={index} project={project} />
+        <ul className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
+          {projectsSortedByYear.map((project, index) => (
+            <li key={project.slug} className="min-h-0">
+              <ProjectGridCard
+                dict={dict}
+                index={index}
+                locale={lang}
+                project={project}
+              />
+            </li>
           ))}
-        </div>
+        </ul>
       </PageSection>
-      <PageSection id="componente-demo" tone="marfil">
-        <SectionHeading
-          title="Componente propuesto"
-          description="Comparación: arriba, las tarjetas actuales; abajo, el componente con equipo, resultado, fotos, video y modelo 3D."
-        />
-        <div className="mt-14">
-          <ProjectShowcase project={demoProject} />
-        </div>
-      </PageSection>
-      <section id="archivo" className="bg-grafito py-16 text-white sm:py-24">
-        <div className="mx-auto grid max-w-300 gap-10 px-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16 lg:px-6">
-          <div className="lg:sticky lg:top-28 lg:self-start">
-            <h2 className="text-5xl leading-none tracking-[-0.045em] sm:text-7xl">
-              {copy.archiveTitle}
-            </h2>
-            <p className="mt-6 max-w-sm text-lg text-white/75">
-              {copy.archiveDescription}
-            </p>
-          </div>
-          <ol className="grid border-t border-white/20" data-follow>
-            {dict.mediaLab.map((item) => (
-              <li
-                key={`${item.title}-${item.date}`}
-                className="grid grid-cols-[4.5rem_1fr] items-baseline gap-4 border-b border-white/20 py-6 sm:grid-cols-[8rem_1fr] sm:py-8"
-              >
-                <p className="text-2xl font-bold tracking-[-0.03em] text-[#e2c58f] tabular-nums sm:text-4xl">
-                  <span className="sr-only">
-                    {fill(copy.realized, { date: item.date })}
-                  </span>
-                  <span aria-hidden="true">{item.date}</span>
-                </p>
-                <h3 className="text-2xl leading-tight sm:text-4xl">
-                  {item.title}
-                </h3>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
       <section id="comparte" className="bg-marfil py-20 sm:py-28">
         <div className="mx-auto grid max-w-300 gap-8 px-5 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end lg:gap-16 lg:px-6">
           <h2 className="text-grafito text-5xl leading-[1.02] tracking-[-0.045em] sm:text-7xl">

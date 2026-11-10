@@ -4,8 +4,9 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 import sitemap from "@/app/sitemap";
+import { projects } from "@/content/projects";
 import { getDictionary } from "@/lib/dictionary";
-import { locales, sitePaths } from "@/lib/i18n";
+import { locales, localizedPath, sitePaths } from "@/lib/i18n";
 import { siteLastModified, siteRoutes } from "@/lib/site";
 
 const appDir = path.join(process.cwd(), "src/app");
@@ -36,18 +37,24 @@ const findPageFiles = (dir: string): string[] => {
   });
 };
 
+const isContentGeneratedPage = (file: string): boolean => {
+  const relative = file.replace(`${appDir}`, "");
+  const dynamicSegments = relative.match(/\[[^\]]+\]/gu) ?? [];
+  return dynamicSegments.length > 1;
+};
+
 const routeFromPageFile = (file: string): string => {
   const relative =
     file.replace(`${appDir}`, "").replace("/page.tsx", "") || "/";
   return relative.replace("/[lang]", "") || "/";
 };
 
-const collectPageIssues = (pageFiles: string[]): string[] => {
+const collectFixedPageIssues = (pageFiles: string[]): string[] => {
   const issues: string[] = [];
 
   if (pageFiles.length !== sitePaths.length) {
     issues.push(
-      `expected ${sitePaths.length} page routes, found ${pageFiles.length}`
+      `expected ${sitePaths.length} fixed page routes, found ${pageFiles.length}`
     );
   }
 
@@ -67,11 +74,42 @@ const collectPageIssues = (pageFiles: string[]): string[] => {
   return issues;
 };
 
+const collectContentPageIssues = (pageFiles: string[]): string[] => {
+  const issues: string[] = [];
+
+  for (const file of pageFiles) {
+    const route = routeFromPageFile(file);
+    const source = readFileSync(file, "utf-8");
+
+    if (!/export const generateMetadata/u.test(source)) {
+      issues.push(`${route}: missing generateMetadata export`);
+    }
+
+    if (!/export const generateStaticParams/u.test(source)) {
+      issues.push(`${route}: missing generateStaticParams export`);
+    }
+  }
+
+  return issues;
+};
+
+const projectSiteRoutes = locales.flatMap((locale) =>
+  projects.map((project) => localizedPath(locale, `/proyectos/${project.slug}`))
+);
+
 describe("seo metadata", () => {
   const pageFiles = findPageFiles(appDir).toSorted();
+  const fixedPageFiles = pageFiles.filter(
+    (file) => !isContentGeneratedPage(file)
+  );
+  const contentPageFiles = pageFiles.filter(isContentGeneratedPage);
 
-  it("exports generateMetadata on every route", () => {
-    expect(collectPageIssues(pageFiles)).toStrictEqual([]);
+  it("exports generateMetadata on every fixed route", () => {
+    expect(collectFixedPageIssues(fixedPageFiles)).toStrictEqual([]);
+  });
+
+  it("exports generateMetadata and generateStaticParams on content routes", () => {
+    expect(collectContentPageIssues(contentPageFiles)).toStrictEqual([]);
   });
 
   it("keeps dictionary titles and descriptions within bounds", () => {
@@ -103,21 +141,52 @@ describe("seo metadata", () => {
     expect(issues).toStrictEqual([]);
   });
 
-  it("lists every localized route in sitemap.ts", () => {
+  it("keeps project metadata within bounds for every locale", () => {
+    const issues: string[] = [];
+
+    for (const locale of locales) {
+      for (const project of projects) {
+        const pageTitle = project.metaTitle ?? project.title;
+        const rendered = `${pageTitle}${titleSuffix}`;
+        const { metaDescription } = project;
+
+        if (metaDescription.length > maxDescriptionLength) {
+          issues.push(
+            `${locale} /proyectos/${project.slug}: description exceeds ${maxDescriptionLength} chars`
+          );
+        }
+        if (metaDescription.length < minDescriptionLength) {
+          issues.push(
+            `${locale} /proyectos/${project.slug}: description below ${minDescriptionLength} chars (${metaDescription.length})`
+          );
+        }
+        if (rendered.length > maxTitleLength) {
+          issues.push(
+            `${locale} /proyectos/${project.slug}: title exceeds ${maxTitleLength} chars (${rendered.length})`
+          );
+        }
+      }
+    }
+
+    expect(issues).toStrictEqual([]);
+  });
+
+  it("lists fixed and project routes in sitemap.ts", () => {
     const entries = sitemap();
     const paths = entries.map((entry) => new URL(entry.url).pathname);
+    const expected = [...siteRoutes, ...projectSiteRoutes];
 
-    for (const route of siteRoutes) {
+    for (const route of expected) {
       expect(paths).toContain(route);
     }
-    expect(entries).toHaveLength(siteRoutes.length);
+    expect(entries).toHaveLength(expected.length);
     expect(entries.map((entry) => entry.lastModified)).toStrictEqual(
-      siteRoutes.map(() => siteLastModified)
+      expected.map(() => siteLastModified)
     );
   });
 
-  it("keeps sitemap.ts aligned with page routes", () => {
-    const routesFromPages = pageFiles.map(routeFromPageFile).toSorted();
+  it("keeps sitemap.ts aligned with fixed page routes", () => {
+    const routesFromPages = fixedPageFiles.map(routeFromPageFile).toSorted();
     expect([...sitePaths].toSorted()).toStrictEqual(routesFromPages);
   });
 });
