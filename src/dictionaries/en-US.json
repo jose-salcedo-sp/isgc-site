@@ -58,11 +58,7 @@
         "sections": [
           {
             "id": "explora",
-            "label": "What you can build"
-          },
-          {
-            "id": "archivo",
-            "label": "Project archive"
+            "label": "Projects"
           },
           {
             "id": "comparte",
@@ -590,10 +586,15 @@
       "crumb": "Projects",
       "title": "CSE projects",
       "description": "Explore problems, processes and results in code, data and digital experiences.",
-      "exploreTitle": "What you can build",
-      "exploreDescription": "One project from the archive and one illustrative data example.",
-      "archiveTitle": "Project archive",
-      "archiveDescription": "Applied research and interactive experiences, 2013–2015.",
+      "exploreTitle": "Projects",
+      "exploreDescription": "Historical archive and recent CSE projects: code, data, graphics and digital experiences.",
+      "badge3d": "3D",
+      "badgeVideo": "Video",
+      "cardKind": "Project",
+      "githubLink": "GitHub",
+      "githubRepo": "GitHub repository",
+      "teamTitle": "Team",
+      "resultTitle": "Result",
       "realized": "Completed in {date}.",
       "shareTitle": "Do you have a project to show?",
       "shareText": "Tell us the problem, the process, the result and who made it.",

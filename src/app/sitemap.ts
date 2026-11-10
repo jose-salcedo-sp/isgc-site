@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { projects } from "@/content/projects";
 import { locales, localizedPath, sitePaths } from "@/lib/i18n";
 import { siteLastModified, siteUrl } from "@/lib/site";
 
@@ -20,8 +21,8 @@ const routeConfig: Record<
   "/recursos": { changeFrequency: "weekly", priority: 0.7 },
 };
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return locales.flatMap((locale) =>
+const staticEntries = (): MetadataRoute.Sitemap =>
+  locales.flatMap((locale) =>
     sitePaths.map((path) => {
       const { changeFrequency, priority } = routeConfig[path];
       const languages: Record<string, string> = {};
@@ -38,4 +39,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
       };
     })
   );
+
+const projectEntries = (): MetadataRoute.Sitemap =>
+  locales.flatMap((locale) =>
+    projects.map((project) => {
+      const slugPath = `/proyectos/${project.slug}`;
+      const path = localizedPath(locale, slugPath);
+      const languages = {
+        "x-default": `${siteUrl}${localizedPath("es", slugPath)}`,
+        ...Object.fromEntries(
+          locales.map((item) => [
+            item,
+            `${siteUrl}${localizedPath(item, slugPath)}`,
+          ])
+        ),
+      } satisfies Record<string, string>;
+
+      return {
+        alternates: { languages },
+        changeFrequency: "monthly",
+        lastModified: siteLastModified,
+        priority: 0.7,
+        url: `${siteUrl}${path}`,
+      };
+    })
+  );
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  return [...staticEntries(), ...projectEntries()];
 }

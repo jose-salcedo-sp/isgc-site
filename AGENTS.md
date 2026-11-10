@@ -37,6 +37,7 @@ src/
 - Structured data: `OrganizationJsonLd` in `layout.tsx`; local `<JsonLd>` for Course, FAQPage, and BreadcrumbList.
 - New routes must export metadata, be added to `siteRoutes` in `src/lib/site.ts`, and appear in `src/app/sitemap.ts`.
 - Guard test: `src/lib/seo.test.ts` statically parses page sources for metadata bounds and sitemap coverage — do not import page modules in that test.
+- Project detail URLs come from `src/content/projects.ts`; the sitemap and SEO test enumerate every locale × slug.
 - No hand-written `<meta>` tags in JSX; JSON-LD claims must match visible page content.
 - See `.cursor/rules/03-seo.mdc` for the full contract.
 

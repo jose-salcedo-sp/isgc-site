@@ -58,11 +58,7 @@
         "sections": [
           {
             "id": "explora",
-            "label": "Qué puedes construir"
-          },
-          {
-            "id": "archivo",
-            "label": "Archivo histórico"
+            "label": "Proyectos"
           },
           {
             "id": "comparte",
@@ -594,10 +590,15 @@
       "crumb": "Proyectos",
       "title": "Proyectos de CSE",
       "description": "Explora problemas, procesos y resultados con código, datos y experiencias digitales.",
-      "exploreTitle": "Lo que puedes construir",
-      "exploreDescription": "Un proyecto del archivo histórico y un ejemplo ilustrativo de datos.",
-      "archiveTitle": "Archivo histórico",
-      "archiveDescription": "Proyectos de investigación aplicada y experiencias interactivas, 2013–2015.",
+      "exploreTitle": "Proyectos",
+      "exploreDescription": "Archivo histórico y proyectos recientes de CSE: código, datos, gráficas y experiencias digitales.",
+      "badge3d": "3D",
+      "badgeVideo": "Video",
+      "cardKind": "Proyecto",
+      "githubLink": "GitHub",
+      "githubRepo": "Repositorio en GitHub",
+      "teamTitle": "Equipo",
+      "resultTitle": "Resultado",
       "realized": "Realizado en {date}.",
       "shareTitle": "¿Tienes un proyecto para mostrar?",
       "shareText": "Cuéntanos el problema, el proceso, el resultado y quién lo hizo.",

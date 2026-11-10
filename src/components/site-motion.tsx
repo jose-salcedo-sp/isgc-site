@@ -436,7 +436,13 @@ export const SiteMotion = () => {
       // router.push() after the curtain lands at the top; jump to the
       // anchor (e.g. /carrera#mapa) while the curtain still covers the page.
       if (location.hash) {
-        const id = decodeURIComponent(location.hash.slice(1));
+        const raw = location.hash.slice(1);
+        let id = raw;
+        try {
+          id = decodeURIComponent(raw);
+        } catch {
+          id = raw;
+        }
         document
           .querySelector(`[id="${CSS.escape(id)}"]`)
           ?.scrollIntoView({ behavior: "instant" });
