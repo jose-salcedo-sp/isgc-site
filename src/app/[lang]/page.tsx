@@ -11,6 +11,7 @@ import {
 } from "@/components/page-frame";
 import { RenderHeroCanvas } from "@/components/render-hero";
 import { ScrollHint } from "@/components/scroll-hint";
+import { getProject } from "@/content/projects";
 import { faculty } from "@/content/site-content";
 import type { Dictionary } from "@/lib/dictionary";
 import { getDictionary } from "@/lib/dictionary";
@@ -171,6 +172,19 @@ const NextStepSection = ({ dict, locale }: HomeCopy) => {
   );
 };
 
+const homeFeaturedProjectSlugs = [
+  "icpc-testigos-de-german",
+  "halberd-studios-colaboracion-up",
+] as const;
+
+const homeFeaturedProjects = homeFeaturedProjectSlugs.map((slug) => {
+  const project = getProject(slug);
+  if (!project) {
+    throw new Error(`Featured home project not found: ${slug}`);
+  }
+  return project;
+});
+
 const ProjectsSection = ({ dict, locale }: HomeCopy) => (
   <PageSection tone="marfil" id="proyectos">
     <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
@@ -185,9 +199,9 @@ const ProjectsSection = ({ dict, locale }: HomeCopy) => (
       </Link>
     </div>
     <ol className="border-grafito/15 mt-12 grid border-t">
-      {dict.projects.map((project, index) => (
+      {homeFeaturedProjects.map((project, index) => (
         <li
-          key={project.title}
+          key={project.slug}
           className="border-grafito/15 grid gap-3 border-b py-8 md:grid-cols-[4rem_minmax(0,6fr)_minmax(0,5fr)] md:gap-8 md:py-10"
         >
           <span
@@ -196,10 +210,15 @@ const ProjectsSection = ({ dict, locale }: HomeCopy) => (
           >
             {String(index + 1).padStart(2, "0")}
           </span>
-          <h3 className="text-grafito text-3xl leading-tight sm:text-4xl">
-            {project.title}
+          <h3 className="text-3xl leading-tight sm:text-4xl">
+            <Link
+              href={localizedPath(locale, `/proyectos/${project.slug}`)}
+              className="text-grafito decoration-dorado underline-offset-4 hover:underline focus-visible:underline"
+            >
+              {project.title}
+            </Link>
           </h3>
-          <p className="text-piedra text-lg md:pt-1">{project.process}</p>
+          <p className="text-piedra text-lg md:pt-1">{project.description}</p>
         </li>
       ))}
     </ol>

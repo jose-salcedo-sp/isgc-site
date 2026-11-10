@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { CarreraCurriculumMap } from "@/app/[lang]/carrera/carrera-curriculum-map";
+import { CarreraPlanOverview } from "@/app/[lang]/carrera/carrera-plan-overview";
+import { CarreraSemesterBoard } from "@/app/[lang]/carrera/carrera-semester-board";
 import { GpaCalculator } from "@/components/gpa-calculator";
-import { GraphView } from "@/components/graph/graph-view";
+import { FaqAccordion } from "@/components/home-interactions";
 import {
-  ExternalLink,
   PageFrame,
   PageIntro,
   PageSection,
   SectionHeading,
 } from "@/components/page-frame";
 import { JsonLd } from "@/components/seo/json-ld";
-import { SeriesBoard } from "@/components/series-board";
-import { externalLinks } from "@/content/site-content";
 import curriculum from "@/data/curriculum.json";
 import { localizedCourseName, localizedGraphNodes } from "@/lib/course-copy";
 import { curriculumGraph } from "@/lib/curriculum-graph";
 import { getDictionary } from "@/lib/dictionary";
-import { fill, hasLocale } from "@/lib/i18n";
+import { hasLocale } from "@/lib/i18n";
 import type { LocaleParams } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/page-metadata";
 import { org, universityUrl } from "@/lib/site";
@@ -30,56 +30,6 @@ export const generateMetadata = async ({
     return {};
   }
   return pageMetadata(lang, "/carrera", getDictionary(lang));
-};
-
-const planSemesters = Array.from(
-  { length: curriculum.program.semesters },
-  (_, index) => {
-    const semester = index + 1;
-
-    return {
-      courses: curriculum.courses.filter(
-        (course) => course.semester === semester
-      ),
-      semester,
-    };
-  }
-);
-
-/*
- * Prerequisite chains ("seriación"): for each course, every course it
- * depends on (backward) and every course that depends on it (forward),
- * following the "relates" edges of the curriculum graph transitively.
- */
-const prerequisiteEdges = curriculum.graph.edges.filter(
-  (edge) => edge.label === "relates"
-);
-
-const followChain = (start: string, forward: boolean, found: Set<string>) => {
-  const pending = [start];
-  while (pending.length > 0) {
-    const current = pending.pop();
-    for (const edge of prerequisiteEdges) {
-      const from = forward ? edge.a : edge.b;
-      const to = forward ? edge.b : edge.a;
-      if (from === current && !found.has(to)) {
-        found.add(to);
-        pending.push(to);
-      }
-    }
-  }
-};
-
-/** Space-separated ids of the course's chain, or undefined if it has none. */
-const seriesOf = (courseId: string): string | undefined => {
-  const chain = new Set<string>();
-  followChain(courseId, true, chain);
-  followChain(courseId, false, chain);
-  if (chain.size === 0) {
-    return undefined;
-  }
-  chain.add(courseId);
-  return [...chain].join(" ");
 };
 
 const CarreraPage = async ({ params }: LocaleParams) => {
@@ -162,94 +112,8 @@ const CarreraPage = async ({ params }: LocaleParams) => {
           {copy.videoPlaceholder}
         </div>
       </PageSection>
-      <PageSection id="semestres">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
-          <div className="lg:sticky lg:top-28 lg:self-start">
-            <h2 className="text-grafito text-4xl leading-tight sm:text-5xl">
-              {copy.planTitle}
-            </h2>
-            <p className="text-piedra mt-4 text-lg">
-              {fill(copy.planMeta, {
-                campus: org.campus,
-                plan: org.plan,
-                rvoe: org.rvoe,
-              })}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-              <ExternalLink href={externalLinks.tuRutaIdeal}>
-                {copy.rutaCta}
-              </ExternalLink>
-              <a
-                href={`mailto:${org.coordinationEmail}?subject=${encodeURIComponent(copy.planSubject)}`}
-                className="text-tinto decoration-dorado font-semibold underline decoration-2 underline-offset-4"
-              >
-                {copy.planCta} ↗
-              </a>
-            </div>
-          </div>
-          <ul className="border-grafito/15 grid border-t">
-            {areaList.map((item) => (
-              <li
-                key={item.id}
-                className="border-grafito/15 border-b py-6 sm:py-8"
-              >
-                <h3 className="text-grafito text-2xl sm:text-3xl">
-                  {item.name}
-                </h3>
-                <p className="text-piedra mt-2 max-w-xl">{item.description}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </PageSection>
-      <div className="bg-marfil py-16 sm:py-20">
-        <div className="mx-auto max-w-300 px-5 lg:px-6">
-          {/* A rail of semesters: a swipeable strip on phones, a 5 × 2 board
-              on desktop. The rule above each column draws itself in order as
-              the rail scrolls in, so it reads as a timeline. */}
-          <SeriesBoard>
-            <ol className="-mx-5 flex snap-x snap-mandatory scroll-px-5 overflow-x-auto px-5 pb-2 lg:mx-0 lg:grid lg:grid-cols-5 lg:gap-y-14 lg:overflow-visible lg:px-0 lg:pb-0">
-              {planSemesters.map((item, index) => (
-                <li
-                  key={item.semester}
-                  className="relative w-[72%] shrink-0 snap-start pt-5 pr-6 sm:w-[40%] lg:w-auto"
-                >
-                  <span
-                    className="bg-grafito/20 absolute top-0 left-0 h-px w-full"
-                    aria-hidden="true"
-                    data-reveal="line"
-                    data-delay={(index % 5) * 0.12}
-                  />
-                  <span
-                    className="bg-tinto absolute -top-[5px] left-0 size-[9px] rounded-full"
-                    aria-hidden="true"
-                  />
-                  <h3 className="text-tinto text-5xl leading-none font-bold tracking-[-0.05em] tabular-nums">
-                    <span className="sr-only">
-                      {fill(copy.semester, { n: item.semester })}
-                    </span>
-                    <span aria-hidden="true">
-                      {String(item.semester).padStart(2, "0")}
-                    </span>
-                  </h3>
-                  <ul className="text-grafito mt-4 text-[15px] leading-snug">
-                    {item.courses.map((course) => (
-                      <li
-                        key={course.id}
-                        className="series-course -mx-2 px-2 py-1"
-                        data-course={course.id}
-                        data-series={seriesOf(course.id)}
-                      >
-                        {localizedCourseName(dict, course.id, course.name)}
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ol>
-          </SeriesBoard>
-        </div>
-      </div>
+      <CarreraPlanOverview areaList={areaList} copy={copy} />
+      <CarreraSemesterBoard copy={copy} dict={dict} />
       <PageSection id="gpa">
         <SectionHeading
           title={copy.gpa.title}
@@ -272,41 +136,12 @@ const CarreraPage = async ({ params }: LocaleParams) => {
           text={copy.gpa}
         />
       </PageSection>
-      <section className="graph-surface w-full py-16 sm:py-24" id="mapa">
-        <div className="mx-auto max-w-300 px-5 lg:px-6">
-          <h2 className="text-foreground max-w-4xl text-5xl leading-[1.02] tracking-[-0.04em] sm:text-7xl">
-            {copy.mapTitleBefore}
-            <em className="text-[#e2c58f] not-italic">
-              {copy.mapTitleEmphasis}
-            </em>
-            .
-          </h2>
-          <p className="text-muted-foreground mt-6 max-w-2xl text-lg leading-relaxed">
-            {copy.mapText}
-          </p>
-          <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
-            {[
-              { label: copy.legendSemester, tone: "bg-graph-semester" },
-              { label: copy.legendCourse, tone: "bg-graph-course" },
-            ].map((item) => (
-              <li
-                className="text-muted-foreground flex items-center gap-2 text-sm font-semibold"
-                key={item.label}
-              >
-                <span className={`size-2.5 rounded-full ${item.tone}`} />
-                {item.label}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="relative mt-10 w-full">
-          <GraphView
-            initialEdges={curriculumGraph.edges}
-            initialNodes={graphNodes}
-            text={dict.graph}
-          />
-        </div>
-      </section>
+      <CarreraCurriculumMap
+        copy={copy}
+        dict={dict}
+        edges={curriculumGraph.edges}
+        nodes={graphNodes}
+      />
       <PageSection id="aprendizaje">
         <SectionHeading title={copy.learnTitle} />
         <ol className="border-grafito/15 grid border-t">
@@ -340,17 +175,27 @@ const CarreraPage = async ({ params }: LocaleParams) => {
               <p className="text-piedra mt-3 max-w-md text-lg">
                 {specialty.description}
               </p>
-              <figure className="border-dorado mt-5 border-l-2 pl-4">
-                <blockquote className="text-grafito">
-                  “{specialty.testimony}”
-                </blockquote>
-                <figcaption className="text-piedra mt-2 text-sm font-semibold">
-                  {specialty.student}
-                </figcaption>
-              </figure>
+              {specialty.testimony ? (
+                <figure className="border-dorado mt-5 border-l-2 pl-4">
+                  <blockquote className="text-grafito">
+                    “{specialty.testimony}”
+                  </blockquote>
+                  {specialty.student ? (
+                    <figcaption className="text-piedra mt-2 text-sm font-semibold">
+                      {specialty.student}
+                    </figcaption>
+                  ) : null}
+                </figure>
+              ) : null}
             </li>
           ))}
         </ul>
+      </PageSection>
+      <PageSection id="ingreso">
+        <SectionHeading title={copy.admissionTitle} />
+        <FaqAccordion
+          groups={[{ items: copy.admissionFaqs, title: copy.admissionTitle }]}
+        />
       </PageSection>
       <PageSection id="campo-profesional">
         <SectionHeading title={copy.fieldTitle} />

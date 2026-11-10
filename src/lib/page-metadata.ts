@@ -61,6 +61,11 @@ export const projectMetadata = (
   const renderedTitle = `${pageTitle}${titleSuffix}`;
   const url = `${siteUrl}${path}`;
 
+  const defaultOgImage = `${siteUrl}${localizedPath(locale, "/")}/opengraph-image`;
+  const shareImage = project.cover
+    ? `${siteUrl}${project.cover.src}`
+    : defaultOgImage;
+
   const projectPath = `/proyectos/${project.slug}`;
   const languages = {
     "x-default": `${siteUrl}${localizedPath("es", projectPath)}`,
@@ -80,7 +85,7 @@ export const projectMetadata = (
     description: metaDescription,
     openGraph: {
       description: metaDescription,
-      images: [{ url: `${siteUrl}${project.cover.src}` }],
+      images: [{ url: shareImage }],
       locale: dict.ogLocale,
       title: renderedTitle,
       type: "article",
@@ -89,7 +94,7 @@ export const projectMetadata = (
     title: pageTitle,
     twitter: {
       description: metaDescription,
-      images: [`${siteUrl}${project.cover.src}`],
+      images: [shareImage],
       title: renderedTitle,
     },
   };

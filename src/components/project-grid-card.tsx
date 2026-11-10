@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { ProjectCoverTile } from "@/components/project-cover-tile";
 import type { Project } from "@/content/projects";
 import type { Dictionary } from "@/lib/dictionary";
 import { localizedPath } from "@/lib/i18n";
@@ -37,15 +38,23 @@ export const ProjectGridCard = ({
 
   return (
     <article className="project-card group rounded-card shadow-soft/40 relative flex h-full flex-col overflow-hidden bg-white">
-      <div className="bg-grafito relative aspect-[4/3] overflow-hidden">
-        <Image
-          alt={project.cover.alt}
-          className="object-cover motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-focus-within:scale-[1.02] motion-safe:group-hover:scale-[1.02]"
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          src={project.cover.src}
-          priority={index < 4}
-        />
+      <div className="relative aspect-[4/3] overflow-hidden">
+        {project.cover ? (
+          <Image
+            alt={project.cover.alt}
+            className="object-cover motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-focus-within:scale-[1.02] motion-safe:group-hover:scale-[1.02]"
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            src={project.cover.src}
+            priority={index < 4}
+          />
+        ) : (
+          <ProjectCoverTile
+            title={project.title}
+            variant="card"
+            year={project.year}
+          />
+        )}
         <div className="pointer-events-none absolute top-3 right-3 flex gap-2">
           {hasVideo(project) && (
             <span className="bg-grafito/90 rounded-full px-2 py-0.5 text-[10px] font-bold tracking-wider text-[#e2c58f] uppercase">
@@ -75,15 +84,29 @@ export const ProjectGridCard = ({
           ) : (
             <span />
           )}
-          {project.githubUrl ? (
-            <a
-              href={project.githubUrl}
-              className="text-tinto decoration-dorado relative z-20 text-sm font-semibold underline decoration-2 underline-offset-4"
-              rel="noreferrer"
-              target="_blank"
-            >
-              {labels.githubLink}
-            </a>
+          {(project.githubUrl ?? project.projectUrl) ? (
+            <div className="relative z-20 flex flex-col items-end gap-1">
+              {project.githubUrl ? (
+                <a
+                  href={project.githubUrl}
+                  className="text-tinto decoration-dorado text-sm font-semibold underline decoration-2 underline-offset-4"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  {labels.githubLink}
+                </a>
+              ) : null}
+              {project.projectUrl ? (
+                <a
+                  href={project.projectUrl}
+                  className="text-tinto decoration-dorado text-sm font-semibold underline decoration-2 underline-offset-4"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  {labels.projectLink}
+                </a>
+              ) : null}
+            </div>
           ) : null}
         </div>
       </div>

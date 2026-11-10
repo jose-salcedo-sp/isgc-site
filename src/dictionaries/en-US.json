@@ -102,7 +102,7 @@
     "en-US": "English (US)"
   },
   "brand": {
-    "footerBlurb": "Computer Science and Engineering · Universidad Panamericana Guadalajara."
+    "footerBlurb": "Computer Science and Engineering (ISGC) · Universidad Panamericana Guadalajara."
   },
   "graph": {
     "close": "Close",
@@ -184,7 +184,7 @@
         "id": "linkedin",
         "group": "career",
         "label": "LinkedIn",
-        "description": "Build your professional profile."
+        "description": "UP's institutional school page to link your academic experience."
       },
       {
         "id": "internships",
@@ -196,7 +196,7 @@
         "id": "github",
         "group": "career",
         "label": "GitHub",
-        "description": "Organize and share your work."
+        "description": "Use a personal account; there is no official ISGC GitHub organization."
       },
       {
         "id": "up4u",
@@ -234,6 +234,16 @@
       "date": "10 October 2026",
       "text": "See how our graduates connect the program with their professional field.",
       "title": "Alumni panel"
+    },
+    "icpc": {
+      "date": "5 January 2026",
+      "title": "Gold medal at national ICPC",
+      "text": "Team Testigos de Germán won gold and 4th nationally, advancing to the Latin America Super Regional (ITESO, Oct 2025)."
+    },
+    "halberd": {
+      "date": "24 February 2026",
+      "title": "UP Guadalajara and Halberd Studios",
+      "text": "Collaboration with the games and animation studio on projects with engineering and digital-art students."
     }
   },
   "faculty": {
@@ -246,22 +256,22 @@
   },
   "alumni": [
     {
-      "imageAlt": "Space reserved for Lorem Ipsum’s photograph.",
-      "name": "Lorem Ipsum",
-      "role": "CSE alumna · sample profile",
-      "testimony": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "imageAlt": "Portrait placeholder for Álvaro Gallo Cruz.",
+      "name": "Álvaro Gallo Cruz",
+      "role": "ISGC student · competitive programming",
+      "testimony": "At the start of the contest we received three packets with several sheets listing the 12 problems to solve…"
     },
     {
-      "imageAlt": "Space reserved for Dolor Sit’s photograph.",
-      "name": "Dolor Sit",
-      "role": "CSE alumnus · sample profile",
-      "testimony": "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt."
+      "imageAlt": "Portrait placeholder for Iván Ferrat.",
+      "name": "Iván Ferrat",
+      "role": "ISGC student · UP Guadalajara",
+      "testimony": "As a kid I played a lot of video games… teacher Jafet Rodríguez told me about this degree…"
     },
     {
-      "imageAlt": "Space reserved for Amet Consectetur’s photograph.",
-      "name": "Amet Consectetur",
-      "role": "CSE alumna · sample profile",
-      "testimony": "Lorem ipsum dolor sit amet, ut labore et dolore magna aliqua."
+      "imageAlt": "Portrait placeholder for Sergio Velázquez.",
+      "name": "Sergio Velázquez",
+      "role": "ISGC alumnus · Guadalajara campus",
+      "testimony": "Before university I did not know anything about programming…"
     }
   ],
   "specialties": [
@@ -278,22 +288,6 @@
       ],
       "text": "Combine mathematics, programming and visual judgement to create digital experiences.",
       "title": "Visual effects"
-    }
-  ],
-  "projects": [
-    {
-      "caption": "Project archive, 2015.",
-      "date": "Archive · 2015",
-      "learning": "Design an experience that connects research, technology and public outreach.",
-      "process": "Modelling, interaction and digital visualization to bring paleontological pieces to the public.",
-      "title": "Augmented reality to discover the past"
-    },
-    {
-      "caption": "Illustrative example.",
-      "date": "Example application",
-      "learning": "Communicate findings clearly and make decisions from data.",
-      "process": "Analysis and visualization to turn complex information into questions that can be discussed.",
-      "title": "Data to understand our surroundings"
     }
   ],
   "mediaLab": [
@@ -335,7 +329,7 @@
         "question": "What will I learn in CSE?"
       },
       {
-        "answer": "Check the official process and dates directly with Admissions at Universidad Panamericana.",
+        "answer": "Start on the Guadalajara Admissions portal for exam dates, registration, and team contact.",
         "question": "Where do I check admissions?"
       },
       {
@@ -348,75 +342,75 @@
     "home": {
       "meta": {
         "title": "CSE | Computer Science and Engineering",
-        "description": "Discover Computer Science and Engineering (CSE) at Universidad Panamericana Guadalajara: software, data, graphics and applied projects on campus."
+        "description": "Computer Science and Engineering (ISGC) at Universidad Panamericana Guadalajara: software, data, graphics, and project-based learning on campus."
       },
       "hero": {
         "title": "Computer Science and Engineering.",
-        "lede": "Lorem ipsum dolor sit.",
-        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "lede": "Software, data, and computer graphics engineering at the Guadalajara campus.",
+        "text": "The degree combines programming, data analysis, and computer graphics with project work from early semesters. The plan covers computer vision, mixed reality, cloud computing, and work in the campus Media Lab.",
         "careerCta": "Explore the program",
         "studentCta": "I study here",
         "canvasAria": "The Utah teapot, the classic computer graphics model, drawn in real time: it goes from vertices to mesh to shaded surface as you scroll."
       },
       "story": {
-        "line1": "Lorem ipsum.",
-        "line2Before": "Dolor sit ",
-        "line2Emphasis": "amet.",
+        "line1": "You learn by doing:",
+        "line2Before": "understand, ",
+        "line2Emphasis": "build, and share.",
         "cta": "See what we're already building",
         "steps": [
           {
             "number": "01",
-            "title": "Lorem ipsum dolor sit amet.",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
+            "title": "Understand",
+            "text": "Observe a problem, ask questions, and build a solid foundation."
           },
           {
             "number": "02",
-            "title": "Consectetur adipiscing elit.",
-            "text": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo."
+            "title": "Build",
+            "text": "Write code, design prototypes, and work with tools used outside the classroom."
           },
           {
             "number": "03",
-            "title": "Sed do eiusmod tempor.",
-            "text": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+            "title": "Share",
+            "text": "Present your decisions, get feedback, and work with others."
           }
         ]
       },
       "career": {
-        "title": "Lorem ipsum dolor sit amet consectetur.",
-        "text": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        "deepen": "Lorem ipsum dolor sit amet:",
+        "title": "Five tracks in the degree plan.",
+        "text": "The plan spans software development, artificial intelligence, virtual and mixed reality, computer graphics, and data science, with electives and a 4+1 specialty year.",
+        "deepen": "On the curriculum map you deepen in",
         "join": " and ",
         "cta": "See the study plan"
       },
       "capabilities": [
         {
-          "title": "Lorem ipsum",
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          "title": "Software development",
+          "text": "Algorithms, data structures, databases, operating systems, and software engineering."
         },
         {
-          "title": "Dolor sit amet",
-          "text": "Sed do eiusmod tempor incididunt ut labore et dolore."
+          "title": "Computer graphics",
+          "text": "Digital modeling, geometry, animation, games, and advanced rendering."
         },
         {
-          "title": "Consectetur elit",
-          "text": "Ut enim ad minim veniam, quis nostrud exercitation."
+          "title": "Data science",
+          "text": "Statistics, numerical methods, parallel computing, and the data-science specialty in 4+1."
         }
       ],
       "projects": {
-        "title": "Lorem ipsum dolor sit amet.",
+        "title": "Lab and archive projects.",
         "cta": "View projects"
       },
       "community": {
-        "title": "Lorem ipsum dolor sit amet.",
-        "text": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        "title": "Program coordination",
+        "text": "Bernardo Moya directs the program and Marcelo Alvarez coordinates courses, schedules, and academic processes. Email them about the plan, projects, or paperwork. Coordination is in Building C, 3rd floor."
       },
       "next": {
-        "title": "Lorem ipsum dolor?",
-        "admissionsTitle": "Lorem ipsum",
-        "admissionsText": "Lorem ipsum dolor sit amet, consectetur adipiscing.",
+        "title": "What's next?",
+        "admissionsTitle": "I want to apply to CSE",
+        "admissionsText": "Review admission steps, exam dates, and scholarships on the Guadalajara Admissions portal.",
         "admissionsCta": "See how to apply",
-        "studentsTitle": "Dolor sit amet",
-        "studentsText": "Sed do eiusmod tempor incididunt ut labore et dolore.",
+        "studentsTitle": "I'm already a student",
+        "studentsText": "Links to Tu Ruta Ideal, treasury, Office 365, and coordination appointments in one place.",
         "studentsCta": "Go to resources"
       },
       "scrollHint": "Scroll down"
@@ -463,7 +457,7 @@
         "10th Semester"
       ],
       "rutaCta": "Open Tu Ruta Ideal",
-      "planCta": "Request the official plan",
+      "planCta": "Download the official plan",
       "planSubject": "CSE study plan",
       "mapTitleBefore": "Your program ",
       "mapTitleEmphasis": "at a glance",
@@ -471,7 +465,7 @@
       "legendSemester": "Semesters",
       "legendCourse": "Courses",
       "trackTitle": "Specializations",
-      "trackDescription": "Confirm the current offering with Coordination.",
+      "trackDescription": "The 4+1 program lets you graduate with two degrees: four years of the bachelor's degree plus one year of specialty (semesters 9 and 10). See the official plan for the specialty list.",
       "doubleTitle": "Double degree",
       "doubleText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
       "doubleItems": [
@@ -514,46 +508,58 @@
       },
       "specialtyList": [
         {
-          "name": "Specialization in Data Science",
-          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
-          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          "student": "Student name · class year"
+          "name": "Specialty in Automation and Control",
+          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
+          "testimony": "",
+          "student": ""
         },
         {
-          "name": "Specialization in Operations Management",
-          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
-          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          "student": "Student name · class year"
+          "name": "Specialty in Data Science",
+          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
+          "testimony": "",
+          "student": ""
         },
         {
-          "name": "Specialization in Project Engineering and Management",
-          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
-          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          "student": "Student name · class year"
+          "name": "Specialty in Design and Technology",
+          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
+          "testimony": "",
+          "student": ""
         },
         {
-          "name": "Specialization in Strategic Design Management",
-          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
-          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          "student": "Student name · class year"
+          "name": "Specialty in Operations Management",
+          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
+          "testimony": "",
+          "student": ""
         },
         {
-          "name": "Specialization in Manufacturing and Product Engineering",
-          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
-          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          "student": "Student name · class year"
+          "name": "Specialty in Visual Effects",
+          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
+          "testimony": "",
+          "student": ""
         },
         {
-          "name": "Specialization in Autonomous Systems",
-          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
-          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          "student": "Student name · class year"
+          "name": "Specialty in Engineering and Project Management",
+          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
+          "testimony": "",
+          "student": ""
         },
         {
-          "name": "Specialization in Visual Effects",
-          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
-          "testimony": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          "student": "Student name · class year"
+          "name": "Specialty in Process Optimization",
+          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
+          "testimony": "",
+          "student": ""
+        },
+        {
+          "name": "Specialty in Quality Systems",
+          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
+          "testimony": "",
+          "student": ""
+        },
+        {
+          "name": "Specialty in Advanced Manufacturing Systems",
+          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
+          "testimony": "",
+          "student": ""
         }
       ],
       "gpa": {
@@ -567,7 +573,24 @@
         "empty": "Enter at least one grade to see your result.",
         "note": "Estimate based on Scholaro's scale for Mexico: 9 to 10 equals 4.0, 8 equals 3.0, 7 equals 2.0, 6 equals 1.0 and below 6 equals 0. Each university may convert it differently.",
         "reset": "Clear grades"
-      }
+      },
+      "planMailtoCta": "Request the plan by email",
+      "planNote": "RVOE SEP 20160122 · 9 Mar 2016 · 2015 plan · Guadalajara campus.",
+      "admissionTitle": "Admission questions",
+      "admissionFaqs": [
+        {
+          "question": "Who is this degree for?",
+          "answer": "It may suit you if you want to improve society through technology, enjoy applied mathematics, think analytically, and work well in teams."
+        },
+        {
+          "question": "What is the Guadalajara admission process?",
+          "answer": "Register for the exam, take it, attend an interview with your program coordinator, receive results, and enroll. Confirm dates with Admissions."
+        },
+        {
+          "question": "Where do I start?",
+          "answer": "Use the Guadalajara Admissions portal or email admisionesgdl@up.edu.mx."
+        }
+      ]
     },
     "hallOfFame": {
       "meta": {
@@ -593,6 +616,7 @@
       "cardKind": "Project",
       "githubLink": "GitHub",
       "githubRepo": "GitHub repository",
+      "projectLink": "View project",
       "teamTitle": "Team",
       "resultTitle": "Result",
       "realized": "Completed in {date}.",
