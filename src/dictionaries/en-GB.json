@@ -465,7 +465,7 @@
       "legendSemester": "Semesters",
       "legendCourse": "Modules",
       "trackTitle": "Specialisations",
-      "trackDescription": "The 4+1 programme lets you graduate with two degrees: four years of the bachelor's degree plus one year of specialty (semesters 9 and 10). See the official plan for the specialty list.",
+      "trackDescription": "The 4+1 programme lets you graduate with two degrees: four years of the bachelor's degree plus one year of specialty (semesters 9 and 10). Guadalajara campus offers seven one-year engineering specialties; you can add a second year for a master's degree.",
       "doubleTitle": "Double degree",
       "doubleText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
       "doubleItems": [
@@ -508,56 +508,44 @@
       },
       "specialtyList": [
         {
-          "name": "Specialty in Automation and Control",
-          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
-          "testimony": "",
-          "student": ""
-        },
-        {
           "name": "Specialty in Data Science",
-          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
-          "testimony": "",
-          "student": ""
-        },
-        {
-          "name": "Specialty in Design and Technology",
-          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
+          "description": "Extract insights with statistics, modelling, and visualisation for decision-making. Preparatory coursework required. Starts in January and August.",
           "testimony": "",
           "student": ""
         },
         {
           "name": "Specialty in Operations Management",
-          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
+          "description": "Strategic view of supply chains, resources, and integrated operations solutions. Starts in January and August.",
           "testimony": "",
           "student": ""
         },
         {
           "name": "Specialty in Visual Effects",
-          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
+          "description": "Large-scale projects in animation and entertainment; selective admission. 4+1 in semesters 9 and 10. August intake only.",
+          "testimony": "",
+          "student": ""
+        },
+        {
+          "name": "Specialty in Strategic Design Management",
+          "description": "Design decisions with technology, sustainability, and business thinking across the value chain. August intake only.",
           "testimony": "",
           "student": ""
         },
         {
           "name": "Specialty in Engineering and Project Management",
-          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
+          "description": "Plan, execute, and control your own year-long project, including economic feasibility. Starts in January and August.",
           "testimony": "",
           "student": ""
         },
         {
-          "name": "Specialty in Process Optimization",
-          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
+          "name": "Specialty in Manufacturing and Product Engineering",
+          "description": "Integrate design, analysis, and manufacturing for buildable, profitable products. August intake only.",
           "testimony": "",
           "student": ""
         },
         {
-          "name": "Specialty in Quality Systems",
-          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
-          "testimony": "",
-          "student": ""
-        },
-        {
-          "name": "Specialty in Advanced Manufacturing Systems",
-          "description": "4+1 year: specialty in semesters 9 and 10. Listed on the official Guadalajara campus study plan.",
+          "name": "Specialty in Autonomous Systems",
+          "description": "Automation, control, sensors, actuators, and robotics (formerly Automation and Control). August intake only.",
           "testimony": "",
           "student": ""
         }
@@ -974,7 +962,7 @@
     },
     "especialidad-10": {
       "name": "Specialisation",
-      "description": "Continues the chosen specialisation. Options listed under specialties."
+      "description": "Continues the specialty you chose among Guadalajara campus's seven options."
     }
   }
 }

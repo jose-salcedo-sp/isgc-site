@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -244,16 +245,14 @@ const CommunitySection = ({ dict }: HomeCopy) => {
               className="border-grafito/15 grid gap-3 border-b py-8 md:grid-cols-[minmax(0,6fr)_minmax(0,4fr)_minmax(0,3fr)] md:items-center md:gap-10"
             >
               <div className="flex items-center gap-5">
-                <span
-                  className="bg-marfil text-tinto flex size-16 shrink-0 items-center justify-center rounded-full text-xl font-bold"
-                  aria-hidden="true"
-                >
-                  {person.name
-                    .split(" ")
-                    .slice(0, 2)
-                    .map((part) => part[0])
-                    .join("")}
-                </span>
+                <Image
+                  alt={person.name}
+                  className="size-16 shrink-0 rounded-full object-cover"
+                  height={64}
+                  src={person.photo}
+                  style={{ objectPosition: person.photoPosition }}
+                  width={64}
+                />
                 <h3 className="text-grafito text-3xl leading-tight font-bold tracking-[-0.025em] text-balance sm:text-4xl">
                   {person.name}
                 </h3>

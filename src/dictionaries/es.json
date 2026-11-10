@@ -469,7 +469,7 @@
       "legendSemester": "Semestres",
       "legendCourse": "Materias",
       "trackTitle": "Especialidades",
-      "trackDescription": "El programa 4+1 te permite graduarte con dos títulos: cuatro años de licenciatura y un año de especialidad (noveno y décimo semestre). La oferta de especialidades está en el plan oficial.",
+      "trackDescription": "El programa 4+1 te permite graduarte con dos títulos: cuatro años de licenciatura y un año de especialidad (noveno y décimo semestre). El campus Guadalajara ofrece siete especialidades de un año; con un año adicional puedes convertirla en maestría.",
       "doubleTitle": "Doble carrera",
       "doubleText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
       "doubleItems": [
@@ -512,56 +512,44 @@
       },
       "specialtyList": [
         {
-          "name": "Especialidad en Automatización y Control",
-          "description": "Año 4+1: especialidad de noveno y décimo semestre. Figura en el plan de estudios oficial del campus Guadalajara.",
-          "testimony": "",
-          "student": ""
-        },
-        {
           "name": "Especialidad en Ciencia de Datos",
-          "description": "Año 4+1: especialidad de noveno y décimo semestre. Figura en el plan de estudios oficial del campus Guadalajara.",
-          "testimony": "",
-          "student": ""
-        },
-        {
-          "name": "Especialidad en Diseño y Tecnología",
-          "description": "Año 4+1: especialidad de noveno y décimo semestre. Figura en el plan de estudios oficial del campus Guadalajara.",
+          "description": "Domina técnicas para extraer información, modelar y visualizar datos para decidir. Requiere propedéutico previo. Apertura en enero y agosto.",
           "testimony": "",
           "student": ""
         },
         {
           "name": "Especialidad en Dirección de Operaciones",
-          "description": "Año 4+1: especialidad de noveno y décimo semestre. Figura en el plan de estudios oficial del campus Guadalajara.",
+          "description": "Genera valor con visión estratégica: cadena de suministro, recursos y soluciones integrales. Apertura en enero y agosto.",
           "testimony": "",
           "student": ""
         },
         {
           "name": "Especialidad en Efectos Visuales",
-          "description": "Año 4+1: especialidad de noveno y décimo semestre. Figura en el plan de estudios oficial del campus Guadalajara.",
+          "description": "Proyectos a gran escala en animación y entretenimiento; proceso de selección. Año 4+1, noveno y décimo semestre. Solo apertura en agosto.",
+          "testimony": "",
+          "student": ""
+        },
+        {
+          "name": "Especialidad en Gestión Estratégica del Diseño",
+          "description": "Decisiones de diseño con tecnología, sustentabilidad y pensamiento crítico en la cadena de valor. Solo apertura en agosto.",
           "testimony": "",
           "student": ""
         },
         {
           "name": "Especialidad en Ingeniería y Gestión de Proyectos",
-          "description": "Año 4+1: especialidad de noveno y décimo semestre. Figura en el plan de estudios oficial del campus Guadalajara.",
+          "description": "Planea, ejecuta y controla un proyecto propio durante el año, con viabilidad económica. Apertura en enero y agosto.",
           "testimony": "",
           "student": ""
         },
         {
-          "name": "Especialidad en Optimización de procesos",
-          "description": "Año 4+1: especialidad de noveno y décimo semestre. Figura en el plan de estudios oficial del campus Guadalajara.",
+          "name": "Especialidad en Manufactura e Ingeniería de Producto",
+          "description": "Integra diseño, análisis y manufactura para productos fabricables y rentables. Solo apertura en agosto.",
           "testimony": "",
           "student": ""
         },
         {
-          "name": "Especialidad en Sistemas de Calidad",
-          "description": "Año 4+1: especialidad de noveno y décimo semestre. Figura en el plan de estudios oficial del campus Guadalajara.",
-          "testimony": "",
-          "student": ""
-        },
-        {
-          "name": "Especialidad en Sistemas de Manufactura Avanzada",
-          "description": "Año 4+1: especialidad de noveno y décimo semestre. Figura en el plan de estudios oficial del campus Guadalajara.",
+          "name": "Especialidad en Sistemas Autónomos",
+          "description": "Automatización, control, sensores, actuadores y robótica (antes Automatización y Control). Solo apertura en agosto.",
           "testimony": "",
           "student": ""
         }
@@ -978,7 +966,7 @@
     },
     "especialidad-10": {
       "name": "Especialidad",
-      "description": "Continúa la especialidad elegida. Opciones listadas en specialties."
+      "description": "Continúa la especialidad elegida entre las siete opciones del campus Guadalajara."
     }
   }
 }

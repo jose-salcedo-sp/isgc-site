@@ -141,10 +141,14 @@ export const faculty = [
     email: "bmoya@up.edu.mx",
     id: "bernardo",
     name: "Bernardo Moya de la Mora",
+    photo: "/personas/bernardo-moya.jpg",
+    photoPosition: "center 20%",
   },
   {
     email: "malvarezg@up.edu.mx",
     id: "marcelo",
     name: "Marcelo Alvarez García",
+    photo: "/personas/marcelo-alvarez.jpg",
+    photoPosition: "center 30%",
   },
 ] as const;
