@@ -66,12 +66,19 @@ export const ProjectDetailView = ({
           <h1 className="text-grafito mt-4 text-4xl leading-[1.05] tracking-[-0.03em] sm:text-6xl">
             {project.title}
           </h1>
-          {project.githubUrl ? (
-            <p className="mt-5">
-              <ExternalLink href={project.githubUrl}>
-                {copy.githubRepo}
-              </ExternalLink>
-            </p>
+          {(project.githubUrl ?? project.projectUrl) ? (
+            <div className="mt-5 flex flex-wrap gap-x-6 gap-y-3">
+              {project.githubUrl ? (
+                <ExternalLink href={project.githubUrl}>
+                  {copy.githubRepo}
+                </ExternalLink>
+              ) : null}
+              {project.projectUrl ? (
+                <ExternalLink href={project.projectUrl}>
+                  {copy.projectLink}
+                </ExternalLink>
+              ) : null}
+            </div>
           ) : null}
         </div>
       </section>

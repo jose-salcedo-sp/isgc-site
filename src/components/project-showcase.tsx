@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { ProjectCoverTile } from "@/components/project-cover-tile";
 import { ProjectGallery } from "@/components/project-gallery";
 
 export type ProjectMedia =
@@ -17,6 +18,7 @@ export type ProjectMedia =
 export interface ProjectShowcaseData {
   description: string;
   githubUrl?: string;
+  projectUrl?: string;
   media: ProjectMedia[];
   result: string;
   team: { name: string; role: string }[];
@@ -42,17 +44,31 @@ const ProjectCoverStage = ({
   </div>
 );
 
+const ProjectCoverTileStage = ({
+  title,
+  year,
+}: {
+  title: string;
+  year: string;
+}) => (
+  <div className="min-w-0">
+    <div className="lab-panel relative aspect-[4/3] overflow-hidden">
+      <ProjectCoverTile title={title} variant="detail" year={year} />
+    </div>
+  </div>
+);
+
 const mediaColumn = (
-  media: ProjectShowcaseData["media"],
+  project: ProjectShowcaseData,
   cover?: { alt: string; src: string }
 ) => {
-  if (media.length > 0) {
-    return <ProjectGallery media={media} />;
+  if (project.media.length > 0) {
+    return <ProjectGallery media={project.media} />;
   }
   if (cover) {
     return <ProjectCoverStage cover={cover} />;
   }
-  return null;
+  return <ProjectCoverTileStage title={project.title} year={project.year} />;
 };
 
 export const ProjectShowcase = ({
@@ -67,7 +83,7 @@ export const ProjectShowcase = ({
   showHeading?: boolean;
 }) => (
   <article className="grid items-start gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
-    {mediaColumn(project.media, cover)}
+    {mediaColumn(project, cover)}
     <div className="min-w-0">
       {showHeading ? (
         <>

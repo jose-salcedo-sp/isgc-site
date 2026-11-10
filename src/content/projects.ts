@@ -1,445 +1,253 @@
-import type {
-  ProjectMedia,
-  ProjectShowcaseData,
-} from "@/components/project-showcase";
+import type { ProjectShowcaseData } from "@/components/project-showcase";
 
 export type Project = ProjectShowcaseData & {
-  cover: { alt: string; src: string };
+  cover?: { alt: string; src: string };
   githubUrl?: string;
+  projectUrl?: string;
   metaDescription: string;
   metaTitle?: string;
   slug: string;
 };
 
-const demoMedia: ProjectMedia[] = [
-  {
-    alt: "Diagrama de rayos que atraviesan una lente positiva y convergen en el plano focal.",
-    caption:
-      "Trazado de rayos en una lente positiva. Imagen: Goodphy, CC BY-SA 4.0.",
-    kind: "photo",
-    src: "/proyectos/demo/raytrace-1.png",
-  },
-  {
-    alt: "Renderizado de vasos de vidrio con líquidos, reflejos y cáusticas.",
-    caption:
-      "Renderizado con trazado de rayos: refracción, reflexión y cáusticas. Imagen: Gilles Tran, dominio público.",
-    kind: "photo",
-    src: "/proyectos/demo/raytrace-2.jpg",
-  },
-  {
-    caption:
-      "Cáusticas y aberración de un espejo parabólico. Video: wgxli, CC0.",
-    captions: "/proyectos/demo/video-captions.vtt",
-    kind: "video",
-    poster: "/proyectos/demo/raytrace-poster.jpg",
-    src: "/proyectos/demo/raytrace-video.webm",
-    type: "video/webm",
-  },
-  {
-    alt: "Modelo 3D de ejemplo: una tetera de Utah.",
-    caption:
-      "Modelo 3D de ejemplo: la tetera de Utah, objeto de prueba clásico del trazado de rayos (three.js, MIT).",
-    kind: "model",
-    src: "/proyectos/demo/tetera.glb",
-  },
-];
-
 export const projects: Project[] = [
   {
-    cover: {
-      alt: "Entrada del teatro de realidad virtual Tyffonium.",
-      src: "/proyectos/covers/realidad-aumentada.jpg",
-    },
     description:
-      "Modelado, interacción y visualización digital para acercar piezas paleontológicas al público.",
+      "Durante el hackathon Latin America vs. Covid-19 del MIT, estudiantes de la UP Guadalajara propusieron Pixan: una plataforma de realidad virtual y gamificación para apoyar la salud mental del personal médico en primera línea. El proyecto ganó en su eje temático y recibió apoyo para validación e implementación. Iván Ferrat representó a ISGC en el equipo de siete integrantes.",
     media: [],
     metaDescription:
-      "Proyecto de realidad aumentada del archivo CSE: modelado e interacción para acercar piezas paleontológicas al público con visualización digital.",
+      "Pixan, proyecto ISGC ganador en el MIT Covid-19 Challenge: VR y gamificación para la salud mental del personal médico; hackathon de 48 horas, 2020.",
+    projectUrl:
+      "https://www.informador.mx/tecnologia/UP-triunfa-en-el-MIT-COVID-19-Challenge-20200628-0014.html",
     result:
-      "Diseñar una experiencia que conecte investigación, tecnología y divulgación.",
-    slug: "realidad-aumentada-descubrir-el-pasado",
-    team: [],
-    title: "Realidad aumentada para descubrir el pasado",
-    year: "2015",
-  },
-  {
-    cover: {
-      alt: "Sala con pantallas de visualización de datos.",
-      src: "/proyectos/covers/datos-entorno.jpg",
-    },
-    description:
-      "Análisis y visualización para convertir información compleja en preguntas que se puedan discutir.",
-    media: [],
-    metaDescription:
-      "Ejemplo ilustrativo de datos en CSE: análisis y visualización que convierten información compleja en preguntas claras para debatir y decidir.",
-    result:
-      "Comunicar hallazgos con claridad y tomar decisiones a partir de datos.",
-    slug: "datos-para-entender-nuestro-entorno",
-    team: [],
-    title: "Datos para entender nuestro entorno",
+      "Ganador en su eje temático del MIT Latin America vs. Covid-19 Challenge; apoyo para validación e implementación.",
+    slug: "pixan-mit-covid19-vr",
+    team: [{ name: "Iván Ferrat", role: "Alumno ISGC · UP GDL" }],
+    title: "Pixan — bienestar con realidad virtual",
     year: "2020",
   },
   {
-    cover: {
-      alt: "Reconstrucción ilustrada del Caracol en Chichén Itzá.",
-      src: "/proyectos/covers/chichen-itza.jpg",
-    },
     description:
-      "Reconstrucción digital e interactiva inspirada en la Pirámide de Chichén Itzá, parte del archivo histórico del laboratorio de medios.",
+      "Jonathan Castillo Aguilar desarrolló un motor de ray tracing en Java presentado en la convocatoria estudiantil de ACM SIGGRAPH. La UP Guadalajara fue la única universidad latinoamericana con proyectos seleccionados en esa edición, junto a instituciones como Carnegie Mellon y Texas A&M.",
     media: [],
     metaDescription:
-      "Archivo CSE 2013: proyecto sobre la Pirámide de Chichén Itzá con reconstrucción digital e interacción para explorar el patrimonio desde la computación.",
-    result: "Pirámide de Chichén Itzá",
-    slug: "piramide-de-chichen-itza",
-    team: [],
-    title: "Pirámide de Chichén Itzá",
-    year: "2013",
-  },
-  {
-    cover: {
-      alt: "Manual de programación BASIC en un ordenador retro.",
-      src: "/proyectos/covers/larva-game-studios.jpg",
-    },
-    description:
-      "Colaboración estudiantil con LARVA Game Studios: prototipos de juego y herramientas para un estudio local de entretenimiento digital.",
-    githubUrl: "https://github.com/example/larva-game-studios",
-    media: [],
-    metaDescription:
-      "Proyecto 2014 con LARVA Game Studios: prototipos de juego y pipelines de producción que conectan la carrera con la industria de videojuegos en la región.",
-    result: "LARVA Game Studios",
-    slug: "larva-game-studios",
-    team: [],
-    title: "LARVA Game Studios",
-    year: "2014",
-  },
-  {
-    cover: {
-      alt: "Montaña rusa en un parque de atracciones.",
-      src: "/proyectos/covers/montana-rusa.jpg",
-    },
-    description:
-      "Simulación inmersiva de montaña rusa: física, cámara y render en tiempo real para una experiencia de parque virtual.",
-    media: [],
-    metaDescription:
-      "Montaña rusa virtual (2014): simulación con física, cámaras y render en tiempo real; archivo histórico de experiencias inmersivas en CSE Guadalajara.",
-    result: "Montaña rusa virtual",
-    slug: "montana-rusa-virtual",
-    team: [],
-    title: "Montaña rusa virtual",
-    year: "2014",
-  },
-  {
-    cover: {
-      alt: "Sala de exposición de fósiles en un museo.",
-      src: "/proyectos/covers/fosiles-ra.jpg",
-    },
-    description:
-      "Fósiles en realidad aumentada: marcadores, modelos 3D y narración para museo, hermano del archivo de divulgación paleontológica.",
-    media: [],
-    metaDescription:
-      "Fósiles en realidad aumentada (2015): marcadores y modelos 3D con narración museográfica; archivo histórico de divulgación paleontológica en CSE.",
-    result: "Fósiles en realidad aumentada",
-    slug: "fosiles-en-realidad-aumentada",
-    team: [],
-    title: "Fósiles en realidad aumentada",
-    year: "2015",
-  },
-  {
-    cover: {
-      alt: "Renderizado con trazado de rayos: vasos, refracción y cáusticas.",
-      src: "/proyectos/demo/raytrace-2.jpg",
-    },
-    description:
-      "Demostración de trazado de rayos con fotos, video WebVTT y modelo 3D de la tetera de Utah; contenido de ejemplo para el componente de proyecto.",
-    githubUrl: "https://github.com/example/lorem-ipsum-trazado-de-rayos",
-    media: demoMedia,
-    metaDescription:
-      "Demo de trazado de rayos en CSE: fotos, video con subtítulos y modelo 3D interactivo. Ejemplo de ficha de proyecto con galería mixta y equipo.",
-    metaTitle: "Demo: trazado de rayos",
+      "Motor de ray tracing en Java de ISGC en la exhibición estudiantil de ACM SIGGRAPH 2021; UP Guadalajara, única universidad latinoamericana seleccionada.",
+    metaTitle: "Ray tracing en Java — SIGGRAPH",
     result:
-      "Lorem ipsum: 42% menos tiempo de espera en el proceso de catalogación.",
-    slug: "lorem-ipsum-trazado-de-rayos",
+      "Proyecto seleccionado para la exhibición estudiantil de ACM SIGGRAPH 2021.",
+    slug: "siggraph-ray-tracing-java",
     team: [
-      { name: "Lorem Ipsum", role: "Alumno" },
-      { name: "Dolor Sit Amet", role: "Profesor" },
-      { name: "Consectetur Adipiscing", role: "Colaborador" },
-    ],
-    title: "Lorem ipsum dolor sit amet",
-    year: "2025",
-  },
-  {
-    cover: {
-      alt: "Placa de circuito impreso recién grabada.",
-      src: "/proyectos/covers/red-mesh.jpg",
-    },
-    description:
-      "Nodos ESP32 en una red mesh para monitorear humedad en invernaderos escolares.",
-    githubUrl: "https://github.com/example/red-mesh-iot",
-    media: [],
-    metaDescription:
-      "Red mesh con microcontroladores en CSE: nodos de bajo costo, telemetría y un tablero web para leer sensores de humedad en tiempo real en el campus.",
-    result: "Red estable con ocho nodos y alertas por umbral.",
-    slug: "red-mesh-iot",
-    team: [{ name: "Mateo Herrera", role: "Alumno" }],
-    title: "Red mesh",
-    year: "2026",
-  },
-  {
-    cover: {
-      alt: "Laboratorio de cómputo con equipos de escritorio.",
-      src: "/proyectos/covers/galeria-multimedia.jpg",
-    },
-    description:
-      "Sensores LoRa, ETL en Python y tableros para leer indicadores de movilidad urbana en el campus.",
-    media: [
+      { name: "Jonathan Castillo Aguilar", role: "Creador · ISGC 7.º" },
+      { name: "Felipe López Valdez", role: "Participante institución" },
+      { name: "María Fernanda Gallo Cruz", role: "Participante institución" },
+      { name: "Sebastian Woolfolk", role: "Participante institución" },
       {
-        alt: "Sala de servidores con racks de red.",
-        caption: "Rack de servidores usado para ingesta de datos.",
-        kind: "photo",
-        src: "/proyectos/covers/servidor-datos.jpg",
+        name: "Saúl Eduardo Zepeda de la Torre",
+        role: "Participante institución",
+      },
+      { name: "Sebastián García Aguirre", role: "Participante institución" },
+      { name: "Benjamín Santana Velázquez", role: "Participante institución" },
+      { name: "Mauricio Castro Torres", role: "Participante institución" },
+      {
+        name: "Guillermo Asael Fernández Villalobos",
+        role: "Participante institución",
       },
       {
-        alt: "Cables de red en un centro de datos.",
-        caption: "Cableado de red del laboratorio.",
-        kind: "photo",
-        src: "/proyectos/covers/cable-red.jpg",
-      },
-      {
-        alt: "Sala de cómputo con perspectiva ojo de pez.",
-        caption:
-          "Laboratorio de cómputo del campus. Imagen: Addjimedu, CC0 vía Wikimedia Commons.",
-        kind: "photo",
-        src: "/proyectos/covers/app-campus.jpg",
+        name: "Santiago Juárez Badillo Chávez",
+        role: "Participante institución",
       },
     ],
-    metaDescription:
-      "Plataforma de analítica urbana con sensores LoRa en CSE: ingesta, limpieza y tableros para visualizar movilidad y ocupación en tiempo real en el campus.",
-    metaTitle: "Plataforma de analítica urbana con sensores LoRa",
-    result: "Tablero con seis indicadores actualizados cada cinco minutos.",
-    slug: "plataforma-analitica-urbana-lora",
-    team: [
-      { name: "Valeria Núñez", role: "Alumna" },
-      { name: "Luis Ortega", role: "Profesor" },
-    ],
-    title: "Plataforma de analítica urbana con sensores LoRa y tableros",
-    year: "2024",
-  },
-  {
-    cover: {
-      alt: "Cables de red en un centro de datos.",
-      src: "/proyectos/covers/cable-red.jpg",
-    },
-    description:
-      "Archivo fotográfico del laboratorio: tres tomas documentan cableado, impresión 3D y robótica.",
-    media: [
-      {
-        alt: "Placa de circuito recién grabada.",
-        caption: "Placa prototipo. Imagen: Tinux, CC0 vía Wikimedia Commons.",
-        kind: "photo",
-        src: "/proyectos/covers/red-mesh.jpg",
-      },
-      {
-        alt: "Impresora 3D de sinterizado en laboratorio.",
-        caption: "Impresora 3D industrial. Imagen: Johannes-at-voxeljet, CC0.",
-        kind: "photo",
-        src: "/proyectos/covers/impresion-3d-modelo.jpg",
-      },
-      {
-        alt: "Brazo robótico manipulando placas en laboratorio.",
-        caption:
-          "Brazo robótico en banco de pruebas. Imagen: dominio público, NIH.",
-        kind: "photo",
-        src: "/proyectos/covers/brazo-robotico.jpg",
-      },
-    ],
-    metaDescription:
-      "Archivo fotográfico del laboratorio CSE: tres escenas de red, fabricación aditiva y automatización que documentan infraestructura y prototipos del programa.",
-    result: "Set publicado para material de divulgación interna.",
-    slug: "archivo-fotografico-laboratorio",
-    team: [],
-    title: "Archivo fotográfico del laboratorio",
-    year: "2022",
-  },
-  {
-    cover: {
-      alt: "Laboratorio de cómputo con equipos en filas.",
-      src: "/proyectos/covers/video-documental.jpg",
-    },
-    description:
-      "Corto documental sobre paneles solares en el campus: foto de campo y clip editado con subtítulos.",
-    githubUrl: "https://github.com/example/documental-energia-solar",
-    media: [
-      {
-        alt: "Sala de cómputo del campus.",
-        caption:
-          "Toma de apoyo en laboratorio. Imagen: Addjimedu, CC0 vía Wikimedia Commons.",
-        kind: "photo",
-        src: "/proyectos/covers/video-documental.jpg",
-      },
-      {
-        caption:
-          "Cáusticas y aberración de un espejo parabólico. Video: wgxli, CC0.",
-        captions: "/proyectos/demo/video-captions.vtt",
-        kind: "video",
-        poster: "/proyectos/demo/raytrace-poster.jpg",
-        src: "/proyectos/demo/raytrace-video.webm",
-        type: "video/webm",
-      },
-    ],
-    metaDescription:
-      "Documental corto de energía solar en CSE: registro en campo, montaje con subtítulos y pieza de divulgación sobre paneles instalados en el campus universitario.",
-    result: "Video de tres minutos con datos de generación diaria.",
-    slug: "documental-energia-solar",
-    team: [{ name: "Camila Reyes", role: "Alumna" }],
-    title: "Documental de energía solar en campus",
-    year: "2023",
-  },
-  {
-    cover: {
-      alt: "Impresora 3D de sinterizado en un laboratorio.",
-      src: "/proyectos/covers/impresion-3d-modelo.jpg",
-    },
-    description:
-      "Pieza impresa en 3D y modelo navegable de la misma geometría para revisar acabados.",
-    githubUrl: "https://github.com/example/prototipo-impresion-3d",
-    media: [
-      {
-        alt: "Equipo de impresión 3D de alta velocidad.",
-        caption: "Impresora 3D. Imagen: Johannes-at-voxeljet, CC0.",
-        kind: "photo",
-        src: "/proyectos/covers/impresion-3d-modelo.jpg",
-      },
-      {
-        alt: "Modelo 3D de la tetera de Utah.",
-        caption:
-          "Modelo 3D de prueba para comparar malla y pieza impresa (three.js, MIT).",
-        kind: "model",
-        src: "/proyectos/demo/tetera.glb",
-      },
-    ],
-    metaDescription:
-      "Prototipo con impresión 3D y modelo navegable en CSE: malla interactiva para comparar tolerancias de una pieza fabricada en el laboratorio de manufactura.",
-    result: "Desviación máxima registrada menor a 0,4 mm.",
-    slug: "prototipo-impresion-3d",
-    team: [
-      { name: "Diego Castillo", role: "Alumno" },
-      { name: "María Solís", role: "Asesora" },
-    ],
-    title: "Prototipo de impresión 3D con vista 3D",
+    title: "Ray tracing en Java — exhibición estudiantil SIGGRAPH",
     year: "2021",
   },
   {
     cover: {
-      alt: "Sala de servidores con racks iluminados.",
-      src: "/proyectos/covers/servidor-datos.jpg",
+      alt: "Estudiantes de ingeniería en el campus de UP Guadalajara.",
+      src: "/proyectos/covers/icpc-testigos-de-german.jpg",
     },
     description:
-      "Cluster docente para simulaciones de n-cuerpos y prácticas de sistemas distribuidos a gran escala.",
-    githubUrl: "https://github.com/example/cluster-simulacion-cse",
+      "En la etapa nacional de la ICPC celebrada en el ITESO, el equipo Testigos de Germán obtuvo medalla de oro y cuarto lugar nacional, avanzando a la Súper Regional Latinoamericana. El Dr. Miguel Alcaraz, co-coach, vincula el resultado con años de trabajo del Club de Programación en UP Guadalajara.",
     media: [],
     metaDescription:
-      "Cluster de cómputo docente en CSE: nueve integrantes, jobs MPI y prácticas de sistemas distribuidos para simulaciones de n-cuerpos a escala semestral.",
-    result: "Cola de trabajos estable para laboratorios de séptimo semestre.",
-    slug: "cluster-simulacion-cse",
+      "Equipo Testigos de Germán (ISGC/SC UP Guadalajara): medalla de oro y 4.º lugar nacional en ICPC 2025; clasificación a Súper Regional Latinoamericana.",
+    projectUrl:
+      "https://www.up.edu.mx/escuelas-y-facultades/facultad-de-ingenieria/up-guadalajara-semestre-historico-para-la-facultad-de-ingenieria/",
+    result:
+      "Medalla de oro y 4.º lugar nacional; clasificación a la Súper Regional Latinoamericana.",
+    slug: "icpc-testigos-de-german",
     team: [
-      { name: "Ana Ríos", role: "Alumna" },
-      { name: "Bruno Lema", role: "Alumno" },
-      { name: "Carla Méndez", role: "Alumna" },
-      { name: "Daniel Vargas", role: "Alumno" },
-      { name: "Elena Ponce", role: "Alumna" },
-      { name: "Felipe Gómez", role: "Soporte TI" },
-      { name: "Gabriela Nájera", role: "Profesora" },
+      { name: "Álvaro Gallo Cruz", role: "Alumno" },
+      { name: "Miguel Rincón Burboa", role: "Alumno" },
+      { name: "Santiago de la Torre Zamudio", role: "Alumno" },
+      { name: "Dr. Miguel Alcaraz", role: "Coach" },
     ],
-    title: "Cluster de simulación para cómputo científico",
+    title: "Testigos de Germán — ICPC nacional",
+    year: "2025",
+  },
+  {
+    cover: {
+      alt: "Estudiantes de ingeniería en el campus de UP Guadalajara.",
+      src: "/proyectos/covers/icpc-software-chasers-2022.jpg",
+    },
+    description:
+      "Dos equipos de Ingeniería en Sistemas y Gráficas Computacionales de UP Guadalajara clasificaron a la etapa regional de la ICPC por segundo año consecutivo. Software Chasers integró a Héctor Manuel Eguiarte Carlos, Regina Ochoa Gispert y Eduardo Ulises Martínez Vaca, entrenados por el Dr. Miguel Alcaraz.",
+    media: [],
+    metaDescription:
+      "Software Chasers, equipo ISGC UP Guadalajara clasificado a la etapa regional ICPC 2022; competencia algorítmica internacional del Club de Programación.",
+    projectUrl:
+      "https://www.up.edu.mx/escuelas-y-facultades/facultad-de-ingenieria/up-guadalajara-semestre-historico-para-la-facultad-de-ingenieria/",
+    result: "Clasificación a la etapa regional ICPC 2022.",
+    slug: "icpc-software-chasers-2022",
+    team: [
+      { name: "Héctor Manuel Eguiarte Carlos", role: "Alumno" },
+      { name: "Regina Ochoa Gispert", role: "Alumna" },
+      { name: "Eduardo Ulises Martínez Vaca", role: "Alumno" },
+      { name: "Dr. Miguel Alcaraz", role: "Coach" },
+    ],
+    title: "Software Chasers — ICPC regional",
+    year: "2022",
+  },
+  {
+    cover: {
+      alt: "Estudiantes de ingeniería en el campus de UP Guadalajara.",
+      src: "/proyectos/covers/icpc-hololive-2022.jpg",
+    },
+    description:
+      "El equipo Hololive fue el segundo representante de UP Guadalajara en la regional ICPC 2022. Integró a Damián López Virgen, Juan Enrique Luna García y Jonathan Oswualdo Cuevas Jiménez, bajo la dirección del Club de Programación de la Facultad de Ingeniería.",
+    media: [],
+    metaDescription:
+      "Hololive, segundo equipo ISGC UP Guadalajara en la regional ICPC 2022; programación competitiva y trabajo en equipo bajo el Club de Programación.",
+    projectUrl:
+      "https://www.up.edu.mx/escuelas-y-facultades/facultad-de-ingenieria/up-guadalajara-semestre-historico-para-la-facultad-de-ingenieria/",
+    result: "Clasificación a la etapa regional ICPC 2022.",
+    slug: "icpc-hololive-2022",
+    team: [
+      { name: "Damián López Virgen", role: "Alumno" },
+      { name: "Juan Enrique Luna García", role: "Alumno" },
+      { name: "Jonathan Oswualdo Cuevas Jiménez", role: "Alumno" },
+      { name: "Dr. Miguel Alcaraz", role: "Coach" },
+    ],
+    title: "Hololive — ICPC regional",
+    year: "2022",
+  },
+  {
+    description:
+      "Panteras Vortex es el grupo estudiantil de la Facultad de Ingenierías de la UP enfocado en videojuegos. Desde 2019 organiza talleres de Blender y Unity, la Game Jam UP y un laboratorio de desarrollo; la comunidad supera 65 miembros de distintas carreras.",
+    media: [],
+    metaDescription:
+      "Panteras Vortex UP: grupo estudiantil de ingeniería en la UP Guadalajara; talleres Unity y Blender, Game Jam UP y laboratorio de videojuegos desde 2019.",
+    projectUrl: "https://panteras-vortex-up.itch.io/",
+    result:
+      "Grupo activo desde 2019 con talleres, Game Jam UP y laboratorio; más de 65 integrantes.",
+    slug: "panteras-vortex-up",
+    team: [],
+    title: "Panteras Vortex UP — laboratorio de videojuegos",
     year: "2019",
   },
   {
-    cover: {
-      alt: "Vista de laboratorio de cómputo del campus.",
-      src: "/proyectos/covers/app-campus.jpg",
-    },
     description:
-      "Guía móvil para reservar cubículos y consultar horarios de la biblioteca central.",
+      "Juego de acción HTML5 creado en la Game Jam UP 3, organizada por Panteras Vortex UP en mayo de 2024. La mecánica pide impedir que Terry cruce el puente; fue desarrollado con Unity y publicado en itch.io por el autor «Javi».",
     media: [],
     metaDescription:
-      "Guía de app para biblioteca en CSE: reservas de cubículos, horarios y mapa del campus; prototipo de interacción pensado para estudiantes de primeros semestres.",
-    result: "Flujo de reserva validado con diez usuarios en prueba piloto.",
-    slug: "guia-app-biblioteca",
+      "Jom VS Terry: juego de acción de la Game Jam UP 3 (2024) en UP Guadalajara; proyecto de Panteras Vortex UP publicado en itch.io con Unity.",
+    projectUrl: "https://ariastroki2.itch.io/jom-vs-terry",
+    result: "Entrega oficial de la Game Jam UP 3 (mayo 2024).",
+    slug: "jom-vs-terry-game-jam-up-3",
+    team: [{ name: "Javi", role: "Autor itch.io" }],
+    title: "Jom VS Terry",
+    year: "2024",
+  },
+  {
+    description:
+      "Visual novel jugable en navegador presentada en la Game Jam UP 3 de Panteras Vortex UP. El proyecto fue enviado por la cuenta itch.io «Sara_pg» dentro del plazo de la jam de mayo de 2024.",
+    media: [],
+    metaDescription:
+      "Dive In: visual novel de la Game Jam UP 3 (2024) en UP Guadalajara; entrega de Panteras Vortex UP en itch.io, jugable en navegador.",
+    projectUrl: "https://itch.io/jam/game-jam-up-3",
+    result: "Entrega oficial de la Game Jam UP 3 (mayo 2024).",
+    slug: "dive-in-game-jam-up-3",
+    team: [{ name: "Sara_pg", role: "Autora itch.io" }],
+    title: "Dive In",
+    year: "2024",
+  },
+  {
+    description:
+      "Tercera entrega registrada en la Game Jam UP 3, publicada por «lolsalas» en itch.io. Forma parte del ciclo semestral de jams del grupo Panteras Vortex en la Facultad de Ingenierías UP.",
+    media: [],
+    metaDescription:
+      "BOB: juego de la Game Jam UP 3 (2024) en Universidad Panamericana Guadalajara; proyecto estudiantil de Panteras Vortex UP en itch.io.",
+    projectUrl: "https://itch.io/jam/game-jam-up-3",
+    result: "Entrega oficial de la Game Jam UP 3 (mayo 2024).",
+    slug: "bob-game-jam-up-3",
+    team: [{ name: "lolsalas", role: "Autor itch.io" }],
+    title: "BOB",
+    year: "2024",
+  },
+  {
+    description:
+      "Videojuego para Windows de la Game Jam UP 4 (mayo 2025): Jade intenta reconquistar a su ex en una feria mediante un medley de minijuegos. Publicado por «Javi» en itch.io como entrega oficial de la jam.",
+    media: [],
+    metaDescription:
+      "Fair Game: minijuegos en feria de la Game Jam UP 4 (2025) en UP Guadalajara; descarga Windows en itch.io, entrega de Panteras Vortex UP.",
+    projectUrl: "https://ariastroki2.itch.io/fair-game",
+    result: "Entrega oficial de la Game Jam UP 4 (mayo 2025).",
+    slug: "fair-game-game-jam-up-4",
+    team: [{ name: "Javi", role: "Autor itch.io" }],
+    title: "Fair Game",
+    year: "2025",
+  },
+  {
+    description:
+      "FPS ambientado en el Mictlán, entregado en la Game Jam UP 4 por chaiii22. En la ficha de la jam figuran integrantes Gianlucca, Isai y Juan Pablo (primeros nombres sin apellidos en fuente pública).",
+    media: [],
+    metaDescription:
+      "Retorno del Mictlán: FPS de Game Jam UP 4 (2025) en UP Guadalajara; proyecto estudiantil Panteras Vortex con temática de Mictlán en itch.io.",
+    projectUrl: "https://itch.io/jam/game-jam-up-4",
+    result: "Entrega oficial de la Game Jam UP 4 (mayo 2025).",
+    slug: "retorno-del-mictlan-game-jam-up-4",
     team: [
-      { name: "Héctor Ruiz", role: "Alumno" },
-      { name: "Irene Campos", role: "Bibliotecaria" },
+      { name: "chaiii22", role: "Autor itch.io" },
+      { name: "Gianlucca", role: "Integrante (jam)" },
+      { name: "Isai", role: "Integrante (jam)" },
+      { name: "Juan Pablo", role: "Integrante (jam)" },
     ],
-    title: "Guía de app para biblioteca del campus",
-    year: "2018",
+    title: "Retorno del Mictlán",
+    year: "2025",
+  },
+  {
+    description:
+      "Second_Leaf (visual novel, Santin399) y Larry's Limbo (acción, Narumimin) completaron las cuatro entregas de la Game Jam UP 4 en mayo de 2025, todas bajo el paraguas de Panteras Vortex UP.",
+    media: [],
+    metaDescription:
+      "Second_Leaf y Larry's Limbo en Game Jam UP 4 (2025): visual novel y acción de estudiantes UP en itch.io vía Panteras Vortex.",
+    metaTitle: "Second_Leaf y Larry's Limbo",
+    projectUrl: "https://itch.io/jam/game-jam-up-4",
+    result: "Dos entregas oficiales de la Game Jam UP 4 (mayo 2025).",
+    slug: "second-leaf-larrys-limbo-game-jam-up-4",
+    team: [
+      { name: "Santin399", role: "Autor Second_Leaf" },
+      { name: "Narumimin", role: "Autor Larry's Limbo" },
+    ],
+    title: "Second_Leaf / Larry's Limbo",
+    year: "2025",
   },
   {
     cover: {
-      alt: "Brazo robótico en un banco de laboratorio.",
-      src: "/proyectos/covers/brazo-robotico.jpg",
+      alt: "Sesión de producción digital con equipo de Halberd Studios y estudiantes UP.",
+      src: "/proyectos/covers/halberd-studios-colaboracion-up.jpg",
     },
     description:
-      "Control de un brazo robótico con ROS y visualización 3D de la trayectoria planeada.",
-    githubUrl: "https://github.com/example/celda-robotica-laboratorio",
-    media: [
-      {
-        alt: "Brazo robótico moviendo una placa de ensayo.",
-        caption:
-          "Celda robótica en banco. Imagen: dominio público, National Institute of Allergy and Infectious Diseases.",
-        kind: "photo",
-        src: "/proyectos/covers/brazo-robotico.jpg",
-      },
-      {
-        alt: "Modelo 3D de la tetera de Utah.",
-        caption: "Modelo 3D de referencia para calibrar la escena.",
-        kind: "model",
-        src: "/proyectos/demo/tetera.glb",
-      },
-    ],
+      "La UP Guadalajara formalizó colaboración con Halberd Studios para proyectos que integran comunicación, ingeniería, animación y programación. Estudiantes destacados participan en producción digital real; el estudio desarrolla títulos como Nine Years of Shadows y Mariachi Legends.",
+    media: [],
     metaDescription:
-      "Celda robótica con ROS y modelo 3D en CSE: trayectorias planificadas, simulación previa y control en banco para prácticas de automatización industrial.",
-    result: "Repetibilidad dentro de 2 mm en diez ciclos de prueba.",
-    slug: "celda-robotica-laboratorio",
-    team: [
-      { name: "Javier Ortiz", role: "Alumno" },
-      { name: "Karen Delgado", role: "Alumna" },
-      { name: "Laura Ibáñez", role: "Profesora" },
-    ],
-    title: "Celda robótica con simulación 3D",
-    year: "2017",
-  },
-  {
-    cover: {
-      alt: "Captura de pantalla de una aplicación móvil.",
-      src: "/proyectos/covers/smartphone-ui.jpg",
-    },
-    description:
-      "Prototipo de interfaz móvil para reportar incidencias de mantenimiento en el campus.",
-    githubUrl: "https://github.com/example/diseno-interfaz-movil",
-    media: [
-      {
-        alt: "Interfaz móvil en orientación horizontal.",
-        caption: "Exploración de layout móvil para reportes rápidos.",
-        kind: "photo",
-        src: "/proyectos/covers/smartphone-ui.jpg",
-      },
-      {
-        alt: "Laboratorio de cómputo.",
-        caption: "Contexto de prueba en laboratorio.",
-        kind: "photo",
-        src: "/proyectos/covers/galeria-multimedia.jpg",
-      },
-    ],
-    metaDescription:
-      "Diseño de interfaz móvil en CSE: flujo para reportar incidencias de mantenimiento, prototipo en Figma y pruebas de usabilidad con estudiantes del campus.",
-    result: "Tiempo medio de reporte reducido a menos de un minuto.",
-    slug: "diseno-interfaz-movil",
-    team: [
-      { name: "Miguel Arce", role: "Alumno" },
-      { name: "Nora Jiménez", role: "Alumna" },
-      { name: "Oscar Pineda", role: "Mentor" },
-    ],
-    title: "Diseño de interfaz móvil",
-    year: "2016",
+      "Alianza UP Guadalajara y Halberd Studios: estudiantes de ingeniería en videojuegos y animación con proyectos profesionales como Mariachi Legends.",
+    projectUrl:
+      "https://www.up.edu.mx/noticias/innovacion-y-emprendimiento/universidad-panamericana-y-halberd-studios-intercambio-de-talento-y-aprendizaje/",
+    result:
+      "Colaboración académica formalizada entre UP Guadalajara y Halberd Studios.",
+    slug: "halberd-studios-colaboracion-up",
+    team: [{ name: "Raúl Bonillas", role: "Profesor vinculado (UP)" }],
+    title: "Colaboración académica con Halberd Studios",
+    year: "2026",
   },
 ];
 

@@ -14,6 +14,9 @@ const nextConfig: NextConfig = {
         source: "/:path*",
       },
     ]),
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
   reactCompiler: process.env.NODE_ENV === "production",
   redirects: () =>
     Promise.resolve([

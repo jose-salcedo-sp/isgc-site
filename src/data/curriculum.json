@@ -593,7 +593,7 @@
       "credits": null,
       "kind": "specialty-slot",
       "areas": [],
-      "description": "Continúa la especialidad elegida. Opciones listadas en specialties."
+      "description": "Continúa la especialidad elegida entre las siete opciones del campus Guadalajara."
     }
   ],
   "electives": [
@@ -648,58 +648,46 @@
   ],
   "specialties": [
     {
-      "id": "automatizacion-y-control",
-      "name": "Automatización y Control",
-      "semesters": [9, 10],
-      "description": "Especialidad 4+1 en sistemas de control y automatización de procesos."
-    },
-    {
       "id": "ciencia-de-datos",
       "name": "Ciencia de Datos",
       "semesters": [9, 10],
-      "description": "Especialidad 4+1 en análisis de datos, modelado y decisión basada en información."
-    },
-    {
-      "id": "diseno-y-tecnologia",
-      "name": "Diseño y Tecnología",
-      "semesters": [9, 10],
-      "description": "Especialidad 4+1 en la intersección de diseño de producto y tecnología."
+      "description": "Extraer información con estadística, modelos y visualización para decidir. Requiere propedéutico previo."
     },
     {
       "id": "direccion-de-operaciones",
       "name": "Dirección de Operaciones",
       "semesters": [9, 10],
-      "description": "Especialidad 4+1 en operación, cadena de valor y gestión del día a día de una empresa."
+      "description": "Cadena de suministro, coordinación de áreas y soluciones integrales desde una visión estratégica."
     },
     {
       "id": "efectos-visuales",
       "name": "Efectos Visuales",
       "semesters": [9, 10],
-      "description": "Especialidad 4+1 en VFX: imagen, composición y producción visual de alto nivel."
+      "description": "Arte y técnica para animación, videojuegos y entretenimiento; proceso de selección y portafolio. Solo apertura en agosto."
+    },
+    {
+      "id": "gestion-estrategica-del-diseno",
+      "name": "Gestión Estratégica del Diseño",
+      "semesters": [9, 10],
+      "description": "Desarrollo de producto con estrategia, manufactura y decisiones de negocio. Solo apertura en agosto."
     },
     {
       "id": "ingenieria-y-gestion-de-proyectos",
       "name": "Ingeniería y Gestión de Proyectos",
       "semesters": [9, 10],
-      "description": "Especialidad 4+1 en dirigir proyectos de ingeniería de punta a punta."
+      "description": "Planeación, ejecución y control de un proyecto propio durante el año, con viabilidad económica."
     },
     {
-      "id": "optimizacion-de-procesos",
-      "name": "Optimización de procesos",
+      "id": "manufactura-e-ingenieria-de-producto",
+      "name": "Manufactura e Ingeniería de Producto",
       "semesters": [9, 10],
-      "description": "Especialidad 4+1 en mejorar y optimizar procesos productivos o de servicio."
+      "description": "Del diseño a un producto fabricable y rentable: materiales, análisis y manufactura. Solo apertura en agosto."
     },
     {
-      "id": "sistemas-de-calidad",
-      "name": "Sistemas de Calidad",
+      "id": "sistemas-autonomos",
+      "name": "Sistemas Autónomos",
       "semesters": [9, 10],
-      "description": "Especialidad 4+1 en calidad, normas y mejora continua."
-    },
-    {
-      "id": "sistemas-de-manufactura-avanzada",
-      "name": "Sistemas de Manufactura Avanzada",
-      "semesters": [9, 10],
-      "description": "Especialidad 4+1 en manufactura avanzada y sistemas de producción."
+      "description": "Automatización, control, robótica e IA aplicada en procesos industriales. Solo apertura en agosto."
     }
   ],
   "graph": {
@@ -1296,7 +1284,7 @@
         "proximity": 2
       },
       {
-        "description": "Continúa la especialidad elegida. Opciones listadas en specialties.",
+        "description": "Continúa la especialidad elegida entre las siete opciones del campus Guadalajara.",
         "id": "especialidad-10",
         "kind": "course",
         "label": "Especialidad",

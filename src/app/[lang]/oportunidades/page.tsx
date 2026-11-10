@@ -7,6 +7,7 @@ import {
   PageIntro,
   PageSection,
 } from "@/components/page-frame";
+import { externalLinks } from "@/content/site-content";
 import { getDictionary } from "@/lib/dictionary";
 import { hasLocale } from "@/lib/i18n";
 import type { LocaleParams } from "@/lib/i18n";
@@ -78,7 +79,7 @@ const OportunidadesPage = async ({ params }: LocaleParams) => {
               {copy.profileTitle}
             </h2>
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-              <ExternalLink href="https://mx.linkedin.com/">
+              <ExternalLink href={externalLinks.linkedinSchool}>
                 {copy.linkedin}
               </ExternalLink>
               <ExternalLink href="https://github.com/">
