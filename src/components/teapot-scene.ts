@@ -4,6 +4,10 @@
  *   1. vertices (points), 2. edges (wireframe), 3. flat-shaded surface.
  * On load the vertices assemble from the bottom up. Scroll progress (0 → 1)
  * moves the drawing through the stages; the mouse turns it a little.
+ * The surface does not fade in: a horizontal cut sweeps up the teapot,
+ * like a renderer filling the image line by line. Below the cut the teapot
+ * is shaded (with its mesh drawn on top), above it is still wireframe, and
+ * a bright line marks the cut.
  *
  * Kept light on purpose, so scrolling never stutters:
  * - While only the slow idle turn is moving, it draws at 30 fps; intro,
@@ -22,6 +26,7 @@ const SPIN_SPEED = 0.18;
 const CALM_FRAME_MS = 1000 / 30;
 const GOLD = 0xe2_c5_8f;
 const SHADOW = 0x3d_0a_1a;
+const SCAN = 0xff_f3_dc;
 
 /** 0 before `start`, 1 after `end`, eased in between. */
 const stageBetween = (value: number, start: number, end: number): number => {
@@ -115,23 +120,58 @@ export const createTeapotScene = async ({
     ? faceted.boundingBox.max.x - faceted.boundingBox.min.x
     : 5.4;
 
-  // Every material stays transparent the whole time: switching it on and
-  // off would make three.js rebuild the shader in the middle of a scroll.
+  // The cut is a set of clipping planes. They are placed in the teapot's
+  // own space, parallel to its base, so the sweep rises from the bottom of
+  // the teapot whatever the camera angle, and turns with it. A plane keeps
+  // the side its normal points to; applyStage() moves them. Their number
+  // never changes, so the shaders compile once.
+  renderer.localClippingEnabled = true;
+  const keepAbove = new THREE.Plane();
+  const keepBelow = new THREE.Plane();
+  const scanBottom = new THREE.Plane();
+  const up = new THREE.Vector3(0, 1, 0);
+  const down = new THREE.Vector3(0, -1, 0);
+  // computeBoundingBox() above always fills it; the fallback only satisfies
+  // the types.
+  const teapotBox =
+    faceted.boundingBox ??
+    new THREE.Box3(new THREE.Vector3(0, -1.5, 0), new THREE.Vector3(0, 1.5, 0));
+  const teapotBottom = teapotBox.min.y;
+  const teapotHeight = teapotBox.max.y - teapotBox.min.y;
+
+  // Below the cut: the shaded surface. It is pushed back a little in depth
+  // so the mesh lines drawn on it are not hidden by their own surface.
+  // The spout is an open tube and the cut opens the body: both sides of the
+  // faces are drawn, so looking inside shows walls instead of a hole.
   const surfaceMaterial = new THREE.MeshPhongMaterial({
+    clippingPlanes: [keepBelow],
     color: GOLD,
     flatShading: true,
-    opacity: 0,
+    polygonOffset: true,
+    polygonOffsetFactor: 1,
+    polygonOffsetUnits: 1,
     shininess: 40,
+    side: THREE.DoubleSide,
     specular: 0x55_44_33,
-    transparent: true,
   });
   const surface = new THREE.Mesh(faceted, surfaceMaterial);
   model.add(surface);
 
+  // The bright line: a thin slice of the same surface, right below the cut.
+  const scanMaterial = new THREE.MeshBasicMaterial({
+    clippingPlanes: [keepBelow, scanBottom],
+    color: SCAN,
+    side: THREE.DoubleSide,
+  });
+  const scan = new THREE.Mesh(faceted, scanMaterial);
+  model.add(scan);
+
   const wireGeometry = new THREE.WireframeGeometry(coarse);
-  // Points and lines never write depth: fading out, they would otherwise
-  // punch invisible holes in the surface behind them.
+  // Lines and points never write depth: fading in, they would otherwise
+  // punch invisible holes in whatever is behind them.
+  // Above the cut: gold wireframe.
   const wireMaterial = new THREE.LineBasicMaterial({
+    clippingPlanes: [keepAbove],
     color: GOLD,
     depthWrite: false,
     opacity: 0,
@@ -140,10 +180,38 @@ export const createTeapotScene = async ({
   const wireframe = new THREE.LineSegments(wireGeometry, wireMaterial);
   model.add(wireframe);
 
+  // Below the cut: the surface's own mesh, dark and faint. It is built from
+  // the surface geometry so the lines lie exactly on the faces.
+  const overlayMaterial = new THREE.LineBasicMaterial({
+    clippingPlanes: [keepBelow],
+    color: SHADOW,
+    depthWrite: false,
+    opacity: 0.18,
+    transparent: true,
+  });
+  const overlayGeometry = new THREE.WireframeGeometry(faceted);
+  const overlay = new THREE.LineSegments(overlayGeometry, overlayMaterial);
+  model.add(overlay);
+
   // Points: each vertex starts somewhere random and travels home, the
   // lowest vertices first.
+  // TeapotGeometry repeats the vertices where its patches meet; keeping one
+  // of each stops the seams from showing up as clumps of brighter dots.
   // SAFETY: TeapotGeometry always stores its positions in a Float32Array.
-  const home = coarse.getAttribute("position").array as Float32Array;
+  const coarsePositions = coarse.getAttribute("position").array as Float32Array;
+  const seen = new Set<string>();
+  const unique: number[] = [];
+  for (let index = 0; index < coarsePositions.length; index += 3) {
+    const x = coarsePositions[index];
+    const y = coarsePositions[index + 1];
+    const z = coarsePositions[index + 2];
+    const key = `${x.toFixed(3)},${y.toFixed(3)},${z.toFixed(3)}`;
+    if (!seen.has(key)) {
+      seen.add(key);
+      unique.push(x, y, z);
+    }
+  }
+  const home = new Float32Array(unique);
   const count = home.length / 3;
   const scattered = new Float32Array(home.length);
   const arrival = new Float32Array(count);
@@ -169,6 +237,7 @@ export const createTeapotScene = async ({
     new THREE.BufferAttribute(pointPositions, 3)
   );
   const pointMaterial = new THREE.PointsMaterial({
+    clippingPlanes: [keepAbove],
     color: GOLD,
     depthWrite: false,
     size: lowPower ? 2 : 2.5,
@@ -193,17 +262,32 @@ export const createTeapotScene = async ({
     pointGeometry.getAttribute("position").needsUpdate = true;
   };
 
-  /** Shows each stage according to scroll progress. */
+  /**
+   * Shows each stage according to scroll progress. Call after the pose
+   * changes: the cut turns with the teapot.
+   */
   const applyStage = (stage: number) => {
-    const faces = stageBetween(stage, 0.45, 0.8);
-    // Edges fade out as the surface covers them.
-    const edges = stageBetween(stage, 0.12, 0.42) * (1 - faces);
-    surfaceMaterial.opacity = faces;
-    surface.visible = faces > 0.01;
+    const edges = stageBetween(stage, 0.08, 0.3);
+    const sweep = stageBetween(stage, 0.32, 0.85);
+
+    // The cut starts just below the base and ends just above the lid,
+    // measured in the teapot's own space, then moved to world space.
+    const scanWidth = teapotHeight * 0.012;
+    const cut =
+      teapotBottom - scanWidth + sweep * (teapotHeight + scanWidth * 2);
+    model.updateMatrixWorld();
+    keepAbove.set(up, -cut).applyMatrix4(model.matrixWorld);
+    keepBelow.set(down, cut).applyMatrix4(model.matrixWorld);
+    scanBottom.set(up, -(cut - scanWidth)).applyMatrix4(model.matrixWorld);
+
+    const rendering = sweep > 0;
+    const rendered = sweep >= 1;
+    surface.visible = rendering;
+    overlay.visible = rendering;
+    scan.visible = rendering && !rendered;
     wireMaterial.opacity = edges * 0.55;
-    wireframe.visible = edges > 0.01;
-    pointMaterial.opacity = 1 - faces;
-    points.visible = faces < 0.99;
+    wireframe.visible = edges > 0.01 && !rendered;
+    points.visible = !rendered;
   };
 
   /** Fits the teapot to the canvas, which CSS sizes to the teapot's area. */
@@ -297,6 +381,7 @@ export const createTeapotScene = async ({
   const resizeObserver = new ResizeObserver(() => {
     resize();
     setPose(getStage());
+    applyStage(getStage());
     render();
   });
   resizeObserver.observe(canvas);
@@ -307,9 +392,12 @@ export const createTeapotScene = async ({
     coarse.dispose();
     faceted.dispose();
     wireGeometry.dispose();
+    overlayGeometry.dispose();
     pointGeometry.dispose();
     surfaceMaterial.dispose();
+    scanMaterial.dispose();
     wireMaterial.dispose();
+    overlayMaterial.dispose();
     pointMaterial.dispose();
     renderer.dispose();
   };

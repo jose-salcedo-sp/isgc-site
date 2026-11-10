@@ -356,71 +356,71 @@
       },
       "hero": {
         "title": "Computer Science and Engineering.",
-        "lede": "Construye lo que sigue.",
+        "lede": "Lorem ipsum dolor sit.",
         "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         "careerCta": "Conoce la carrera",
         "studentCta": "Ya estudio aquí",
         "canvasAria": "La tetera de Utah, el modelo clásico de las gráficas por computadora, dibujada en tiempo real: pasa de vértices a malla y a superficie sombreada mientras haces scroll."
       },
       "story": {
-        "line1": "Una idea.",
-        "line2Before": "Todo lo que ",
-        "line2Emphasis": "puede ser.",
+        "line1": "Lorem ipsum.",
+        "line2Before": "Dolor sit ",
+        "line2Emphasis": "amet.",
         "cta": "Mira lo que ya construimos",
         "steps": [
           {
             "number": "01",
-            "title": "Todo empieza con una pregunta.",
-            "text": "¿Y si pudieras construir eso que imaginas? Observa lo que te rodea y convierte tu curiosidad en una idea."
+            "title": "Lorem ipsum dolor sit amet.",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
           },
           {
             "number": "02",
-            "title": "La idea toma forma contigo.",
-            "text": "Escribe, prueba, equivócate y vuelve a intentar. Con código, datos y gráficas, lo abstracto empieza a funcionar."
+            "title": "Consectetur adipiscing elit.",
+            "text": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo."
           },
           {
             "number": "03",
-            "title": "Alguien más lo hace parte de su vida.",
-            "text": "Una herramienta que ayuda. Una experiencia que conecta. Lo que aprendes cobra sentido cuando alguien lo usa."
+            "title": "Sed do eiusmod tempor.",
+            "text": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
           }
         ]
       },
       "career": {
-        "title": "Aprende haciendo cosas que otros pueden usar.",
-        "text": "Programa, modela y prototipa sobre problemas que existen fuera de la pantalla.",
-        "deepen": "En el plan puedes profundizar en",
+        "title": "Lorem ipsum dolor sit amet consectetur.",
+        "text": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "deepen": "Lorem ipsum dolor sit amet:",
         "join": " y ",
         "cta": "Consulta el plan de estudios"
       },
       "capabilities": [
         {
-          "title": "Piensa en sistemas",
-          "text": "Entiende un problema, ordénalo y encuentra cómo resolverlo."
+          "title": "Lorem ipsum",
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         },
         {
-          "title": "Prototipa y construye",
-          "text": "Diseña software, datos y experiencias que puedes probar y mejorar."
+          "title": "Dolor sit amet",
+          "text": "Sed do eiusmod tempor incididunt ut labore et dolore."
         },
         {
-          "title": "Trabaja con personas",
-          "text": "Colabora y crea productos que funcionen para quienes los usan."
+          "title": "Consectetur elit",
+          "text": "Ut enim ad minim veniam, quis nostrud exercitation."
         }
       ],
       "projects": {
-        "title": "Proyectos que explican cómo aprendemos.",
+        "title": "Lorem ipsum dolor sit amet.",
         "cta": "Ver proyectos"
       },
       "community": {
-        "title": "Quién está al frente de la carrera.",
-        "text": "Para dudas sobre materias, profesores y procesos académicos, escribe a Coordinación."
+        "title": "Lorem ipsum dolor sit amet.",
+        "text": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
       },
       "next": {
-        "title": "¿Qué necesitas hoy?",
-        "admissionsTitle": "Quiero estudiar CSE",
-        "admissionsText": "Proceso de admisión, becas y contacto directo.",
+        "title": "Lorem ipsum dolor?",
+        "admissionsTitle": "Lorem ipsum",
+        "admissionsText": "Lorem ipsum dolor sit amet, consectetur adipiscing.",
         "admissionsCta": "Ver cómo entrar",
-        "studentsTitle": "Ya estudio en CSE",
-        "studentsText": "Accesos, trámites, recursos de estudio y prácticas.",
+        "studentsTitle": "Dolor sit amet",
+        "studentsText": "Sed do eiusmod tempor incididunt ut labore et dolore.",
         "studentsCta": "Ir a recursos"
       },
       "scrollHint": "Desliza hacia abajo"

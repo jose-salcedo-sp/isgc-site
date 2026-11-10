@@ -279,7 +279,7 @@ const DesktopNav = ({
                 {selectedIndex === index && (
                   <m.span
                     layoutId="nav-selector"
-                    className="absolute inset-x-0 top-[calc(50%-20px)] h-10 rounded-[10px] bg-white/[0.14]"
+                    className="absolute inset-x-0 top-[calc(50%-20px)] h-10 rounded-full bg-white/[0.14]"
                     transition={{
                       bounce: 0.18,
                       duration: 0.9,
